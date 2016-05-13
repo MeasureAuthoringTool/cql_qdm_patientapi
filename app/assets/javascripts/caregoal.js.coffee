@@ -2,13 +2,16 @@
 Based on the QDM 4.2 Documentation - Section 4.1.2
 ###
 
+@cql_qdm_patientapi ||= {}
+
+
 ###
 Unlike other QDM datatypes, the Care Goal datatype does not indicate a
 specific context of use. Instead, to meet this criterion, there must be
 documentation of a care goal as defined by the Care Goal QDM category and
 its corresponding value set.
 ###
-class CareGoal
+class cql_qdm_patientapi.CareGoal
   constructor: (@entry) ->
     @_startDatetime = @entry.start_time
     @_stopDatetime = @entry.end_time
