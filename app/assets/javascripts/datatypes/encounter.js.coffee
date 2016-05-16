@@ -17,7 +17,7 @@ class CQL_QDM.EncounterActive
     @_dischargeDatetime = @entry.dischargeTime
     @_facilityLocation = @entry.facility.name
     @_facilityLocationArrivalDatetime = @entry.facility.start_time
-    @_facilityLocationDepartureDatetime =@entry.facility.end_time
+    @_facilityLocationDepartureDatetime = @entry.facility.end_time
     @_reason = @entry.reason
 
   ###
@@ -126,7 +126,7 @@ class CQL_QDM.EncounterPerformed
     @_dischargeStatus = @entry.dischargeDisposition
     @_facilityLocation = @entry.facility.name
     @_facilityLocationArrivalDatetime = @entry.facility.start_time
-    @_facilityLocationDepartureDatetime =@entry.facility.end_time
+    @_facilityLocationDepartureDatetime = @entry.facility.end_time
     @_negationRationale = @entry.negationRationale
     @_reason = @entry.reason
     @_principalDiagnosis = @entry.principalDiagnosis
