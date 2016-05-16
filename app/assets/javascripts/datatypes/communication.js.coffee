@@ -1,8 +1,7 @@
 ###
-Based on the QDM 4.2 Documentation - Section 4.1.3
+@namespace scoping into the CQL_QDM namespace
 ###
-
-@cql_qdm_patientapi ||= {}
+@CQL_QDM ||= {}
 
 
 ###
@@ -10,7 +9,7 @@ To meet criteria using this datatype, the communication indicated by the
 Communication QDM category and its corresponding value set must be
 communicated from a patient to a provider.
 ###
-class cql_qdm_patientapi.CommunicationFromPatientToProvider
+class CQL_QDM.CommunicationFromPatientToProvider
   constructor: (@entry) ->
     @_negationRationale = @entry.negationRationale
     @_startDatetime = @entry.start_time
@@ -18,26 +17,29 @@ class cql_qdm_patientapi.CommunicationFromPatientToProvider
 
   ###
   @returns {Code}
-  ####
-  negationRationale: -> cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+  ###
+  negationRationale: ->
+    cql.Code(@_negationRationale.code, @_negationRationale.code_system)
 
   ###
   @returns {Date}
-  ####
-  startDatetime: -> cql.DateTime.fromDate(moment.utc(@_startDatetime, 'X').toDate())
+  ###
+  startDatetime: ->
+    cql.DateTime.fromDate(moment.utc(@_startDatetime, 'X').toDate())
 
   ###
   @returns {Date}
-  ####
-  stopDatetime: -> cql.DateTime.fromDate(moment.utc(@_stopDatetime, 'X').toDate())
+  ###
+  stopDatetime: ->
+    cql.DateTime.fromDate(moment.utc(@_stopDatetime, 'X').toDate())
 
 
 ###
-To meet criteria using this datatype, the communication indicated by the 
+To meet criteria using this datatype, the communication indicated by the
 Communication QDM category and its corresponding value set must be
 communicated from a provider to a patient.
 ###
-class cql_qdm_patientapi.CommunicationFromProviderToPatient
+class CQL_QDM.CommunicationFromProviderToPatient
   constructor: (@entry) ->
     @_negationRationale = @entry.negationRationale
     @_startDatetime = @entry.start_time
@@ -45,18 +47,21 @@ class cql_qdm_patientapi.CommunicationFromProviderToPatient
 
   ###
   @returns {Code}
-  ####
-  negationRationale: -> cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+  ###
+  negationRationale: ->
+    cql.Code(@_negationRationale.code, @_negationRationale.code_system)
 
   ###
   @returns {Date}
-  ####
-  startDatetime: -> cql.DateTime.fromDate(moment.utc(@_startDatetime, 'X').toDate())
+  ###
+  startDatetime: ->
+    cql.DateTime.fromDate(moment.utc(@_startDatetime, 'X').toDate())
 
   ###
   @returns {Date}
-  ####
-  stopDatetime: -> cql.DateTime.fromDate(moment.utc(@_stopDatetime, 'X').toDate())
+  ###
+  stopDatetime: ->
+    cql.DateTime.fromDate(moment.utc(@_stopDatetime, 'X').toDate())
 
 
 ###
@@ -64,7 +69,7 @@ To meet criteria using this datatype, the communication indicated by the
 Communication QDM category and its corresponding value set must be
 communicated from one provider to another.
 ###
-class cql_qdm_patientapi.CommunicationFromProviderToProvider
+class CQL_QDM.CommunicationFromProviderToProvider
   constructor: (@entry) ->
     @_negationRationale = @entry.negationRationale
     @_startDatetime = @entry.start_time
@@ -72,15 +77,18 @@ class cql_qdm_patientapi.CommunicationFromProviderToProvider
 
   ###
   @returns {Code}
-  ####
-  negationRationale: -> cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+  ###
+  negationRationale: ->
+    cql.Code(@_negationRationale.code, @_negationRationale.code_system)
 
   ###
   @returns {Date}
-  ####
-  startDatetime: -> cql.DateTime.fromDate(moment.utc(@_startDatetime, 'X').toDate())
+  ###
+  startDatetime: ->
+    cql.DateTime.fromDate(moment.utc(@_startDatetime, 'X').toDate())
 
   ###
   @returns {Date}
-  ####
-  stopDatetime: -> cql.DateTime.fromDate(moment.utc(@_stopDatetime, 'X').toDate())
+  ###
+  stopDatetime: ->
+    cql.DateTime.fromDate(moment.utc(@_stopDatetime, 'X').toDate())

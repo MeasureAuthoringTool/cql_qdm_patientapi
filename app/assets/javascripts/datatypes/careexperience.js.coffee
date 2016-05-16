@@ -1,8 +1,7 @@
 ###
-Based on the QDM 4.2 Documentation - Section 4.1.1
+@namespace scoping into the CQL_QDM namespace
 ###
-
-@cql_qdm_patientapi ||= {}
+@CQL_QDM ||= {}
 
 
 ###
@@ -10,20 +9,22 @@ Data elements that meet this criterion indicate the patient’s care experience,
 usually measured with a validated survey tool. The most common tool is the
 Consumer Assessment of Healthcare Providers and Systems.
 ###
-class cql_qdm_patientapi.PatientCareExperience
+class CQL_QDM.PatientCareExperience
   constructor: (@entry) ->
     @_startDatetime = @entry.start_time
     @_stopDatetime = @entry.end_time
 
   ###
   @returns {Date}
-  ####
-  startDatetime: -> cql.DateTime.fromDate(moment.utc(@_startDatetime, 'X').toDate())
+  ###
+  startDatetime: ->
+    cql.DateTime.fromDate(moment.utc(@_startDatetime, 'X').toDate())
 
   ###
   @returns {Date}
-  ####
-  stopDatetime: -> cql.DateTime.fromDate(moment.utc(@_stopDatetime, 'X').toDate())
+  ###
+  stopDatetime: ->
+    cql.DateTime.fromDate(moment.utc(@_stopDatetime, 'X').toDate())
 
 
 ###
@@ -33,17 +34,19 @@ such consumables as medications). Provider care experience gauges provider
 satisfaction with key structures, processes, and outcomes in the healthcare
 delivery system.
 ###
-class cql_qdm_patientapi.ProviderCareExperience
+class CQL_QDM.ProviderCareExperience
   constructor: (@entry) ->
     @_startDatetime = @entry.start_time
     @_stopDatetime = @entry.end_time
 
   ###
   @returns {Date}
-  ####
-  startDatetime: -> cql.DateTime.fromDate(moment.utc(@_startDatetime, 'X').toDate())
+  ###
+  startDatetime: ->
+    cql.DateTime.fromDate(moment.utc(@_startDatetime, 'X').toDate())
 
   ###
   @returns {Date}
-  ####
-  stopDatetime: -> cql.DateTime.fromDate(moment.utc(@_stopDatetime, 'X').toDate())
+  ###
+  stopDatetime: ->
+    cql.DateTime.fromDate(moment.utc(@_stopDatetime, 'X').toDate())
