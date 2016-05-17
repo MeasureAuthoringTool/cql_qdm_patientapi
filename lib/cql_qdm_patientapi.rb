@@ -1,4 +1,4 @@
-module CqlQdmPatientApi
-  require 'cql_qdm_patientapi/engine'
-  require 'cql_qdm_patientapi/generator'
+module CqlQdmPatientapi
+  require "cql_qdm_patientapi/version"
+  require "cql_qdm_patientapi/engine"
 end
