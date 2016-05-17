@@ -11,8 +11,9 @@ diagnosis/problem of a family member. When used in timing relationships, the
 recorded datetime acts as both the implicit start datetime and implicit stop
 datetime.
 ###
-class CQL_QDM.FamilyHistory
+class CQL_QDM.FamilyHistory extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
+    super @entry
     @_onsetAge = @entry.onsetAge
     @_recordedDatetime = @entry.recordedDatetime
     @_relationship = @entry.relationshipToPatient

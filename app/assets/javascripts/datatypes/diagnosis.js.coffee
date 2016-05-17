@@ -14,8 +14,9 @@ be active. When this datatype is used with timing relationships, the criterion
 is looking for an active diagnosis for the time frame indicated by the timing
 relationships.
 ###
-class CQL_QDM.Diagnosis
+class CQL_QDM.Diagnosis extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
+    super @entry
     @_abatementDatetime = @entry.abatementDatetime
     @_onsetDatetime = @entry.onsetDatetime
     @_anatomicalLocationSite = @entry.anatomical_location

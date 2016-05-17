@@ -9,8 +9,9 @@ Data elements that meet criteria using this datatype should document an
 unexpected or dangerous reaction to the laboratory test indicated by the QDM
 category and its corresponding value set.
 ###
-class CQL_QDM.LaboratoryTestAdverseEvent
+class CQL_QDM.LaboratoryTestAdverseEvent extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
+    super @entry
     @_reaction = @entry.reaction
     @_startDatetime = @entry.start_time
     @_stopDatetime = @entry.end_time
@@ -40,8 +41,9 @@ in specific patients representing a low threshold to the normal reported or
 expected reactions of the laboratory test indicated by the QDM category and its
 corresponding value set
 ###
-class CQL_QDM.LaboratoryTestIntolerance
+class CQL_QDM.LaboratoryTestIntolerance extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
+    super @entry
     @_reaction = @entry.reaction
     @_startDatetime = @entry.start_time
     @_stopDatetime = @entry.end_time
@@ -70,8 +72,9 @@ Data elements that meet criteria using this datatype should document a request
 for the laboratory test indicated by the QDM category and its corresponding
 value set.
 ###
-class CQL_QDM.LaboratoryTestOrder
+class CQL_QDM.LaboratoryTestOrder extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
+    super @entry
     @_method = @entry.method
     @_negationRationale = @entry.negationRationale
     @_reason = @entry.reason
@@ -114,8 +117,9 @@ Data elements that meet criteria using this datatype should document the
 laboratory test indicated by the QDM category and its corresponding value set
 was performed.
 ###
-class CQL_QDM.LaboratoryTestPerformed
+class CQL_QDM.LaboratoryTestPerformed extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
+    super @entry
     @_method = @entry.method
     @_negationRationale = @entry.negationRationale
     @_reason = @entry.reason
@@ -186,8 +190,9 @@ Data elements that meet criteria using this datatype should document a
 recommendation for the laboratory test indicated by the QDM category and its
 corresponding value set.
 ###
-class CQL_QDM.LaboratoryTestRecommended
+class CQL_QDM.LaboratoryTestRecommended extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
+    super @entry
     @_method = @entry.method
     @_negationRationale = @entry.negationRationale
     @_reason = @entry.reason

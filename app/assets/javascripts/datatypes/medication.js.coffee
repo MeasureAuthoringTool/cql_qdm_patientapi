@@ -11,8 +11,9 @@ being taken by the patient. Keep in mind that when this datatype is used with
 timing relationships, the criterion is looking for a medication being taken for
 the time frame indicated by the timing relationships.
 ###
-class CQL_QDM.MedicationActive
+class CQL_QDM.MedicationActive extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
+    super @entry
     @_cumulativeMedicationDuration = @entry.cumulativeMedicationDuration
     @_dose = @entry.dose
   #  @_frequency = @entry.
@@ -57,8 +58,9 @@ Data elements that meet criteria using this datatype should document that the
 medication indicated by the QDM category and its corresponding value set was
 actually administered to the patient.
 ###
-class CQL_QDM.MedicationAdministered
+class CQL_QDM.MedicationAdministered extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
+    super @entry
     @_cumulativeMedicationDuration = @entry.cumulativeMedicationDuration
     @_dose = @entry.dose
   #  @_frequency = @entry.
@@ -117,8 +119,9 @@ Data elements that meet criteria using this datatype should document an
 unexpected or dangerous reaction to the medication indicated by the QDM
 category and its corresponding value set
 ###
-class CQL_QDM.MedicationAdverseEffects
+class CQL_QDM.MedicationAdverseEffects extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
+    super @entry
     @_reaction = @entry.reaction
     @_startDatetime = @entry.start_time
     @_stopDatetime = @entry.end_time
@@ -148,8 +151,9 @@ immunologically mediated reaction that exhibits specificity and recurrence on
 re-exposure to the offending medication indicated by the QDM category and
 its corresponding value set.
 ###
-class CQL_QDM.MedicationAllergy
+class CQL_QDM.MedicationAllergy extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
+    super @entry
     @_reaction = @entry.reaction
     @_startDatetime = @entry.start_time
     @_stopDatetime = @entry.end_time
@@ -179,8 +183,9 @@ medications indicated by the QDM category and its corresponding value set
 should be taken by or given to the patient after being discharged from
 an inpatient encounter.
 ###
-class CQL_QDM.MedicationDischarge
+class CQL_QDM.MedicationDischarge extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
+    super @entry
     @_dose = @entry.dose
   #  @_frequency = @entry.
     @_negationRationale = @entry.negationRationale
@@ -236,8 +241,9 @@ health provider documentation of medication compliance. In settings where
 patients attest to taking medications in electronic format (perhaps a Personal
 Health Record), patient attestation of “medication taken” may be available.
 ###
-class CQL_QDM.MedicationDispensed
+class CQL_QDM.MedicationDispensed extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
+    super @entry
     @_cumulativeMedicationDuration = @entry.cumulativeMedicationDuration
     @_dose = @entry.dose
   #  @_frequency = @entry.
@@ -297,8 +303,9 @@ in specific patients representing a low threshold to the normal pharmacological
 action of the medication indicated by the QDM category and its corresponding
 value set.
 ###
-class CQL_QDM.MedicationIntolerance
+class CQL_QDM.MedicationIntolerance extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
+    super @entry
     @_reaction = @entry.reaction
     @_startDatetime = @entry.start_time
     @_stopDatetime = @entry.end_time
@@ -327,8 +334,9 @@ Data elements that meet criteria using this datatype should document a request
 to a pharmacy to provide the medication indicated by the QDM category and its
 corresponding value set.
 ###
-class CQL_QDM.MedicationOrder
+class CQL_QDM.MedicationOrder extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
+    super @entry
     @_activeDatetime = @entry.active_datetime
     @_cumulativeMedicationDuration = @entry.cumulativeMedicationDuration
     @_dose = @entry.dose

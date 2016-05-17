@@ -11,8 +11,9 @@ set. The datatype is expected to be used to identify orders such as "vital
 signs, frequency every x hours,” or "pedal pulse check, frequency every 15
 minutes for x hours."
 ###
-class CQL_QDM.PhysicalExamOrder
+class CQL_QDM.PhysicalExamOrder extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
+    super @entry
     @_anatomicalLocationSite = @entry.anatomicalLocation
     @_method = @entry.method
     @_negationRationale = @entry.negationRationale
@@ -63,8 +64,9 @@ Data elements that meet criteria using this datatype should document the
 completion of the physical exam indicated by the QDM category and its
 corresponding value set.
 ###
-class CQL_QDM.PhysicalExamPerformed
+class CQL_QDM.PhysicalExamPerformed extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
+    super @entry
     @_anatomicalLocationSite = @entry.anatomicalLocation
     @_method = @entry.method
     @_negationRationale = @entry.negationRationale
@@ -116,8 +118,9 @@ Data elements that meet criteria using this datatype should document a
 recommendation for the physical exam indicated by the QDM category and its
 corresponding value set.
 ###
-class CQL_QDM.PhysicalExamRecommended
+class CQL_QDM.PhysicalExamRecommended extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
+    super @entry
     @_anatomicalLocationSite = @entry.anatomicalLocation
     @_method = @entry.method
     @_negationRationale = @entry.negationRationale

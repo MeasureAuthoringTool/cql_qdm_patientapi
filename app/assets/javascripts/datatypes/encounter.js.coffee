@@ -11,8 +11,9 @@ progress. Keep in mind that when this datatype is used with timingrelationships,
 the criterion is looking for an encounter that was in progress for the time
 frame indicated by the timing relationships.
 ###
-class CQL_QDM.EncounterActive
+class CQL_QDM.EncounterActive extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
+    super @entry
     @_admissionDatetime = @entry.admitTime
     @_dischargeDatetime = @entry.dischargeTime
     @_facilityLocation = @entry.facility.name
@@ -69,8 +70,9 @@ Data elements that meet criteria using this datatype should document that an
 order for the encounter indicated by the QDM category and its corresponding
 value set has been recommended.
 ###
-class CQL_QDM.EncounterOrder
+class CQL_QDM.EncounterOrder extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
+    super @entry
     @_facilityLocation = @entry.facility.name
     @_negationRationale = @entry.negationRationale
     @_reason = @entry.reason
@@ -113,8 +115,9 @@ Data elements that meet criteria using this datatype should document that the
 encounter indicated by the QDM category and its corresponding value set has
 been completed.
 ###
-class CQL_QDM.EncounterPerformed
+class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
+    super @entry
     @_admissionDatetime = @entry.admitTime
     @_diagnosis = @entry.diagnosis
     @_dischargeDatetime = @entry.dischargeTime
@@ -199,8 +202,9 @@ Data elements that meet criteria using this datatype should document that the
 encounter indicated by the QDM category and its corresponding value set has been
 recommended.
 ###
-class CQL_QDM.EncounterRecommended
+class CQL_QDM.EncounterRecommended extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
+    super @entry
     @_facilityLocation = @entry.facility.name
     @_negationRationale = @entry.negationRationale
     @_reason = @entry.reason

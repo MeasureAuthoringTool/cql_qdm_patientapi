@@ -9,8 +9,9 @@ Data elements that meet criteria using this datatype should document an
 unexpected or dangerous reaction to a device indicated by the QDM category
 and its corresponding value set.
 ###
-class CQL_QDM.DeviceAdverseEvent
+class CQL_QDM.DeviceAdverseEvent extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
+    super @entry
     @_reaction = @entry.reaction
     @_startDatetime = @entry.start_time
     @_stopDatetime = @entry.end_time
@@ -40,8 +41,9 @@ immunologically mediated reaction that exhibits specificity and recurrence
 on re-exposure to the offending device indicated by the QDM category and its
 corresponding value set.
 ###
-class CQL_QDM.DeviceAllergy
+class CQL_QDM.DeviceAllergy extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
+    super @entry
     @_reaction = @entry.reaction
     @_startDatetime = @entry.start_time
     @_stopDatetime = @entry.end_time
@@ -72,8 +74,9 @@ or impacts or alters the treatment, care plan, or encounter (e.g., an
 antithrombotic device has been placed on the patient's legs to prevent
 thromboembolism, or a cardiac pacemaker is in place).
 ###
-class CQL_QDM.DeviceApplied
+class CQL_QDM.DeviceApplied extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
+    super @entry
     @_anatomicalApproachSite = @entry.anatomical_approach
     @_anatomicalLocationSite = @entry.anatomical_location
     @_negationRationale = @entry.negationRationale
@@ -124,8 +127,9 @@ in specific patients who have a low threshold to the normal reported or
 expected reactions of the device indicated by the QDM category and its
 corresponding value set.
 ###
-class CQL_QDM.DeviceIntolerance
+class CQL_QDM.DeviceIntolerance extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
+    super @entry
     @_reaction = @entry.reaction
     @_startDatetime = @entry.start_time
     @_stopDatetime = @entry.end_time
@@ -153,8 +157,9 @@ class CQL_QDM.DeviceIntolerance
 Data elements that meet criteria using this datatype should document an order
 for the device indicated by the QDM category and its corresponding value set.
 ###
-class CQL_QDM.DeviceOrder
+class CQL_QDM.DeviceOrder extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
+    super @entry
     @_negationRationale = @entry.negationRationale
     @_reaction = @entry.reaction
     @_startDatetime = @entry.start_time
@@ -190,8 +195,9 @@ Data elements that meet criteria using this datatype should document a
 recommendation to use the device indicated by the QDM category and its
 corresponding value set.
 ###
-class CQL_QDM.DeviceRecommended
+class CQL_QDM.DeviceRecommended extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
+    super @entry
     @_negationRationale = @entry.negationRationale
     @_reaction = @entry.reaction
     @_startDatetime = @entry.start_time

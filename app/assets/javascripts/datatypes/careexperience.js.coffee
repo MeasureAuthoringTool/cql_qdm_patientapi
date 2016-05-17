@@ -9,8 +9,9 @@ Data elements that meet this criterion indicate the patient’s care experience,
 usually measured with a validated survey tool. The most common tool is the
 Consumer Assessment of Healthcare Providers and Systems.
 ###
-class CQL_QDM.PatientCareExperience
+class CQL_QDM.PatientCareExperience extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
+    super @entry
     @_startDatetime = @entry.start_time
     @_stopDatetime = @entry.end_time
 
@@ -34,8 +35,9 @@ such consumables as medications). Provider care experience gauges provider
 satisfaction with key structures, processes, and outcomes in the healthcare
 delivery system.
 ###
-class CQL_QDM.ProviderCareExperience
+class CQL_QDM.ProviderCareExperience extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
+    super @entry
     @_startDatetime = @entry.start_time
     @_stopDatetime = @entry.end_time
 

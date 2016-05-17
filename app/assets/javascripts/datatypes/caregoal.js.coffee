@@ -10,8 +10,9 @@ specific context of use. Instead, to meet this criterion, there must be
 documentation of a care goal as defined by the Care Goal QDM category and
 its corresponding value set.
 ###
-class CQL_QDM.CareGoal
+class CQL_QDM.CareGoal extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
+    super @entry
     @_startDatetime = @entry.start_time
     @_stopDatetime = @entry.end_time
     @_relatedTo = @entry.relatedTo

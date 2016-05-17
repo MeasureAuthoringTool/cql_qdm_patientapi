@@ -9,8 +9,9 @@ To meet criteria using this datatype, the communication indicated by the
 Communication QDM category and its corresponding value set must be
 communicated from a patient to a provider.
 ###
-class CQL_QDM.CommunicationFromPatientToProvider
+class CQL_QDM.CommunicationFromPatientToProvider extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
+    super @entry
     @_negationRationale = @entry.negationRationale
     @_startDatetime = @entry.start_time
     @_stopDatetime = @entry.end_time
@@ -39,8 +40,9 @@ To meet criteria using this datatype, the communication indicated by the
 Communication QDM category and its corresponding value set must be
 communicated from a provider to a patient.
 ###
-class CQL_QDM.CommunicationFromProviderToPatient
+class CQL_QDM.CommunicationFromProviderToPatient extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
+    super @entry
     @_negationRationale = @entry.negationRationale
     @_startDatetime = @entry.start_time
     @_stopDatetime = @entry.end_time
@@ -69,8 +71,9 @@ To meet criteria using this datatype, the communication indicated by the
 Communication QDM category and its corresponding value set must be
 communicated from one provider to another.
 ###
-class CQL_QDM.CommunicationFromProviderToProvider
+class CQL_QDM.CommunicationFromProviderToProvider extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
+    super @entry
     @_negationRationale = @entry.negationRationale
     @_startDatetime = @entry.start_time
     @_stopDatetime = @entry.end_time

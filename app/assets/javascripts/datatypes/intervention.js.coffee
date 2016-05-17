@@ -9,8 +9,9 @@ Data elements that meet criteria using this datatype should document an
 unexpected or dangerous reaction to the intervention indicated by the QDM
 category and its corresponding value set.
 ###
-class CQL_QDM.InterventionAdverseEvent
+class CQL_QDM.InterventionAdverseEvent extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
+    super @entry
     @_reaction = @entry.reaction
     @_startDatetime = @entry.start_time
     @_stopDatetime = @entry.end_time
@@ -40,8 +41,9 @@ in specific patients representing a low threshold to the normal reported or
 expected reactions of intervention indicated by the QDM category and its
 corresponding value set.
 ###
-class CQL_QDM.InterventionIntolerance
+class CQL_QDM.InterventionIntolerance extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
+    super @entry
     @_reaction = @entry.reaction
     @_startDatetime = @entry.start_time
     @_stopDatetime = @entry.end_time
@@ -70,8 +72,9 @@ Data elements that meet criteria using this datatype should document a request
 to perform the intervention indicated by the QDM category and its corresponding
 value set.
 ###
-class CQL_QDM.InterventionOrder
+class CQL_QDM.InterventionOrder extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
+    super @entry
     @_negationRationale = @entry.negationRationale
     @_reason = @entry.reason
     @_startDatetime = @entry.start_time
@@ -107,8 +110,9 @@ Data elements that meet criteria using this datatype should document the
 completion of the intervention indicated by the QDM category and its
 corresponding value set.
 ###
-class CQL_QDM.InterventionPerformed
+class CQL_QDM.InterventionPerformed extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
+    super @entry
     @_negationRationale = @entry.negationRationale
     @_reason = @entry.reason
     @_result = @entry.result
@@ -158,8 +162,9 @@ Data elements that meet criteria using this datatype should document a
 recommendation for the intervention indicated by the QDM category and its
 corresponding value set.
 ###
-class CQL_QDM.InterventionRecommended
+class CQL_QDM.InterventionRecommended extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
+    super @entry
     @_negationRationale = @entry.negationRationale
     @_reason = @entry.reason
     @_startDatetime = @entry.start_time

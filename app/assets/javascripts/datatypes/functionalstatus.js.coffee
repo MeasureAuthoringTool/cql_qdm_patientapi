@@ -9,8 +9,9 @@ Data elements that meet criteria using this datatype should document that a
 request to perform the functional status assessment indicated by the QDM
 category and its corresponding value set has been completed.
 ###
-class CQL_QDM.FunctionalStatusOrder
+class CQL_QDM.FunctionalStatusOrder extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
+    super @entry
     @_method = @entry.method
     @_negationRationale = @entry.negationRationale
     @_reason = @entry.reason
@@ -53,8 +54,9 @@ Data elements that meet criteria using this datatype should document the
 completion of the functional status assessment indicated by the QDM category
 and its corresponding value set.
 ###
-class CQL_QDM.FunctionalStatusPerformed
+class CQL_QDM.FunctionalStatusPerformed extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
+    super @entry
     @_method = @entry.method
     @_negationRationale = @entry.negationRationale
     @_reason = @entry.reason
@@ -104,8 +106,9 @@ Data elements that meet criteria using this datatype should document a
 recommendation regarding the functional status assessment indicated by
 the QDM category and that its corresponding value set has been completed.
 ###
-class CQL_QDM.FunctionalStatusRecommended
+class CQL_QDM.FunctionalStatusRecommended extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
+    super @entry
     @_method = @entry.method
     @_negationRationale = @entry.negationRationale
     @_reason = @entry.reason

@@ -9,8 +9,9 @@ Data elements that meet criteria using this datatype should document an
 unexpected or dangerous reaction to the diagnostic study indicated by the QDM
 category and its corresponding value set.
 ###
-class CQL_QDM.DiagnosticStudyAdverseEvent
+class CQL_QDM.DiagnosticStudyAdverseEvent extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
+    super @entry
     @_radiationDosage = @entry.radiation_dose
     @_radiationDuration = @entry.radiation_duration
     @_reaction = @entry.reaction
@@ -54,8 +55,9 @@ in specific patients who have a low threshold to the normal reported or
 expected reactions of the diagnostic study indicated by the QDM category and its
 corresponding value set.
 ###
-class CQL_QDM.DiagnosticStudyIntolerance
+class CQL_QDM.DiagnosticStudyIntolerance extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
+    super @entry
     @_radiationDosage = @entry.radiation_dose
     @_radiationDuration = @entry.radiation_duration
     @_reaction = @entry.reaction
@@ -104,8 +106,9 @@ laboratory. Such studies include but are not limited to imaging studies,
 cardiology studies (electrocardiogram, treadmill stress testing), pulmonary
 function testing, vascular laboratory testing, and others.
 ###
-class CQL_QDM.DiagnosticStudyOrder
+class CQL_QDM.DiagnosticStudyOrder extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
+    super @entry
     @_method = @entry.method
     @_negationRationale = @entry.negationRationale
     @_radiationDosage = @entry.radiation_dose
@@ -162,8 +165,9 @@ Data elements that meet criteria using this datatype should document the
 completion of the diagnostic study indicated by the QDM category and its
 corresponding value set.
 ###
-class CQL_QDM.DiagnosticStudyPerformed
+class CQL_QDM.DiagnosticStudyPerformed extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
+    super @entry
     @_facilityLocation = @entry.facility_location
     @_method = @entry.method
     @_negationRationale = @entry.negationRationale
@@ -242,8 +246,9 @@ recommendation for a request by a clinician or appropriately licensed care
 provider to an appropriate provider or organization to perform the diagnostic
 study indicated by the QDM category and its corresponding value set.
 ###
-class CQL_QDM.DiagnosticStudyRecommended
+class CQL_QDM.DiagnosticStudyRecommended extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
+    super @entry
     @_method = @entry.method
     @_negationRationale = @entry.negationRationale
     @_radiationDosage = @entry.radiation_dose

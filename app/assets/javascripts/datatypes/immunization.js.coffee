@@ -9,8 +9,9 @@ Data elements that meet criteria using this datatype should document that the
 vaccine indicated by the QDM category and its corresponding value set was
 actually administered to the patient.
 ###
-class CQL_QDM.ImmunizationAdministered
+class CQL_QDM.ImmunizationAdministered extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
+    super @entry
     @_dose = @entry.dose
     @_negationRationale = @entry.negationRationale
     @_reason = @entry.reason
@@ -61,8 +62,9 @@ immunologically mediated reaction that exhibits specificity and recurrence
 on re-exposure to the offending vaccine indicated by the QDM category and
 its corresponding value set.
 ###
-class CQL_QDM.ImmunizationAllergy
+class CQL_QDM.ImmunizationAllergy extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
+    super @entry
     @_reaction = @entry.reaction
     @_startDatetime = @entry.start_time
     @_stopDatetime = @entry.end_time
@@ -92,8 +94,9 @@ reaction in specific patients representing a low threshold to the normal
 pharmacological action of the vaccine indicated by the QDM category and its
 corresponding value set.
 ###
-class CQL_QDM.ImmunizationIntolerance
+class CQL_QDM.ImmunizationIntolerance extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
+    super @entry
     @_reaction = @entry.reaction
     @_startDatetime = @entry.start_time
     @_stopDatetime = @entry.end_time
@@ -122,8 +125,9 @@ Data elements that meet criteria using this datatype should document a request
 for the immunization indicated by the QDM category and its corresponding value
 set.
 ###
-class CQL_QDM.ImmunizationOrder
+class CQL_QDM.ImmunizationOrder extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
+    super @entry
     @_activeDatetime = @entry.active_datetime
     @_dose = @entry.dose
     @_negationRationale = @entry.negationRationale
