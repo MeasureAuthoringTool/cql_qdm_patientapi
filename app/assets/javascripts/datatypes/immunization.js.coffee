@@ -17,7 +17,7 @@ class CQL_QDM.ImmunizationAdministered
     @_route = @entry.route
     @_startDatetime = @entry.start_time
     @_stopDatetime = @entry.end_time
-    
+
   ###
   @returns {Quantity}
   ###

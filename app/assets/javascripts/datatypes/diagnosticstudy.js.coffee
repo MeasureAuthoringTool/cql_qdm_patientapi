@@ -103,10 +103,6 @@ study. Diagnostic studies are those that are not performed in the clinical
 laboratory. Such studies include but are not limited to imaging studies,
 cardiology studies (electrocardiogram, treadmill stress testing), pulmonary
 function testing, vascular laboratory testing, and others.
-
-The start and stop datetime of Medication, Order reflects the
-“author time” of the record in QRDA. This corresponds to when the order was
-signed.
 ###
 class CQL_QDM.DiagnosticStudyOrder
   constructor: (@entry) ->

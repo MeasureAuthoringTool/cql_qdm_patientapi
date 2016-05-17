@@ -68,11 +68,6 @@ class CQL_QDM.EncounterActive
 Data elements that meet criteria using this datatype should document that an
 order for the encounter indicated by the QDM category and its corresponding
 value set has been recommended.
-
-The start and stop datetime of
-Encounter, Order reflects the “author time” of
-the record in QRDA. This corresponds to when
-the order was signed.
 ###
 class CQL_QDM.EncounterOrder
   constructor: (@entry) ->
