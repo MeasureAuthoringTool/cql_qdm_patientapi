@@ -24,10 +24,9 @@ class CQL_QDM.CQLPatient
   ###
   findRecords: (profile) ->
     if profile == 'Patient'
-      #@getPatientCharacteristics()
-      [{ 'birth datetime': cql.DateTime.fromDate(moment.utc(@patient.get('birthdate'), 'X').toDate()) }]
+      @getPatientCharacteristics()
     else
-      @_datatypes[profile]
+      return if @_datatypes[profile]? then @_datatypes[profile] else []
 
   ###
   @returns {Object}
@@ -64,8 +63,9 @@ class CQL_QDM.CQLPatient
   @returns {Object}
   ###
   getPatientCharacteristics: ->
-    characteristics = {}
-    characteristics['birthDatetime'] = cql.DateTime.fromDate(moment.utc(@_patient.get('birthdate'), 'X').toDate())
-    characteristics['gender'] = cql.DateTime.fromDate(moment.utc(@_patient.get('gender'), 'X').toDate())
-    # TODO: More characteristics?
-    [characteristics]
+    # characteristics = {}
+    # characteristics['birthDatetime'] = cql.DateTime.fromDate(moment.utc(@_patient.get('birthdate'), 'X').toDate())
+    # characteristics['gender'] = cql.DateTime.fromDate(moment.utc(@_patient.get('gender'), 'X').toDate())
+    # # TODO: More characteristics?
+    # [characteristics]
+    [{ 'birth datetime': cql.DateTime.fromDate(moment.utc(@patient.get('birthdate'), 'X').toDate()) }]
