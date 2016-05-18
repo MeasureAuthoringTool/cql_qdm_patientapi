@@ -22,6 +22,9 @@ class CQL_QDM.OIDMap
       definition = @hqmfr2_oid_map[oid]['definition']
       status = @hqmfr2_oid_map[oid]['status']
     if definition and status
+      # NOTE: Bonnie uses "Ordered" and not "Order
+      if status == 'ordered'
+        status = 'order'
       classname = definition + '_' + status
       classname = classname.replace /_([a-z])/g, (g) -> g[1].toUpperCase()
       classname.charAt(0).toUpperCase() + classname.slice(1)
@@ -32,7 +35,7 @@ class CQL_QDM.OIDMap
         "status":""
     "2.16.840.1.113883.3.560.1.25":
         "definition":"patient_characteristic_birthdate"
-        "status":""     
+        "status":""
     "2.16.840.1.113883.3.560.1.400":
         "definition":"patient_characteristic_birthdate"
         "status":""

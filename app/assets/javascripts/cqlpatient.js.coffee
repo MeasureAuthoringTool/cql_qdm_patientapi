@@ -54,6 +54,8 @@ class CQL_QDM.CQLPatient
       if data_criteria
         for dc in data_criteria
           classname = CQL_QDM.OIDMap.oidToClassName(dc.oid)
+          unless classname
+            classname = dc.description.substr(0, dc.description.indexOf(':'))
           unless datatypes[classname]?
             datatypes[classname] = []
           datatypes[classname].push new window['CQL_QDM'][classname](dc)
