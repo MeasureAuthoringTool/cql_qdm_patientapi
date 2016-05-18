@@ -16,9 +16,9 @@ class CQL_QDM.EncounterActive extends CQL_QDM.QDMDatatype
     super @entry
     @_admissionDatetime = @entry.admitTime
     @_dischargeDatetime = @entry.dischargeTime
-    @_facilityLocation = @entry.facility.name
-    @_facilityLocationArrivalDatetime = @entry.facility.start_time
-    @_facilityLocationDepartureDatetime = @entry.facility.end_time
+    @_facilityLocation = @entry.facility?['name']
+    @_facilityLocationArrivalDatetime = @entry.facility?['start_time']
+    @_facilityLocationDepartureDatetime = @entry.facility?['end_time']
     @_reason = @entry.reason
 
   ###
@@ -73,7 +73,7 @@ value set has been recommended.
 class CQL_QDM.EncounterOrder extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
-    @_facilityLocation = @entry.facility.name
+    @_facilityLocation = @entry.facility?['name']
     @_negationRationale = @entry.negationRationale
     @_reason = @entry.reason
     @_startDatetime = @entry.admitTime
@@ -122,9 +122,9 @@ class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
     @_diagnosis = @entry.diagnosis
     @_dischargeDatetime = @entry.dischargeTime
     @_dischargeStatus = @entry.dischargeDisposition
-    @_facilityLocation = @entry.facility.name
-    @_facilityLocationArrivalDatetime = @entry.facility.start_time
-    @_facilityLocationDepartureDatetime = @entry.facility.end_time
+    @_facilityLocation = @entry.facility?['name']
+    @_facilityLocationArrivalDatetime = @entry.facility?['start_time']
+    @_facilityLocationDepartureDatetime = @entry.facility?['end_time']
     @_negationRationale = @entry.negationRationale
     @_reason = @entry.reason
     @_principalDiagnosis = @entry.principalDiagnosis
@@ -205,7 +205,7 @@ recommended.
 class CQL_QDM.EncounterRecommended extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
-    @_facilityLocation = @entry.facility.name
+    @_facilityLocation = @entry.facility?['name']
     @_negationRationale = @entry.negationRationale
     @_reason = @entry.reason
     @_startDatetime = @entry.admitTime
