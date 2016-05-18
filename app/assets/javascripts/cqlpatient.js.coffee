@@ -12,7 +12,6 @@ class CQL_QDM.CQLPatient
   constructor: (@patient) ->
     @_patient = @patient
     @_datatypes = @buildDatatypes()
-    debugger
 
   ###
   @returns {String}
