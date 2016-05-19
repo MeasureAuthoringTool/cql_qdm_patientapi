@@ -55,8 +55,9 @@ class CQL_QDM.EncounterActive extends CQL_QDM.QDMDatatype
   @returns {Quantity}
   ###
   lengthOfStay: ->
-    @_lengthOfStay = @_dischargeDatetime - @admissionDatetime
-    cql.Quantity(@_dischargeDatetime['unit'], @_lengthOfStay)
+    ddt = cql.DateTime.fromDate(moment.utc(@_dischargeDatetime, 'X').toDate())
+    adt = cql.DateTime.fromDate(moment.utc(@_admissionDatetime, 'X').toDate())
+    cql.Quantity(@_dischargeDatetime['unit'], ddt - adt)
 
   ###
   @returns {Code}
