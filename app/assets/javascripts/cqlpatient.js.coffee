@@ -55,7 +55,9 @@ class CQL_QDM.CQLPatient
           classname = CQL_QDM.OIDMap.oidToClassName(dc)
           unless datatypes[classname]?
             datatypes[classname] = []
-          datatypes[classname].push new window['CQL_QDM'][classname](dc)
+          cql_dc = new window['CQL_QDM'][classname](dc)
+          cql_dc['bonnie_type'] = type
+          datatypes[classname].push cql_dc
     datatypes
 
   ###
