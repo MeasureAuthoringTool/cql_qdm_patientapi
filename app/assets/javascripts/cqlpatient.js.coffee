@@ -52,7 +52,7 @@ class CQL_QDM.CQLPatient
       if data_criteria
         for dc in data_criteria
           if dc.oid == null
-          classname = CQL_QDM.OIDMap.oidToClassName(dc)
+            classname = CQL_QDM.OIDMap.oidToClassName(dc)
           unless datatypes[classname]?
             datatypes[classname] = []
           cql_dc = new window['CQL_QDM'][classname](dc)
