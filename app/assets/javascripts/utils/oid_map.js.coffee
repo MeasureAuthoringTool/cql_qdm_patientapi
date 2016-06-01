@@ -12,20 +12,27 @@ class CQL_QDM.OIDMap
   ###
   @returns String
   ###
-  @oidToClassName: (oid) ->
+  @oidToClassName: (dc) ->
+    oid = dc.oid
+    unless oid
+      return dc.description.substr(0, dc.description.indexOf(':'))
     definition = ''
     status = ''
-    if @hqmf_oid_map[oid]?['definition'] and @hqmf_oid_map[oid]?['status']
+    if @hqmf_oid_map[oid]?['definition']?
       definition = @hqmf_oid_map[oid]['definition']
       status = @hqmf_oid_map[oid]['status']
-    else if @hqmfr2_oid_map[oid]?['definition'] and @hqmfr2_oid_map[oid]?['status']
+    else if @hqmfr2_oid_map[oid]?['definition']?
       definition = @hqmfr2_oid_map[oid]['definition']
       status = @hqmfr2_oid_map[oid]['status']
-    if definition and status
-      # NOTE: Bonnie uses "Ordered" and not "Order
+
+    if definition
+      # NOTE: Bonnie uses "Ordered" and not "Order"
       if status == 'ordered'
         status = 'order'
-      classname = definition + '_' + status
+      if status
+        classname = definition + '_' + status
+      else
+        classname = definition
       classname = classname.replace /_([a-z])/g, (g) -> g[1].toUpperCase()
       classname.charAt(0).toUpperCase() + classname.slice(1)
 
