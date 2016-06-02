@@ -17,7 +17,7 @@ class CQL_QDM.Symptom extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
     @_abatementDatetime = @entry.abatementDatetime
-    @_onsetDatetime = @entry.onsetDatetime
+    @_onsetDatetime = @entry.start_time
     @_severity = @entry.severity
 
   ###
