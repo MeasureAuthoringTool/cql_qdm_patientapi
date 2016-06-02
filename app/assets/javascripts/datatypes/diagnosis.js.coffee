@@ -18,7 +18,7 @@ class CQL_QDM.Diagnosis extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
     @_abatementDatetime = @entry.abatementDatetime
-    @_onsetDatetime = @entry.onsetDatetime
+    @_onsetDatetime = @entry.start_time
     @_anatomicalLocationSite = @entry.anatomical_location
     @_severity = @entry.severity
 
