@@ -14,8 +14,8 @@ frame indicated by the timing relationships.
 class CQL_QDM.EncounterActive extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
-    @_admissionDatetime = @entry.admitTime
-    @_dischargeDatetime = @entry.dischargeTime
+    @_admissionDatetime = if @entry.admissionDatetime? then @entry.admissionDatetime else @entry.start_time
+    @_dischargeDatetime = if @entry.dischargeDatetime? then @entry.dischargeDatetime else @entry.end_time
     @_facilityLocation = @entry.facility?['name']
     @_facilityLocationArrivalDatetime = @entry.facility?['start_time']
     @_facilityLocationDepartureDatetime = @entry.facility?['end_time']
@@ -119,9 +119,9 @@ been completed.
 class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
-    @_admissionDatetime = @entry.admitTime
+    @_admissionDatetime = if @entry.admissionDatetime? then @entry.admissionDatetime else @entry.start_time
+    @_dischargeDatetime = if @entry.dischargeDatetime? then @entry.dischargeDatetime else @entry.end_time
     @_diagnosis = @entry.diagnosis
-    @_dischargeDatetime = @entry.dischargeTime
     @_dischargeStatus = @entry.dischargeDisposition
     @_facilityLocation = @entry.facility?['name']
     @_facilityLocationArrivalDatetime = @entry.facility?['start_time']
@@ -134,7 +134,7 @@ class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   admissionDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_admissionDatetime, 'X').toDate())
+    new cql.DateTime.fromDate(moment.utc(@_admissionDatetime, 'X').toDate())
 
   ###
   @returns {Code}
@@ -146,7 +146,7 @@ class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   dischargeDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_dischargeDatetime, 'X').toDate())
+    new cql.DateTime.fromDate(moment.utc(@_dischargeDatetime, 'X').toDate())
 
   ###
   @returns {Code}
@@ -176,8 +176,7 @@ class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
   @returns {Quantity}
   ###
   lengthOfStay: ->
-    @_lengthOfStay = @_dischargeDatetime - @admissionDatetime
-    cql.Quantity(@_dischargeDatetime['unit'], @_lengthOfStay)
+    new Quantity({unit: 'milliseconds', value: (@_dischargeDatetime - @_admissionDatetime)})
 
   ###
   @returns {Code}
