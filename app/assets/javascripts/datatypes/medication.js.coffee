@@ -25,14 +25,13 @@ class CQL_QDM.MedicationActive extends CQL_QDM.QDMDatatype
   @returns {Quantity}
   ###
   cumulativeMedicationDuration: ->
-    cql.Quantity(@_cumulativeMedicationDuration['unit'],
-      @_cumulativeMedicationDuration['value'])
+    new Quantity({unit: @_cumulativeMedicationDuration['unit'], value: @_cumulativeMedicationDuration['value']})
 
   ###
   @returns {Quantity}
   ###
   dose: ->
-    cql.Quantity(@_dose['unit'], @_dose['value'])
+    new Quantity({unit: @_dose['unit'], value: @_dose['value']})
 
   ###
   @returns {Code}
@@ -74,14 +73,13 @@ class CQL_QDM.MedicationAdministered extends CQL_QDM.QDMDatatype
   @returns {Quantity}
   ###
   cumulativeMedicationDuration: ->
-    cql.Quantity(@_cumulativeMedicationDuration['unit'],
-      @_cumulativeMedicationDuration['value'])
+    new Quantity({unit: @_cumulativeMedicationDuration['unit'], value: @_cumulativeMedicationDuration['value']})
 
   ###
   @returns {Quantity}
   ###
   dose: ->
-    cql.Quantity(@_dose['unit'], @_dose['value'])
+    new Quantity({unit: @_dose['unit'], value: @_dose['value']})
 
   ###
   @returns {Code}
@@ -198,7 +196,7 @@ class CQL_QDM.MedicationDischarge extends CQL_QDM.QDMDatatype
   @returns {Quantity}
   ###
   dose: ->
-    cql.Quantity(@_dose['unit'], @_dose['value'])
+    new Quantity({unit: @_dose['unit'], value: @_dose['value']})
 
   ###
   @returns {Code}
@@ -257,14 +255,13 @@ class CQL_QDM.MedicationDispensed extends CQL_QDM.QDMDatatype
   @returns {Quantity}
   ###
   cumulativeMedicationDuration: ->
-    cql.Quantity(@_cumulativeMedicationDuration['unit'],
-      @_cumulativeMedicationDuration['value'])
+    new Quantity({unit: @_cumulativeMedicationDuration['unit'], value: @_cumulativeMedicationDuration['value']})
 
   ###
   @returns {Quantity}
   ###
   dose: ->
-    cql.Quantity(@_dose['unit'], @_dose['value'])
+    new Quantity({unit: @_dose['unit'], value: @_dose['value']})
 
   ###
   @returns {Code}
@@ -360,14 +357,13 @@ class CQL_QDM.MedicationOrder extends CQL_QDM.QDMDatatype
   @returns {Quantity}
   ###
   cumulativeMedicationDuration: ->
-    cql.Quantity(@_cumulativeMedicationDuration['unit'],
-      @_cumulativeMedicationDuration['value'])
+    new Quantity({unit: @_cumulativeMedicationDuration['unit'], value: @_cumulativeMedicationDuration['value']})
 
   ###
   @returns {Quantity}
   ###
   dose: ->
-    cql.Quantity(@_dose['unit'], @_dose['value'])
+    new Quantity({unit: @_dose['unit'], value: @_dose['value']})
 
   ###
   @returns {Code}

@@ -22,13 +22,13 @@ class CQL_QDM.DiagnosticStudyAdverseEvent extends CQL_QDM.QDMDatatype
   @returns {Quantity}
   ###
   radiationDosage: ->
-    cql.Quantity(@_radiationDosage['unit'], @_radiationDosage['value'])
+    new Quantity({unit: @_radiationDosage['unit'], value: @_radiationDosage['value']})
 
   ###
   @returns {Quantity}
   ###
   radiationDuration: ->
-    cql.Quantity(@_radiationDuration['unit'], @_radiationDuration['value'])
+    new Quantity({unit: @_radiationDuration['unit'], value: @_radiationDuration['value']})
 
   ###
   @returns {Code}
@@ -68,13 +68,13 @@ class CQL_QDM.DiagnosticStudyIntolerance extends CQL_QDM.QDMDatatype
   @returns {Quantity}
   ###
   radiationDosage: ->
-    cql.Quantity(@_radiationDosage['unit'], @_radiationDosage['value'])
+    new Quantity({unit: @_radiationDosage['unit'], value: @_radiationDosage['value']})
 
   ###
   @returns {Quantity}
   ###
   radiationDuration: ->
-    cql.Quantity(@_radiationDuration['unit'], @_radiationDuration['value'])
+    new Quantity({unit: @_radiationDuration['unit'], value: @_radiationDuration['value']})
 
   ###
   @returns {Code}
@@ -133,13 +133,13 @@ class CQL_QDM.DiagnosticStudyOrder extends CQL_QDM.QDMDatatype
   @returns {Quantity}
   ###
   radiationDosage: ->
-    cql.Quantity(@_radiationDosage['unit'], @_radiationDosage['value'])
+    new Quantity({unit: @_radiationDosage['unit'], value: @_radiationDosage['value']})
 
   ###
   @returns {Quantity}
   ###
   radiationDuration: ->
-    cql.Quantity(@_radiationDuration['unit'], @_radiationDuration['value'])
+    new Quantity({unit: @_radiationDuration['unit'], value: @_radiationDuration['value']})
 
   ###
   @returns {Code}
@@ -201,13 +201,13 @@ class CQL_QDM.DiagnosticStudyPerformed extends CQL_QDM.QDMDatatype
   @returns {Quantity}
   ###
   radiationDosage: ->
-    cql.Quantity(@_radiationDosage['unit'], @_radiationDosage['value'])
+    new Quantity({unit: @_radiationDosage['unit'], value: @_radiationDosage['value']})
 
   ###
   @returns {Quantity}
   ###
   radiationDuration: ->
-    cql.Quantity(@_radiationDuration['unit'], @_radiationDuration['value'])
+    new Quantity({unit: @_radiationDuration['unit'], value: @_radiationDuration['value']})
 
   ###
   @returns {Code}
@@ -272,13 +272,13 @@ class CQL_QDM.DiagnosticStudyRecommended extends CQL_QDM.QDMDatatype
   @returns {Quantity}
   ###
   radiationDosage: ->
-    cql.Quantity(@_radiationDosage['unit'], @_radiationDosage['value'])
+    new Quantity({unit: @_radiationDosage['unit'], value: @_radiationDosage['value']})
 
   ###
   @returns {Quantity}
   ###
   radiationDuration: ->
-    cql.Quantity(@_radiationDuration['unit'], @_radiationDuration['value'])
+    new Quantity({unit: @_radiationDuration['unit'], value: @_radiationDuration['value']})
 
   ###
   @returns {Date}

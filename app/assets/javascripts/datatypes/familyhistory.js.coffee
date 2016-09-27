@@ -22,7 +22,7 @@ class CQL_QDM.FamilyHistory extends CQL_QDM.QDMDatatype
   @returns {Quantity}
   ###
   onsetAge: ->
-    cql.Quantity(@_onsetAge['unit'], @_onsetAge['value'])
+    new Quantity({unit: @_onsetAge['unit'], value: @_onsetAge['value']})
 
   ###
   @returns {Date}
