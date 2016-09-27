@@ -132,7 +132,7 @@ class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   admissionDatetime: ->
-    cql.DateTime.fromDate(@_admissionDatetime.toDate())#moment.utc(@_admissionDatetime, 'X').toDate())
+    cql.DateTime.fromDate(@_admissionDatetime.toDate())
 
   ###
   @returns {Code}
@@ -144,7 +144,7 @@ class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   dischargeDatetime: ->
-    cql.DateTime.fromDate(@_dischargeDatetime.toDate())#moment.utc(@_dischargeDatetime, 'X').toDate())
+    cql.DateTime.fromDate(@_dischargeDatetime.toDate())
 
   ###
   @returns {Code}
