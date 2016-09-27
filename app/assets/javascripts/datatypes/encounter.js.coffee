@@ -14,8 +14,8 @@ frame indicated by the timing relationships.
 class CQL_QDM.EncounterActive extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
-    @_admissionDatetime = if @entry.admissionDatetime? then @entry.admissionDatetime else @entry.start_time
-    @_dischargeDatetime = if @entry.dischargeDatetime? then @entry.dischargeDatetime else @entry.end_time
+    @_admissionDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
+    @_dischargeDatetime = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
     @_facilityLocation = @entry.facility?['name']
     @_facilityLocationArrivalDatetime = @entry.facility?['start_time']
     @_facilityLocationDepartureDatetime = @entry.facility?['end_time']
@@ -55,9 +55,7 @@ class CQL_QDM.EncounterActive extends CQL_QDM.QDMDatatype
   @returns {Quantity}
   ###
   lengthOfStay: ->
-    ddt = cql.DateTime.fromDate(moment.utc(@_dischargeDatetime, 'X').toDate())
-    adt = cql.DateTime.fromDate(moment.utc(@_admissionDatetime, 'X').toDate())
-    cql.Quantity(@_dischargeDatetime['unit'], ddt - adt)
+    new Quantity({unit: 'milliseconds', value: (@_dischargeDatetime - @_admissionDatetime)})
 
   ###
   @returns {Code}
@@ -119,8 +117,8 @@ been completed.
 class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
-    @_admissionDatetime = if @entry.admissionDatetime? then @entry.admissionDatetime else @entry.start_time
-    @_dischargeDatetime = if @entry.dischargeDatetime? then @entry.dischargeDatetime else @entry.end_time
+    @_admissionDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
+    @_dischargeDatetime = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
     @_diagnosis = @entry.diagnosis
     @_dischargeStatus = @entry.dischargeDisposition
     @_facilityLocation = @entry.facility?['name']
@@ -134,7 +132,7 @@ class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   admissionDatetime: ->
-    new cql.DateTime.fromDate(moment.utc(@_admissionDatetime, 'X').toDate())
+    cql.DateTime.fromDate(@_admissionDatetime.toDate())#moment.utc(@_admissionDatetime, 'X').toDate())
 
   ###
   @returns {Code}
@@ -146,7 +144,7 @@ class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   dischargeDatetime: ->
-    new cql.DateTime.fromDate(moment.utc(@_dischargeDatetime, 'X').toDate())
+    cql.DateTime.fromDate(@_dischargeDatetime.toDate())#moment.utc(@_dischargeDatetime, 'X').toDate())
 
   ###
   @returns {Code}
