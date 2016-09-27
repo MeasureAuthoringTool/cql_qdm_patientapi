@@ -23,7 +23,7 @@ class CQL_QDM.ImmunizationAdministered extends CQL_QDM.QDMDatatype
   @returns {Quantity}
   ###
   dose: ->
-    cql.Quantity(@_dose['unit'], @_dose['value'])
+    new Quantity({unit: @_dose['unit'], value: @_dose['value']})
 
   ###
   @returns {Code}
@@ -147,7 +147,7 @@ class CQL_QDM.ImmunizationOrder extends CQL_QDM.QDMDatatype
   @returns {Quantity}
   ###
   dose: ->
-    cql.Quantity(@_dose['unit'], @_dose['value'])
+    new Quantity({unit: @_dose['unit'], value: @_dose['value']})
 
   ###
   @returns {Code}

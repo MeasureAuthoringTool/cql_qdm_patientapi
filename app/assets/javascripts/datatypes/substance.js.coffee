@@ -23,7 +23,7 @@ class CQL_QDM.SubstanceAdministered extends CQL_QDM.QDMDatatype
   @returns {Quantity}
   ###
   dose: ->
-    cql.Quantity(@_dose['unit'], @_dose['value'])
+    new Quantity({unit: @_dose['unit'], value: @_dose['value']})
 
   ###
   @returns {Code}
@@ -165,7 +165,7 @@ class CQL_QDM.SubstanceOrder extends CQL_QDM.QDMDatatype
   @returns {Quantity}
   ###
   dose: ->
-    cql.Quantity(@_dose['unit'], @_dose['value'])
+    new Quantity({unit: @_dose['unit'], value: @_dose['value']})
 
   ###
   @returns {Code}
@@ -232,7 +232,7 @@ class CQL_QDM.SubstanceRecommended extends CQL_QDM.QDMDatatype
   @returns {Quantity}
   ###
   dose: ->
-    cql.Quantity(@_dose['unit'], @_dose['value'])
+    new Quantity({unit: @_dose['unit'], value: @_dose['value']})
 
   ###
   @returns {Code}
