@@ -3,76 +3,6 @@
 ###
 @CQL_QDM ||= {}
 
-
-###
-Data elements that meet criteria using this datatype should document an
-unexpected or dangerous reaction to the procedure indicated by the QDM category
-and its corresponding value set.
-###
-class CQL_QDM.ProcedureAdverseEvent extends CQL_QDM.QDMDatatype
-  constructor: (@entry) ->
-    super @entry
-    @_reaction = @entry.reaction
-    @_startDatetime = @entry.start_time
-    @_stopDatetime = @entry.end_time
-
-  ###
-  @returns {Code}
-  ###
-  reaction: ->
-    cql.Code(@_reaction.code, @_reaction.code_system)
-
-  ###
-  @returns {Date}
-  ###
-  startDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_startDatetime, 'X').toDate())
-
-  ###
-  @returns {Date}
-  ###
-  stopDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_stopDatetime, 'X').toDate())
-
-
-###
-Data elements that meet criteria using this datatype should document a reaction
-in specific patients representing a low threshold to the normal execution of
-the procedure indicated by the QDM category and its corresponding value set.
-###
-class CQL_QDM.ProcedureIntolerance extends CQL_QDM.QDMDatatype
-  constructor: (@entry) ->
-    super @entry
-    @_ordinality = @entry.ordinality
-    @_reaction = @entry.reaction
-    @_startDatetime = @entry.start_time
-    @_stopDatetime = @entry.end_time
-
-  ###
-  @returns {Code}
-  ###
-  ordinality: ->
-    cql.Code(@_ordinality.code, @_ordinality.code_system)
-
-  ###
-  @returns {Code}
-  ###
-  reaction: ->
-    cql.Code(@_reaction.code, @_reaction.code_system)
-
-  ###
-  @returns {Date}
-  ###
-  startDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_startDatetime, 'X').toDate())
-
-  ###
-  @returns {Date}
-  ###
-  stopDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_stopDatetime, 'X').toDate())
-
-
 ###
 Data elements that meet criteria using this datatype should document a request
 for the procedure indicated by the QDM category and its corresponding value set.
@@ -264,8 +194,7 @@ class CQL_QDM.ProcedureRecommended extends CQL_QDM.QDMDatatype
     @_negationRationale = @entry.negationRationale
     @_ordinality = @entry.ordinality
     @_reason = @entry.reason
-    @_startDatetime = @entry.start_time
-    @_stopDatetime = @entry.end_time
+    @_authorDatetime = @entry.start_time
 
   ###
   @returns {Code}
@@ -280,6 +209,12 @@ class CQL_QDM.ProcedureRecommended extends CQL_QDM.QDMDatatype
   anatomicalLocationSite: ->
     cql.Code(@_anatomicalLocationSite.code,
       @_anatomicalLocationSite.code_system)
+
+  ###
+  @returns {Date}
+  ###
+  authorDatetime: ->
+    cql.DateTime.fromDate(moment.utc(@_authorDatetime, 'X').toDate())
 
   ###
   @returns {Code}
@@ -304,15 +239,3 @@ class CQL_QDM.ProcedureRecommended extends CQL_QDM.QDMDatatype
   ###
   reason: ->
     cql.Code(@_reason.code, @_reason.code_system)
-
-  ###
-  @returns {Date}
-  ###
-  startDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_startDatetime, 'X').toDate())
-
-  ###
-  @returns {Date}
-  ###
-  stopDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_stopDatetime, 'X').toDate())

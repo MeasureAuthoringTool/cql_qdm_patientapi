@@ -14,8 +14,7 @@ class CQL_QDM.LaboratoryTestOrder extends CQL_QDM.QDMDatatype
     @_method = @entry.method
     @_negationRationale = @entry.negationRationale
     @_reason = @entry.reason
-    @_startDatetime = @entry.start_time
-    @_stopDatetime = @entry.end_time
+    @_authorDatetime = @entry.start_time
 
   ###
   @returns {Code}
@@ -38,14 +37,8 @@ class CQL_QDM.LaboratoryTestOrder extends CQL_QDM.QDMDatatype
   ###
   @returns {Date}
   ###
-  startDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_startDatetime, 'X').toDate())
-
-  ###
-  @returns {Date}
-  ###
-  stopDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_stopDatetime, 'X').toDate())
+  authorDatetime: ->
+    cql.DateTime.fromDate(moment.utc(@_authorDatetime, 'X').toDate())
 
 
 ###
@@ -62,10 +55,10 @@ class CQL_QDM.LaboratoryTestPerformed extends CQL_QDM.QDMDatatype
     @_reason = @entry.reason
     @_referenceRangeLow = @entry.referenceRangeLow
     @_referenceRangeHigh = @entry.referenceRangeHigh
-    @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
+    @_relevantPeriodLow = @entry.start_time
+    @_relevantPeriodHigh = @entry.end_time
     @_result = @entry.result
-    @_resultDatetime = CQL_QDM.Helpers.convertDateTime(@entry.result_date_time)
+    @_resultDatetime = @entry.result_date_time
     @_status = @entry.status
 
   ###
@@ -111,6 +104,7 @@ class CQL_QDM.LaboratoryTestPerformed extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   result: ->
+    # TODO: return type in modelinfo is Any. does this need to change?
     cql.Code(@_result.code, @_result.code_system)
 
   ###

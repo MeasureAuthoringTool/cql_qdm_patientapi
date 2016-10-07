@@ -3,70 +3,6 @@
 ###
 @CQL_QDM ||= {}
 
-
-###
-Data elements that meet criteria using this datatype should document an
-unexpected or dangerous reaction to a device indicated by the QDM category
-and its corresponding value set.
-###
-class CQL_QDM.DeviceAdverseEvent extends CQL_QDM.QDMDatatype
-  constructor: (@entry) ->
-    super @entry
-    @_reaction = @entry.reaction
-    @_startDatetime = @entry.start_time
-    @_stopDatetime = @entry.end_time
-
-  ###
-  @returns {Code}
-  ###
-  reaction: ->
-    cql.Code(@_reaction.code, @_reaction.code_system)
-  
-  ###
-  @returns {Date}
-  ###
-  startDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_startDatetime, 'X').toDate())
-
-  ###
-  @returns {Date}
-  ###
-  stopDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_stopDatetime, 'X').toDate())
-
-
-###
-Data elements that meet criteria using this datatype should document an
-immunologically mediated reaction that exhibits specificity and recurrence
-on re-exposure to the offending device indicated by the QDM category and its
-corresponding value set.
-###
-class CQL_QDM.DeviceAllergy extends CQL_QDM.QDMDatatype
-  constructor: (@entry) ->
-    super @entry
-    @_reaction = @entry.reaction
-    @_startDatetime = @entry.start_time
-    @_stopDatetime = @entry.end_time
-
-  ###
-  @returns {Code}
-  ###
-  reaction: ->
-    cql.Code(@_reaction.code, @_reaction.code_system)
-  
-  ###
-  @returns {Date}
-  ###
-  startDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_startDatetime, 'X').toDate())
-
-  ###
-  @returns {Date}
-  ###
-  stopDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_stopDatetime, 'X').toDate())
-
-
 ###
 Data elements that meet criteria using this datatype should document that the
 device indicated by the QDM category and its corresponding value set is in use,
@@ -162,8 +98,7 @@ class CQL_QDM.DeviceOrder extends CQL_QDM.QDMDatatype
     super @entry
     @_negationRationale = @entry.negationRationale
     @_reaction = @entry.reaction
-    @_startDatetime = @entry.start_time
-    @_stopDatetime = @entry.end_time
+    @_authorDatetime = @entry.start_time
 
   ###
   @returns {Code}
@@ -180,14 +115,8 @@ class CQL_QDM.DeviceOrder extends CQL_QDM.QDMDatatype
   ###
   @returns {Date}
   ###
-  startDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_startDatetime, 'X').toDate())
-
-  ###
-  @returns {Date}
-  ###
-  stopDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_stopDatetime, 'X').toDate())
+  authorDatetime: ->
+    cql.DateTime.fromDate(moment.utc(@_authorDatetime, 'X').toDate())
 
 
 ###

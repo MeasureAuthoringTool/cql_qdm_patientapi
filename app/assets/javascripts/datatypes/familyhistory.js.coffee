@@ -14,21 +14,14 @@ datetime.
 class CQL_QDM.FamilyHistory extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
-    @_onsetAge = @entry.onsetAge
-    @_recordedDatetime = @entry.recordedDatetime
+    @_authorDatetime = @entry.start_time
     @_relationship = @entry.relationshipToPatient
-
-  ###
-  @returns {Quantity}
-  ###
-  onsetAge: ->
-    new Quantity({unit: @_onsetAge['unit'], value: @_onsetAge['value']})
 
   ###
   @returns {Date}
   ###
-  recordedDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_recordedDatetime, 'X').toDate())
+  authorDatetime: ->
+    cql.DateTime.fromDate(moment.utc(@_authorDatetime, 'X').toDate())
 
   ###
   @returns {Code}

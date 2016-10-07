@@ -14,10 +14,8 @@ class CQL_QDM.CareGoal extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
 
-    # @_relevantPeriodLow = @entry.start_time
-
-    @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
+    @_relevantPeriodLow = @entry.start_time
+    @_relevantPeriodHigh = @entry.end_time
     @_relatedTo = @entry.relatedTo
     @_targetOutcome = @entry.targetOutcome
 
