@@ -3,70 +3,6 @@
 ###
 @CQL_QDM ||= {}
 
-
-###
-Data elements that meet criteria using this datatype should document an
-unexpected or dangerous reaction to the laboratory test indicated by the QDM
-category and its corresponding value set.
-###
-class CQL_QDM.LaboratoryTestAdverseEvent extends CQL_QDM.QDMDatatype
-  constructor: (@entry) ->
-    super @entry
-    @_reaction = @entry.reaction
-    @_startDatetime = @entry.start_time
-    @_stopDatetime = @entry.end_time
-
-  ###
-  @returns {Code}
-  ###
-  reaction: ->
-    cql.Code(@_reaction.code, @_reaction.code_system)
-
-  ###
-  @returns {Date}
-  ###
-  startDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_startDatetime, 'X').toDate())
-
-  ###
-  @returns {Date}
-  ###
-  stopDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_stopDatetime, 'X').toDate())
-
-
-###
-Data elements that meet criteria using this datatype should document a reaction
-in specific patients representing a low threshold to the normal reported or
-expected reactions of the laboratory test indicated by the QDM category and its
-corresponding value set
-###
-class CQL_QDM.LaboratoryTestIntolerance extends CQL_QDM.QDMDatatype
-  constructor: (@entry) ->
-    super @entry
-    @_reaction = @entry.reaction
-    @_startDatetime = @entry.start_time
-    @_stopDatetime = @entry.end_time
-
-  ###
-  @returns {Code}
-  ###
-  reaction: ->
-    cql.Code(@_reaction.code, @_reaction.code_system)
-
-  ###
-  @returns {Date}
-  ###
-  startDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_startDatetime, 'X').toDate())
-
-  ###
-  @returns {Date}
-  ###
-  stopDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_stopDatetime, 'X').toDate())
-
-
 ###
 Data elements that meet criteria using this datatype should document a request
 for the laboratory test indicated by the QDM category and its corresponding
@@ -120,15 +56,17 @@ was performed.
 class CQL_QDM.LaboratoryTestPerformed extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
+
     @_method = @entry.method
     @_negationRationale = @entry.negationRationale
     @_reason = @entry.reason
-    @_referenceRangeHigh = @entry.referenceRangeHigh
     @_referenceRangeLow = @entry.referenceRangeLow
+    @_referenceRangeHigh = @entry.referenceRangeHigh
+    @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
+    @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
     @_result = @entry.result
-    @_startDatetime = @entry.start_time
+    @_resultDatetime = CQL_QDM.Helpers.convertDateTime(@entry.result_date_time)
     @_status = @entry.status
-    @_stopDatetime = @entry.end_time
 
   ###
   @returns {Code}
@@ -149,16 +87,25 @@ class CQL_QDM.LaboratoryTestPerformed extends CQL_QDM.QDMDatatype
     cql.Code(@_reason.code, @_reason.code_system)
 
   ###
-  @returns {String}
+  @returns {Interval}
   ###
-  referenceRangeHigh: ->
-    @_referenceRangeHigh
+  referenceRange: ->
+    # according to documentation, this is assumed to be a 'Quantity'
+    high = null
+    low = null
+    if @_referenceRangeHigh?['unit']?
+      high = new Quantity({unit: @_referenceRangeHigh['unit'], value: @_referenceRangeHigh['value']})
+    if @_referenceRangeLow?['unit']?
+      low = new Quantity({unit: @_referenceRangeLow['unit'], value: @_referenceRangeLow['value']})
+    new Interval({low: low, high: high})
 
   ###
-  @returns {String}
+  @returns {Interval<Date>}
   ###
-  referenceRangeLow: ->
-    @_referenceRangeLow
+  relevantPeriod: ->
+    low = cql.DateTime.fromDate(moment.utc(@_relevantPeriodLow, 'X').toDate())
+    high = cql.DateTime.fromDate(moment.utc(@_relevantPeriodHigh, 'X').toDate())
+    new Interval({low: low, high: high})
 
   ###
   @returns {Code}
@@ -169,20 +116,14 @@ class CQL_QDM.LaboratoryTestPerformed extends CQL_QDM.QDMDatatype
   ###
   @returns {Date}
   ###
-  startDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_startDatetime, 'X').toDate())
+  resultDatetime: ->
+    cql.DateTime.fromDate(moment.utc(@_resultDatetime, 'X').toDate())
 
   ###
   @returns {Code}
   ###
   status: ->
     cql.Code(@_status.code, @_status.code_system)
-
-  ###
-  @returns {Date}
-  ###
-  stopDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_stopDatetime, 'X').toDate())
 
 
 ###

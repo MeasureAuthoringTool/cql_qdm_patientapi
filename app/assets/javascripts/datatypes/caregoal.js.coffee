@@ -13,22 +13,21 @@ its corresponding value set.
 class CQL_QDM.CareGoal extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
-    @_startDatetime = @entry.start_time
-    @_stopDatetime = @entry.end_time
+
+    # @_relevantPeriodLow = @entry.start_time
+
+    @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
+    @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
     @_relatedTo = @entry.relatedTo
     @_targetOutcome = @entry.targetOutcome
 
   ###
-  @returns {Date}
+  @returns {Interval<Date>}
   ###
-  startDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_startDatetime, 'X').toDate())
-
-  ###
-  @returns {Date}
-  ###
-  stopDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_stopDatetime, 'X').toDate())
+  relevantPeriod: ->
+    low = cql.DateTime.fromDate(moment.utc(@_relevantPeriodLow, 'X').toDate())
+    high = cql.DateTime.fromDate(moment.utc(@_relevantPeriodHigh, 'X').toDate())
+    new Interval({low: low, high: high})
 
   ###
   @returns {Code}

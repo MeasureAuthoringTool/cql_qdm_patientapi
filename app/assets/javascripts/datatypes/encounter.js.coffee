@@ -14,24 +14,21 @@ frame indicated by the timing relationships.
 class CQL_QDM.EncounterActive extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
-    @_admissionDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    @_dischargeDatetime = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
+
+    @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
+    @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
+    @_locationPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.facility?['start_time'])
+    @_locationPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.facility?['end_time'])
     @_facilityLocation = @entry.facility?['name']
-    @_facilityLocationArrivalDatetime = @entry.facility?['start_time']
-    @_facilityLocationDepartureDatetime = @entry.facility?['end_time']
     @_reason = @entry.reason
 
   ###
-  @returns {Date}
+  @returns {Interval<Date>}
   ###
-  admissionDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_admissionDatetime, 'X').toDate())
-
-  ###
-  @returns {Date}
-  ###
-  dischargeDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_dischargeDatetime, 'X').toDate())
+  relevantPeriod: ->
+    low = cql.DateTime.fromDate(moment.utc(@_relevantPeriodLow, 'X').toDate())
+    high = cql.DateTime.fromDate(moment.utc(@_relevantPeriodHigh, 'X').toDate())
+    new Interval({low: low, high: high})
 
   ###
   @returns {Code}
@@ -40,22 +37,18 @@ class CQL_QDM.EncounterActive extends CQL_QDM.QDMDatatype
     cql.Code(@_facilityLocation.code, @_facilityLocation.code_system)
 
   ###
-  @returns {Date}
+  @returns {Interval<Date>}
   ###
-  facilityLocationArrivalDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_facilityLocationArrivalDatetime, 'X').toDate())
-
-  ###
-  @returns {Date}
-  ###
-  facilityLocationDepartureDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_facilityLocationDepartureDatetime, 'X').toDate())
+  locationPeriod: ->
+    low = cql.DateTime.fromDate(moment.utc(@_locationPeriodLow, 'X').toDate())
+    high = cql.DateTime.fromDate(moment.utc(@_locationPeriodHigh, 'X').toDate())
+    new Interval({low: low, high: high})
 
   ###
   @returns {Quantity}
   ###
   lengthOfStay: ->
-    new Quantity({unit: 'milliseconds', value: (@_dischargeDatetime - @_admissionDatetime)})
+    new Quantity({unit: 'milliseconds', value: (@_relevantPeriodHigh - @_relevantPeriodLow)})
 
   ###
   @returns {Code}
