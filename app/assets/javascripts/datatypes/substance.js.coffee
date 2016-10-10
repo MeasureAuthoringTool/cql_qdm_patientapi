@@ -81,7 +81,7 @@ class CQL_QDM.SubstanceOrder extends CQL_QDM.QDMDatatype
   @returns {Quantity}
   ###
   dosage: ->
-    new Quantity({unit: @_dose['unit'], value: @_dose['value']})
+    new Quantity({unit: @_dosage['unit'], value: @_dosage['value']})
 
   ###
   @returns {Code}

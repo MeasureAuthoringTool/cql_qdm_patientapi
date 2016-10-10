@@ -10,7 +10,7 @@ or Intolerance and its corresponding value set.
 Timing: The Prevalence Period references the time from the onset date to the
 abatement date.
 ###
-class CQL_QDM.AllergyIntollerance extends CQL_QDM.QDMDatatype
+class CQL_QDM.AllergyIntolerance extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
     @_prevalencePeriodLow = @entry.start_time

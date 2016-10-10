@@ -54,38 +54,6 @@ class CQL_QDM.DeviceApplied extends CQL_QDM.QDMDatatype
 
 
 ###
-Data elements that meet criteria using this datatype should document a reaction
-in specific patients who have a low threshold to the normal reported or
-expected reactions of the device indicated by the QDM category and its
-corresponding value set.
-###
-class CQL_QDM.DeviceIntolerance extends CQL_QDM.QDMDatatype
-  constructor: (@entry) ->
-    super @entry
-    @_reaction = @entry.reaction
-    @_startDatetime = @entry.start_time
-    @_stopDatetime = @entry.end_time
-
-  ###
-  @returns {Code}
-  ###
-  reaction: ->
-    cql.Code(@_reaction.code, @_reaction.code_system)
-  
-  ###
-  @returns {Date}
-  ###
-  startDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_startDatetime, 'X').toDate())
-
-  ###
-  @returns {Date}
-  ###
-  stopDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_stopDatetime, 'X').toDate())
-
-
-###
 Data elements that meet criteria using this datatype should document an order
 for the device indicated by the QDM category and its corresponding value set.
 ###

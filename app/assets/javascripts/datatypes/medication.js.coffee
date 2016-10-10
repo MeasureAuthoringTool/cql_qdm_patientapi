@@ -26,7 +26,7 @@ class CQL_QDM.MedicationActive extends CQL_QDM.QDMDatatype
   @returns {Quantity}
   ###
   dosage: ->
-    new Quantity({unit: @_dose['unit'], value: @_dose['value']})
+    new Quantity({unit: @_dosage['unit'], value: @_dosage['value']})
 
   ###
   @returns {Code}
@@ -70,7 +70,7 @@ class CQL_QDM.MedicationAdministered extends CQL_QDM.QDMDatatype
   @returns {Quantity}
   ###
   dosage: ->
-    new Quantity({unit: @_dose['unit'], value: @_dose['value']})
+    new Quantity({unit: @_dosage['unit'], value: @_dosage['value']})
 
   ###
   @returns {Code}

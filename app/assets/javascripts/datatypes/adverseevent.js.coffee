@@ -4,11 +4,8 @@
 @CQL_QDM ||= {}
 
 ###
-Data elements that meet criteria using this datatype should document the Allergy
-or Intolerance and its corresponding value set.
-
-Timing: The Prevalence Period references the time from the onset date to the
-abatement date.
+Data elements that meet criteria using this datatype should document the Adverse
+Event and its corresponding value set.
 ###
 class CQL_QDM.AdverseEvent extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
