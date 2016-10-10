@@ -17,8 +17,8 @@ class CQL_QDM.DeviceApplied extends CQL_QDM.QDMDatatype
     @_anatomicalLocationSite = @entry.anatomical_location
     @_negationRationale = @entry.negationRationale
     @_reason = @entry.reason
-    @_removalDatetime = @entry.removal_time
-    @_startDatetime = @entry.start_time
+    @_relevantPeriodLow = @entry.start_time
+    @_relevantPeriodHigh = @entry.end_time
 
   ###
   @returns {Code}
@@ -45,16 +45,12 @@ class CQL_QDM.DeviceApplied extends CQL_QDM.QDMDatatype
     cql.Code(@_reason.code, @_reason.code_system)
 
   ###
-  @returns {Date}
+  @returns {Interval<Date>}
   ###
-  removalDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_removalDatetime, 'X').toDate())
-
-  ###
-  @returns {Date}
-  ###
-  startDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_startDatetime, 'X').toDate())
+  relevantPeriod: ->
+    low = cql.DateTime.fromDate(moment.utc(@_relevantPeriodLow, 'X').toDate())
+    high = cql.DateTime.fromDate(moment.utc(@_relevantPeriodHigh, 'X').toDate())
+    new Interval({low: low, high: high})
 
 
 ###
@@ -127,10 +123,15 @@ corresponding value set.
 class CQL_QDM.DeviceRecommended extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
+    @_authorDatetime = @entry.start_time
     @_negationRationale = @entry.negationRationale
-    @_reaction = @entry.reaction
-    @_startDatetime = @entry.start_time
-    @_stopDatetime = @entry.end_time
+    @_reason = @entry.reason
+
+  ###
+  @returns {Date}
+  ###
+  authorDatetime: ->
+    cql.DateTime.fromDate(moment.utc(@_authorDatetime, 'X').toDate())
 
   ###
   @returns {Code}
@@ -141,17 +142,5 @@ class CQL_QDM.DeviceRecommended extends CQL_QDM.QDMDatatype
   ###
   @returns {Code}
   ###
-  reaction: ->
-    cql.Code(@_reaction.code, @_reaction.code_system)
-  
-  ###
-  @returns {Date}
-  ###
-  startDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_startDatetime, 'X').toDate())
-
-  ###
-  @returns {Date}
-  ###
-  stopDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_stopDatetime, 'X').toDate())
+  reason: ->
+    cql.Code(@_reason.code, @_reason.code_system)

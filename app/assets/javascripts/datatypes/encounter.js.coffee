@@ -68,11 +68,16 @@ value set has been recommended.
 class CQL_QDM.EncounterOrder extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
+    @_authorDatetime = @entry.start_time
     @_facilityLocation = @entry.facility?['name']
     @_negationRationale = @entry.negationRationale
     @_reason = @entry.reason
-    @_startDatetime = @entry.admitTime
-    @_stopDatetime = @entry.dischargeTime
+
+  ###
+  @returns {Date}
+  ###
+  authorDatetime: ->
+    cql.DateTime.fromDate(moment.utc(@_authorDatetime, 'X').toDate())
 
   ###
   @returns {Code}
@@ -91,18 +96,6 @@ class CQL_QDM.EncounterOrder extends CQL_QDM.QDMDatatype
   ###
   reason: ->
     cql.Code(@_reason.code, @_reason.code_system)
-
-  ###
-  @returns {Date}
-  ###
-  startDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_startDatetime, 'X').toDate())
-
-  ###
-  @returns {Date}
-  ###
-  stopDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_stopDatetime, 'X').toDate())
 
 
 ###
@@ -202,11 +195,16 @@ recommended.
 class CQL_QDM.EncounterRecommended extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
+    @_authorDatetime = @entry.start_time
     @_facilityLocation = @entry.facility?['name']
     @_negationRationale = @entry.negationRationale
     @_reason = @entry.reason
-    @_startDatetime = @entry.admitTime
-    @_stopDatetime = @entry.dischargeTime
+
+  ###
+  @returns {Date}
+  ###
+  authorDatetime: ->
+    cql.DateTime.fromDate(moment.utc(@_authorDatetime, 'X').toDate())
 
   ###
   @returns {Code}
@@ -225,23 +223,3 @@ class CQL_QDM.EncounterRecommended extends CQL_QDM.QDMDatatype
   ###
   reason: ->
     cql.Code(@_reason.code, @_reason.code_system)
-
-  ###
-  @returns {Interval<Date>}
-  ###
-  relevantPeriod: ->
-    low = cql.DateTime.fromDate(moment.utc(@_relevantPeriodLow, 'X').toDate())
-    high = cql.DateTime.fromDate(moment.utc(@_relevantPeriodHigh, 'X').toDate())
-    new Interval({low: low, high: high})
-
-  ###
-  @returns {Date}
-  ###
-  startDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_startDatetime, 'X').toDate())
-
-  ###
-  @returns {Date}
-  ###
-  stopDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_stopDatetime, 'X').toDate())

@@ -12,18 +12,24 @@ actually administered to the patient.
 class CQL_QDM.ImmunizationAdministered extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
-    @_dose = @entry.dose
+    @_authorDatetime = @entry.start_time
+    @_dosage = @entry.dose
     @_negationRationale = @entry.negationRationale
     @_reason = @entry.reason
     @_route = @entry.route
-    @_startDatetime = @entry.start_time
-    @_stopDatetime = @entry.end_time
+    @_supply = @entry.supply
+
+  ###
+  @returns {Date}
+  ###
+  authorDatetime: ->
+    cql.DateTime.fromDate(moment.utc(@_authorDatetime, 'X').toDate())
 
   ###
   @returns {Quantity}
   ###
-  dose: ->
-    new Quantity({unit: @_dose['unit'], value: @_dose['value']})
+  dosage: ->
+    new Quantity({unit: @_dosage['unit'], value: @_dosage['value']})
 
   ###
   @returns {Code}
@@ -44,81 +50,10 @@ class CQL_QDM.ImmunizationAdministered extends CQL_QDM.QDMDatatype
     cql.Code(@_route.code, @_route.code_system)
 
   ###
-  @returns {Date}
+  @returns {Quantity}
   ###
-  startDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_startDatetime, 'X').toDate())
-
-  ###
-  @returns {Date}
-  ###
-  stopDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_stopDatetime, 'X').toDate())
-
-
-###
-Data elements that meet criteria using this datatype should document an
-immunologically mediated reaction that exhibits specificity and recurrence
-on re-exposure to the offending vaccine indicated by the QDM category and
-its corresponding value set.
-###
-class CQL_QDM.ImmunizationAllergy extends CQL_QDM.QDMDatatype
-  constructor: (@entry) ->
-    super @entry
-    @_reaction = @entry.reaction
-    @_startDatetime = @entry.start_time
-    @_stopDatetime = @entry.end_time
-
-  ###
-  @returns {Code}
-  ###
-  reaction: ->
-    cql.Code(@_reaction.code, @_reaction.code_system)
-
-  ###
-  @returns {Date}
-  ###
-  startDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_startDatetime, 'X').toDate())
-
-  ###
-  @returns {Date}
-  ###
-  stopDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_stopDatetime, 'X').toDate())
-
-
-###
-Data elements that meet criteria using this datatype should document a
-reaction in specific patients representing a low threshold to the normal
-pharmacological action of the vaccine indicated by the QDM category and its
-corresponding value set.
-###
-class CQL_QDM.ImmunizationIntolerance extends CQL_QDM.QDMDatatype
-  constructor: (@entry) ->
-    super @entry
-    @_reaction = @entry.reaction
-    @_startDatetime = @entry.start_time
-    @_stopDatetime = @entry.end_time
-
-  ###
-  @returns {Code}
-  ###
-  reaction: ->
-    cql.Code(@_reaction.code, @_reaction.code_system)
-
-  ###
-  @returns {Date}
-  ###
-  startDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_startDatetime, 'X').toDate())
-
-  ###
-  @returns {Date}
-  ###
-  stopDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_stopDatetime, 'X').toDate())
-
+  supply: ->
+    new Quantity({unit: @_supply['unit'], value: @_supply['value']})
 
 ###
 Data elements that meet criteria using this datatype should document a request
@@ -129,13 +64,12 @@ class CQL_QDM.ImmunizationOrder extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
     @_activeDatetime = @entry.active_datetime
-    @_dose = @entry.dose
+    @_authorDatetime = @entry.start_time
+    @_dosage = @entry.dose
     @_negationRationale = @entry.negationRationale
     @_reason = @entry.reason
     @_route = @entry.route
-    @_signedDatetime = @entry.signed_datetime
-    @_startDatetime = @entry.start_time
-    @_stopDatetime = @entry.end_time
+    @_supply = @entry.supply
 
   ###
   @returns {Date}
@@ -144,10 +78,16 @@ class CQL_QDM.ImmunizationOrder extends CQL_QDM.QDMDatatype
     cql.DateTime.fromDate(moment.utc(@_activeDatetime, 'X').toDate())
 
   ###
+  @returns {Date}
+  ###
+  authorDatetime: ->
+    cql.DateTime.fromDate(moment.utc(@_authorDatetime, 'X').toDate())
+
+  ###
   @returns {Quantity}
   ###
-  dose: ->
-    new Quantity({unit: @_dose['unit'], value: @_dose['value']})
+  dosage: ->
+    new Quantity({unit: @_dosage['unit'], value: @_dosage['value']})
 
   ###
   @returns {Code}
@@ -168,19 +108,7 @@ class CQL_QDM.ImmunizationOrder extends CQL_QDM.QDMDatatype
     cql.Code(@_route.code, @_route.code_system)
 
   ###
-  @returns {Date}
+  @returns {Quantity}
   ###
-  signedDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_signedDatetime, 'X').toDate())
-
-  ###
-  @returns {Date}
-  ###
-  startDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_startDatetime, 'X').toDate())
-
-  ###
-  @returns {Date}
-  ###
-  stopDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_stopDatetime, 'X').toDate())
+  supply: ->
+    new Quantity({unit: @_supply['unit'], value: @_supply['value']})

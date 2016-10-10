@@ -15,10 +15,10 @@ class CQL_QDM.PhysicalExamOrder extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
     @_anatomicalLocationSite = @entry.anatomicalLocation
+    @_authorDatetime = @entry.start_time
     @_method = @entry.method
     @_negationRationale = @entry.negationRationale
     @_reason = @entry.reason
-    @_authorDatetime = @entry.start_time
 
   ###
   @returns {Code}
@@ -64,9 +64,9 @@ class CQL_QDM.PhysicalExamPerformed extends CQL_QDM.QDMDatatype
     @_method = @entry.method
     @_negationRationale = @entry.negationRationale
     @_reason = @entry.reason
+    @_relevantPeriodLow = @entry.start_time
+    @_relevantPeriodHigh = @entry.end_time
     @_result = @entry.result
-    @_startDatetime = @entry.start_time
-    @_stopDatetime = @entry.end_time
 
   ###
   @returns {Code}
@@ -94,16 +94,12 @@ class CQL_QDM.PhysicalExamPerformed extends CQL_QDM.QDMDatatype
     cql.Code(@_reason.code, @_reason.code_system)
 
   ###
-  @returns {Date}
+  @returns {Interval<Date>}
   ###
-  startDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_startDatetime, 'X').toDate())
-
-  ###
-  @returns {Date}
-  ###
-  stopDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_stopDatetime, 'X').toDate())
+  relevantPeriod: ->
+    low = cql.DateTime.fromDate(moment.utc(@_relevantPeriodLow, 'X').toDate())
+    high = cql.DateTime.fromDate(moment.utc(@_relevantPeriodHigh, 'X').toDate())
+    new Interval({low: low, high: high})
 
 
 ###
@@ -114,12 +110,11 @@ corresponding value set.
 class CQL_QDM.PhysicalExamRecommended extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
+    @_authorDatetime = @entry.start_time
     @_anatomicalLocationSite = @entry.anatomicalLocation
     @_method = @entry.method
     @_negationRationale = @entry.negationRationale
     @_reason = @entry.reason
-    @_startDatetime = @entry.start_time
-    @_stopDatetime = @entry.end_time
 
   ###
   @returns {Code}
@@ -127,6 +122,12 @@ class CQL_QDM.PhysicalExamRecommended extends CQL_QDM.QDMDatatype
   anatomicalLocationSite: ->
     cql.Code(@_anatomicalLocationSite.code,
       @_anatomicalLocationSite.code_system)
+
+  ###
+  @returns {Date}
+  ###
+  authorDatetime: ->
+    cql.DateTime.fromDate(moment.utc(@_authorDatetime, 'X').toDate())
 
   ###
   @returns {Code}
@@ -145,15 +146,3 @@ class CQL_QDM.PhysicalExamRecommended extends CQL_QDM.QDMDatatype
   ###
   reason: ->
     cql.Code(@_reason.code, @_reason.code_system)
-
-  ###
-  @returns {Date}
-  ###
-  startDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_startDatetime, 'X').toDate())
-
-  ###
-  @returns {Date}
-  ###
-  stopDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_stopDatetime, 'X').toDate())

@@ -128,11 +128,16 @@ corresponding value set.
 class CQL_QDM.LaboratoryTestRecommended extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
+    @_authorDatetime = @entry.start_time
     @_method = @entry.method
     @_negationRationale = @entry.negationRationale
-    @_reason = @entry.reason
-    @_startDatetime = @entry.start_time
-    @_stopDatetime = @entry.end_time
+    @_reason = @entry.reason]
+
+  ###
+  @returns {Date}
+  ###
+  authorDatetime: ->
+    cql.DateTime.fromDate(moment.utc(@_authorDatetime, 'X').toDate())
 
   ###
   @returns {Code}
@@ -151,15 +156,3 @@ class CQL_QDM.LaboratoryTestRecommended extends CQL_QDM.QDMDatatype
   ###
   reason: ->
     cql.Code(@_reason.code, @_reason.code_system)
-
-  ###
-  @returns {Date}
-  ###
-  startDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_startDatetime, 'X').toDate())
-
-  ###
-  @returns {Date}
-  ###
-  stopDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_stopDatetime, 'X').toDate())

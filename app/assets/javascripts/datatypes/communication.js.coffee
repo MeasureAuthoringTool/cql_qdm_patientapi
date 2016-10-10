@@ -12,27 +12,20 @@ communicated from a patient to a provider.
 class CQL_QDM.CommunicationFromPatientToProvider extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
+    @_authorDatetime = @entry.start_time
     @_negationRationale = @entry.negationRationale
-    @_startDatetime = @entry.start_time
-    @_stopDatetime = @entry.end_time
+
+  ###
+  @returns {Date}
+  ###
+  authorDatetime: ->
+    cql.DateTime.fromDate(moment.utc(@_authorDatetime, 'X').toDate())
 
   ###
   @returns {Code}
   ###
   negationRationale: ->
     cql.Code(@_negationRationale.code, @_negationRationale.code_system)
-
-  ###
-  @returns {Date}
-  ###
-  startDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_startDatetime, 'X').toDate())
-
-  ###
-  @returns {Date}
-  ###
-  stopDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_stopDatetime, 'X').toDate())
 
 
 ###

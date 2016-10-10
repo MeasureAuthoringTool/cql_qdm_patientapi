@@ -17,7 +17,7 @@ function testing, vascular laboratory testing, and others.
 class CQL_QDM.DiagnosticStudyOrder extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
-    @_authorDatetime = @entr.start_time
+    @_authorDatetime = @entry.start_time
     @_method = @entry.method
     @_negationRationale = @entry.negationRationale
     @_radiationDosage = @entry.radiation_dose
@@ -153,12 +153,17 @@ study indicated by the QDM category and its corresponding value set.
 class CQL_QDM.DiagnosticStudyRecommended extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
+    @_authorDatetime = @entry.start_time
     @_method = @entry.method
     @_negationRationale = @entry.negationRationale
     @_radiationDosage = @entry.radiation_dose
     @_radiationDuration = @entry.radiation_duration
-    @_startDatetime = @entry.start_time
-    @_stopDatetime = @entry.end_time
+
+  ###
+  @returns {Date}
+  ###
+  authorDatetime: ->
+    cql.DateTime.fromDate(moment.utc(@_authorDatetime, 'X').toDate())
 
   ###
   @returns {Code}
@@ -183,15 +188,3 @@ class CQL_QDM.DiagnosticStudyRecommended extends CQL_QDM.QDMDatatype
   ###
   radiationDuration: ->
     new Quantity({unit: @_radiationDuration['unit'], value: @_radiationDuration['value']})
-
-  ###
-  @returns {Date}
-  ###
-  startDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_startDatetime, 'X').toDate())
-
-  ###
-  @returns {Date}
-  ###
-  stopDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_stopDatetime, 'X').toDate())
