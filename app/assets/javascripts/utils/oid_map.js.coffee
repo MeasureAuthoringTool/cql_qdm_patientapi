@@ -36,6 +36,8 @@ class CQL_QDM.OIDMap
       classname = classname.replace /_([a-z])/g, (g) -> g[1].toUpperCase()
       classname.charAt(0).toUpperCase() + classname.slice(1)
 
+  # TODO: these oid maps should not be included directly. They should be passed
+  # in as an argument.
   @hqmf_oid_map =
     "2.16.840.1.113883.3.560.1.1001":
         "definition":"patient_characteristic"
@@ -818,4 +820,10 @@ class CQL_QDM.OIDMap
         "status":""
     "2.16.840.1.113883.10.20.28.3.85":
         "definition":"transfer_to"
+        "status":""
+    "OID_NOT_YET_AVAILABLE_ADVERSE_EVENT":
+        "definition":"adverse_event"
+        "status":""
+    "OID_NOT_YET_AVAILABLE_ALLERGY_INTOLERANCE":
+        "definition":"allergy_intolerance"
         "status":""
