@@ -1,9 +1,9 @@
 
 class Quantity extends Expression
-  constructor: (json) ->
+  constructor: (quantity) ->
     super
-    @unit = json.unit
-    @value = json.value
+    @unit = quantity.unit
+    @value = quantity.value
 
   exec: (ctx) ->
     @

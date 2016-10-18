@@ -14,24 +14,19 @@ the time frame indicated by the timing relationships.
 class CQL_QDM.MedicationActive extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
-    @_cumulativeMedicationDuration = @entry.cumulativeMedicationDuration
-    @_dose = @entry.dose
+    @_dosage = @entry.dose
+    # TODO: why isn't this done?
   #  @_frequency = @entry.
     @_route = @entry.route
-    @_startDatetime = @entry.start_time
-    @_stopDatetime = @entry.end_time
+    @_relevantPeriodLow = @entry.start_time
+    @_relevantPeriodHigh = @entry.end_time
+    @_supply = @entry.supply
 
   ###
   @returns {Quantity}
   ###
-  cumulativeMedicationDuration: ->
-    new Quantity({unit: @_cumulativeMedicationDuration['unit'], value: @_cumulativeMedicationDuration['value']})
-
-  ###
-  @returns {Quantity}
-  ###
-  dose: ->
-    new Quantity({unit: @_dose['unit'], value: @_dose['value']})
+  dosage: ->
+    new Quantity({unit: @_dosage['unit'], value: @_dosage['value']})
 
   ###
   @returns {Code}
@@ -40,17 +35,18 @@ class CQL_QDM.MedicationActive extends CQL_QDM.QDMDatatype
     cql.Code(@_route.code, @_route.code_system)
 
   ###
-  @returns {Date}
+  @returns {Interval<Date>}
   ###
-  startDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_startDatetime, 'X').toDate())
+  relevantPeriod: ->
+    low = cql.DateTime.fromDate(moment.utc(@_relevantPeriodLow, 'X').toDate())
+    high = cql.DateTime.fromDate(moment.utc(@_relevantPeriodHigh, 'X').toDate())
+    new Interval({low: low, high: high})
 
   ###
-  @returns {Date}
+  @returns {Quantity}
   ###
-  stopDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_stopDatetime, 'X').toDate())
-
+  supply: ->
+    new Quantity({unit: @_supply['unit'], value: @_supply['value']})
 
 ###
 Data elements that meet criteria using this datatype should document that the
@@ -60,26 +56,21 @@ actually administered to the patient.
 class CQL_QDM.MedicationAdministered extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
-    @_cumulativeMedicationDuration = @entry.cumulativeMedicationDuration
-    @_dose = @entry.dose
+    @_dosage = @entry.dose
+    # TODO: what is this comment about?
   #  @_frequency = @entry.
     @_negationRationale = @entry.negationRationale
     @_reason = @entry.reason
+    @_relevantPeriodLow = @entry.start_time
+    @_relevantPeriodHigh = @entry.end_time
     @_route = @entry.route
-    @_startDatetime = @entry.start_time
-    @_stopDatetime = @entry.end_time
+    @_supply = @entry.supply
 
   ###
   @returns {Quantity}
   ###
-  cumulativeMedicationDuration: ->
-    new Quantity({unit: @_cumulativeMedicationDuration['unit'], value: @_cumulativeMedicationDuration['value']})
-
-  ###
-  @returns {Quantity}
-  ###
-  dose: ->
-    new Quantity({unit: @_dose['unit'], value: @_dose['value']})
+  dosage: ->
+    new Quantity({unit: @_dosage['unit'], value: @_dosage['value']})
 
   ###
   @returns {Code}
@@ -94,85 +85,24 @@ class CQL_QDM.MedicationAdministered extends CQL_QDM.QDMDatatype
     cql.Code(@_reason.code, @_reason.code_system)
 
   ###
+  @returns {Interval<Date>}
+  ###
+  relevantPeriod: ->
+    low = cql.DateTime.fromDate(moment.utc(@_relevantPeriodLow, 'X').toDate())
+    high = cql.DateTime.fromDate(moment.utc(@_relevantPeriodHigh, 'X').toDate())
+    new Interval({low: low, high: high})
+
+  ###
   @returns {Code}
   ###
   route: ->
     cql.Code(@_route.code, @_route.code_system)
 
   ###
-  @returns {Date}
+  @returns {Quantity}
   ###
-  startDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_startDatetime, 'X').toDate())
-
-  ###
-  @returns {Date}
-  ###
-  stopDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_stopDatetime, 'X').toDate())
-
-
-###
-Data elements that meet criteria using this datatype should document an
-unexpected or dangerous reaction to the medication indicated by the QDM
-category and its corresponding value set
-###
-class CQL_QDM.MedicationAdverseEffects extends CQL_QDM.QDMDatatype
-  constructor: (@entry) ->
-    super @entry
-    @_reaction = @entry.reaction
-    @_startDatetime = @entry.start_time
-    @_stopDatetime = @entry.end_time
-
-  ###
-  @returns {Code}
-  ###
-  reaction: ->
-    cql.Code(@_reaction.code, @_reaction.code_system)
-
-  ###
-  @returns {Date}
-  ###
-  startDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_startDatetime, 'X').toDate())
-
-  ###
-  @returns {Date}
-  ###
-  stopDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_stopDatetime, 'X').toDate())
-
-
-###
-Data elements that meet criteria using this datatype should document an
-immunologically mediated reaction that exhibits specificity and recurrence on
-re-exposure to the offending medication indicated by the QDM category and
-its corresponding value set.
-###
-class CQL_QDM.MedicationAllergy extends CQL_QDM.QDMDatatype
-  constructor: (@entry) ->
-    super @entry
-    @_reaction = @entry.reaction
-    @_startDatetime = @entry.start_time
-    @_stopDatetime = @entry.end_time
-
-  ###
-  @returns {Code}
-  ###
-  reaction: ->
-    cql.Code(@_reaction.code, @_reaction.code_system)
-
-  ###
-  @returns {Date}
-  ###
-  startDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_startDatetime, 'X').toDate())
-
-  ###
-  @returns {Date}
-  ###
-  stopDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_stopDatetime, 'X').toDate())
+  supply: ->
+    new Quantity({unit: @_supply['unit'], value: @_supply['value']})
 
 
 ###
@@ -184,19 +114,26 @@ an inpatient encounter.
 class CQL_QDM.MedicationDischarge extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
-    @_dose = @entry.dose
+    @_authorDatetime = @entry.start_time
+    @_dosage = @entry.dose
+    # TODO: why not used?
   #  @_frequency = @entry.
     @_negationRationale = @entry.negationRationale
     @_refills = @entry.refills
     @_route = @entry.route
-    @_startDatetime = @entry.start_time
-    @_stopDatetime = @entry.end_time
+    @_supply = @entry.supply
+
+  ###
+  @returns {Date}
+  ###
+  authorDatetime: ->
+    cql.DateTime.fromDate(moment.utc(@_authorDatetime, 'X').toDate())
 
   ###
   @returns {Quantity}
   ###
-  dose: ->
-    new Quantity({unit: @_dose['unit'], value: @_dose['value']})
+  dosage: ->
+    new Quantity({unit: @_dosage['unit'], value: @_dosage['value']})
 
   ###
   @returns {Code}
@@ -217,16 +154,10 @@ class CQL_QDM.MedicationDischarge extends CQL_QDM.QDMDatatype
     cql.Code(@_route.code, @_route.code_system)
 
   ###
-  @returns {Date}
+  @returns {Quantity}
   ###
-  startDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_startDatetime, 'X').toDate())
-
-  ###
-  @returns {Date}
-  ###
-  stopDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_stopDatetime, 'X').toDate())
+  supply: ->
+    new Quantity({unit: @_supply['unit'], value: @_supply['value']})
 
 
 ###
@@ -242,26 +173,26 @@ Health Record), patient attestation of “medication taken” may be available.
 class CQL_QDM.MedicationDispensed extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
-    @_cumulativeMedicationDuration = @entry.cumulativeMedicationDuration
-    @_dose = @entry.dose
+    @_authorDatetime = @entry.start_time
+    @_dosage = @entry.dose
+    # TODO: why not implemented?
   #  @_frequency = @entry.
     @_negationRationale = @entry.negationRationale
     @_refills = @entry.refills
     @_route = @entry.route
-    @_startDatetime = @entry.start_time
-    @_stopDatetime = @entry.end_time
+    @_supply = @entry.supply
+
+  ###
+  @returns {Date}
+  ###
+  authorDatetime: ->
+    cql.DateTime.fromDate(moment.utc(@_authorDatetime, 'X').toDate())
 
   ###
   @returns {Quantity}
   ###
-  cumulativeMedicationDuration: ->
-    new Quantity({unit: @_cumulativeMedicationDuration['unit'], value: @_cumulativeMedicationDuration['value']})
-
-  ###
-  @returns {Quantity}
-  ###
-  dose: ->
-    new Quantity({unit: @_dose['unit'], value: @_dose['value']})
+  dosage: ->
+    new Quantity({unit: @_dosage['unit'], value: @_dosage['value']})
 
   ###
   @returns {Code}
@@ -282,48 +213,10 @@ class CQL_QDM.MedicationDispensed extends CQL_QDM.QDMDatatype
     cql.Code(@_route.code, @_route.code_system)
 
   ###
-  @returns {Date}
+  @returns {Quantity}
   ###
-  startDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_startDatetime, 'X').toDate())
-
-  ###
-  @returns {Date}
-  ###
-  stopDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_stopDatetime, 'X').toDate())
-
-
-###
-Data elements that meet criteria using this datatype should document a reaction
-in specific patients representing a low threshold to the normal pharmacological
-action of the medication indicated by the QDM category and its corresponding
-value set.
-###
-class CQL_QDM.MedicationIntolerance extends CQL_QDM.QDMDatatype
-  constructor: (@entry) ->
-    super @entry
-    @_reaction = @entry.reaction
-    @_startDatetime = @entry.start_time
-    @_stopDatetime = @entry.end_time
-
-  ###
-  @returns {Code}
-  ###
-  reaction: ->
-    cql.Code(@_reaction.code, @_reaction.code_system)
-
-  ###
-  @returns {Date}
-  ###
-  startDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_startDatetime, 'X').toDate())
-
-  ###
-  @returns {Date}
-  ###
-  stopDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_stopDatetime, 'X').toDate())
+  supply: ->
+    new Quantity({unit: @_supply['unit'], value: @_supply['value']})
 
 
 ###
@@ -335,17 +228,16 @@ class CQL_QDM.MedicationOrder extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
     @_activeDatetime = @entry.active_datetime
-    @_cumulativeMedicationDuration = @entry.cumulativeMedicationDuration
-    @_dose = @entry.dose
+    @_authorDatetime = @entry.start_time
+    @_dosage = @entry.dose
+    # TODO: why not implemented?
   #  @_frequency = @entry.
     @_method = @entry.method
     @_negationRationale = @entry.negationRationale
     @_reason = @entry.reason
     @_refills = @entry.refills
     @_route = @entry.route
-    @_signedDatetime = @entry.signed_datetime
-    @_startDatetime = @entry.start_time
-    @_stopDatetime = @entry.end_time
+    @_supply = @entry.supply
 
   ###
   @returns {Date}
@@ -354,16 +246,16 @@ class CQL_QDM.MedicationOrder extends CQL_QDM.QDMDatatype
     cql.DateTime.fromDate(moment.utc(@_activeDatetime, 'X').toDate())
 
   ###
-  @returns {Quantity}
+  @returns {Date}
   ###
-  cumulativeMedicationDuration: ->
-    new Quantity({unit: @_cumulativeMedicationDuration['unit'], value: @_cumulativeMedicationDuration['value']})
+  authorDatetime: ->
+    cql.DateTime.fromDate(moment.utc(@_authorDatetime, 'X').toDate())
 
   ###
   @returns {Quantity}
   ###
-  dose: ->
-    new Quantity({unit: @_dose['unit'], value: @_dose['value']})
+  dosage: ->
+    new Quantity({unit: @_dosage['unit'], value: @_dosage['value']})
 
   ###
   @returns {Code}
@@ -396,19 +288,7 @@ class CQL_QDM.MedicationOrder extends CQL_QDM.QDMDatatype
     cql.Code(@_route.code, @_route.code_system)
 
   ###
-  @returns {Date}
+  @returns {Quantity}
   ###
-  signedDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_signedDatetime, 'X').toDate())
-
-  ###
-  @returns {Date}
-  ###
-  startDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_startDatetime, 'X').toDate())
-
-  ###
-  @returns {Date}
-  ###
-  stopDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_stopDatetime, 'X').toDate())
+  supply: ->
+    new Quantity({unit: @_supply['unit'], value: @_supply['value']})

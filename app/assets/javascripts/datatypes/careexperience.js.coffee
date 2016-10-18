@@ -12,20 +12,13 @@ Consumer Assessment of Healthcare Providers and Systems.
 class CQL_QDM.PatientCareExperience extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
-    @_startDatetime = @entry.start_time
-    @_stopDatetime = @entry.end_time
+    @_authorDatetime = @entry.start_time
 
   ###
   @returns {Date}
   ###
-  startDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_startDatetime, 'X').toDate())
-
-  ###
-  @returns {Date}
-  ###
-  stopDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_stopDatetime, 'X').toDate())
+  authorDatetime: ->
+    cql.DateTime.fromDate(moment.utc(@_authorDatetime, 'X').toDate())
 
 
 ###
@@ -38,17 +31,10 @@ delivery system.
 class CQL_QDM.ProviderCareExperience extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
-    @_startDatetime = @entry.start_time
-    @_stopDatetime = @entry.end_time
+    @_authorDatetime = @entry.start_time
 
   ###
   @returns {Date}
   ###
-  startDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_startDatetime, 'X').toDate())
-
-  ###
-  @returns {Date}
-  ###
-  stopDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_stopDatetime, 'X').toDate())
+  authorDatetime: ->
+    cql.DateTime.fromDate(moment.utc(@_authorDatetime, 'X').toDate())

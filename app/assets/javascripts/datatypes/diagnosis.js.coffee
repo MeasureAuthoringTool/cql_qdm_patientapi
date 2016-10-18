@@ -17,28 +17,24 @@ relationships.
 class CQL_QDM.Diagnosis extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
-    @_abatementDatetime = @entry.abatementDatetime
-    @_onsetDatetime = @entry.start_time
+    @_prevalencePeriodLow = @entry.start_time
+    @_prevalencePeriodHigh = @entry.end_time
     @_anatomicalLocationSite = @entry.anatomical_location
     @_severity = @entry.severity
-
-  ###
-  @returns {Date}
-  ###
-  abatementDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_abatementDatetime, 'X').toDate())
-
-  ###
-  @returns {Date}
-  ###
-  onsetDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_onsetDatetime, 'X').toDate())
 
   ###
   @returns {Code}
   ###
   anatomicalLocationSite: ->
     cql.Code(@_anatomicalLocationSite.code, @_anatomicalLocationSite.code_system)
+
+  ###
+  @returns {Interval<Date>}
+  ###
+  prevalencePeriod: ->
+    low = cql.DateTime.fromDate(moment.utc(@_prevalencePeriodLow, 'X').toDate())
+    high = cql.DateTime.fromDate(moment.utc(@_prevalencePeriodHigh, 'X').toDate())
+    new Interval({low: low, high: high})
 
   ###
   @returns {Code}
