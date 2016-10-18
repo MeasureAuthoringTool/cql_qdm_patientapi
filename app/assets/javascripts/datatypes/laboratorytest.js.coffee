@@ -131,7 +131,7 @@ class CQL_QDM.LaboratoryTestRecommended extends CQL_QDM.QDMDatatype
     @_authorDatetime = @entry.start_time
     @_method = @entry.method
     @_negationRationale = @entry.negationRationale
-    @_reason = @entry.reason]
+    @_reason = @entry.reason
 
   ###
   @returns {Date}
