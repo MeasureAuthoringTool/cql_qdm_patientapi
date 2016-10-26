@@ -17,7 +17,7 @@ class CQL_QDM.PhysicalExamOrder extends CQL_QDM.QDMDatatype
     @_anatomicalLocationSite = @entry.anatomicalLocation
     @_authorDatetime = @entry.start_time
     @_method = @entry.method
-    @_negationRationale = @entry.negationRationale
+    @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
 
   ###
@@ -31,7 +31,7 @@ class CQL_QDM.PhysicalExamOrder extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_authorDatetime, 'X').toDate())
+    cql.DateTime.fromDate(moment(@_authorDatetime, 'X').toDate())
 
   ###
   @returns {Code}
@@ -62,7 +62,7 @@ class CQL_QDM.PhysicalExamPerformed extends CQL_QDM.QDMDatatype
     super @entry
     @_anatomicalLocationSite = @entry.anatomicalLocation
     @_method = @entry.method
-    @_negationRationale = @entry.negationRationale
+    @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
     @_relevantPeriodLow = @entry.start_time
     @_relevantPeriodHigh = @entry.end_time
@@ -97,9 +97,9 @@ class CQL_QDM.PhysicalExamPerformed extends CQL_QDM.QDMDatatype
   @returns {Interval<Date>}
   ###
   relevantPeriod: ->
-    low = cql.DateTime.fromDate(moment.utc(@_relevantPeriodLow, 'X').toDate())
-    high = cql.DateTime.fromDate(moment.utc(@_relevantPeriodHigh, 'X').toDate())
-    new Interval({low: low, high: high})
+    low = cql.DateTime.fromDate(moment(@_relevantPeriodLow, 'X').toDate())
+    high = cql.DateTime.fromDate(moment(@_relevantPeriodHigh, 'X').toDate())
+    new cql.Interval(low, high)
 
 
 ###
@@ -113,7 +113,7 @@ class CQL_QDM.PhysicalExamRecommended extends CQL_QDM.QDMDatatype
     @_authorDatetime = @entry.start_time
     @_anatomicalLocationSite = @entry.anatomicalLocation
     @_method = @entry.method
-    @_negationRationale = @entry.negationRationale
+    @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
 
   ###
@@ -127,7 +127,7 @@ class CQL_QDM.PhysicalExamRecommended extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_authorDatetime, 'X').toDate())
+    cql.DateTime.fromDate(moment(@_authorDatetime, 'X').toDate())
 
   ###
   @returns {Code}

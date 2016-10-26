@@ -29,9 +29,9 @@ class CQL_QDM.EncounterActive extends CQL_QDM.QDMDatatype
   @returns {Interval<Date>}
   ###
   relevantPeriod: ->
-    low = cql.DateTime.fromDate(moment.utc(@_relevantPeriodLow, 'X').toDate())
-    high = cql.DateTime.fromDate(moment.utc(@_relevantPeriodHigh, 'X').toDate())
-    new Interval({low: low, high: high})
+    low = cql.DateTime.fromDate(moment(@_relevantPeriodLow, 'X').toDate())
+    high = cql.DateTime.fromDate(moment(@_relevantPeriodHigh, 'X').toDate())
+    new cql.Interval(low, high)
 
   ###
   @returns {Code}
@@ -43,9 +43,9 @@ class CQL_QDM.EncounterActive extends CQL_QDM.QDMDatatype
   @returns {Interval<Date>}
   ###
   locationPeriod: ->
-    low = cql.DateTime.fromDate(moment.utc(@_locationPeriodLow, 'X').toDate())
-    high = cql.DateTime.fromDate(moment.utc(@_locationPeriodHigh, 'X').toDate())
-    new Interval({low: low, high: high})
+    low = cql.DateTime.fromDate(moment(@_locationPeriodLow, 'X').toDate())
+    high = cql.DateTime.fromDate(moment(@_locationPeriodHigh, 'X').toDate())
+    new cql.Interval(low, high)
 
   ###
   @returns {Quantity}
@@ -70,14 +70,14 @@ class CQL_QDM.EncounterOrder extends CQL_QDM.QDMDatatype
     super @entry
     @_authorDatetime = @entry.start_time
     @_facilityLocation = @entry.facility?['name']
-    @_negationRationale = @entry.negationRationale
+    @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
 
   ###
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_authorDatetime, 'X').toDate())
+    cql.DateTime.fromDate(moment(@_authorDatetime, 'X').toDate())
 
   ###
   @returns {Code}
@@ -113,13 +113,10 @@ class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
     @_locationPeriodLow = @entry.facility?['start_time']
     @_locationPeriodHigh = @entry.facility?['end_time']
     @_facilityLocation = @entry.facility?['name']
-    @_negationRationale = @entry.negationRationale
+    @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
-    # TODO this had CQL_QDM.Helpers.convertDateTime calls previously. I believe
-    # this was related to the lengthOfStay calculation. Need to confirm how this
-    # should be.
-    @_relevantPeriodLow = @entry.start_time
-    @_relevantPeriodHigh = @entry.end_time
+    @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
+    @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
     @_principalDiagnosis = @entry.principalDiagnosis
 
   ###
@@ -156,9 +153,9 @@ class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
   @returns {Interval<Date>}
   ###
   locationPeriod: ->
-    low = cql.DateTime.fromDate(moment.utc(@_locationPeriodLow, 'X').toDate())
-    high = cql.DateTime.fromDate(moment.utc(@_locationPeriodHigh, 'X').toDate())
-    new Interval({low: low, high: high})
+    low = cql.DateTime.fromDate(@_locationPeriodLow.toDate())
+    high = cql.DateTime.fromDate(@_locationPeriodHigh.toDate())
+    new cql.Interval(low, high)
 
   ###
   @returns {Code}
@@ -176,9 +173,9 @@ class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
   @returns {Interval<Date>}
   ###
   relevantPeriod: ->
-    low = cql.DateTime.fromDate(moment.utc(@_relevantPeriodLow, 'X').toDate())
-    high = cql.DateTime.fromDate(moment.utc(@_relevantPeriodHigh, 'X').toDate())
-    new Interval({low: low, high: high})
+    low = cql.DateTime.fromDate(@_relevantPeriodLow.toDate())
+    high = cql.DateTime.fromDate(@_relevantPeriodHigh.toDate())
+    new cql.Interval(low, high)
 
   ###
   @returns {Code}
@@ -197,14 +194,14 @@ class CQL_QDM.EncounterRecommended extends CQL_QDM.QDMDatatype
     super @entry
     @_authorDatetime = @entry.start_time
     @_facilityLocation = @entry.facility?['name']
-    @_negationRationale = @entry.negationRationale
+    @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
 
   ###
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_authorDatetime, 'X').toDate())
+    cql.DateTime.fromDate(moment(@_authorDatetime, 'X').toDate())
 
   ###
   @returns {Code}

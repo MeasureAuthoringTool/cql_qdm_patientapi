@@ -19,7 +19,7 @@ class CQL_QDM.DiagnosticStudyOrder extends CQL_QDM.QDMDatatype
     super @entry
     @_authorDatetime = @entry.start_time
     @_method = @entry.method
-    @_negationRationale = @entry.negationRationale
+    @_negationRationale = @entry.negationReason
     @_radiationDosage = @entry.radiation_dose
     @_radiationDuration = @entry.radiation_duration
     @_reason = @entry.reason
@@ -28,7 +28,7 @@ class CQL_QDM.DiagnosticStudyOrder extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_authorDatetime, 'X').toDate())
+    cql.DateTime.fromDate(moment(@_authorDatetime, 'X').toDate())
 
   ###
   @returns {Code}
@@ -71,7 +71,7 @@ class CQL_QDM.DiagnosticStudyPerformed extends CQL_QDM.QDMDatatype
     super @entry
     @_facilityLocation = @entry.facility_location
     @_method = @entry.method
-    @_negationRationale = @entry.negationRationale
+    @_negationRationale = @entry.negationReason
     @_radiationDosage = @entry.radiation_dose
     @_radiationDuration = @entry.radiation_duration
     @_reason = @entry.reason
@@ -121,9 +121,9 @@ class CQL_QDM.DiagnosticStudyPerformed extends CQL_QDM.QDMDatatype
   @returns {Interval<Date>}
   ###
   relevantPeriod: ->
-    low = cql.DateTime.fromDate(moment.utc(@_relevantPeriodLow, 'X').toDate())
-    high = cql.DateTime.fromDate(moment.utc(@_relevantPeriodHigh, 'X').toDate())
-    new Interval({low: low, high: high})
+    low = cql.DateTime.fromDate(moment(@_relevantPeriodLow, 'X').toDate())
+    high = cql.DateTime.fromDate(moment(@_relevantPeriodHigh, 'X').toDate())
+    new cql.Interval(low, high)
 
   ###
   @returns {Code}
@@ -135,7 +135,7 @@ class CQL_QDM.DiagnosticStudyPerformed extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   resultDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_resultDatetime, 'X').toDate())
+    cql.DateTime.fromDate(moment(@_resultDatetime, 'X').toDate())
 
   ###
   @returns {Code}
@@ -155,7 +155,7 @@ class CQL_QDM.DiagnosticStudyRecommended extends CQL_QDM.QDMDatatype
     super @entry
     @_authorDatetime = @entry.start_time
     @_method = @entry.method
-    @_negationRationale = @entry.negationRationale
+    @_negationRationale = @entry.negationReason
     @_radiationDosage = @entry.radiation_dose
     @_radiationDuration = @entry.radiation_duration
 
@@ -163,7 +163,7 @@ class CQL_QDM.DiagnosticStudyRecommended extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_authorDatetime, 'X').toDate())
+    cql.DateTime.fromDate(moment(@_authorDatetime, 'X').toDate())
 
   ###
   @returns {Code}

@@ -21,7 +21,7 @@ class CQL_QDM.FamilyHistory extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_authorDatetime, 'X').toDate())
+    cql.DateTime.fromDate(moment(@_authorDatetime, 'X').toDate())
 
   ###
   @returns {Code}

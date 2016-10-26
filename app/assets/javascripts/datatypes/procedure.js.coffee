@@ -14,7 +14,7 @@ class CQL_QDM.ProcedureOrder extends CQL_QDM.QDMDatatype
     @_anatomicalLocationSite = @entry.anatomicalLocation
     @_authorDatetime = @entry.start_time
     @_method = @entry.method
-    @_negationRationale = @entry.negationRationale
+    @_negationRationale = @entry.negationReason
     @_ordinality = @entry.ordinality
     @_radiationDuration = @entry.radiation_duration
     @_reason = @entry.reason
@@ -37,7 +37,7 @@ class CQL_QDM.ProcedureOrder extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_authorDatetime, 'X').toDate())
+    cql.DateTime.fromDate(moment(@_authorDatetime, 'X').toDate())
 
   ###
   @returns {Code}
@@ -82,7 +82,7 @@ class CQL_QDM.ProcedurePerformed extends CQL_QDM.QDMDatatype
     @_anatomicalLocationSite = @entry.anatomicalLocation
     @_incisionDatetime = @entry.incisionTime
     @_method = @entry.method
-    @_negationRationale = @entry.negationRationale
+    @_negationRationale = @entry.negationReason
     @_ordinality = @entry.ordinality
     @_radiationDosage = @entry.radiation_dose
     @_radiationDuration = @entry.radiation_duration
@@ -110,7 +110,7 @@ class CQL_QDM.ProcedurePerformed extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   incisionDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_incisionDatetime, 'X').toDate())
+    cql.DateTime.fromDate(moment(@_incisionDatetime, 'X').toDate())
 
   ###
   @returns {Code}
@@ -152,9 +152,9 @@ class CQL_QDM.ProcedurePerformed extends CQL_QDM.QDMDatatype
   @returns {Interval<Date>}
   ###
   relevantPeriod: ->
-    low = cql.DateTime.fromDate(moment.utc(@_relevantPeriodLow, 'X').toDate())
-    high = cql.DateTime.fromDate(moment.utc(@_relevantPeriodHigh, 'X').toDate())
-    new Interval({low: low, high: high})
+    low = cql.DateTime.fromDate(moment(@_relevantPeriodLow, 'X').toDate())
+    high = cql.DateTime.fromDate(moment(@_relevantPeriodHigh, 'X').toDate())
+    new cql.Interval(low, high)
 
   ###
   @returns {Code}
@@ -180,7 +180,7 @@ class CQL_QDM.ProcedureRecommended extends CQL_QDM.QDMDatatype
     @_anatomicalApproachSite = @entry.anatomical_approach
     @_anatomicalLocationSite = @entry.anatomicalLocation
     @_method = @entry.method
-    @_negationRationale = @entry.negationRationale
+    @_negationRationale = @entry.negationReason
     @_ordinality = @entry.ordinality
     @_reason = @entry.reason
     @_authorDatetime = @entry.start_time
@@ -203,7 +203,7 @@ class CQL_QDM.ProcedureRecommended extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_authorDatetime, 'X').toDate())
+    cql.DateTime.fromDate(moment(@_authorDatetime, 'X').toDate())
 
   ###
   @returns {Code}

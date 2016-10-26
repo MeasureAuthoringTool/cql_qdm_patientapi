@@ -22,9 +22,9 @@ class CQL_QDM.AllergyIntolerance extends CQL_QDM.QDMDatatype
   @returns {Interval<Date>}
   ###
   prevalencePeriod: ->
-  low = cql.DateTime.fromDate(moment.utc(@_prevalencePeriodLow, 'X').toDate())
-  high = cql.DateTime.fromDate(moment.utc(@_prevalencePeriodHigh, 'X').toDate())
-  new Interval({low: low, high: high})
+  low = cql.DateTime.fromDate(moment(@_prevalencePeriodLow, 'X').toDate())
+  high = cql.DateTime.fromDate(moment(@_prevalencePeriodHigh, 'X').toDate())
+  new cql.Interval(low, high)
 
   ###
   @returns {Code}

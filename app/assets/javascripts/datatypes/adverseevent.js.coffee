@@ -26,9 +26,9 @@ class CQL_QDM.AdverseEvent extends CQL_QDM.QDMDatatype
   @returns {Interval<Date>}
   ###
   relevantPeriod: ->
-    low = cql.DateTime.fromDate(moment.utc(@_relevantPeriodLow, 'X').toDate())
-    high = cql.DateTime.fromDate(moment.utc(@_relevantPeriodHigh, 'X').toDate())
-    new Interval({low: low, high: high})
+    low = cql.DateTime.fromDate(moment(@_relevantPeriodLow, 'X').toDate())
+    high = cql.DateTime.fromDate(moment(@_relevantPeriodHigh, 'X').toDate())
+    new cql.Interval(low, high)
 
   ###
   @returns {Code}

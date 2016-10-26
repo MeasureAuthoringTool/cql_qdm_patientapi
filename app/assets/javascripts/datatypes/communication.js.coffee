@@ -13,13 +13,13 @@ class CQL_QDM.CommunicationFromPatientToProvider extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
     @_authorDatetime = @entry.start_time
-    @_negationRationale = @entry.negationRationale
+    @_negationRationale = @entry.negationReason
 
   ###
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_authorDatetime, 'X').toDate())
+    cql.DateTime.fromDate(moment(@_authorDatetime, 'X').toDate())
 
   ###
   @returns {Code}
@@ -36,7 +36,7 @@ communicated from a provider to a patient.
 class CQL_QDM.CommunicationFromProviderToPatient extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
-    @_negationRationale = @entry.negationRationale
+    @_negationRationale = @entry.negationReason
     @_authorDatetime = @entry.start_time
 
   ###
@@ -49,7 +49,7 @@ class CQL_QDM.CommunicationFromProviderToPatient extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_authorDatetime, 'X').toDate())
+    cql.DateTime.fromDate(moment(@_authorDatetime, 'X').toDate())
 
 
 ###
@@ -60,7 +60,7 @@ communicated from one provider to another.
 class CQL_QDM.CommunicationFromProviderToProvider extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
-    @_negationRationale = @entry.negationRationale
+    @_negationRationale = @entry.negationReason
     @_authorDatetime = @entry.start_time
 
   ###
@@ -73,4 +73,4 @@ class CQL_QDM.CommunicationFromProviderToProvider extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_authorDatetime, 'X').toDate())
+    cql.DateTime.fromDate(moment(@_authorDatetime, 'X').toDate())

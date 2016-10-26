@@ -15,7 +15,7 @@ class CQL_QDM.DeviceApplied extends CQL_QDM.QDMDatatype
     super @entry
     @_anatomicalApproachSite = @entry.anatomical_approach
     @_anatomicalLocationSite = @entry.anatomical_location
-    @_negationRationale = @entry.negationRationale
+    @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
     @_relevantPeriodLow = @entry.start_time
     @_relevantPeriodHigh = @entry.end_time
@@ -48,9 +48,9 @@ class CQL_QDM.DeviceApplied extends CQL_QDM.QDMDatatype
   @returns {Interval<Date>}
   ###
   relevantPeriod: ->
-    low = cql.DateTime.fromDate(moment.utc(@_relevantPeriodLow, 'X').toDate())
-    high = cql.DateTime.fromDate(moment.utc(@_relevantPeriodHigh, 'X').toDate())
-    new Interval({low: low, high: high})
+    low = cql.DateTime.fromDate(moment(@_relevantPeriodLow, 'X').toDate())
+    high = cql.DateTime.fromDate(moment(@_relevantPeriodHigh, 'X').toDate())
+    new cql.Interval(low, high)
 
 
 ###
@@ -60,7 +60,7 @@ for the device indicated by the QDM category and its corresponding value set.
 class CQL_QDM.DeviceOrder extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
-    @_negationRationale = @entry.negationRationale
+    @_negationRationale = @entry.negationReason
     @_reaction = @entry.reaction
     @_authorDatetime = @entry.start_time
 
@@ -80,7 +80,7 @@ class CQL_QDM.DeviceOrder extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_authorDatetime, 'X').toDate())
+    cql.DateTime.fromDate(moment(@_authorDatetime, 'X').toDate())
 
 
 ###
@@ -92,14 +92,14 @@ class CQL_QDM.DeviceRecommended extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
     @_authorDatetime = @entry.start_time
-    @_negationRationale = @entry.negationRationale
+    @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
 
   ###
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_authorDatetime, 'X').toDate())
+    cql.DateTime.fromDate(moment(@_authorDatetime, 'X').toDate())
 
   ###
   @returns {Code}

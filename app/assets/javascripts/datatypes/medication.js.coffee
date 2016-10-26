@@ -38,9 +38,9 @@ class CQL_QDM.MedicationActive extends CQL_QDM.QDMDatatype
   @returns {Interval<Date>}
   ###
   relevantPeriod: ->
-    low = cql.DateTime.fromDate(moment.utc(@_relevantPeriodLow, 'X').toDate())
-    high = cql.DateTime.fromDate(moment.utc(@_relevantPeriodHigh, 'X').toDate())
-    new Interval({low: low, high: high})
+    low = cql.DateTime.fromDate(moment(@_relevantPeriodLow, 'X').toDate())
+    high = cql.DateTime.fromDate(moment(@_relevantPeriodHigh, 'X').toDate())
+    new cql.Interval(low, high)
 
   ###
   @returns {Quantity}
@@ -59,7 +59,7 @@ class CQL_QDM.MedicationAdministered extends CQL_QDM.QDMDatatype
     @_dosage = @entry.dose
     # TODO: what is this comment about?
   #  @_frequency = @entry.
-    @_negationRationale = @entry.negationRationale
+    @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
     @_relevantPeriodLow = @entry.start_time
     @_relevantPeriodHigh = @entry.end_time
@@ -88,9 +88,9 @@ class CQL_QDM.MedicationAdministered extends CQL_QDM.QDMDatatype
   @returns {Interval<Date>}
   ###
   relevantPeriod: ->
-    low = cql.DateTime.fromDate(moment.utc(@_relevantPeriodLow, 'X').toDate())
-    high = cql.DateTime.fromDate(moment.utc(@_relevantPeriodHigh, 'X').toDate())
-    new Interval({low: low, high: high})
+    low = cql.DateTime.fromDate(moment(@_relevantPeriodLow, 'X').toDate())
+    high = cql.DateTime.fromDate(moment(@_relevantPeriodHigh, 'X').toDate())
+    new cql.Interval(low, high)
 
   ###
   @returns {Code}
@@ -118,7 +118,7 @@ class CQL_QDM.MedicationDischarge extends CQL_QDM.QDMDatatype
     @_dosage = @entry.dose
     # TODO: why not used?
   #  @_frequency = @entry.
-    @_negationRationale = @entry.negationRationale
+    @_negationRationale = @entry.negationReason
     @_refills = @entry.refills
     @_route = @entry.route
     @_supply = @entry.supply
@@ -127,7 +127,7 @@ class CQL_QDM.MedicationDischarge extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_authorDatetime, 'X').toDate())
+    cql.DateTime.fromDate(moment(@_authorDatetime, 'X').toDate())
 
   ###
   @returns {Quantity}
@@ -177,7 +177,7 @@ class CQL_QDM.MedicationDispensed extends CQL_QDM.QDMDatatype
     @_dosage = @entry.dose
     # TODO: why not implemented?
   #  @_frequency = @entry.
-    @_negationRationale = @entry.negationRationale
+    @_negationRationale = @entry.negationReason
     @_refills = @entry.refills
     @_route = @entry.route
     @_supply = @entry.supply
@@ -186,7 +186,7 @@ class CQL_QDM.MedicationDispensed extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_authorDatetime, 'X').toDate())
+    cql.DateTime.fromDate(moment(@_authorDatetime, 'X').toDate())
 
   ###
   @returns {Quantity}
@@ -233,7 +233,7 @@ class CQL_QDM.MedicationOrder extends CQL_QDM.QDMDatatype
     # TODO: why not implemented?
   #  @_frequency = @entry.
     @_method = @entry.method
-    @_negationRationale = @entry.negationRationale
+    @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
     @_refills = @entry.refills
     @_route = @entry.route
@@ -243,13 +243,13 @@ class CQL_QDM.MedicationOrder extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   activeDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_activeDatetime, 'X').toDate())
+    cql.DateTime.fromDate(moment(@_activeDatetime, 'X').toDate())
 
   ###
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_authorDatetime, 'X').toDate())
+    cql.DateTime.fromDate(moment(@_authorDatetime, 'X').toDate())
 
   ###
   @returns {Quantity}

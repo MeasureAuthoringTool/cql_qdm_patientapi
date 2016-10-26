@@ -23,10 +23,30 @@ class CQL_QDM.CQLPatient
   @returns {Object}
   ###
   findRecords: (profile) ->
+    debugger
     if profile == 'Patient'
       @getPatientCharacteristics()
     else
-      return if @_datatypes[profile]? then @_datatypes[profile] else []
+      # Handle Positive / Negative (negated) data criteria for QDM 5.0+
+      if /Positive/.test profile
+        profile = profile.replace /Positive/, ""
+        return @filterDataCriteria profile, false
+      else if /Negative/.test profile
+        profile = profile.replace /Negative/, ""
+        return @filterDataCriteria profile, true
+      else
+        if @_datatypes[profile]? then return @datatypes[profile] else []
+
+  ###
+  @returns {Array}
+  ###
+  filterDataCriteria: (profile, isNegated) ->
+    results = []
+    if @_datatypes[profile]?
+      for dataCriteria in @_datatypes[profile]
+        if dataCriteria._negationRationale? == isNegated
+          results.push dataCriteria
+    results
 
   ###
   @returns {Object}
@@ -67,8 +87,8 @@ class CQL_QDM.CQLPatient
   ###
   getPatientCharacteristics: ->
     # characteristics = {}
-    # characteristics['birthDatetime'] = cql.DateTime.fromDate(moment.utc(@_patient.get('birthdate'), 'X').toDate())
-    # characteristics['gender'] = cql.DateTime.fromDate(moment.utc(@_patient.get('gender'), 'X').toDate())
+    # characteristics['birthDatetime'] = cql.DateTime.fromDate(moment(@_patient.get('birthdate'), 'X').toDate())
+    # characteristics['gender'] = cql.DateTime.fromDate(moment(@_patient.get('gender'), 'X').toDate())
     # # TODO: More characteristics?
     # [characteristics]
-    [{ 'birth datetime': cql.DateTime.fromDate(moment.utc(@patient.get('birthdate'), 'X').toDate()) }]
+    [{'birthDatetime': cql.DateTime.fromDate(moment(@_patient.get('birthdate'), 'X').toDate()), 'gender': "Female" }]

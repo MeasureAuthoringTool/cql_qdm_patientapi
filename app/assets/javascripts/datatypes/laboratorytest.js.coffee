@@ -12,7 +12,7 @@ class CQL_QDM.LaboratoryTestOrder extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
     @_method = @entry.method
-    @_negationRationale = @entry.negationRationale
+    @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
     @_authorDatetime = @entry.start_time
 
@@ -38,7 +38,7 @@ class CQL_QDM.LaboratoryTestOrder extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_authorDatetime, 'X').toDate())
+    cql.DateTime.fromDate(moment(@_authorDatetime, 'X').toDate())
 
 
 ###
@@ -51,7 +51,7 @@ class CQL_QDM.LaboratoryTestPerformed extends CQL_QDM.QDMDatatype
     super @entry
 
     @_method = @entry.method
-    @_negationRationale = @entry.negationRationale
+    @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
     @_referenceRangeLow = @entry.referenceRangeLow
     @_referenceRangeHigh = @entry.referenceRangeHigh
@@ -90,15 +90,15 @@ class CQL_QDM.LaboratoryTestPerformed extends CQL_QDM.QDMDatatype
       high = new Quantity({unit: @_referenceRangeHigh['unit'], value: @_referenceRangeHigh['value']})
     if @_referenceRangeLow?['unit']?
       low = new Quantity({unit: @_referenceRangeLow['unit'], value: @_referenceRangeLow['value']})
-    new Interval({low: low, high: high})
+    new cql.Interval(low, high)
 
   ###
   @returns {Interval<Date>}
   ###
   relevantPeriod: ->
-    low = cql.DateTime.fromDate(moment.utc(@_relevantPeriodLow, 'X').toDate())
-    high = cql.DateTime.fromDate(moment.utc(@_relevantPeriodHigh, 'X').toDate())
-    new Interval({low: low, high: high})
+    low = cql.DateTime.fromDate(moment(@_relevantPeriodLow, 'X').toDate())
+    high = cql.DateTime.fromDate(moment(@_relevantPeriodHigh, 'X').toDate())
+    new cql.Interval(low, high)
 
   ###
   @returns {Code}
@@ -111,7 +111,7 @@ class CQL_QDM.LaboratoryTestPerformed extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   resultDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_resultDatetime, 'X').toDate())
+    cql.DateTime.fromDate(moment(@_resultDatetime, 'X').toDate())
 
   ###
   @returns {Code}
@@ -130,14 +130,14 @@ class CQL_QDM.LaboratoryTestRecommended extends CQL_QDM.QDMDatatype
     super @entry
     @_authorDatetime = @entry.start_time
     @_method = @entry.method
-    @_negationRationale = @entry.negationRationale
+    @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
 
   ###
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_authorDatetime, 'X').toDate())
+    cql.DateTime.fromDate(moment(@_authorDatetime, 'X').toDate())
 
   ###
   @returns {Code}

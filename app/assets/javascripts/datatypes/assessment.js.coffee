@@ -15,7 +15,7 @@ class CQL_QDM.AssessmentPerformed extends CQL_QDM.QDMDatatype
     super @entry
     @_authorDatetime = @entry.start_time
     @_method = @entry.method
-    @_negationRationale = @entry.negationRationalev
+    @_negationRationale = @entry.negationReasonv
     @_reason = @entry.reason
     @_result = @entry.result
 
@@ -23,7 +23,7 @@ class CQL_QDM.AssessmentPerformed extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_authorDatetime, 'X').toDate())
+    cql.DateTime.fromDate(moment(@_authorDatetime, 'X').toDate())
 
   ###
   @returns {Code}
@@ -70,7 +70,7 @@ class CQL_QDM.AssessmentRecommended extends CQL_QDM.QDMDatatype
     super @entry
     @_authorDatetime = @entry.start_time
     @_method = @entry.method
-    @_negationRationale = @entry.negationRationalev
+    @_negationRationale = @entry.negationReasonv
     @_reason = @entry.reason
     @_result = @entry.result
 
@@ -78,7 +78,7 @@ class CQL_QDM.AssessmentRecommended extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_authorDatetime, 'X').toDate())
+    cql.DateTime.fromDate(moment(@_authorDatetime, 'X').toDate())
 
   ###
   @returns {Code}
