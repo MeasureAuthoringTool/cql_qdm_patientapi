@@ -9,7 +9,7 @@ Represents a patient (using the HDS model) for use by the CQL execution
 engine.
 ###
 class CQL_QDM.CQLPatient
-  constructor: (@patient) ->
+  constructor: (@patient, @measure) ->
     @_patient = @patient
     @_datatypes = @buildDatatypes()
 
@@ -23,11 +23,14 @@ class CQL_QDM.CQLPatient
   @returns {Object}
   ###
   findRecords: (profile) ->
-    debugger
-    if profile == 'Patient'
-      @getPatientCharacteristics()
-    else
-      # Handle Positive / Negative (negated) data criteria for QDM 5.0+
+    if profile == 'Patient' # Requested generic patient info
+      @getPatientInfo()
+    else if /PatientCharacteristicSex/.test profile # Requested gender
+      [@_patient.get('gender')]
+    else if profile?
+      # Requested something else. Need to properly handle Positive / Negative
+      # (negated) data criteria for QDM 5.0+.
+      profile = profile.replace(/ *\{[^)]*\} */g, "") # Strip model details
       if /Positive/.test profile
         profile = profile.replace /Positive/, ""
         return @filterDataCriteria profile, false
@@ -36,11 +39,15 @@ class CQL_QDM.CQLPatient
         return @filterDataCriteria profile, true
       else
         if @_datatypes[profile]? then return @datatypes[profile] else []
+    else
+      []
 
   ###
   @returns {Array}
   ###
   filterDataCriteria: (profile, isNegated) ->
+    # Search patient's history for data criteria that match the given
+    # profile (keeping in mind negated status).
     results = []
     if @_datatypes[profile]?
       for dataCriteria in @_datatypes[profile]
@@ -85,10 +92,8 @@ class CQL_QDM.CQLPatient
   ###
   @returns {Object}
   ###
-  getPatientCharacteristics: ->
-    # characteristics = {}
-    # characteristics['birthDatetime'] = cql.DateTime.fromDate(moment(@_patient.get('birthdate'), 'X').toDate())
-    # characteristics['gender'] = cql.DateTime.fromDate(moment(@_patient.get('gender'), 'X').toDate())
-    # # TODO: More characteristics?
-    # [characteristics]
-    [{'birthDatetime': cql.DateTime.fromDate(moment(@_patient.get('birthdate'), 'X').toDate()), 'gender': "Female" }]
+  getPatientInfo: ->
+    info = {}
+    info['birthDatetime'] = cql.DateTime.fromDate(moment(@_patient.get('birthdate'), 'X').toDate())
+    info['gender'] = @_patient.get('gender')
+    [info]

@@ -3621,7 +3621,10 @@
     Retrieve.prototype.exec = function(ctx) {
       var r, range, records, valueset;
       records = ctx.findRecords(this.templateId);
-      if (this.codes) {
+      if (records.length == 0) {
+        records = ctx.findRecords(this.datatype);
+      }
+      if (this.codes && this.codeProperty) {
         valueset = this.codes.exec(ctx);
         records = (function() {
           var i, len, results;
@@ -3635,7 +3638,7 @@
           return results;
         }).call(this);
       }
-      if (this.dateRange) {
+      if (this.dateRange && this.dateProperty) {
         range = this.dateRange.exec(ctx);
         records = (function() {
           var i, len, results;
