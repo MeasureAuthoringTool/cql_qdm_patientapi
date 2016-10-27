@@ -11,8 +11,8 @@ class CQL_QDM.AdverseEvent extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
     @_facilityLocation = @entry.facility?['name']
-    @_relevantPeriodLow = @entry.start_time
-    @_relevantPeriodHigh = @entry.end_time
+    @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
+    @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
     @_severity = @entry.severity
     @_type = @entry.type
 
@@ -26,8 +26,8 @@ class CQL_QDM.AdverseEvent extends CQL_QDM.QDMDatatype
   @returns {Interval<Date>}
   ###
   relevantPeriod: ->
-    low = cql.DateTime.fromDate(moment(@_relevantPeriodLow, 'X').toDate())
-    high = cql.DateTime.fromDate(moment(@_relevantPeriodHigh, 'X').toDate())
+    low = cql.DateTime.fromDate(@_relevantPeriodLow.toDate())
+    high = cql.DateTime.fromDate(@_relevantPeriodHigh.toDate())
     new cql.Interval(low, high)
 
   ###

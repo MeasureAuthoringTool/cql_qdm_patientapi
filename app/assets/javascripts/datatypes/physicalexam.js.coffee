@@ -64,8 +64,8 @@ class CQL_QDM.PhysicalExamPerformed extends CQL_QDM.QDMDatatype
     @_method = @entry.method
     @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
-    @_relevantPeriodLow = @entry.start_time
-    @_relevantPeriodHigh = @entry.end_time
+    @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
+    @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
     @_result = @entry.result
 
   ###
@@ -97,8 +97,8 @@ class CQL_QDM.PhysicalExamPerformed extends CQL_QDM.QDMDatatype
   @returns {Interval<Date>}
   ###
   relevantPeriod: ->
-    low = cql.DateTime.fromDate(moment(@_relevantPeriodLow, 'X').toDate())
-    high = cql.DateTime.fromDate(moment(@_relevantPeriodHigh, 'X').toDate())
+    low = cql.DateTime.fromDate(@_relevantPeriodLow.toDate())
+    high = cql.DateTime.fromDate(@_relevantPeriodHigh.toDate())
     new cql.Interval(low, high)
 
 

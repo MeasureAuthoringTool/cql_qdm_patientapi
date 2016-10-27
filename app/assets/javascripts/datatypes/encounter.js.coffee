@@ -18,8 +18,8 @@ class CQL_QDM.EncounterActive extends CQL_QDM.QDMDatatype
     # TODO this had CQL_QDM.Helpers.convertDateTime calls previously. I believe
     # this was related to the lengthOfStay calculation. Need to confirm how this
     # should be.
-    @_relevantPeriodLow = @entry.start_time
-    @_relevantPeriodHigh = @entry.end_time
+    @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
+    @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
     @_locationPeriodLow = @entry.facility?['start_time']
     @_locationPeriodHigh = @entry.facility?['end_time']
     @_facilityLocation = @entry.facility?['name']
@@ -29,8 +29,8 @@ class CQL_QDM.EncounterActive extends CQL_QDM.QDMDatatype
   @returns {Interval<Date>}
   ###
   relevantPeriod: ->
-    low = cql.DateTime.fromDate(moment(@_relevantPeriodLow, 'X').toDate())
-    high = cql.DateTime.fromDate(moment(@_relevantPeriodHigh, 'X').toDate())
+    low = cql.DateTime.fromDate(@_relevantPeriodLow.toDate())
+    high = cql.DateTime.fromDate(@_relevantPeriodHigh.toDate())
     new cql.Interval(low, high)
 
   ###
