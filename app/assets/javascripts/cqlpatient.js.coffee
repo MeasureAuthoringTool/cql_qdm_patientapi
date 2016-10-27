@@ -38,7 +38,7 @@ class CQL_QDM.CQLPatient
         profile = profile.replace /Negative/, ""
         return @filterDataCriteria profile, true
       else
-        if @_datatypes[profile]? then return @datatypes[profile] else []
+        if @_datatypes[profile]? then return @_datatypes[profile] else []
     else
       []
 

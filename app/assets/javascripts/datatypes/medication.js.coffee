@@ -175,8 +175,7 @@ class CQL_QDM.MedicationDispensed extends CQL_QDM.QDMDatatype
     super @entry
     @_authorDatetime = @entry.start_time
     @_dosage = @entry.dose
-    # TODO: why not implemented?
-  #  @_frequency = @entry.
+    @_frequency = @entry.frequency
     @_negationRationale = @entry.negationReason
     @_refills = @entry.refills
     @_route = @entry.route
