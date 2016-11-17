@@ -97,3 +97,15 @@ class CQL_QDM.CQLPatient
     info = {}
     info['birthDatetime'] = cql.DateTime.fromDate(moment(@_patient.get('birthdate'), 'X').toDate())
     [info]
+
+  ###
+  @returns {Array}
+  ###
+  getUniqueCoveredDataCriteria: ->
+    data_criteria = []
+    for type, dc_array of @_datatypes
+      for dc in dc_array
+        # To ensure uniqueness, describe each data criteria by its OID as
+        # well as its description.
+        data_criteria.push(dc.entry.oid + '_' + dc.entry.description)
+    _.uniq(data_criteria)
