@@ -71,7 +71,8 @@ class CQL_QDM.CQLPatient
       'medications',
       'procedures',
       'results',
-      'social_history'
+      'social_history',
+      'vital_signs'
     ]
     datatypes = {}
     for type in types
@@ -95,5 +96,4 @@ class CQL_QDM.CQLPatient
   getPatientInfo: ->
     info = {}
     info['birthDatetime'] = cql.DateTime.fromDate(moment(@_patient.get('birthdate'), 'X').toDate())
-    info['gender'] = @_patient.get('gender')
     [info]

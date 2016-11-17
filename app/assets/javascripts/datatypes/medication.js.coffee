@@ -15,8 +15,7 @@ class CQL_QDM.MedicationActive extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
     @_dosage = @entry.dose
-    # TODO: why isn't this done?
-  #  @_frequency = @entry.
+    @_frequency = @entry.frequency
     @_route = @entry.route
     @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
@@ -57,8 +56,7 @@ class CQL_QDM.MedicationAdministered extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
     @_dosage = @entry.dose
-    # TODO: what is this comment about?
-  #  @_frequency = @entry.
+    @_frequency = @entry.frequency
     @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
     @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
@@ -114,10 +112,9 @@ an inpatient encounter.
 class CQL_QDM.MedicationDischarge extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
-    @_authorDatetime = @entry.start_time
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_dosage = @entry.dose
-    # TODO: why not used?
-  #  @_frequency = @entry.
+    @_frequency = @entry.frequency
     @_negationRationale = @entry.negationReason
     @_refills = @entry.refills
     @_route = @entry.route
@@ -127,7 +124,7 @@ class CQL_QDM.MedicationDischarge extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(moment(@_authorDatetime, 'X').toDate())
+    cql.DateTime.fromDate(@_authorDatetime.toDate())
 
   ###
   @returns {Quantity}
@@ -173,7 +170,7 @@ Health Record), patient attestation of “medication taken” may be available.
 class CQL_QDM.MedicationDispensed extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
-    @_authorDatetime = @entry.start_time
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_dosage = @entry.dose
     @_frequency = @entry.frequency
     @_negationRationale = @entry.negationReason
@@ -185,7 +182,7 @@ class CQL_QDM.MedicationDispensed extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(moment(@_authorDatetime, 'X').toDate())
+    cql.DateTime.fromDate(@_authorDatetime.toDate())
 
   ###
   @returns {Quantity}
@@ -226,11 +223,10 @@ corresponding value set.
 class CQL_QDM.MedicationOrder extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
-    @_activeDatetime = @entry.active_datetime
-    @_authorDatetime = @entry.start_time
+    @_activeDatetime = CQL_QDM.Helpers.convertDateTime(@entry.active_datetime)
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_dosage = @entry.dose
-    # TODO: why not implemented?
-  #  @_frequency = @entry.
+    @_frequency = @entry.frequency
     @_method = @entry.method
     @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
@@ -242,13 +238,13 @@ class CQL_QDM.MedicationOrder extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   activeDatetime: ->
-    cql.DateTime.fromDate(moment(@_activeDatetime, 'X').toDate())
+    cql.DateTime.fromDate(@_activeDatetime.toDate())
 
   ###
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(moment(@_authorDatetime, 'X').toDate())
+    cql.DateTime.fromDate(@_authorDatetime.toDate())
 
   ###
   @returns {Quantity}

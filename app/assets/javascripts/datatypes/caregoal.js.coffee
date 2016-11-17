@@ -13,7 +13,6 @@ its corresponding value set.
 class CQL_QDM.CareGoal extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
-
     @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
     @_relatedTo = @entry.relatedTo

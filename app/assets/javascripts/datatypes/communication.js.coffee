@@ -12,14 +12,14 @@ communicated from a patient to a provider.
 class CQL_QDM.CommunicationFromPatientToProvider extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
-    @_authorDatetime = @entry.start_time
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_negationRationale = @entry.negationReason
 
   ###
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(moment(@_authorDatetime, 'X').toDate())
+    cql.DateTime.fromDate(@_authorDatetime.toDate())
 
   ###
   @returns {Code}
@@ -37,7 +37,7 @@ class CQL_QDM.CommunicationFromProviderToPatient extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
     @_negationRationale = @entry.negationReason
-    @_authorDatetime = @entry.start_time
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
 
   ###
   @returns {Code}
@@ -49,7 +49,7 @@ class CQL_QDM.CommunicationFromProviderToPatient extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(moment(@_authorDatetime, 'X').toDate())
+    cql.DateTime.fromDate(@_authorDatetime.toDate())
 
 
 ###
@@ -61,7 +61,7 @@ class CQL_QDM.CommunicationFromProviderToProvider extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
     @_negationRationale = @entry.negationReason
-    @_authorDatetime = @entry.start_time
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
 
   ###
   @returns {Code}
@@ -73,4 +73,4 @@ class CQL_QDM.CommunicationFromProviderToProvider extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(moment(@_authorDatetime, 'X').toDate())
+    cql.DateTime.fromDate(@_authorDatetime.toDate())

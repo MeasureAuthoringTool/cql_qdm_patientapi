@@ -13,8 +13,7 @@ class CQL_QDM.SubstanceAdministered extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
     @_dosage = @entry.dose
-    # TODO: why not defined?
-    #@_frequency =
+    @_frequency = @entry.frequency
     @_negationRationale = @entry.negationReason
     @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
@@ -60,10 +59,9 @@ for the substance indicated by the QDM category and its corresponding value set.
 class CQL_QDM.SubstanceOrder extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
-    @_authorDatetime = @entry.start_time
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_dosage = @entry.dose
-    # TODO: why not defined?
-    #@_frequency =
+    @_frequency = @entry.frequency
     @_method = @entry.method
     @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
@@ -75,7 +73,7 @@ class CQL_QDM.SubstanceOrder extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(moment(@_authorDatetime, 'X').toDate())
+    cql.DateTime.fromDate(@_authorDatetime.toDate())
 
   ###
   @returns {Quantity}
@@ -128,10 +126,9 @@ corresponding value set.
 class CQL_QDM.SubstanceRecommended extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
-    @_authorDatetime = @entry.start_time
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_dosage = @entry.dose
-    # TODO: why not implemented?
-    #@_frequency =
+    @_frequency = @entry.frequency
     @_method = @entry.method
     @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
@@ -143,7 +140,7 @@ class CQL_QDM.SubstanceRecommended extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(moment(@_authorDatetime, 'X').toDate())
+    cql.DateTime.fromDate(@_authorDatetime.toDate())
 
   ###
   @returns {Quantity}

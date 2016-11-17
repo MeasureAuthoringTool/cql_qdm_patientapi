@@ -17,8 +17,8 @@ relationships.
 class CQL_QDM.Diagnosis extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
-    @_prevalencePeriodLow = @entry.start_time
-    @_prevalencePeriodHigh = @entry.end_time
+    @_prevalencePeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
+    @_prevalencePeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
     @_anatomicalLocationSite = @entry.anatomical_location
     @_severity = @entry.severity
 
@@ -32,8 +32,8 @@ class CQL_QDM.Diagnosis extends CQL_QDM.QDMDatatype
   @returns {Interval<Date>}
   ###
   prevalencePeriod: ->
-    low = cql.DateTime.fromDate(moment(@_prevalencePeriodLow, 'X').toDate())
-    high = cql.DateTime.fromDate(moment(@_prevalencePeriodHigh, 'X').toDate())
+    low = cql.DateTime.fromDate(@_prevalencePeriodLow.toDate())
+    high = cql.DateTime.fromDate(@_prevalencePeriodHigh.toDate())
     new cql.Interval(low, high)
 
   ###

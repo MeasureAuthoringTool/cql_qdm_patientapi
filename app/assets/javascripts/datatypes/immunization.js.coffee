@@ -12,7 +12,7 @@ actually administered to the patient.
 class CQL_QDM.ImmunizationAdministered extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
-    @_authorDatetime = @entry.start_time
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_dosage = @entry.dose
     @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
@@ -23,7 +23,7 @@ class CQL_QDM.ImmunizationAdministered extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(moment(@_authorDatetime, 'X').toDate())
+    cql.DateTime.fromDate(@_authorDatetime.toDate())
 
   ###
   @returns {Quantity}
@@ -63,8 +63,8 @@ set.
 class CQL_QDM.ImmunizationOrder extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
-    @_activeDatetime = @entry.active_datetime
-    @_authorDatetime = @entry.start_time
+    @_activeDatetime = CQL_QDM.Helpers.convertDateTime(@entry.active_datetime)
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_dosage = @entry.dose
     @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
@@ -75,13 +75,13 @@ class CQL_QDM.ImmunizationOrder extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   activeDatetime: ->
-    cql.DateTime.fromDate(moment(@_activeDatetime, 'X').toDate())
+    cql.DateTime.fromDate(@_activeDatetime.toDate())
 
   ###
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(moment(@_authorDatetime, 'X').toDate())
+    cql.DateTime.fromDate(@_authorDatetime.toDate())
 
   ###
   @returns {Quantity}

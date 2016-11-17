@@ -14,7 +14,7 @@ class CQL_QDM.LaboratoryTestOrder extends CQL_QDM.QDMDatatype
     @_method = @entry.method
     @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
-    @_authorDatetime = @entry.start_time
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
 
   ###
   @returns {Code}
@@ -38,7 +38,7 @@ class CQL_QDM.LaboratoryTestOrder extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(moment(@_authorDatetime, 'X').toDate())
+    cql.DateTime.fromDate(@_authorDatetime.toDate())
 
 
 ###
@@ -49,7 +49,6 @@ was performed.
 class CQL_QDM.LaboratoryTestPerformed extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
-
     @_method = @entry.method
     @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
@@ -58,7 +57,7 @@ class CQL_QDM.LaboratoryTestPerformed extends CQL_QDM.QDMDatatype
     @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
     @_result = @entry.result
-    @_resultDatetime = @entry.result_date_time
+    @_resultDatetime = CQL_QDM.Helpers.convertDateTime(@entry.result_date_time)
     @_status = @entry.status
 
   ###
@@ -83,7 +82,7 @@ class CQL_QDM.LaboratoryTestPerformed extends CQL_QDM.QDMDatatype
   @returns {Interval}
   ###
   referenceRange: ->
-    # according to documentation, this is assumed to be a 'Quantity'
+    # According to documentation, this is assumed to be a 'Quantity'
     high = null
     low = null
     if @_referenceRangeHigh?['unit']?
@@ -104,14 +103,13 @@ class CQL_QDM.LaboratoryTestPerformed extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   result: ->
-    # TODO: return type in modelinfo is Any. does this need to change?
     cql.Code(@_result.code, @_result.code_system)
 
   ###
   @returns {Date}
   ###
   resultDatetime: ->
-    cql.DateTime.fromDate(moment(@_resultDatetime, 'X').toDate())
+    cql.DateTime.fromDate(@_resultDatetime.toDate())
 
   ###
   @returns {Code}
@@ -128,7 +126,7 @@ corresponding value set.
 class CQL_QDM.LaboratoryTestRecommended extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
-    @_authorDatetime = @entry.start_time
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_method = @entry.method
     @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
@@ -137,7 +135,7 @@ class CQL_QDM.LaboratoryTestRecommended extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(moment(@_authorDatetime, 'X').toDate())
+    cql.DateTime.fromDate(@_authorDatetime.toDate())
 
   ###
   @returns {Code}

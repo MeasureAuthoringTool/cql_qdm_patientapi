@@ -13,7 +13,7 @@ Timing: The time the assessment is completed; author time.
 class CQL_QDM.AssessmentPerformed extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
-    @_authorDatetime = @entry.start_time
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_method = @entry.method
     @_negationRationale = @entry.negationReasonv
     @_reason = @entry.reason
@@ -23,7 +23,7 @@ class CQL_QDM.AssessmentPerformed extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(moment(@_authorDatetime, 'X').toDate())
+    cql.DateTime.fromDate(@_authorDatetime.toDate())
 
   ###
   @returns {Code}
@@ -47,7 +47,6 @@ class CQL_QDM.AssessmentPerformed extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   result: ->
-    # TODO: return type in modelinfo is Any. does this need to change?
     cql.Code(@_result.code, @_result.code_system)
 
 
@@ -68,7 +67,7 @@ workflow to capture recommendations when evaluating measures.
 class CQL_QDM.AssessmentRecommended extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
-    @_authorDatetime = @entry.start_time
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_method = @entry.method
     @_negationRationale = @entry.negationReasonv
     @_reason = @entry.reason
@@ -78,7 +77,7 @@ class CQL_QDM.AssessmentRecommended extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(moment(@_authorDatetime, 'X').toDate())
+    cql.DateTime.fromDate(@_authorDatetime.toDate())
 
   ###
   @returns {Code}

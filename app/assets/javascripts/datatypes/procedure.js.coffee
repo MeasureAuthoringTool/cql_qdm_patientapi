@@ -12,7 +12,7 @@ class CQL_QDM.ProcedureOrder extends CQL_QDM.QDMDatatype
     super @entry
     @_anatomicalApproachSite = @entry.anatomical_approach
     @_anatomicalLocationSite = @entry.anatomicalLocation
-    @_authorDatetime = @entry.start_time
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_method = @entry.method
     @_negationRationale = @entry.negationReason
     @_ordinality = @entry.ordinality
@@ -37,7 +37,7 @@ class CQL_QDM.ProcedureOrder extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(moment(@_authorDatetime, 'X').toDate())
+    cql.DateTime.fromDate(@_authorDatetime.toDate())
 
   ###
   @returns {Code}
@@ -80,7 +80,7 @@ class CQL_QDM.ProcedurePerformed extends CQL_QDM.QDMDatatype
     super @entry
     @_anatomicalApproachSite = @entry.anatomical_approach
     @_anatomicalLocationSite = @entry.anatomicalLocation
-    @_incisionDatetime = @entry.incisionTime
+    @_incisionDatetime = CQL_QDM.Helpers.convertDateTime(@entry.incisionTime)
     @_method = @entry.method
     @_negationRationale = @entry.negationReason
     @_ordinality = @entry.ordinality
@@ -110,7 +110,7 @@ class CQL_QDM.ProcedurePerformed extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   incisionDatetime: ->
-    cql.DateTime.fromDate(moment(@_incisionDatetime, 'X').toDate())
+    cql.DateTime.fromDate(@_incisionDatetime.toDate())
 
   ###
   @returns {Code}
@@ -183,7 +183,7 @@ class CQL_QDM.ProcedureRecommended extends CQL_QDM.QDMDatatype
     @_negationRationale = @entry.negationReason
     @_ordinality = @entry.ordinality
     @_reason = @entry.reason
-    @_authorDatetime = @entry.start_time
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
 
   ###
   @returns {Code}
@@ -203,7 +203,7 @@ class CQL_QDM.ProcedureRecommended extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(moment(@_authorDatetime, 'X').toDate())
+    cql.DateTime.fromDate(@_authorDatetime.toDate())
 
   ###
   @returns {Code}

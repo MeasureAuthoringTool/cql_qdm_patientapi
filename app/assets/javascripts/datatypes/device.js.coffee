@@ -62,7 +62,7 @@ class CQL_QDM.DeviceOrder extends CQL_QDM.QDMDatatype
     super @entry
     @_negationRationale = @entry.negationReason
     @_reaction = @entry.reaction
-    @_authorDatetime = @entry.start_time
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
 
   ###
   @returns {Code}
@@ -80,7 +80,7 @@ class CQL_QDM.DeviceOrder extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(moment(@_authorDatetime, 'X').toDate())
+    cql.DateTime.fromDate(@_authorDatetime.toDate())
 
 
 ###
@@ -91,7 +91,7 @@ corresponding value set.
 class CQL_QDM.DeviceRecommended extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
-    @_authorDatetime = @entry.start_time
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
 
@@ -99,7 +99,7 @@ class CQL_QDM.DeviceRecommended extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(moment(@_authorDatetime, 'X').toDate())
+    cql.DateTime.fromDate(@_authorDatetime.toDate())
 
   ###
   @returns {Code}

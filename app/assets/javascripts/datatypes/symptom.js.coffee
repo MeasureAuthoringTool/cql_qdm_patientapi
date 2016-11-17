@@ -16,21 +16,21 @@ symptom was active for the time frame indicated by the timing relationships.
 class CQL_QDM.Symptom extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
-    @_abatementDatetime = @entry.abatementDatetime
-    @_onsetDatetime = @entry.start_time
+    @_abatementDatetime = CQL_QDM.Helpers.convertDateTime(@entry.abatementDatetime)
+    @_onsetDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_severity = @entry.severity
 
   ###
   @returns {Date}
   ###
   abatementDatetime: ->
-    cql.DateTime.fromDate(moment(@_abatementDatetime, 'X').toDate())
+    cql.DateTime.fromDate(@_abatementDatetime.toDate())
 
   ###
   @returns {Date}
   ###
   onsetDatetime: ->
-    cql.DateTime.fromDate(moment(@_onsetDatetime, 'X').toDate())
+    cql.DateTime.fromDate(@_onsetDatetime.toDate())
 
   ###
   @returns {Code}

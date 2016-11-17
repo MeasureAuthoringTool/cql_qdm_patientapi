@@ -14,14 +14,10 @@ frame indicated by the timing relationships.
 class CQL_QDM.EncounterActive extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
-
-    # TODO this had CQL_QDM.Helpers.convertDateTime calls previously. I believe
-    # this was related to the lengthOfStay calculation. Need to confirm how this
-    # should be.
     @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
-    @_locationPeriodLow = @entry.facility?['start_time']
-    @_locationPeriodHigh = @entry.facility?['end_time']
+    @_locationPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.facility?['start_time'])
+    @_locationPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.facility?['end_time'])
     @_facilityLocation = @entry.facility?['name']
     @_reason = @entry.reason
 
@@ -43,8 +39,8 @@ class CQL_QDM.EncounterActive extends CQL_QDM.QDMDatatype
   @returns {Interval<Date>}
   ###
   locationPeriod: ->
-    low = cql.DateTime.fromDate(moment(@_locationPeriodLow, 'X').toDate())
-    high = cql.DateTime.fromDate(moment(@_locationPeriodHigh, 'X').toDate())
+    low = cql.DateTime.fromDate(@_locationPeriodLow?.toDate())
+    high = cql.DateTime.fromDate(@_locationPeriodHigh?.toDate())
     new cql.Interval(low, high)
 
   ###
@@ -68,7 +64,7 @@ value set has been recommended.
 class CQL_QDM.EncounterOrder extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
-    @_authorDatetime = @entry.start_time
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_facilityLocation = @entry.facility?['name']
     @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
@@ -77,7 +73,7 @@ class CQL_QDM.EncounterOrder extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(moment(@_authorDatetime, 'X').toDate())
+    cql.DateTime.fromDate(@_authorDatetime.toDate())
 
   ###
   @returns {Code}
@@ -106,7 +102,6 @@ been completed.
 class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
-
     @_admissionSource = @entry.admission_source?['name']
     @_diagnosis = @entry.diagnosis
     @_dischargeDisposition = @entry.dischargeDisposition
@@ -192,7 +187,7 @@ recommended.
 class CQL_QDM.EncounterRecommended extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
-    @_authorDatetime = @entry.start_time
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_facilityLocation = @entry.facility?['name']
     @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
@@ -201,7 +196,7 @@ class CQL_QDM.EncounterRecommended extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(moment(@_authorDatetime, 'X').toDate())
+    cql.DateTime.fromDate(@_authorDatetime.toDate())
 
   ###
   @returns {Code}

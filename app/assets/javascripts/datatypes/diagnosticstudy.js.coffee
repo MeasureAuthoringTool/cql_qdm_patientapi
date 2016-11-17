@@ -17,7 +17,7 @@ function testing, vascular laboratory testing, and others.
 class CQL_QDM.DiagnosticStudyOrder extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
-    @_authorDatetime = @entry.start_time
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_method = @entry.method
     @_negationRationale = @entry.negationReason
     @_radiationDosage = @entry.radiation_dose
@@ -28,7 +28,7 @@ class CQL_QDM.DiagnosticStudyOrder extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(moment(@_authorDatetime, 'X').toDate())
+    cql.DateTime.fromDate(@_authorDatetime.toDate())
 
   ###
   @returns {Code}
@@ -76,7 +76,7 @@ class CQL_QDM.DiagnosticStudyPerformed extends CQL_QDM.QDMDatatype
     @_radiationDuration = @entry.radiation_duration
     @_reason = @entry.reason
     @_result = @entry.result
-    @_resultDatetime = @entry.result_date_time
+    @_resultDatetime = CQL_QDM.Helpers.convertDateTime(@entry.result_date_time)
     @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
     @_status = @entry.status
@@ -135,7 +135,7 @@ class CQL_QDM.DiagnosticStudyPerformed extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   resultDatetime: ->
-    cql.DateTime.fromDate(moment(@_resultDatetime, 'X').toDate())
+    cql.DateTime.fromDate(@_resultDatetime.toDate())
 
   ###
   @returns {Code}
@@ -153,7 +153,7 @@ study indicated by the QDM category and its corresponding value set.
 class CQL_QDM.DiagnosticStudyRecommended extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
-    @_authorDatetime = @entry.start_time
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_method = @entry.method
     @_negationRationale = @entry.negationReason
     @_radiationDosage = @entry.radiation_dose
@@ -163,7 +163,7 @@ class CQL_QDM.DiagnosticStudyRecommended extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(moment(@_authorDatetime, 'X').toDate())
+    cql.DateTime.fromDate(@_authorDatetime.toDate())
 
   ###
   @returns {Code}
