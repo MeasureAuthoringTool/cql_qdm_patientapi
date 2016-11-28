@@ -25,8 +25,8 @@ class CQL_QDM.CQLPatient
   findRecords: (profile) ->
     if profile == 'Patient' # Requested generic patient info
       @getPatientInfo()
-    else if /PatientCharacteristicSex/.test profile # Requested gender
-      [@_patient.get('gender')]
+    else if /PatientCharacteristicSex/.test profile # Requested sex
+      return [new CharacteristicSex(@_patient)]
     else if profile?
       # Requested something else. Need to properly handle Positive / Negative
       # (negated) data criteria for QDM 5.0+.
@@ -96,6 +96,7 @@ class CQL_QDM.CQLPatient
   getPatientInfo: ->
     info = {}
     info['birthDatetime'] = cql.DateTime.fromDate(moment(@_patient.get('birthdate'), 'X').toDate())
+    info['gender'] = @_patient.get('gender')
     [info]
 
   ###

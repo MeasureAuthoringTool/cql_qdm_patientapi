@@ -4,4 +4,5 @@
 #= require datatypes/datatype
 #= require types/expression
 #= require types/quantity
+#= require types/characteristic_sex
 #= require_tree .

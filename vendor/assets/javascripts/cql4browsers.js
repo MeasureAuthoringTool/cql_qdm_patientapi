@@ -3170,7 +3170,7 @@
       if (records.length === 0) {
         records = ctx.findRecords(this.datatype);
       }
-      if (this.codes && this.codeProperty) {
+      if (this.codes && (this.codeProperty || /Characteristic/.test(this.datatype))) {
         valueset = this.codes.exec(ctx);
         records = (function() {
           var i, len, results;
