@@ -2987,7 +2987,7 @@
       var args, ref, result;
       args = this.execArgs(ctx);
       result = args[0].durationBetween(args[1], (ref = this.precision) != null ? ref.toLowerCase() : void 0);
-      if (result.isPoint()) {
+      if (result != null && result.isPoint()) {
         return result.low;
       } else {
         return result;
