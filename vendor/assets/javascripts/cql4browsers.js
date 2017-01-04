@@ -41929,7 +41929,7 @@
       this._parameters = _parameters != null ? _parameters : {};
       this.context_values = {};
       this.library_context = {};
-      if (Object.keys(this._parameters).length === 0) {
+      if (Object.keys(this._parameters).length === 0 && this.parent.hasOwnProperty('_parameters')) {
         this._parameters = this.parent._parameters;
       }
     }
