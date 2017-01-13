@@ -30,10 +30,10 @@ class CQL_QDM.AllergyIntolerance extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   severity: ->
-    cql.Code(@_severity?.code, @_severity.code_system)
+    cql.Code(@_severity?.code, @_severity?.code_system)
 
   ###
   @returns {Code}
   ###
   type: ->
-    cql.Code(@_type?.code, @_type.code_system)
+    cql.Code(@_type?.code, @_type?.code_system)

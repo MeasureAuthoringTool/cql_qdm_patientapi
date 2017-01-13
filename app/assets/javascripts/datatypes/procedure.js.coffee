@@ -24,14 +24,14 @@ class CQL_QDM.ProcedureOrder extends CQL_QDM.QDMDatatype
   ###
   anatomicalApproachSite: ->
     cql.Code(@_anatomicalApproachSite?.code,
-      @_anatomicalApproachSite.code_system)
+      @_anatomicalApproachSite?.code_system)
 
   ###
   @returns {Code}
   ###
   anatomicalLocationSite: ->
     cql.Code(@_anatomicalLocationSite?.code,
-      @_anatomicalLocationSite.code_system)
+      @_anatomicalLocationSite?.code_system)
 
   ###
   @returns {Date}
@@ -43,19 +43,19 @@ class CQL_QDM.ProcedureOrder extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   method: ->
-    cql.Code(@_method?.code, @_method.code_system)
+    cql.Code(@_method?.code, @_method?.code_system)
 
   ###
   @returns {Code}
   ###
   negationRationale: ->
-    cql.Code(@_negationRationale?.code, @_negationRationale.code_system)
+    cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
 
   ###
   @returns {Code}
   ###
   ordinality: ->
-    cql.Code(@_ordinality?.code, @_ordinality.code_system)
+    cql.Code(@_ordinality?.code, @_ordinality?.code_system)
 
   ###
   @returns {Quantity}
@@ -67,7 +67,7 @@ class CQL_QDM.ProcedureOrder extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   reason: ->
-    cql.Code(@_reason?.code, @_reason.code_system)
+    cql.Code(@_reason?.code, @_reason?.code_system)
 
 
 ###
@@ -97,14 +97,14 @@ class CQL_QDM.ProcedurePerformed extends CQL_QDM.QDMDatatype
   ###
   anatomicalApproachSite: ->
     cql.Code(@_anatomicalApproachSite?.code,
-      @_anatomicalApproachSite.code_system)
+      @_anatomicalApproachSite?.code_system)
 
   ###
   @returns {Code}
   ###
   anatomicalLocationSite: ->
     cql.Code(@_anatomicalLocationSite?.code,
-      @_anatomicalLocationSite.code_system)
+      @_anatomicalLocationSite?.code_system)
 
   ###
   @returns {Date}
@@ -116,19 +116,19 @@ class CQL_QDM.ProcedurePerformed extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   method: ->
-    cql.Code(@_method?.code, @_method.code_system)
+    cql.Code(@_method?.code, @_method?.code_system)
 
   ###
   @returns {Code}
   ###
   negationRationale: ->
-    cql.Code(@_negationRationale?.code, @_negationRationale.code_system)
+    cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
 
   ###
   @returns {Code}
   ###
   ordinality: ->
-    cql.Code(@_ordinality?.code, @_ordinality.code_system)
+    cql.Code(@_ordinality?.code, @_ordinality?.code_system)
 
   ###
   @returns {Quantity}
@@ -146,7 +146,7 @@ class CQL_QDM.ProcedurePerformed extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   reason: ->
-    cql.Code(@_reason?.code, @_reason.code_system)
+    cql.Code(@_reason?.code, @_reason?.code_system)
 
   ###
   @returns {Interval<Date>}
@@ -160,13 +160,13 @@ class CQL_QDM.ProcedurePerformed extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   result: ->
-    cql.Code(@_result?.code, @_result.code_system)
+    cql.Code(@_result?.code, @_result?.code_system)
 
   ###
   @returns {Code}
   ###
   status: ->
-    cql.Code(@_status?.code, @_status.code_system)
+    cql.Code(@_status?.code, @_status?.code_system)
 
 
 ###
@@ -190,14 +190,14 @@ class CQL_QDM.ProcedureRecommended extends CQL_QDM.QDMDatatype
   ###
   anatomicalApproachSite: ->
     cql.Code(@_anatomicalApproachSite?.code,
-      @_anatomicalApproachSite.code_system)
+      @_anatomicalApproachSite?.code_system)
 
   ###
   @returns {Code}
   ###
   anatomicalLocationSite: ->
     cql.Code(@_anatomicalLocationSite?.code,
-      @_anatomicalLocationSite.code_system)
+      @_anatomicalLocationSite?.code_system)
 
   ###
   @returns {Date}
@@ -209,22 +209,22 @@ class CQL_QDM.ProcedureRecommended extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   method: ->
-    cql.Code(@_method?.code, @_method.code_system)
+    cql.Code(@_method?.code, @_method?.code_system)
 
   ###
   @returns {Code}
   ###
   negationRationale: ->
-    cql.Code(@_negationRationale?.code, @_negationRationale.code_system)
+    cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
 
   ###
   @returns {Code}
   ###
   ordinality: ->
-    cql.Code(@_ordinality?.code, @_ordinality.code_system)
+    cql.Code(@_ordinality?.code, @_ordinality?.code_system)
 
   ###
   @returns {Code}
   ###
   reason: ->
-    cql.Code(@_reason?.code, @_reason.code_system)
+    cql.Code(@_reason?.code, @_reason?.code_system)

@@ -20,7 +20,7 @@ class CQL_QDM.AdverseEvent extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   facilityLocation: ->
-    cql.Code(@_facilityLocation?.code, @_facilityLocation.code_system)
+    cql.Code(@_facilityLocation?.code, @_facilityLocation?.code_system)
 
   ###
   @returns {Interval<Date>}
@@ -34,10 +34,10 @@ class CQL_QDM.AdverseEvent extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   severity: ->
-    cql.Code(@_severity?.code, @_severity.code_system)
+    cql.Code(@_severity?.code, @_severity?.code_system)
 
   ###
   @returns {Code}
   ###
   type: ->
-    cql.Code(@_type?.code, @_type.code_system)
+    cql.Code(@_type?.code, @_type?.code_system)

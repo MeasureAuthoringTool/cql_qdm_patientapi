@@ -35,19 +35,19 @@ class CQL_QDM.ImmunizationAdministered extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   negationRationale: ->
-    cql.Code(@_negationRationale?.code, @_negationRationale.code_system)
+    cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
 
   ###
   @returns {Code}
   ###
   reason: ->
-    cql.Code(@_reason?.code, @_reason.code_system)
+    cql.Code(@_reason?.code, @_reason?.code_system)
 
   ###
   @returns {Code}
   ###
   route: ->
-    cql.Code(@_route?.code, @_route.code_system)
+    cql.Code(@_route?.code, @_route?.code_system)
 
   ###
   @returns {Quantity}
@@ -93,19 +93,19 @@ class CQL_QDM.ImmunizationOrder extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   negationRationale: ->
-    cql.Code(@_negationRationale?.code, @_negationRationale.code_system)
+    cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
 
   ###
   @returns {Code}
   ###
   reason: ->
-    cql.Code(@_reason?.code, @_reason.code_system)
+    cql.Code(@_reason?.code, @_reason?.code_system)
 
   ###
   @returns {Code}
   ###
   route: ->
-    cql.Code(@_route?.code, @_route.code_system)
+    cql.Code(@_route?.code, @_route?.code_system)
 
   ###
   @returns {Quantity}

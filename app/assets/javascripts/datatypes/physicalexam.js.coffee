@@ -25,7 +25,7 @@ class CQL_QDM.PhysicalExamOrder extends CQL_QDM.QDMDatatype
   ###
   anatomicalLocationSite: ->
     cql.Code(@_anatomicalLocationSite?.code,
-      @_anatomicalLocationSite.code_system)
+      @_anatomicalLocationSite?.code_system)
 
   ###
   @returns {Date}
@@ -37,19 +37,19 @@ class CQL_QDM.PhysicalExamOrder extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   method: ->
-    cql.Code(@_method?.code, @_method.code_system)
+    cql.Code(@_method?.code, @_method?.code_system)
 
   ###
   @returns {Code}
   ###
   negationRationale: ->
-    cql.Code(@_negationRationale?.code, @_negationRationale.code_system)
+    cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
 
   ###
   @returns {Code}
   ###
   reason: ->
-    cql.Code(@_reason?.code, @_reason.code_system)
+    cql.Code(@_reason?.code, @_reason?.code_system)
 
 
 ###
@@ -73,25 +73,25 @@ class CQL_QDM.PhysicalExamPerformed extends CQL_QDM.QDMDatatype
   ###
   anatomicalLocationSite: ->
     cql.Code(@_anatomicalLocationSite?.code,
-      @_anatomicalLocationSite.code_system)
+      @_anatomicalLocationSite?.code_system)
 
   ###
   @returns {Code}
   ###
   method: ->
-    cql.Code(@_method?.code, @_method.code_system)
+    cql.Code(@_method?.code, @_method?.code_system)
 
   ###
   @returns {Code}
   ###
   negationRationale: ->
-    cql.Code(@_negationRationale?.code, @_negationRationale.code_system)
+    cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
 
   ###
   @returns {Code}
   ###
   reason: ->
-    cql.Code(@_reason?.code, @_reason.code_system)
+    cql.Code(@_reason?.code, @_reason?.code_system)
 
   ###
   @returns {Interval<Date>}
@@ -121,7 +121,7 @@ class CQL_QDM.PhysicalExamRecommended extends CQL_QDM.QDMDatatype
   ###
   anatomicalLocationSite: ->
     cql.Code(@_anatomicalLocationSite?.code,
-      @_anatomicalLocationSite.code_system)
+      @_anatomicalLocationSite?.code_system)
 
   ###
   @returns {Date}
@@ -133,16 +133,16 @@ class CQL_QDM.PhysicalExamRecommended extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   method: ->
-    cql.Code(@_method?.code, @_method.code_system)
+    cql.Code(@_method?.code, @_method?.code_system)
 
   ###
   @returns {Code}
   ###
   negationRationale: ->
-    cql.Code(@_negationRationale?.code, @_negationRationale.code_system)
+    cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
 
   ###
   @returns {Code}
   ###
   reason: ->
-    cql.Code(@_reason?.code, @_reason.code_system)
+    cql.Code(@_reason?.code, @_reason?.code_system)

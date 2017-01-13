@@ -27,4 +27,4 @@ class CQL_QDM.FamilyHistory extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   relationshipToPatient: ->
-    cql.Code(@_relationship?.code, @_relationship.code_system)
+    cql.Code(@_relationship?.code, @_relationship?.code_system)
