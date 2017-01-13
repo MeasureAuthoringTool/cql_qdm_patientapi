@@ -33,7 +33,7 @@ class CQL_QDM.EncounterActive extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   facilityLocation: ->
-    cql.Code(@_facilityLocation.code, @_facilityLocation.code_system)
+    cql.Code(@_facilityLocation?.code, @_facilityLocation.code_system)
 
   ###
   @returns {Interval<Date>}
@@ -53,7 +53,7 @@ class CQL_QDM.EncounterActive extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   reason: ->
-    cql.Code(@_reason.code, @_reason.code_system)
+    cql.Code(@_reason?.code, @_reason.code_system)
 
 
 ###
@@ -79,19 +79,19 @@ class CQL_QDM.EncounterOrder extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   facilityLocation: ->
-    cql.Code(@_facilityLocation.code, @_facilityLocation.code_system)
+    cql.Code(@_facilityLocation?.code, @_facilityLocation.code_system)
 
   ###
   @returns {Code}
   ###
   negationRationale: ->
-    cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+    cql.Code(@_negationRationale?.code, @_negationRationale.code_system)
 
   ###
   @returns {Code}
   ###
   reason: ->
-    cql.Code(@_reason.code, @_reason.code_system)
+    cql.Code(@_reason?.code, @_reason.code_system)
 
 
 ###
@@ -118,25 +118,25 @@ class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   admissionSource: ->
-    cql.Code(@_admissionSource.code, @_admissionSource.code_system)
+    cql.Code(@_admissionSource?.code, @_admissionSource.code_system)
 
   ###
   @returns {Code}
   ###
   diagnosis: ->
-    cql.Code(@_diagnosis.code, @_diagnosis.code_system)
+    cql.Code(@_diagnosis?.code, @_diagnosis.code_system)
 
   ###
   @returns {Code}
   ###
   dischargeDisposition: ->
-    cql.Code(@_dischargeDisposition.code, @_dischargeDisposition.code_system)
+    cql.Code(@_dischargeDisposition?.code, @_dischargeDisposition.code_system)
 
   ###
   @returns {Code}
   ###
   facilityLocation: ->
-    cql.Code(@_facilityLocation.code, @_facilityLocation.code_system)
+    cql.Code(@_facilityLocation?.code, @_facilityLocation.code_system)
 
   ###
   @returns {Quantity}
@@ -156,13 +156,13 @@ class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   negationRationale: ->
-    cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+    cql.Code(@_negationRationale?.code, @_negationRationale.code_system)
 
   ###
   @returns {Code}
   ###
   reason: ->
-    cql.Code(@_reason.code, @_reason.code_system)
+    cql.Code(@_reason?.code, @_reason.code_system)
 
   ###
   @returns {Interval<Date>}
@@ -176,7 +176,7 @@ class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   principalDiagnosis: ->
-    cql.Code(@_principalDiagnosis.code, @_principalDiagnosis.code_system)
+    cql.Code(@_principalDiagnosis?.code, @_principalDiagnosis.code_system)
 
 
 ###
@@ -202,16 +202,16 @@ class CQL_QDM.EncounterRecommended extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   facilityLocation: ->
-    cql.Code(@_facilityLocation.code, @_facilityLocation.code_system)
+    cql.Code(@_facilityLocation?.code, @_facilityLocation.code_system)
 
   ###
   @returns {Code}
   ###
   negationRationale: ->
-    cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+    cql.Code(@_negationRationale?.code, @_negationRationale.code_system)
 
   ###
   @returns {Code}
   ###
   reason: ->
-    cql.Code(@_reason.code, @_reason.code_system)
+    cql.Code(@_reason?.code, @_reason.code_system)

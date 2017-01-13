@@ -30,7 +30,7 @@ class CQL_QDM.CareGoal extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   relatedTo: ->
-    cql.Code(@_relatedTo.code, @_relatedTo.code_system)
+    cql.Code(@_relatedTo?.code, @_relatedTo.code_system)
 
   ###
   @returns {Quantity | Code}
@@ -39,4 +39,4 @@ class CQL_QDM.CareGoal extends CQL_QDM.QDMDatatype
     if @_targetOutcome?['unit']?
       new Quantity({unit: @_targetOutcome['unit'], value: @_targetOutcome['value']})
     else
-      cql.Code(@_targetOutcome.code, @_targetOutcome.code_system)
+      cql.Code(@_targetOutcome?.code, @_targetOutcome.code_system)

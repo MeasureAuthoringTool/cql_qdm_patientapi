@@ -31,7 +31,7 @@ class CQL_QDM.MedicationActive extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   route: ->
-    cql.Code(@_route.code, @_route.code_system)
+    cql.Code(@_route?.code, @_route.code_system)
 
   ###
   @returns {Interval<Date>}
@@ -74,13 +74,13 @@ class CQL_QDM.MedicationAdministered extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   negationRationale: ->
-    cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+    cql.Code(@_negationRationale?.code, @_negationRationale.code_system)
 
   ###
   @returns {Code}
   ###
   reason: ->
-    cql.Code(@_reason.code, @_reason.code_system)
+    cql.Code(@_reason?.code, @_reason.code_system)
 
   ###
   @returns {Interval<Date>}
@@ -94,7 +94,7 @@ class CQL_QDM.MedicationAdministered extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   route: ->
-    cql.Code(@_route.code, @_route.code_system)
+    cql.Code(@_route?.code, @_route.code_system)
 
   ###
   @returns {Quantity}
@@ -136,7 +136,7 @@ class CQL_QDM.MedicationDischarge extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   negationRationale: ->
-    cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+    cql.Code(@_negationRationale?.code, @_negationRationale.code_system)
 
   ###
   @returns {String}
@@ -148,7 +148,7 @@ class CQL_QDM.MedicationDischarge extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   route: ->
-    cql.Code(@_route.code, @_route.code_system)
+    cql.Code(@_route?.code, @_route.code_system)
 
   ###
   @returns {Quantity}
@@ -194,7 +194,7 @@ class CQL_QDM.MedicationDispensed extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   negationRationale: ->
-    cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+    cql.Code(@_negationRationale?.code, @_negationRationale.code_system)
 
   ###
   @returns {String}
@@ -206,7 +206,7 @@ class CQL_QDM.MedicationDispensed extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   route: ->
-    cql.Code(@_route.code, @_route.code_system)
+    cql.Code(@_route?.code, @_route.code_system)
 
   ###
   @returns {Quantity}
@@ -256,19 +256,19 @@ class CQL_QDM.MedicationOrder extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   method: ->
-    cql.Code(@_method.code, @_method.code_system)
+    cql.Code(@_method?.code, @_method.code_system)
 
   ###
   @returns {Code}
   ###
   negationRationale: ->
-    cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+    cql.Code(@_negationRationale?.code, @_negationRationale.code_system)
 
   ###
   @returns {Code}
   ###
   reason: ->
-    cql.Code(@_reason.code, @_reason.code_system)
+    cql.Code(@_reason?.code, @_reason.code_system)
 
   ###
   @returns {String}
@@ -280,7 +280,7 @@ class CQL_QDM.MedicationOrder extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   route: ->
-    cql.Code(@_route.code, @_route.code_system)
+    cql.Code(@_route?.code, @_route.code_system)
 
   ###
   @returns {Quantity}

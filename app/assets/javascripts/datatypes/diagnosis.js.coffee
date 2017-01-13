@@ -26,7 +26,7 @@ class CQL_QDM.Diagnosis extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   anatomicalLocationSite: ->
-    cql.Code(@_anatomicalLocationSite.code, @_anatomicalLocationSite.code_system)
+    cql.Code(@_anatomicalLocationSite?.code, @_anatomicalLocationSite.code_system)
 
   ###
   @returns {Interval<Date>}
@@ -40,4 +40,4 @@ class CQL_QDM.Diagnosis extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   severity: ->
-    cql.Code(@_severity.code, @_severity.code_system)
+    cql.Code(@_severity?.code, @_severity.code_system)

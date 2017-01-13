@@ -24,25 +24,25 @@ class CQL_QDM.DeviceApplied extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   anatomicalApproachSite: ->
-    cql.Code(@_anatomicalApproachSite.code, @_anatomicalApproachSite.code_system)
+    cql.Code(@_anatomicalApproachSite?.code, @_anatomicalApproachSite.code_system)
 
   ###
   @returns {Code}
   ###
   anatomicalLocationSite: ->
-    cql.Code(@_anatomicalLocationSite.code, @_anatomicalLocationSite.code_system)
+    cql.Code(@_anatomicalLocationSite?.code, @_anatomicalLocationSite.code_system)
 
   ###
   @returns {Code}
   ###
   negationRationale: ->
-    cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+    cql.Code(@_negationRationale?.code, @_negationRationale.code_system)
 
   ###
   @returns {Code}
   ###
   reason: ->
-    cql.Code(@_reason.code, @_reason.code_system)
+    cql.Code(@_reason?.code, @_reason.code_system)
 
   ###
   @returns {Interval<Date>}
@@ -68,14 +68,14 @@ class CQL_QDM.DeviceOrder extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   negationRationale: ->
-    cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+    cql.Code(@_negationRationale?.code, @_negationRationale.code_system)
 
   ###
   @returns {Code}
   ###
   reaction: ->
-    cql.Code(@_reaction.code, @_reaction.code_system)
-  
+    cql.Code(@_reaction?.code, @_reaction.code_system)
+
   ###
   @returns {Date}
   ###
@@ -105,10 +105,10 @@ class CQL_QDM.DeviceRecommended extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   negationRationale: ->
-    cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+    cql.Code(@_negationRationale?.code, @_negationRationale.code_system)
 
   ###
   @returns {Code}
   ###
   reason: ->
-    cql.Code(@_reason.code, @_reason.code_system)
+    cql.Code(@_reason?.code, @_reason.code_system)

@@ -26,13 +26,13 @@ class CQL_QDM.InterventionOrder extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   negationRationale: ->
-    cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+    cql.Code(@_negationRationale?.code, @_negationRationale.code_system)
 
   ###
   @returns {Code}
   ###
   reason: ->
-    cql.Code(@_reason.code, @_reason.code_system)
+    cql.Code(@_reason?.code, @_reason.code_system)
 
 
 ###
@@ -54,13 +54,13 @@ class CQL_QDM.InterventionPerformed extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   negationRationale: ->
-    cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+    cql.Code(@_negationRationale?.code, @_negationRationale.code_system)
 
   ###
   @returns {Code}
   ###
   reason: ->
-    cql.Code(@_reason.code, @_reason.code_system)
+    cql.Code(@_reason?.code, @_reason.code_system)
 
   ###
   @returns {Interval<Date>}
@@ -74,13 +74,13 @@ class CQL_QDM.InterventionPerformed extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   result: ->
-    cql.Code(@_result.code, @_result.code_system)
+    cql.Code(@_result?.code, @_result.code_system)
 
   ###
   @returns {Code}
   ###
   status: ->
-    cql.Code(@_status.code, @_status.code_system)
+    cql.Code(@_status?.code, @_status.code_system)
 
 
 ###
@@ -105,10 +105,10 @@ class CQL_QDM.InterventionRecommended extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   negationRationale: ->
-    cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+    cql.Code(@_negationRationale?.code, @_negationRationale.code_system)
 
   ###
   @returns {Code}
   ###
   reason: ->
-    cql.Code(@_reason.code, @_reason.code_system)
+    cql.Code(@_reason?.code, @_reason.code_system)
