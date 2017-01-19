@@ -24,7 +24,7 @@ class CQL_QDM.AssessmentPerformed extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(@_authorDatetime)
+    @_authorDatetime
 
   ###
   @returns {Code}
@@ -85,7 +85,7 @@ class CQL_QDM.AssessmentRecommended extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(@_authorDatetime)
+    @_authorDatetime
 
   ###
   @returns {Code}

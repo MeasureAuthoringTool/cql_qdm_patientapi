@@ -26,8 +26,8 @@ class CQL_QDM.AllergyIntolerance extends CQL_QDM.QDMDatatype
   @returns {Interval<Date>}
   ###
   prevalencePeriod: ->
-    low = cql.DateTime.fromDate(@_prevalencePeriodLow)
-    high = cql.DateTime.fromDate(@_prevalencePeriodHigh)
+    low = @_prevalencePeriodLow
+    high = @_prevalencePeriodHigh
     new cql.Interval(low, high)
 
   ###

@@ -52,8 +52,8 @@ class CQL_QDM.DeviceApplied extends CQL_QDM.QDMDatatype
   @returns {Interval<Date>}
   ###
   relevantPeriod: ->
-    low = cql.DateTime.fromDate(@_relevantPeriodLow)
-    high = cql.DateTime.fromDate(@_relevantPeriodHigh)
+    low = @_relevantPeriodLow
+    high = @_relevantPeriodHigh
     new cql.Interval(low, high)
 
 
@@ -84,7 +84,7 @@ class CQL_QDM.DeviceOrder extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(@_authorDatetime)
+    @_authorDatetime
 
 
 ###
@@ -103,7 +103,7 @@ class CQL_QDM.DeviceRecommended extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(@_authorDatetime)
+    @_authorDatetime
 
   ###
   @returns {Code}

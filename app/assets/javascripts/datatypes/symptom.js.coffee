@@ -24,13 +24,13 @@ class CQL_QDM.Symptom extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   abatementDatetime: ->
-    cql.DateTime.fromDate(@_abatementDatetime)
+    @_abatementDatetime
 
   ###
   @returns {Date}
   ###
   onsetDatetime: ->
-    cql.DateTime.fromDate(@_onsetDatetime)
+    @_onsetDatetime
 
   ###
   @returns {Code}

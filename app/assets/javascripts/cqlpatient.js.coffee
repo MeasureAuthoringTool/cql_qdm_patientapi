@@ -105,7 +105,7 @@ class CQL_QDM.CQLPatient
   ###
   getPatientInfo: ->
     info = {}
-    info['birthDatetime'] = cql.DateTime.fromDate(CQL_QDM.Helpers.convertDateTime(@_patient.get('birthdate')))
+    info['birthDatetime'] = CQL_QDM.Helpers.convertDateTime(@_patient.get('birthdate'))
     info['gender'] = @_patient.get('gender')
     [info]
 

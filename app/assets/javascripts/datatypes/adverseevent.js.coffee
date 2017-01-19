@@ -30,8 +30,8 @@ class CQL_QDM.AdverseEvent extends CQL_QDM.QDMDatatype
   @returns {Interval<Date>}
   ###
   relevantPeriod: ->
-    low = cql.DateTime.fromDate(@_relevantPeriodLow)
-    high = cql.DateTime.fromDate(@_relevantPeriodHigh)
+    low = @_relevantPeriodLow
+    high = @_relevantPeriodHigh
     new cql.Interval(low, high)
 
   ###

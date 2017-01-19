@@ -41,8 +41,8 @@ class CQL_QDM.MedicationActive extends CQL_QDM.QDMDatatype
   @returns {Interval<Date>}
   ###
   relevantPeriod: ->
-    low = cql.DateTime.fromDate(@_relevantPeriodLow)
-    high = cql.DateTime.fromDate(@_relevantPeriodHigh)
+    low = @_relevantPeriodLow
+    high = @_relevantPeriodHigh
     new cql.Interval(low, high)
 
   ###
@@ -94,8 +94,8 @@ class CQL_QDM.MedicationAdministered extends CQL_QDM.QDMDatatype
   @returns {Interval<Date>}
   ###
   relevantPeriod: ->
-    low = cql.DateTime.fromDate(@_relevantPeriodLow)
-    high = cql.DateTime.fromDate(@_relevantPeriodHigh)
+    low = @_relevantPeriodLow
+    high = @_relevantPeriodHigh
     new cql.Interval(low, high)
 
   ###
@@ -132,7 +132,7 @@ class CQL_QDM.MedicationDischarge extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(@_authorDatetime)
+    @_authorDatetime
 
   ###
   @returns {Quantity}
@@ -190,7 +190,7 @@ class CQL_QDM.MedicationDispensed extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(@_authorDatetime)
+    @_authorDatetime
 
   ###
   @returns {Quantity}
@@ -246,13 +246,13 @@ class CQL_QDM.MedicationOrder extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   activeDatetime: ->
-    cql.DateTime.fromDate(@_activeDatetime)
+    @_activeDatetime
 
   ###
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(@_authorDatetime)
+    @_authorDatetime
 
   ###
   @returns {Quantity}

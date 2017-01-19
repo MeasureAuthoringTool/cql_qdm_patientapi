@@ -35,7 +35,7 @@ class CQL_QDM.ProcedureOrder extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(@_authorDatetime)
+    @_authorDatetime
 
   ###
   @returns {Code}
@@ -111,7 +111,7 @@ class CQL_QDM.ProcedurePerformed extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   incisionDatetime: ->
-    cql.DateTime.fromDate(@_incisionDatetime)
+    @_incisionDatetime
 
   ###
   @returns {Code}
@@ -153,8 +153,8 @@ class CQL_QDM.ProcedurePerformed extends CQL_QDM.QDMDatatype
   @returns {Interval<Date>}
   ###
   relevantPeriod: ->
-    low = cql.DateTime.fromDate(@_relevantPeriodLow)
-    high = cql.DateTime.fromDate(@_relevantPeriodHigh)
+    low = @_relevantPeriodLow
+    high = @_relevantPeriodHigh
     new cql.Interval(low, high)
 
   ###
@@ -208,7 +208,7 @@ class CQL_QDM.ProcedureRecommended extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(@_authorDatetime)
+    @_authorDatetime
 
   ###
   @returns {Code}

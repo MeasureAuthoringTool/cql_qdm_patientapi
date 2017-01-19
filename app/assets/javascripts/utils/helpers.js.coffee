@@ -13,7 +13,7 @@ class CQL_QDM.Helpers
   @returns Moment.js object
   ###
   @convertDateTime: (input) ->
-    if moment.utc(input, 'X', true).isValid()
-      moment.utc(input, 'X').toDate()
+    if moment.utc(input, 'MM/DD/YYYY hh:mm A', true).isValid()
+      cql.DateTime.fromDate(moment.utc(input, 'MM/DD/YYYY hh:mm A').toDate(), 0)
     else
-      moment.utc(input, 'MM/DD/YYYY hh:mm A').toDate()
+      cql.DateTime.fromDate(moment.utc(input, 'X').toDate(), 0)

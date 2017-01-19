@@ -30,7 +30,7 @@ class CQL_QDM.PhysicalExamOrder extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(@_authorDatetime)
+    @_authorDatetime
 
   ###
   @returns {Code}
@@ -100,8 +100,8 @@ class CQL_QDM.PhysicalExamPerformed extends CQL_QDM.QDMDatatype
   @returns {Interval<Date>}
   ###
   relevantPeriod: ->
-    low = cql.DateTime.fromDate(@_relevantPeriodLow)
-    high = cql.DateTime.fromDate(@_relevantPeriodHigh)
+    low = @_relevantPeriodLow
+    high = @_relevantPeriodHigh
     new cql.Interval(low, high)
 
   ###
@@ -141,7 +141,7 @@ class CQL_QDM.PhysicalExamRecommended extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(@_authorDatetime)
+    @_authorDatetime
 
   ###
   @returns {Code}

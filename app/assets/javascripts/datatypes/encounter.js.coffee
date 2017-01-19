@@ -29,8 +29,8 @@ class CQL_QDM.EncounterActive extends CQL_QDM.QDMDatatype
   @returns {Interval<Date>}
   ###
   relevantPeriod: ->
-    low = cql.DateTime.fromDate(@_relevantPeriodLow)
-    high = cql.DateTime.fromDate(@_relevantPeriodHigh)
+    low = @_relevantPeriodLow
+    high = @_relevantPeriodHigh
     new cql.Interval(low, high)
 
   ###
@@ -43,8 +43,8 @@ class CQL_QDM.EncounterActive extends CQL_QDM.QDMDatatype
   @returns {Interval<Date>}
   ###
   locationPeriod: ->
-    low = cql.DateTime.fromDate(@_locationPeriodLow?)
-    high = cql.DateTime.fromDate(@_locationPeriodHigh?)
+    low = @_locationPeriodLow
+    high = @_locationPeriodHigh
     new cql.Interval(low, high)
 
   ###
@@ -77,7 +77,7 @@ class CQL_QDM.EncounterOrder extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(@_authorDatetime)
+    @_authorDatetime
 
   ###
   @returns {Code}
@@ -156,8 +156,8 @@ class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
   @returns {Interval<Date>}
   ###
   locationPeriod: ->
-    low = cql.DateTime.fromDate(@_locationPeriodLow)
-    high = cql.DateTime.fromDate(@_locationPeriodHigh)
+    low = @_locationPeriodLow
+    high = @_locationPeriodHigh
     new cql.Interval(low, high)
 
   ###
@@ -176,8 +176,8 @@ class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
   @returns {Interval<Date>}
   ###
   relevantPeriod: ->
-    low = cql.DateTime.fromDate(@_relevantPeriodLow)
-    high = cql.DateTime.fromDate(@_relevantPeriodHigh)
+    low = @_relevantPeriodLow
+    high = @_relevantPeriodHigh
     new cql.Interval(low, high)
 
   ###
@@ -204,7 +204,7 @@ class CQL_QDM.EncounterRecommended extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(@_authorDatetime)
+    @_authorDatetime
 
   ###
   @returns {Code}

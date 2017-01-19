@@ -28,4 +28,4 @@ class CQL_QDM.CharacteristicBirthdate extends CQL_QDM.QDMDatatype
   @returns {DateTime}
   ###
   birthDatetime: ->
-    cql.DateTime.fromDate(CQL_QDM.Helpers.convertDateTime(@_patient.get('birthdate')))
+    CQL_QDM.Helpers.convertDateTime(@_patient.get('birthdate'))

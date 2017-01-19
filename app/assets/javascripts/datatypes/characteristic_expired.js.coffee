@@ -32,4 +32,4 @@ class CQL_QDM.CharacteristicExpired extends CQL_QDM.QDMDatatype
   @returns {DateTime}
   ###
   expiredDatetime: ->
-    cql.DateTime.fromDate(CQL_QDM.Helpers.convertDateTime(@_patient.get('deathdate')))
+    CQL_QDM.Helpers.convertDateTime(@_patient.get('deathdate'))
