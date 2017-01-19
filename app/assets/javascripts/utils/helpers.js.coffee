@@ -14,6 +14,6 @@ class CQL_QDM.Helpers
   ###
   @convertDateTime: (input) ->
     if moment(input, 'X', true).isValid()
-      moment.utc(input, 'X').toDate()
+      moment(input, 'X').toDate()
     else
-      moment.utc(input, 'MM/DD/YYYY hh:mm A').toDate()
+      moment(input, 'MM/DD/YYYY hh:mm A').toDate()
