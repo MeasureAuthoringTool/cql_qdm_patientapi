@@ -18,7 +18,7 @@ class CQL_QDM.PatientCareExperience extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(@_authorDatetime.toDate())
+    cql.DateTime.fromDate(@_authorDatetime)
 
 
 ###
@@ -37,4 +37,4 @@ class CQL_QDM.ProviderCareExperience extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(@_authorDatetime.toDate())
+    cql.DateTime.fromDate(@_authorDatetime)

@@ -23,7 +23,7 @@ class CQL_QDM.ImmunizationAdministered extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(@_authorDatetime.toDate())
+    cql.DateTime.fromDate(@_authorDatetime)
 
   ###
   @returns {Quantity}
@@ -35,19 +35,19 @@ class CQL_QDM.ImmunizationAdministered extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   negationRationale: ->
-    cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
+    new cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
 
   ###
   @returns {Code}
   ###
   reason: ->
-    cql.Code(@_reason?.code, @_reason?.code_system)
+    new cql.Code(@_reason?.code, @_reason?.code_system)
 
   ###
   @returns {Code}
   ###
   route: ->
-    cql.Code(@_route?.code, @_route?.code_system)
+    new cql.Code(@_route?.code, @_route?.code_system)
 
   ###
   @returns {Quantity}
@@ -75,13 +75,13 @@ class CQL_QDM.ImmunizationOrder extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   activeDatetime: ->
-    cql.DateTime.fromDate(@_activeDatetime.toDate())
+    cql.DateTime.fromDate(@_activeDatetime)
 
   ###
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(@_authorDatetime.toDate())
+    cql.DateTime.fromDate(@_authorDatetime)
 
   ###
   @returns {Quantity}
@@ -93,19 +93,19 @@ class CQL_QDM.ImmunizationOrder extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   negationRationale: ->
-    cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
+    new cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
 
   ###
   @returns {Code}
   ###
   reason: ->
-    cql.Code(@_reason?.code, @_reason?.code_system)
+    new cql.Code(@_reason?.code, @_reason?.code_system)
 
   ###
   @returns {Code}
   ###
   route: ->
-    cql.Code(@_route?.code, @_route?.code_system)
+    new cql.Code(@_route?.code, @_route?.code_system)
 
   ###
   @returns {Quantity}

@@ -15,7 +15,11 @@ class CQL_QDM.EncounterActive extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
     @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
+    if @entry.end_time
+      @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
+    else
+      # No end time; high is set to infinity
+      @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime('12/31/9999 12:59 PM')
     @_locationPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.facility?['start_time'])
     @_locationPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.facility?['end_time'])
     @_facilityLocation = @entry.facility?['name']
@@ -25,22 +29,22 @@ class CQL_QDM.EncounterActive extends CQL_QDM.QDMDatatype
   @returns {Interval<Date>}
   ###
   relevantPeriod: ->
-    low = cql.DateTime.fromDate(@_relevantPeriodLow.toDate())
-    high = cql.DateTime.fromDate(@_relevantPeriodHigh.toDate())
+    low = cql.DateTime.fromDate(@_relevantPeriodLow)
+    high = cql.DateTime.fromDate(@_relevantPeriodHigh)
     new cql.Interval(low, high)
 
   ###
   @returns {Code}
   ###
   facilityLocation: ->
-    cql.Code(@_facilityLocation?.code, @_facilityLocation?.code_system)
+    new cql.Code(@_facilityLocation?.code, @_facilityLocation?.code_system)
 
   ###
   @returns {Interval<Date>}
   ###
   locationPeriod: ->
-    low = cql.DateTime.fromDate(@_locationPeriodLow?.toDate())
-    high = cql.DateTime.fromDate(@_locationPeriodHigh?.toDate())
+    low = cql.DateTime.fromDate(@_locationPeriodLow?)
+    high = cql.DateTime.fromDate(@_locationPeriodHigh?)
     new cql.Interval(low, high)
 
   ###
@@ -53,7 +57,7 @@ class CQL_QDM.EncounterActive extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   reason: ->
-    cql.Code(@_reason?.code, @_reason?.code_system)
+    new cql.Code(@_reason?.code, @_reason?.code_system)
 
 
 ###
@@ -73,25 +77,25 @@ class CQL_QDM.EncounterOrder extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(@_authorDatetime.toDate())
+    cql.DateTime.fromDate(@_authorDatetime)
 
   ###
   @returns {Code}
   ###
   facilityLocation: ->
-    cql.Code(@_facilityLocation?.code, @_facilityLocation?.code_system)
+    new cql.Code(@_facilityLocation?.code, @_facilityLocation?.code_system)
 
   ###
   @returns {Code}
   ###
   negationRationale: ->
-    cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
+    new cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
 
   ###
   @returns {Code}
   ###
   reason: ->
-    cql.Code(@_reason?.code, @_reason?.code_system)
+    new cql.Code(@_reason?.code, @_reason?.code_system)
 
 
 ###
@@ -111,72 +115,76 @@ class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
     @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
     @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
+    if @entry.end_time
+      @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
+    else
+      # No end time; high is set to infinity
+      @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime('12/31/9999 12:59 PM')
     @_principalDiagnosis = @entry.principalDiagnosis
 
   ###
   @returns {Code}
   ###
   admissionSource: ->
-    cql.Code(@_admissionSource?.code, @_admissionSource?.code_system)
+    new cql.Code(@_admissionSource?.code, @_admissionSource?.code_system)
 
   ###
   @returns {Code}
   ###
   diagnosis: ->
-    cql.Code(@_diagnosis?.code, @_diagnosis?.code_system)
+    new cql.Code(@_diagnosis?.code, @_diagnosis?.code_system)
 
   ###
   @returns {Code}
   ###
   dischargeDisposition: ->
-    cql.Code(@_dischargeDisposition?.code, @_dischargeDisposition?.code_system)
+    new cql.Code(@_dischargeDisposition?.code, @_dischargeDisposition?.code_system)
 
   ###
   @returns {Code}
   ###
   facilityLocation: ->
-    cql.Code(@_facilityLocation?.code, @_facilityLocation?.code_system)
+    new cql.Code(@_facilityLocation?.code, @_facilityLocation?.code_system)
 
   ###
   @returns {Quantity}
   ###
   lengthOfStay: ->
-    new Quantity({unit: 'milliseconds', value: (@_dischargeDatetime - @_admissionDatetime)})
+    new Quantity({unit: 'milliseconds', value: (@_relevantPeriodHigh - @_relevantPeriodLow)})
 
   ###
   @returns {Interval<Date>}
   ###
   locationPeriod: ->
-    low = cql.DateTime.fromDate(@_locationPeriodLow.toDate())
-    high = cql.DateTime.fromDate(@_locationPeriodHigh.toDate())
+    low = cql.DateTime.fromDate(@_locationPeriodLow)
+    high = cql.DateTime.fromDate(@_locationPeriodHigh)
     new cql.Interval(low, high)
 
   ###
   @returns {Code}
   ###
   negationRationale: ->
-    cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
+    new cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
 
   ###
   @returns {Code}
   ###
   reason: ->
-    cql.Code(@_reason?.code, @_reason?.code_system)
+    new cql.Code(@_reason?.code, @_reason?.code_system)
 
   ###
   @returns {Interval<Date>}
   ###
   relevantPeriod: ->
-    low = cql.DateTime.fromDate(@_relevantPeriodLow.toDate())
-    high = cql.DateTime.fromDate(@_relevantPeriodHigh.toDate())
+    low = cql.DateTime.fromDate(@_relevantPeriodLow)
+    high = cql.DateTime.fromDate(@_relevantPeriodHigh)
     new cql.Interval(low, high)
 
   ###
   @returns {Code}
   ###
   principalDiagnosis: ->
-    cql.Code(@_principalDiagnosis?.code, @_principalDiagnosis?.code_system)
+    new cql.Code(@_principalDiagnosis?.code, @_principalDiagnosis?.code_system)
 
 
 ###
@@ -196,22 +204,22 @@ class CQL_QDM.EncounterRecommended extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(@_authorDatetime.toDate())
+    cql.DateTime.fromDate(@_authorDatetime)
 
   ###
   @returns {Code}
   ###
   facilityLocation: ->
-    cql.Code(@_facilityLocation?.code, @_facilityLocation?.code_system)
+    new cql.Code(@_facilityLocation?.code, @_facilityLocation?.code_system)
 
   ###
   @returns {Code}
   ###
   negationRationale: ->
-    cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
+    new cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
 
   ###
   @returns {Code}
   ###
   reason: ->
-    cql.Code(@_reason?.code, @_reason?.code_system)
+    new cql.Code(@_reason?.code, @_reason?.code_system)

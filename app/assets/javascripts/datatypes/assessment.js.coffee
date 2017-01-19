@@ -17,37 +17,44 @@ class CQL_QDM.AssessmentPerformed extends CQL_QDM.QDMDatatype
     @_method = @entry.method
     @_negationRationale = @entry.negationReasonv
     @_reason = @entry.reason
-    @_result = @entry.result
+    if @entry.values? && @entry.values.length > 0
+      @_result = @entry.values?[0]
 
   ###
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(@_authorDatetime.toDate())
+    cql.DateTime.fromDate(@_authorDatetime)
 
   ###
   @returns {Code}
   ###
   method: ->
-    cql.Code(@_method?.code, @_method?.code_system)
+    new cql.Code(@_method?.code, @_method?.code_system)
 
   ###
   @returns {Code}
   ###
   negationRationale: ->
-    cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
+    new cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
 
   ###
   @returns {Code}
   ###
   reason: ->
-    cql.Code(@_reason?.code, @_reason?.code_system)
+    new cql.Code(@_reason?.code, @_reason?.code_system)
 
   ###
-  @returns {Code}
+  @returns {Code|Int}
   ###
   result: ->
-    cql.Code(@_result?.code, @_result?.code_system)
+    if @_result
+      if @_result.codes?
+        code_system = @_result.codes[Object.keys(@_result.codes)[0]]
+        code = @_result.codes[code_system]
+        new cql.Code(code, code_system)
+      else
+        parseInt(@_result.scalar)
 
 
 ###
@@ -71,28 +78,41 @@ class CQL_QDM.AssessmentRecommended extends CQL_QDM.QDMDatatype
     @_method = @entry.method
     @_negationRationale = @entry.negationReasonv
     @_reason = @entry.reason
-    @_result = @entry.result
+    if @entry.values? && @entry.values.length > 0
+      @_result = @entry.values?[0]
 
   ###
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(@_authorDatetime.toDate())
+    cql.DateTime.fromDate(@_authorDatetime)
 
   ###
   @returns {Code}
   ###
   method: ->
-    cql.Code(@_method?.code, @_method?.code_system)
+    new cql.Code(@_method?.code, @_method?.code_system)
 
   ###
   @returns {Code}
   ###
   negationRationale: ->
-    cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
+    new cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
 
   ###
   @returns {Code}
   ###
   reason: ->
-    cql.Code(@_reason?.code, @_reason?.code_system)
+    new cql.Code(@_reason?.code, @_reason?.code_system)
+
+  ###
+  @returns {Code|Int}
+  ###
+  result: ->
+    if @_result
+      if @_result.codes?
+        code_system = @_result.codes[Object.keys(@_result.codes)[0]]
+        code = @_result.codes[code_system]
+        new cql.Code(code, code_system)
+      else
+        parseInt(@_result.scalar)

@@ -16,7 +16,11 @@ class CQL_QDM.SubstanceAdministered extends CQL_QDM.QDMDatatype
     @_frequency = @entry.frequency
     @_negationRationale = @entry.negationReason
     @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
+    if @entry.end_time
+      @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
+    else
+      # No end time; high is set to infinity
+      @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime('12/31/9999 12:59 PM')
     @_route = @entry.route
     @_supply = @entry.supply
 
@@ -30,21 +34,21 @@ class CQL_QDM.SubstanceAdministered extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   negationRationale: ->
-    cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
+    new cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
 
   ###
   @returns {Interval<Date>}
   ###
   relevantPeriod: ->
-    low = cql.DateTime.fromDate(@_relevantPeriodLow.toDate())
-    high = cql.DateTime.fromDate(@_relevantPeriodHigh.toDate())
+    low = cql.DateTime.fromDate(@_relevantPeriodLow)
+    high = cql.DateTime.fromDate(@_relevantPeriodHigh)
     new cql.Interval(low, high)
 
   ###
   @returns {Code}
   ###
   route: ->
-    cql.Code(@_route?.code, @_route?.code_system)
+    new cql.Code(@_route?.code, @_route?.code_system)
 
   ###
   @returns {Quantity}
@@ -73,7 +77,7 @@ class CQL_QDM.SubstanceOrder extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(@_authorDatetime.toDate())
+    cql.DateTime.fromDate(@_authorDatetime)
 
   ###
   @returns {Quantity}
@@ -85,19 +89,19 @@ class CQL_QDM.SubstanceOrder extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   method: ->
-    cql.Code(@_method?.code, @_method?.code_system)
+    new cql.Code(@_method?.code, @_method?.code_system)
 
   ###
   @returns {Code}
   ###
   negationRationale: ->
-    cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
+    new cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
 
   ###
   @returns {Code}
   ###
   reason: ->
-    cql.Code(@_reason?.code, @_reason?.code_system)
+    new cql.Code(@_reason?.code, @_reason?.code_system)
 
   ###
   @returns {String}
@@ -109,7 +113,7 @@ class CQL_QDM.SubstanceOrder extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   route: ->
-    cql.Code(@_route?.code, @_route?.code_system)
+    new cql.Code(@_route?.code, @_route?.code_system)
 
   ###
   @returns {Quantity}
@@ -140,7 +144,7 @@ class CQL_QDM.SubstanceRecommended extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(@_authorDatetime.toDate())
+    cql.DateTime.fromDate(@_authorDatetime)
 
   ###
   @returns {Quantity}
@@ -152,19 +156,19 @@ class CQL_QDM.SubstanceRecommended extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   method: ->
-    cql.Code(@_method?.code, @_method?.code_system)
+    new cql.Code(@_method?.code, @_method?.code_system)
 
   ###
   @returns {Code}
   ###
   negationRationale: ->
-    cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
+    new cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
 
   ###
   @returns {Code}
   ###
   reason: ->
-    cql.Code(@_reason?.code, @_reason?.code_system)
+    new cql.Code(@_reason?.code, @_reason?.code_system)
 
   ###
   @returns {String}
@@ -176,7 +180,7 @@ class CQL_QDM.SubstanceRecommended extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   route: ->
-    cql.Code(@_route?.code, @_route?.code_system)
+    new cql.Code(@_route?.code, @_route?.code_system)
 
   ###
   @returns {Quantity}

@@ -18,7 +18,11 @@ class CQL_QDM.Diagnosis extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
     @_prevalencePeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    @_prevalencePeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
+    if @entry.end_time
+      @_prevalencePeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
+    else
+      # No end time; high is set to infinity
+      @_prevalencePeriodHigh = CQL_QDM.Helpers.convertDateTime('12/31/9999 12:59 PM')
     @_anatomicalLocationSite = @entry.anatomical_location
     @_severity = @entry.severity
 
@@ -26,18 +30,18 @@ class CQL_QDM.Diagnosis extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   anatomicalLocationSite: ->
-    cql.Code(@_anatomicalLocationSite?.code, @_anatomicalLocationSite?.code_system)
+    new cql.Code(@_anatomicalLocationSite?.code, @_anatomicalLocationSite?.code_system)
 
   ###
   @returns {Interval<Date>}
   ###
   prevalencePeriod: ->
-    low = cql.DateTime.fromDate(@_prevalencePeriodLow.toDate())
-    high = cql.DateTime.fromDate(@_prevalencePeriodHigh.toDate())
+    low = cql.DateTime.fromDate(@_prevalencePeriodLow)
+    high = cql.DateTime.fromDate(@_prevalencePeriodHigh)
     new cql.Interval(low, high)
 
   ###
   @returns {Code}
   ###
   severity: ->
-    cql.Code(@_severity?.code, @_severity?.code_system)
+    new cql.Code(@_severity?.code, @_severity?.code_system)

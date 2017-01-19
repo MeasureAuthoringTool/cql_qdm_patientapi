@@ -12,7 +12,11 @@ class CQL_QDM.AdverseEvent extends CQL_QDM.QDMDatatype
     super @entry
     @_facilityLocation = @entry.facility?['name']
     @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
+    if @entry.end_time
+      @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
+    else
+      # No end time; high is set to infinity
+      @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime('12/31/9999 12:59 PM')
     @_severity = @entry.severity
     @_type = @entry.type
 
@@ -20,24 +24,24 @@ class CQL_QDM.AdverseEvent extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   facilityLocation: ->
-    cql.Code(@_facilityLocation?.code, @_facilityLocation?.code_system)
+    new cql.Code(@_facilityLocation?.code, @_facilityLocation?.code_system)
 
   ###
   @returns {Interval<Date>}
   ###
   relevantPeriod: ->
-    low = cql.DateTime.fromDate(@_relevantPeriodLow.toDate())
-    high = cql.DateTime.fromDate(@_relevantPeriodHigh.toDate())
+    low = cql.DateTime.fromDate(@_relevantPeriodLow)
+    high = cql.DateTime.fromDate(@_relevantPeriodHigh)
     new cql.Interval(low, high)
 
   ###
   @returns {Code}
   ###
   severity: ->
-    cql.Code(@_severity?.code, @_severity?.code_system)
+    new cql.Code(@_severity?.code, @_severity?.code_system)
 
   ###
   @returns {Code}
   ###
   type: ->
-    cql.Code(@_type?.code, @_type?.code_system)
+    new cql.Code(@_type?.code, @_type?.code_system)

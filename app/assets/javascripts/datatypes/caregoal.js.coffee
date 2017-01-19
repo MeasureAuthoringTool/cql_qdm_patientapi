@@ -14,7 +14,11 @@ class CQL_QDM.CareGoal extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
     @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
+    if @entry.end_time
+      @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
+    else
+      # No end time; high is set to infinity
+      @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime('12/31/9999 12:59 PM')
     @_relatedTo = @entry.relatedTo
     @_targetOutcome = @entry.targetOutcome
 
@@ -22,15 +26,15 @@ class CQL_QDM.CareGoal extends CQL_QDM.QDMDatatype
   @returns {Interval<Date>}
   ###
   relevantPeriod: ->
-    low = cql.DateTime.fromDate(@_relevantPeriodLow.toDate())
-    high = cql.DateTime.fromDate(@_relevantPeriodHigh.toDate())
+    low = cql.DateTime.fromDate(@_relevantPeriodLow)
+    high = cql.DateTime.fromDate(@_relevantPeriodHigh)
     new cql.Interval(low, high)
 
   ###
   @returns {Code}
   ###
   relatedTo: ->
-    cql.Code(@_relatedTo?.code, @_relatedTo?.code_system)
+    new cql.Code(@_relatedTo?.code, @_relatedTo?.code_system)
 
   ###
   @returns {Quantity | Code}
@@ -39,4 +43,4 @@ class CQL_QDM.CareGoal extends CQL_QDM.QDMDatatype
     if @_targetOutcome?['unit']?
       new Quantity({unit: @_targetOutcome['unit'], value: @_targetOutcome['value']})
     else
-      cql.Code(@_targetOutcome?.code, @_targetOutcome?.code_system)
+      new cql.Code(@_targetOutcome?.code, @_targetOutcome?.code_system)

@@ -43,6 +43,7 @@
 
     CodeService.prototype.findValueSet = function(oid, version) {
       var ref1, results;
+      oid = oid.replace("urn:oid:", "")
       if (version != null) {
         return (ref1 = this.valueSets[oid]) != null ? ref1[version] : void 0;
       } else {
@@ -2352,6 +2353,40 @@
       return E.Literal.from(json);
     } else if (functionExists("E." + json.type)) {
       return constructByName("E." + json.type, json);
+    } else if (json.type === "CodeRef") {
+      
+      // Support for CQL single codes
+      return new (function(json) {
+        // Name of the type to filter
+        this.name = json.name;
+        // Execute function that returns a 'valueset'
+        this.exec = function(ctx) {
+          return new (function(name, ctx) {
+            // Filter out all codes that aren't the same of the type we care about
+            filtered = ctx.library.source.library.codes.def.filter(function (el) {
+              return el.name === name;
+            });
+            if (filtered.length > 0) {
+              // Found a match
+              this.codes = [{'code': filtered[0].name}];
+            } else {
+              this.codes = [];
+            }
+            // Checks to see if this code has the given code
+            this.hasCode = function(codes) {
+              if ('code' in codes) { // 'codes' is an Object
+                for (var i = 0; i < this.codes.length; i++) {
+                  if (this.codes[i].code == codes.code) {
+                    return true
+                  }
+                }
+                return false;
+              }
+            }
+          })(this.name, ctx);  
+        };
+      })(json);
+      
     } else {
       return null;
     }
@@ -3170,14 +3205,14 @@
       if (records.length === 0) {
         records = ctx.findRecords(this.datatype);
       }
-      if (this.codes && (this.codeProperty || /Characteristic/.test(this.datatype))) {
+      if (this.codes && ('exec' in this.codes)) {
         valueset = this.codes.exec(ctx);
         records = (function() {
           var i, len, results;
           results = [];
           for (i = 0, len = records.length; i < len; i++) {
             r = records[i];
-            if (valueset.hasCode(r.getCode(this.codeProperty))) {
+            if (valueset.hasCode(r.getCode())) {
               results.push(r);
             }
           }

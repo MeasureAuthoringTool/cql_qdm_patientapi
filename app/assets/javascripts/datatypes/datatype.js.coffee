@@ -25,5 +25,5 @@ class CQL_QDM.QDMDatatype
     allCodes = []
     for system, codes of @_codes
       for code in codes
-        allCodes.push code: code, system: system
+        allCodes.push code: code
     allCodes

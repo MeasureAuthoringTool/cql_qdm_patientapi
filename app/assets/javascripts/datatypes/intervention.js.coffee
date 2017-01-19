@@ -20,19 +20,19 @@ class CQL_QDM.InterventionOrder extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(@_authorDatetime.toDate())
+    cql.DateTime.fromDate(@_authorDatetime)
 
   ###
   @returns {Code}
   ###
   negationRationale: ->
-    cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
+    new cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
 
   ###
   @returns {Code}
   ###
   reason: ->
-    cql.Code(@_reason?.code, @_reason?.code_system)
+    new cql.Code(@_reason?.code, @_reason?.code_system)
 
 
 ###
@@ -46,41 +46,52 @@ class CQL_QDM.InterventionPerformed extends CQL_QDM.QDMDatatype
     @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
     @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
-    @_result = @entry.result
+    if @entry.end_time
+      @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
+    else
+      # No end time; high is set to infinity
+      @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime('12/31/9999 12:59 PM')
+    if @entry.values? && @entry.values.length > 0
+      @_result = @entry.values?[0]
     @_status = @entry.status
 
   ###
   @returns {Code}
   ###
   negationRationale: ->
-    cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
+    new cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
 
   ###
   @returns {Code}
   ###
   reason: ->
-    cql.Code(@_reason?.code, @_reason?.code_system)
+    new cql.Code(@_reason?.code, @_reason?.code_system)
 
   ###
   @returns {Interval<Date>}
   ###
   relevantPeriod: ->
-    low = cql.DateTime.fromDate(@_relevantPeriodLow.toDate())
-    high = cql.DateTime.fromDate(@_relevantPeriodHigh.toDate())
+    low = cql.DateTime.fromDate(@_relevantPeriodLow)
+    high = cql.DateTime.fromDate(@_relevantPeriodHigh)
     new cql.Interval(low, high)
 
   ###
-  @returns {Code}
+  @returns {Code|Int}
   ###
   result: ->
-    cql.Code(@_result?.code, @_result?.code_system)
+    if @_result
+      if @_result.codes?
+        code_system = @_result.codes[Object.keys(@_result.codes)[0]]
+        code = @_result.codes[code_system]
+        new cql.Code(code, code_system)
+      else
+        parseInt(@_result.scalar)
 
   ###
   @returns {Code}
   ###
   status: ->
-    cql.Code(@_status?.code, @_status?.code_system)
+    new cql.Code(@_status?.code, @_status?.code_system)
 
 
 ###
@@ -99,16 +110,16 @@ class CQL_QDM.InterventionRecommended extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(@_authorDatetime.toDate())
+    cql.DateTime.fromDate(@_authorDatetime)
 
   ###
   @returns {Code}
   ###
   negationRationale: ->
-    cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
+    new cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
 
   ###
   @returns {Code}
   ###
   reason: ->
-    cql.Code(@_reason?.code, @_reason?.code_system)
+    new cql.Code(@_reason?.code, @_reason?.code_system)

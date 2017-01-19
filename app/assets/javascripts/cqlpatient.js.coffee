@@ -26,7 +26,11 @@ class CQL_QDM.CQLPatient
     if profile == 'Patient' # Requested generic patient info
       @getPatientInfo()
     else if /PatientCharacteristicSex/.test profile # Requested sex
-      return [new CharacteristicSex(@_patient)]
+      return [new CQL_QDM.CharacteristicSex(@_patient)]
+    else if /PatientCharacteristicBirthdate/.test profile # Requested birthdate
+      return [new CQL_QDM.CharacteristicBirthdate(@_patient)]
+    else if /PatientCharacteristicExpired/.test profile # Requested deathdate
+      return [new CQL_QDM.CharacteristicExpired(@_patient)]
     else if profile?
       # Requested something else. Need to properly handle Positive / Negative
       # (negated) data criteria for QDM 5.0+.
@@ -60,6 +64,7 @@ class CQL_QDM.CQLPatient
   ###
   buildDatatypes: ->
     types = [
+      'assessments',
       'allergies',
       'care_goals',
       'conditions',
@@ -79,10 +84,14 @@ class CQL_QDM.CQLPatient
       data_criteria = @_patient.get(type)
       if data_criteria
         for dc in data_criteria
-          if dc.oid == null
-            classname = dc.description.substr(0, dc.description.indexOf(':'))
-          else
+          if dc.oid? && CQL_QDM.OIDMap.oidToClassName(dc)?
+            # Data criteria has an oid, and the oid is actually something
             classname = CQL_QDM.OIDMap.oidToClassName(dc)
+          else
+            # Either the oid is missing or it means nothing, try to
+            # construct a potential classname from the description instead.
+            classname = dc.description.substr(0, dc.description.indexOf(':'))
+            classname = classname.replace(", ", "")
           unless datatypes[classname]?
             datatypes[classname] = []
           if classname of CQL_QDM
@@ -96,7 +105,7 @@ class CQL_QDM.CQLPatient
   ###
   getPatientInfo: ->
     info = {}
-    info['birthDatetime'] = cql.DateTime.fromDate(moment(@_patient.get('birthdate'), 'X').toDate())
+    info['birthDatetime'] = cql.DateTime.fromDate(CQL_QDM.Helpers.convertDateTime(@_patient.get('birthdate')))
     info['gender'] = @_patient.get('gender')
     [info]
 

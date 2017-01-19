@@ -24,32 +24,31 @@ class CQL_QDM.PhysicalExamOrder extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   anatomicalLocationSite: ->
-    cql.Code(@_anatomicalLocationSite?.code,
-      @_anatomicalLocationSite?.code_system)
+    new cql.Code(@_anatomicalLocationSite?.code, @_anatomicalLocationSite?.code_system)
 
   ###
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(@_authorDatetime.toDate())
+    cql.DateTime.fromDate(@_authorDatetime)
 
   ###
   @returns {Code}
   ###
   method: ->
-    cql.Code(@_method?.code, @_method?.code_system)
+    new cql.Code(@_method?.code, @_method?.code_system)
 
   ###
   @returns {Code}
   ###
   negationRationale: ->
-    cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
+    new cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
 
   ###
   @returns {Code}
   ###
   reason: ->
-    cql.Code(@_reason?.code, @_reason?.code_system)
+    new cql.Code(@_reason?.code, @_reason?.code_system)
 
 
 ###
@@ -65,41 +64,57 @@ class CQL_QDM.PhysicalExamPerformed extends CQL_QDM.QDMDatatype
     @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
     @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
-    @_result = @entry.result
+    if @entry.end_time
+      @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
+    else
+      # No end time; high is set to infinity
+      @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime('12/31/9999 12:59 PM')
+    if @entry.values? && @entry.values.length > 0
+      @_result = @entry.values?[0]
 
   ###
   @returns {Code}
   ###
   anatomicalLocationSite: ->
-    cql.Code(@_anatomicalLocationSite?.code,
-      @_anatomicalLocationSite?.code_system)
+    new cql.Code(@_anatomicalLocationSite?.code, @_anatomicalLocationSite?.code_system)
 
   ###
   @returns {Code}
   ###
   method: ->
-    cql.Code(@_method?.code, @_method?.code_system)
+    new cql.Code(@_method?.code, @_method?.code_system)
 
   ###
   @returns {Code}
   ###
   negationRationale: ->
-    cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
+    new cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
 
   ###
   @returns {Code}
   ###
   reason: ->
-    cql.Code(@_reason?.code, @_reason?.code_system)
+    new cql.Code(@_reason?.code, @_reason?.code_system)
 
   ###
   @returns {Interval<Date>}
   ###
   relevantPeriod: ->
-    low = cql.DateTime.fromDate(@_relevantPeriodLow.toDate())
-    high = cql.DateTime.fromDate(@_relevantPeriodHigh.toDate())
+    low = cql.DateTime.fromDate(@_relevantPeriodLow)
+    high = cql.DateTime.fromDate(@_relevantPeriodHigh)
     new cql.Interval(low, high)
+
+  ###
+  @returns {Code|Int}
+  ###
+  result: ->
+    if @_result
+      if @_result.codes?
+        code_system = @_result.codes[Object.keys(@_result.codes)[0]]
+        code = @_result.codes[code_system]
+        new cql.Code(code, code_system)
+      else
+        parseInt(@_result.scalar)
 
 
 ###
@@ -120,29 +135,28 @@ class CQL_QDM.PhysicalExamRecommended extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   anatomicalLocationSite: ->
-    cql.Code(@_anatomicalLocationSite?.code,
-      @_anatomicalLocationSite?.code_system)
+    new cql.Code(@_anatomicalLocationSite?.code, @_anatomicalLocationSite?.code_system)
 
   ###
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(@_authorDatetime.toDate())
+    cql.DateTime.fromDate(@_authorDatetime)
 
   ###
   @returns {Code}
   ###
   method: ->
-    cql.Code(@_method?.code, @_method?.code_system)
+    new cql.Code(@_method?.code, @_method?.code_system)
 
   ###
   @returns {Code}
   ###
   negationRationale: ->
-    cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
+    new cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
 
   ###
   @returns {Code}
   ###
   reason: ->
-    cql.Code(@_reason?.code, @_reason?.code_system)
+    new cql.Code(@_reason?.code, @_reason?.code_system)

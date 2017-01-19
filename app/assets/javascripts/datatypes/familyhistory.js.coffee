@@ -21,10 +21,10 @@ class CQL_QDM.FamilyHistory extends CQL_QDM.QDMDatatype
   @returns {Date}
   ###
   authorDatetime: ->
-    cql.DateTime.fromDate(@_authorDatetime.toDate())
+    cql.DateTime.fromDate(@_authorDatetime)
 
   ###
   @returns {Code}
   ###
   relationshipToPatient: ->
-    cql.Code(@_relationship?.code, @_relationship?.code_system)
+    new cql.Code(@_relationship?.code, @_relationship?.code_system)
