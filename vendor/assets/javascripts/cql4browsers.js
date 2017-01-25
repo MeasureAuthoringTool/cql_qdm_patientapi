@@ -48,20 +48,22 @@
       var ref1, results;
       oid = oid.replace("urn:oid:", "")
       if (version != null) {
-        return (ref1 = this.valueSets[oid]) != null ? ref1[version] : void 0;
-      } else {
-        results = this.findValueSetsByOid(oid);
-        if (results.length === 0) {
-          return null;
-        } else {
-          return results.reduce(function(a, b) {
-            if (a.version > b.version) {
-              return a;
-            } else {
-              return b;
-            }
-          });
+        result = (ref1 = this.valueSets[oid]) != null ? ref1[version] : void 0;
+        if (result) {
+          return result;
         }
+      }
+      results = this.findValueSetsByOid(oid);
+      if (results.length === 0) {
+        return null;
+      } else {
+        return results.reduce(function(a, b) {
+          if (a.version > b.version) {
+            return a;
+          } else {
+            return b;
+          }
+        });
       }
     };
 
@@ -2561,7 +2563,13 @@
     CalculateAgeAt.prototype.exec = function(ctx) {
       var args, date1, date2;
       args = this.execArgs(ctx);
-      date1 = args[0].toJSDate();
+      // AgeAt should not care about the anything less than a day
+      date1 = args[0];
+      date1.hour = 0;
+      date1.minute = 0;
+      date1.second = 0;
+      date1.millisecond = 0;
+      date1 = date1.toJSDate();
       date2 = args[1].toJSDate();
       return calculateAge(date1, date2, this.precision);
     };
