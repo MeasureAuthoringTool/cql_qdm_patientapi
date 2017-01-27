@@ -51,7 +51,8 @@ class CQL_QDM.EncounterActive extends CQL_QDM.QDMDatatype
   @returns {Quantity}
   ###
   lengthOfStay: ->
-    new Quantity({unit: 'milliseconds', value: (@_relevantPeriodHigh - @_relevantPeriodLow)})
+    # Converts Milliseconds to Days.
+    new Quantity({unit: 'days', value: (@entry.end_time - @entry.start_time) / 86400})
 
   ###
   @returns {Code}
@@ -150,7 +151,8 @@ class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
   @returns {Quantity}
   ###
   lengthOfStay: ->
-    new Quantity({unit: 'milliseconds', value: (@_relevantPeriodHigh - @_relevantPeriodLow)})
+    # Converts Milliseconds to Days.
+    new Quantity({unit: 'days', value: (@entry.end_time - @entry.start_time) / 86400})
 
   ###
   @returns {Interval<Date>}

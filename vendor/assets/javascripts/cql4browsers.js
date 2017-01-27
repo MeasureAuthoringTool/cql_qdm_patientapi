@@ -1522,6 +1522,8 @@
       lt = function(a, b) {
         if (a.constructor.name === 'DateTime') {
           return a.before(b);
+        } else if (a.constructor.name === 'Quantity') {
+          return a.value < b.value;
         } else {
           return a < b;
         }
@@ -2569,8 +2571,8 @@
       date1.minute = 0;
       date1.second = 0;
       date1.millisecond = 0;
-      date1 = date1.toJSDate();
-      date2 = args[1].toJSDate();
+      date1 = date1.toJSDate(true);
+      date2 = args[1].toJSDate(true);
       return calculateAge(date1, date2, this.precision);
     };
 
