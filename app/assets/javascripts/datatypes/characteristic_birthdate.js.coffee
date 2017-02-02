@@ -19,12 +19,6 @@ class CQL_QDM.CharacteristicBirthdate extends CQL_QDM.QDMDatatype
       'Birthdate'
 
   ###
-  @returns {Date|Code|Quantity|String}
-  ###
-  get: (attribute) ->
-    @[attribute]?()
-
-  ###
   @returns {DateTime}
   ###
   birthDatetime: ->

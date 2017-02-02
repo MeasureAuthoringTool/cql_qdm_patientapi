@@ -23,12 +23,6 @@ class CQL_QDM.CharacteristicExpired extends CQL_QDM.QDMDatatype
         ''
 
   ###
-  @returns {Date|Code|Quantity|String}
-  ###
-  get: (attribute) ->
-    @[attribute]?()
-
-  ###
   @returns {DateTime}
   ###
   expiredDatetime: ->

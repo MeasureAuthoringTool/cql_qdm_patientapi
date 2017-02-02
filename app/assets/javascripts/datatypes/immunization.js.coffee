@@ -55,6 +55,7 @@ class CQL_QDM.ImmunizationAdministered extends CQL_QDM.QDMDatatype
   supply: ->
     new Quantity({unit: @_supply['unit'], value: @_supply['value']})
 
+
 ###
 Data elements that meet criteria using this datatype should document a request
 for the immunization indicated by the QDM category and its corresponding value

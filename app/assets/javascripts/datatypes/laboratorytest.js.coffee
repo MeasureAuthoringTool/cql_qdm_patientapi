@@ -59,7 +59,7 @@ class CQL_QDM.LaboratoryTestPerformed extends CQL_QDM.QDMDatatype
       @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
     else
       # No end time; high is set to infinity
-      @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime('12/31/2999 12:59 PM')
+      @_relevantPeriodHigh = CQL_QDM.Helpers.infinityDateTime()
     if @entry.values? && @entry.values.length > 0
       @_result = @entry.values?[0]
     @_resultDatetime = CQL_QDM.Helpers.convertDateTime(@entry.result_date_time)
@@ -91,9 +91,19 @@ class CQL_QDM.LaboratoryTestPerformed extends CQL_QDM.QDMDatatype
     high = null
     low = null
     if @_referenceRangeHigh?['unit']?
-      high = new Quantity({unit: @_referenceRangeHigh['unit'], value: @_referenceRangeHigh['value']})
+      high_obj =
+        unit:
+          @_referenceRangeHigh['unit']
+        value:
+          @_referenceRangeHigh['value']
+      high = new Quantity(high_obj)
     if @_referenceRangeLow?['unit']?
-      low = new Quantity({unit: @_referenceRangeLow['unit'], value: @_referenceRangeLow['value']})
+      low_obj =
+        unit:
+          @_referenceRangeLow['unit']
+        value:
+          @_referenceRangeLow['value']
+      low = new Quantity(low_obj)
     new cql.Interval(low, high)
 
   ###

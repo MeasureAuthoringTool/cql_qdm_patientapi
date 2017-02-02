@@ -20,7 +20,7 @@ class CQL_QDM.SubstanceAdministered extends CQL_QDM.QDMDatatype
       @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
     else
       # No end time; high is set to infinity
-      @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime('12/31/2999 12:59 PM')
+      @_relevantPeriodHigh = CQL_QDM.Helpers.infinityDateTime()
     @_route = @entry.route
     @_supply = @entry.supply
 
@@ -55,6 +55,7 @@ class CQL_QDM.SubstanceAdministered extends CQL_QDM.QDMDatatype
   ###
   supply: ->
     new Quantity({unit: @_supply['unit'], value: @_supply['value']})
+
 
 ###
 Data elements that meet criteria using this datatype should document a request

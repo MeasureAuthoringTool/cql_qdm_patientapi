@@ -1,3 +1,6 @@
+###
+Represents a CQL 'expression' for use in the CQL execution engine.
+###
 class Expression
   constructor: (json) ->
     if json.operand?
@@ -5,7 +8,7 @@ class Expression
       if typeIsArray(json.operand) then @args = op else @arg = op
 
   exec: (ctx) ->
-    this
+    @
 
   execArgs: (ctx) ->
     switch

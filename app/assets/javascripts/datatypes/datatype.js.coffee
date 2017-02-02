@@ -13,6 +13,8 @@ class CQL_QDM.QDMDatatype
     @_codes = @entry.codes
 
   ###
+  Returns any instances of this attribute currently within this namespace.
+
   @returns {Date|Code|Quantity|String}
   ###
   get: (attribute) ->
