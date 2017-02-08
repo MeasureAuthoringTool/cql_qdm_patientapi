@@ -108,6 +108,7 @@ class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
     @_admissionSource = @entry.admission_source?['name']
+    @_authorDatetime = if @entry.negationReason then CQL_QDM.Helpers.convertDateTime(@entry.start_time) else null
     @_diagnosis = @entry.diagnosis
     @_dischargeDisposition = @entry.dischargeDisposition
     @_locationPeriodLow = @entry.facility?['start_time']
@@ -128,6 +129,13 @@ class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
   ###
   admissionSource: ->
     new cql.Code(@_admissionSource?.code, @_admissionSource?.code_system)
+
+  ###
+  Author date time is only present when this data type has been negated.
+  @returns {Date}
+  ###
+  authorDatetime: ->
+    @_authorDatetime
 
   ###
   @returns {Code}

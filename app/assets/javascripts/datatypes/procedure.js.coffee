@@ -78,6 +78,7 @@ class CQL_QDM.ProcedurePerformed extends CQL_QDM.QDMDatatype
     super @entry
     @_anatomicalApproachSite = @entry.anatomical_approach
     @_anatomicalLocationSite = @entry.anatomicalLocation
+    @_authorDatetime = if @entry.negationReason then CQL_QDM.Helpers.convertDateTime(@entry.start_time) else null
     @_incisionDatetime = CQL_QDM.Helpers.convertDateTime(@entry.incisionTime)
     @_method = @entry.method
     @_negationRationale = @entry.negationReason
@@ -106,6 +107,13 @@ class CQL_QDM.ProcedurePerformed extends CQL_QDM.QDMDatatype
   ###
   anatomicalLocationSite: ->
     new cql.Code(@_anatomicalLocationSite?.code, @_anatomicalLocationSite?.code_system)
+
+  ###
+  Author date time is only present when this data type has been negated.
+  @returns {Date}
+  ###
+  authorDatetime: ->
+    @_authorDatetime
 
   ###
   @returns {Date}

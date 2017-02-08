@@ -69,6 +69,7 @@ corresponding value set.
 class CQL_QDM.DiagnosticStudyPerformed extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
+    @_authorDatetime = if @entry.negationReason then CQL_QDM.Helpers.convertDateTime(@entry.start_time) else null
     @_facilityLocation = @entry.facility_location
     @_method = @entry.method
     @_negationRationale = @entry.negationReason
@@ -85,6 +86,13 @@ class CQL_QDM.DiagnosticStudyPerformed extends CQL_QDM.QDMDatatype
       # No end time; high is set to infinity
       @_relevantPeriodHigh = CQL_QDM.Helpers.infinityDateTime()
     @_status = @entry.status
+
+  ###
+  Author date time is only present when this data type has been negated.
+  @returns {Date}
+  ###
+  authorDatetime: ->
+    @_authorDatetime
 
   ###
   @returns {Code}

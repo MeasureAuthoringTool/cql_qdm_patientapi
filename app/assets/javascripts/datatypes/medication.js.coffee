@@ -60,6 +60,7 @@ actually administered to the patient.
 class CQL_QDM.MedicationAdministered extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
+    @_authorDatetime = if @entry.negationReason then CQL_QDM.Helpers.convertDateTime(@entry.start_time) else null
     @_dosage = @entry.dose
     @_frequency = @entry.frequency
     @_negationRationale = @entry.negationReason
@@ -72,6 +73,13 @@ class CQL_QDM.MedicationAdministered extends CQL_QDM.QDMDatatype
       @_relevantPeriodHigh = CQL_QDM.Helpers.infinityDateTime()
     @_route = @entry.route
     @_supply = @entry.supply
+
+  ###
+  Author date time is only present when this data type has been negated.
+  @returns {Date}
+  ###
+  authorDatetime: ->
+    @_authorDatetime
 
   ###
   @returns {Quantity}

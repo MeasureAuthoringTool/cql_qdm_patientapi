@@ -49,6 +49,7 @@ was performed.
 class CQL_QDM.LaboratoryTestPerformed extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
+    @_authorDatetime = if @entry.negationReason then CQL_QDM.Helpers.convertDateTime(@entry.start_time) else null
     @_method = @entry.method
     @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
@@ -64,6 +65,13 @@ class CQL_QDM.LaboratoryTestPerformed extends CQL_QDM.QDMDatatype
       @_result = @entry.values?[0]
     @_resultDatetime = CQL_QDM.Helpers.convertDateTime(@entry.result_date_time)
     @_status = @entry.status
+
+  ###
+  Author date time is only present when this data type has been negated.
+  @returns {Date}
+  ###
+  authorDatetime: ->
+    @_authorDatetime
 
   ###
   @returns {Code}

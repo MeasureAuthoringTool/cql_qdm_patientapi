@@ -60,6 +60,7 @@ class CQL_QDM.PhysicalExamPerformed extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
     @_anatomicalLocationSite = @entry.anatomicalLocation
+    @_authorDatetime = if @entry.negationReason then CQL_QDM.Helpers.convertDateTime(@entry.start_time) else null
     @_method = @entry.method
     @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
@@ -77,6 +78,13 @@ class CQL_QDM.PhysicalExamPerformed extends CQL_QDM.QDMDatatype
   ###
   anatomicalLocationSite: ->
     new cql.Code(@_anatomicalLocationSite?.code, @_anatomicalLocationSite?.code_system)
+
+  ###
+  Author date time is only present when this data type has been negated.
+  @returns {Date}
+  ###
+  authorDatetime: ->
+    @_authorDatetime
 
   ###
   @returns {Code}
