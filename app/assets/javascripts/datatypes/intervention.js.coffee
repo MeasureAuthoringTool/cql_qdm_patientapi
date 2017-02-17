@@ -43,6 +43,7 @@ corresponding value set.
 class CQL_QDM.InterventionPerformed extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
+    @_authorDatetime = if @entry.negationReason then CQL_QDM.Helpers.convertDateTime(@entry.start_time) else null
     @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
     @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
@@ -54,6 +55,13 @@ class CQL_QDM.InterventionPerformed extends CQL_QDM.QDMDatatype
     if @entry.values? && @entry.values.length > 0
       @_result = @entry.values?[0]
     @_status = @entry.status
+
+  ###
+  Author date time is only present when this data type has been negated.
+  @returns {Date}
+  ###
+  authorDatetime: ->
+    @_authorDatetime
 
   ###
   @returns {Code}
