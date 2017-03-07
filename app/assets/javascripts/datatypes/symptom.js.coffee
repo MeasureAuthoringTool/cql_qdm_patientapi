@@ -14,6 +14,9 @@ used with timing relationships, the criterion is looking for whether the
 symptom was active for the time frame indicated by the timing relationships.
 ###
 class CQL_QDM.Symptom extends CQL_QDM.QDMDatatype
+  ###
+  @param {Object} entry - the HDS data criteria object to convert
+  ###
   constructor: (@entry) ->
     super @entry
     @_abatementDatetime = CQL_QDM.Helpers.convertDateTime(@entry.abatementDatetime)

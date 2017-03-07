@@ -10,6 +10,9 @@ Communication QDM category and its corresponding value set must be
 communicated from a patient to a provider.
 ###
 class CQL_QDM.CommunicationFromPatientToProvider extends CQL_QDM.QDMDatatype
+  ###
+  @param {Object} entry - the HDS data criteria object to convert
+  ###
   constructor: (@entry) ->
     super @entry
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
@@ -34,6 +37,9 @@ Communication QDM category and its corresponding value set must be
 communicated from a provider to a patient.
 ###
 class CQL_QDM.CommunicationFromProviderToPatient extends CQL_QDM.QDMDatatype
+  ###
+  @param {Object} entry - the HDS data criteria object to convert
+  ###
   constructor: (@entry) ->
     super @entry
     @_negationRationale = @entry.negationReason
@@ -58,6 +64,9 @@ Communication QDM category and its corresponding value set must be
 communicated from one provider to another.
 ###
 class CQL_QDM.CommunicationFromProviderToProvider extends CQL_QDM.QDMDatatype
+  ###
+  @param {Object} entry - the HDS data criteria object to convert
+  ###
   constructor: (@entry) ->
     super @entry
     @_negationRationale = @entry.negationReason

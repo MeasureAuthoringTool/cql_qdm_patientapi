@@ -8,6 +8,9 @@ Data elements that meet criteria using this datatype should document the Adverse
 Event and its corresponding value set.
 ###
 class CQL_QDM.AdverseEvent extends CQL_QDM.QDMDatatype
+  ###
+  @param {Object} entry - the HDS data criteria object to convert
+  ###
   constructor: (@entry) ->
     super @entry
     @_facilityLocation = @entry.facility?['name']

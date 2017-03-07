@@ -11,6 +11,9 @@ Timing: The Prevalence Period references the time from the onset date to the
 abatement date.
 ###
 class CQL_QDM.AllergyIntolerance extends CQL_QDM.QDMDatatype
+  ###
+  @param {Object} entry - the HDS data criteria object to convert
+  ###
   constructor: (@entry) ->
     super @entry
     @_prevalencePeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)

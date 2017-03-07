@@ -11,6 +11,8 @@ class CQL_QDM.Helpers
 
   ###
   Used to convert a Bonnie date + time into a compatible cql DateTime.
+  
+  @param {String} input - the date time to convert
   @returns cql.DateTime
   ###
   @convertDateTime: (input) ->

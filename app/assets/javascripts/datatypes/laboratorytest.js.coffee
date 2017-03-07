@@ -9,6 +9,9 @@ for the laboratory test indicated by the QDM category and its corresponding
 value set.
 ###
 class CQL_QDM.LaboratoryTestOrder extends CQL_QDM.QDMDatatype
+  ###
+  @param {Object} entry - the HDS data criteria object to convert
+  ###
   constructor: (@entry) ->
     super @entry
     @_method = @entry.method
@@ -47,6 +50,9 @@ laboratory test indicated by the QDM category and its corresponding value set
 was performed.
 ###
 class CQL_QDM.LaboratoryTestPerformed extends CQL_QDM.QDMDatatype
+  ###
+  @param {Object} entry - the HDS data criteria object to convert
+  ###
   constructor: (@entry) ->
     super @entry
     @_authorDatetime = if @entry.negationReason then CQL_QDM.Helpers.convertDateTime(@entry.start_time) else null
@@ -153,6 +159,9 @@ recommendation for the laboratory test indicated by the QDM category and its
 corresponding value set.
 ###
 class CQL_QDM.LaboratoryTestRecommended extends CQL_QDM.QDMDatatype
+  ###
+  @param {Object} entry - the HDS data criteria object to convert
+  ###
   constructor: (@entry) ->
     super @entry
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)

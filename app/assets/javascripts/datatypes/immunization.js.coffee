@@ -10,6 +10,9 @@ vaccine indicated by the QDM category and its corresponding value set was
 actually administered to the patient.
 ###
 class CQL_QDM.ImmunizationAdministered extends CQL_QDM.QDMDatatype
+  ###
+  @param {Object} entry - the HDS data criteria object to convert
+  ###
   constructor: (@entry) ->
     super @entry
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
@@ -62,6 +65,9 @@ for the immunization indicated by the QDM category and its corresponding value
 set.
 ###
 class CQL_QDM.ImmunizationOrder extends CQL_QDM.QDMDatatype
+  ###
+  @param {Object} entry - the HDS data criteria object to convert
+  ###
   constructor: (@entry) ->
     super @entry
     @_activeDatetime = CQL_QDM.Helpers.convertDateTime(@entry.active_datetime)

@@ -35,8 +35,8 @@ Typical flow of usage:
     can understand.
 ###
 class CQL_QDM.CQLPatient
-  constructor: (@patient, @measure) ->
-    @_patient = @patient
+  constructor: (patient) ->
+    @_patient = patient
     @_datatypes = @buildDatatypes()
 
   ###
@@ -52,6 +52,7 @@ class CQL_QDM.CQLPatient
   that currently exist on this patient (data criteria you drag on a patient
   in Bonnie's patient builder).
 
+  @param {String} profile - the data criteria requested by the execution engine
   @returns {Object}
   ###
   findRecords: (profile) ->
@@ -60,11 +61,9 @@ class CQL_QDM.CQLPatient
       @getPatientMetadata()
     else if /PatientCharacteristic/.test profile
       # Requested a patient characteristic
-      @patientCharacteristicHandler(profile)
+      @getPatientCharacteristic(profile)
     else if profile?
       # Requested something else (probably a QDM data type).
-      # NOTE: Need to properly handle Positive / Negative (negated) data
-      # criteria for QDM 5.0+.
 
       # Strip model details from request
       profile = profile.replace(/ *\{[^)]*\} */g, '')
@@ -72,10 +71,12 @@ class CQL_QDM.CQLPatient
       # Check and handle negation status
       if /Positive/.test profile
         profile = profile.replace /Positive/, ''
-        return @filterDataCriteria(profile, false)
+        # Since the data criteria is 'Positive', it is not negated.
+        return @getNegatableDataCriteria(profile, false)
       else if /Negative/.test profile
         profile = profile.replace /Negative/, ''
-        return @filterDataCriteria(profile, true)
+        # Since the data criteria is 'Negative', it is negated.
+        return @getNegatableDataCriteria(profile, true)
       else
         # No negation status, proceed normally
         if @_datatypes[profile]? then return @_datatypes[profile] else []
@@ -85,9 +86,10 @@ class CQL_QDM.CQLPatient
   ###
   Handles requests for patient characteristic information (e.g. birthdate).
 
+  @param {String} profile - the data criteria requested by the execution engine
   @returns {Array of Objects}
   ###
-  patientCharacteristicHandler: (profile) ->
+  getPatientCharacteristic: (profile) ->
     if /PatientCharacteristicSex/.test profile
       # Requested sex
       [new CQL_QDM.CharacteristicSex(@_patient)]
@@ -107,13 +109,15 @@ class CQL_QDM.CQLPatient
   something that was negated, and we only have an instance of that thing
   without a negation, we would not include it.
 
+  @param {String} profile - the data criteria requested by the execution engine
+  @param {Boolean} isNegated - the negated type of data criteria to look for
   @returns {Array}
   ###
-  filterDataCriteria: (profile, isNegated) ->
+  getNegatableDataCriteria: (profile, isNegated) ->
     results = []
     if @_datatypes[profile]?
       for dataCriteria in @_datatypes[profile]
-        if dataCriteria._negationRationale? == isNegated
+        if dataCriteria.negationRationale?() == isNegated
           results.push dataCriteria
     results
 
@@ -140,9 +144,22 @@ class CQL_QDM.CQLPatient
       'procedures',
       'results',
       'social_history',
-      'vital_signs'
+      'vital_signs',
+      'devices',
+      'diagnostic_studies',
+      'functional_statuses',
+      'interventions',
+      'laboratory_tests',
+      'physical_exams',
+      'risk_category_assessments',
+      'care_experiences',
+      'preferences',
+      'provider_characteristics',
+      'substances',
+      'system_characteristics',
+      'transfers'
     ]
-    datatypes = {}
+    data_types = {}
     for type in types
       data_criteria = @_patient.get(type)
       if data_criteria
@@ -150,20 +167,25 @@ class CQL_QDM.CQLPatient
         # data criteria; loop over them and create CQL_QDM.QDMDatatype of them.
         for dc in data_criteria
           # Construct a classname from the data criteria
+          # e.g. "Encounter, Performed: Face-to-Face Interaction" becomes
+          # EncounterPerformed
           classname = dc.description.substr(0, dc.description.indexOf(':'))
           classname = classname.replace(/,/g, '')
           classname = classname.replace(/ /g, '')
-          unless datatypes[classname]?
-            datatypes[classname] = []
+          unless data_types[classname]?
+            data_types[classname] = []
           if classname of CQL_QDM
             cql_dc = new CQL_QDM[classname](dc)
             # Keep track of the 'bonnie' type for use in the 'Learn CQL' tool
             cql_dc['bonnie_type'] = type
-            datatypes[classname].push cql_dc
-    datatypes
+            data_types[classname].push cql_dc
+    data_types
 
   ###
-  Returns some simple metadata information about this patient.
+  Returns metadata information about this patient.
+  This metadata is composed of:
+    - birthDatetime (the birth date and time of the patient)
+    - gender (the sex of the patient)
 
   @returns {Object}
   ###

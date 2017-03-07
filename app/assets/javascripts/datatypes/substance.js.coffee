@@ -10,6 +10,9 @@ substance indicated by the QDM category and its corresponding value set was
 actually given to the patient.
 ###
 class CQL_QDM.SubstanceAdministered extends CQL_QDM.QDMDatatype
+  ###
+  @param {Object} entry - the HDS data criteria object to convert
+  ###
   constructor: (@entry) ->
     super @entry
     @_authorDatetime = if @entry.negationReason then CQL_QDM.Helpers.convertDateTime(@entry.start_time) else null
@@ -70,6 +73,9 @@ Data elements that meet criteria using this datatype should document a request
 for the substance indicated by the QDM category and its corresponding value set.
 ###
 class CQL_QDM.SubstanceOrder extends CQL_QDM.QDMDatatype
+  ###
+  @param {Object} entry - the HDS data criteria object to convert
+  ###
   constructor: (@entry) ->
     super @entry
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
@@ -137,6 +143,9 @@ recommendation for the substance indicated by the QDM category and its
 corresponding value set.
 ###
 class CQL_QDM.SubstanceRecommended extends CQL_QDM.QDMDatatype
+  ###
+  @param {Object} entry - the HDS data criteria object to convert
+  ###
   constructor: (@entry) ->
     super @entry
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)

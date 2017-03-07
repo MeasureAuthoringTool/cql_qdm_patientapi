@@ -12,6 +12,9 @@ the criterion is looking for an encounter that was in progress for the time
 frame indicated by the timing relationships.
 ###
 class CQL_QDM.EncounterActive extends CQL_QDM.QDMDatatype
+  ###
+  @param {Object} entry - the HDS data criteria object to convert
+  ###
   constructor: (@entry) ->
     super @entry
     @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
@@ -67,6 +70,9 @@ order for the encounter indicated by the QDM category and its corresponding
 value set has been recommended.
 ###
 class CQL_QDM.EncounterOrder extends CQL_QDM.QDMDatatype
+  ###
+  @param {Object} entry - the HDS data criteria object to convert
+  ###
   constructor: (@entry) ->
     super @entry
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
@@ -105,6 +111,9 @@ encounter indicated by the QDM category and its corresponding value set has
 been completed.
 ###
 class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
+  ###
+  @param {Object} entry - the HDS data criteria object to convert
+  ###
   constructor: (@entry) ->
     super @entry
     @_admissionSource = @entry.admission_source?['name']
@@ -203,6 +212,9 @@ encounter indicated by the QDM category and its corresponding value set has been
 recommended.
 ###
 class CQL_QDM.EncounterRecommended extends CQL_QDM.QDMDatatype
+  ###
+  @param {Object} entry - the HDS data criteria object to convert
+  ###
   constructor: (@entry) ->
     super @entry
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)

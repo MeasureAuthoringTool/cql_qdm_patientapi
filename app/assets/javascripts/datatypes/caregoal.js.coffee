@@ -11,6 +11,9 @@ documentation of a care goal as defined by the Care Goal QDM category and
 its corresponding value set.
 ###
 class CQL_QDM.CareGoal extends CQL_QDM.QDMDatatype
+  ###
+  @param {Object} entry - the HDS data criteria object to convert
+  ###
   constructor: (@entry) ->
     super @entry
     @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)

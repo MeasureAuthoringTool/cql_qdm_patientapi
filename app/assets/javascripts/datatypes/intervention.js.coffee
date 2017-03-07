@@ -10,6 +10,9 @@ to perform the intervention indicated by the QDM category and its corresponding
 value set.
 ###
 class CQL_QDM.InterventionOrder extends CQL_QDM.QDMDatatype
+  ###
+  @param {Object} entry - the HDS data criteria object to convert
+  ###
   constructor: (@entry) ->
     super @entry
     @_negationRationale = @entry.negationReason
@@ -41,6 +44,9 @@ completion of the intervention indicated by the QDM category and its
 corresponding value set.
 ###
 class CQL_QDM.InterventionPerformed extends CQL_QDM.QDMDatatype
+  ###
+  @param {Object} entry - the HDS data criteria object to convert
+  ###
   constructor: (@entry) ->
     super @entry
     @_authorDatetime = if @entry.negationReason then CQL_QDM.Helpers.convertDateTime(@entry.start_time) else null
@@ -108,6 +114,9 @@ recommendation for the intervention indicated by the QDM category and its
 corresponding value set.
 ###
 class CQL_QDM.InterventionRecommended extends CQL_QDM.QDMDatatype
+  ###
+  @param {Object} entry - the HDS data criteria object to convert
+  ###
   constructor: (@entry) ->
     super @entry
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)

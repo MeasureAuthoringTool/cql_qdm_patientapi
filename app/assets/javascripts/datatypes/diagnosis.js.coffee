@@ -15,6 +15,9 @@ is looking for an active diagnosis for the time frame indicated by the timing
 relationships.
 ###
 class CQL_QDM.Diagnosis extends CQL_QDM.QDMDatatype
+  ###
+  @param {Object} entry - the HDS data criteria object to convert
+  ###
   constructor: (@entry) ->
     super @entry
     @_prevalencePeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)

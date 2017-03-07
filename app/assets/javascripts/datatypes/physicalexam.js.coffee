@@ -12,6 +12,9 @@ minutes for x hours."
 Timing: The time the order is signed; author time.
 ###
 class CQL_QDM.PhysicalExamOrder extends CQL_QDM.QDMDatatype
+  ###
+  @param {Object} entry - the HDS data criteria object to convert
+  ###
   constructor: (@entry) ->
     super @entry
     @_anatomicalLocationSite = @entry.anatomicalLocation
@@ -57,6 +60,9 @@ completion of the physical exam indicated by the QDM category and its
 corresponding value set.
 ###
 class CQL_QDM.PhysicalExamPerformed extends CQL_QDM.QDMDatatype
+  ###
+  @param {Object} entry - the HDS data criteria object to convert
+  ###
   constructor: (@entry) ->
     super @entry
     @_anatomicalLocationSite = @entry.anatomicalLocation
@@ -131,6 +137,9 @@ recommendation for the physical exam indicated by the QDM category and its
 corresponding value set.
 ###
 class CQL_QDM.PhysicalExamRecommended extends CQL_QDM.QDMDatatype
+  ###
+  @param {Object} entry - the HDS data criteria object to convert
+  ###
   constructor: (@entry) ->
     super @entry
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)

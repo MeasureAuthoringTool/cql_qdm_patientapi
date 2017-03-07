@@ -12,6 +12,9 @@ recorded datetime acts as both the implicit start datetime and implicit stop
 datetime.
 ###
 class CQL_QDM.FamilyHistory extends CQL_QDM.QDMDatatype
+  ###
+  @param {Object} entry - the HDS data criteria object to convert
+  ###
   constructor: (@entry) ->
     super @entry
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)

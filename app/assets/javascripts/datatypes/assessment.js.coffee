@@ -11,6 +11,9 @@ of the assessment indicated by the QDM category and its corresponding value set.
 Timing: The time the assessment is completed; author time.
 ###
 class CQL_QDM.AssessmentPerformed extends CQL_QDM.QDMDatatype
+  ###
+  @param {Object} entry - the HDS data criteria object to convert
+  ###
   constructor: (@entry) ->
     super @entry
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
@@ -72,6 +75,9 @@ narrative text. Measure developers should address feasibility of clinical
 workflow to capture recommendations when evaluating measures.
 ###
 class CQL_QDM.AssessmentRecommended extends CQL_QDM.QDMDatatype
+  ###
+  @param {Object} entry - the HDS data criteria object to convert
+  ###
   constructor: (@entry) ->
     super @entry
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)

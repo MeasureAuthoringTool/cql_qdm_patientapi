@@ -8,6 +8,9 @@ Data elements that meet criteria using this datatype should document a request
 for the procedure indicated by the QDM category and its corresponding value set.
 ###
 class CQL_QDM.ProcedureOrder extends CQL_QDM.QDMDatatype
+  ###
+  @param {Object} entry - the HDS data criteria object to convert
+  ###
   constructor: (@entry) ->
     super @entry
     @_anatomicalApproachSite = @entry.anatomical_approach
@@ -74,6 +77,9 @@ completion of the procedure indicated by the QDM category and its corresponding
 value set.
 ###
 class CQL_QDM.ProcedurePerformed extends CQL_QDM.QDMDatatype
+  ###
+  @param {Object} entry - the HDS data criteria object to convert
+  ###
   constructor: (@entry) ->
     super @entry
     @_anatomicalApproachSite = @entry.anatomical_approach
@@ -190,6 +196,9 @@ recommendation for the procedure indicated by the QDM category and its
 corresponding value set.
 ###
 class CQL_QDM.ProcedureRecommended extends CQL_QDM.QDMDatatype
+  ###
+  @param {Object} entry - the HDS data criteria object to convert
+  ###
   constructor: (@entry) ->
     super @entry
     @_anatomicalApproachSite = @entry.anatomical_approach

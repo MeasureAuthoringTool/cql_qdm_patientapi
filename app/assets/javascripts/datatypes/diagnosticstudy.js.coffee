@@ -15,6 +15,9 @@ cardiology studies (electrocardiogram, treadmill stress testing), pulmonary
 function testing, vascular laboratory testing, and others.
 ###
 class CQL_QDM.DiagnosticStudyOrder extends CQL_QDM.QDMDatatype
+  ###
+  @param {Object} entry - the HDS data criteria object to convert
+  ###
   constructor: (@entry) ->
     super @entry
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
@@ -67,6 +70,9 @@ completion of the diagnostic study indicated by the QDM category and its
 corresponding value set.
 ###
 class CQL_QDM.DiagnosticStudyPerformed extends CQL_QDM.QDMDatatype
+  ###
+  @param {Object} entry - the HDS data criteria object to convert
+  ###
   constructor: (@entry) ->
     super @entry
     @_authorDatetime = if @entry.negationReason then CQL_QDM.Helpers.convertDateTime(@entry.start_time) else null
@@ -170,6 +176,9 @@ provider to an appropriate provider or organization to perform the diagnostic
 study indicated by the QDM category and its corresponding value set.
 ###
 class CQL_QDM.DiagnosticStudyRecommended extends CQL_QDM.QDMDatatype
+  ###
+  @param {Object} entry - the HDS data criteria object to convert
+  ###
   constructor: (@entry) ->
     super @entry
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)

@@ -12,6 +12,9 @@ timing relationships, the criterion is looking for a medication being taken for
 the time frame indicated by the timing relationships.
 ###
 class CQL_QDM.MedicationActive extends CQL_QDM.QDMDatatype
+  ###
+  @param {Object} entry - the HDS data criteria object to convert
+  ###
   constructor: (@entry) ->
     super @entry
     @_dosage = @entry.dose
@@ -58,6 +61,9 @@ medication indicated by the QDM category and its corresponding value set was
 actually administered to the patient.
 ###
 class CQL_QDM.MedicationAdministered extends CQL_QDM.QDMDatatype
+  ###
+  @param {Object} entry - the HDS data criteria object to convert
+  ###
   constructor: (@entry) ->
     super @entry
     @_authorDatetime = if @entry.negationReason then CQL_QDM.Helpers.convertDateTime(@entry.start_time) else null
@@ -127,6 +133,9 @@ should be taken by or given to the patient after being discharged from
 an inpatient encounter.
 ###
 class CQL_QDM.MedicationDischarge extends CQL_QDM.QDMDatatype
+  ###
+  @param {Object} entry - the HDS data criteria object to convert
+  ###
   constructor: (@entry) ->
     super @entry
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
@@ -185,6 +194,9 @@ patients attest to taking medications in electronic format (perhaps a Personal
 Health Record), patient attestation of “medication taken” may be available.
 ###
 class CQL_QDM.MedicationDispensed extends CQL_QDM.QDMDatatype
+  ###
+  @param {Object} entry - the HDS data criteria object to convert
+  ###
   constructor: (@entry) ->
     super @entry
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
@@ -238,6 +250,9 @@ to a pharmacy to provide the medication indicated by the QDM category and its
 corresponding value set.
 ###
 class CQL_QDM.MedicationOrder extends CQL_QDM.QDMDatatype
+  ###
+  @param {Object} entry - the HDS data criteria object to convert
+  ###
   constructor: (@entry) ->
     super @entry
     @_activeDatetime = CQL_QDM.Helpers.convertDateTime(@entry.active_datetime)

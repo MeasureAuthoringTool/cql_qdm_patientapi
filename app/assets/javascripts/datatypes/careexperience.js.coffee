@@ -10,6 +10,9 @@ usually measured with a validated survey tool. The most common tool is the
 Consumer Assessment of Healthcare Providers and Systems.
 ###
 class CQL_QDM.PatientCareExperience extends CQL_QDM.QDMDatatype
+  ###
+  @param {Object} entry - the HDS data criteria object to convert
+  ###
   constructor: (@entry) ->
     super @entry
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
@@ -29,6 +32,9 @@ satisfaction with key structures, processes, and outcomes in the healthcare
 delivery system.
 ###
 class CQL_QDM.ProviderCareExperience extends CQL_QDM.QDMDatatype
+  ###
+  @param {Object} entry - the HDS data criteria object to convert
+  ###
   constructor: (@entry) ->
     super @entry
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)

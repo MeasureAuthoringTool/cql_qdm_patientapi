@@ -11,6 +11,9 @@ antithrombotic device has been placed on the patient's legs to prevent
 thromboembolism, or a cardiac pacemaker is in place).
 ###
 class CQL_QDM.DeviceApplied extends CQL_QDM.QDMDatatype
+  ###
+  @param {Object} entry - the HDS data criteria object to convert
+  ###
   constructor: (@entry) ->
     super @entry
     @_anatomicalApproachSite = @entry.anatomical_approach
@@ -70,6 +73,9 @@ Data elements that meet criteria using this datatype should document an order
 for the device indicated by the QDM category and its corresponding value set.
 ###
 class CQL_QDM.DeviceOrder extends CQL_QDM.QDMDatatype
+  ###
+  @param {Object} entry - the HDS data criteria object to convert
+  ###
   constructor: (@entry) ->
     super @entry
     @_negationRationale = @entry.negationReason
@@ -101,6 +107,9 @@ recommendation to use the device indicated by the QDM category and its
 corresponding value set.
 ###
 class CQL_QDM.DeviceRecommended extends CQL_QDM.QDMDatatype
+  ###
+  @param {Object} entry - the HDS data criteria object to convert
+  ###
   constructor: (@entry) ->
     super @entry
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)

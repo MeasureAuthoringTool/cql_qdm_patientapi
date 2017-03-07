@@ -15,6 +15,7 @@ class CQL_QDM.QDMDatatype
   ###
   Returns any instances of this attribute currently within this namespace.
 
+  @param {String} attribute - the QDM attribute to access
   @returns {Date|Code|Quantity|String}
   ###
   get: (attribute) ->

@@ -8,6 +8,9 @@
 Used to represent a birthdate.
 ###
 class CQL_QDM.CharacteristicBirthdate extends CQL_QDM.QDMDatatype
+  ###
+  @param {Object} patient - the HDS patient object to use
+  ###
   constructor: (@patient) ->
     @_patient = @patient
 
