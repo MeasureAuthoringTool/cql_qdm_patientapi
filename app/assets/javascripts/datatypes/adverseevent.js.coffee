@@ -13,7 +13,7 @@ class CQL_QDM.AdverseEvent extends CQL_QDM.QDMDatatype
   ###
   constructor: (@entry) ->
     super @entry
-    @_facilityLocation = @entry.facility?['name']
+    @_facilityLocation = @entry.facility?.code
     @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     if @entry.end_time
       @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
