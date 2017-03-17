@@ -25,7 +25,7 @@ class CQL_QDM.EncounterActive extends CQL_QDM.QDMDatatype
       @_relevantPeriodHigh = CQL_QDM.Helpers.infinityDateTime()
     @_locationPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.facility?['start_time'])
     @_locationPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.facility?['end_time'])
-    @_facilityLocation = @entry.facility?['name']
+    @_facilityLocation = @entry.facility?.code
     @_reason = @entry.reason
 
   ###
@@ -76,7 +76,7 @@ class CQL_QDM.EncounterOrder extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    @_facilityLocation = @entry.facility?['name']
+    @_facilityLocation = @entry.facility?.code
     @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
 
@@ -122,7 +122,7 @@ class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
     @_dischargeDisposition = @entry.dischargeDisposition
     @_locationPeriodLow = @entry.facility?['start_time']
     @_locationPeriodHigh = @entry.facility?['end_time']
-    @_facilityLocation = @entry.facility?['name']
+    @_facilityLocation = @entry.facility?.code
     @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
     @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
@@ -218,7 +218,7 @@ class CQL_QDM.EncounterRecommended extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    @_facilityLocation = @entry.facility?['name']
+    @_facilityLocation = @entry.facility?.code
     @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
 
