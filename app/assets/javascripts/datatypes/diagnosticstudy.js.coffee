@@ -86,6 +86,8 @@ class CQL_QDM.DiagnosticStudyPerformed extends CQL_QDM.QDMDatatype
       # No end time; high is set to infinity
       @_relevantPeriodHigh = CQL_QDM.Helpers.infinityDateTime()
     @_status = @entry.status
+    @_component = @entry.components
+
 
   ###
   Author date time is only present when this data type has been negated.
@@ -161,6 +163,16 @@ class CQL_QDM.DiagnosticStudyPerformed extends CQL_QDM.QDMDatatype
   ###
   status: ->
     new cql.Code(@_status?.code, @_status?.code_system)
+    
+  ###
+  @returns {Array}
+  ###
+  component: ->
+    components = []
+    if @_component
+      for value in @_component.values
+        components.push new Component(value)
+    components
 
 
 ###

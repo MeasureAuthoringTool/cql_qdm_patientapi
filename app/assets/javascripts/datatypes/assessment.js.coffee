@@ -19,6 +19,8 @@ class CQL_QDM.AssessmentPerformed extends CQL_QDM.QDMDatatype
     @_reason = @entry.reason
     if @entry.values? && @entry.values.length > 0
       @_result = @entry.values?[0]
+    @_component = @entry.components
+
 
   ###
   @returns {Date}
@@ -55,6 +57,16 @@ class CQL_QDM.AssessmentPerformed extends CQL_QDM.QDMDatatype
         new cql.Code(code, code_system)
       else
         parseInt(@_result.scalar)
+        
+  ###
+  @returns {Array}
+  ###
+  component: ->
+    components = []
+    if @_component
+      for value in @_component.values
+        components.push new Component(value)
+    components
 
 
 ###
