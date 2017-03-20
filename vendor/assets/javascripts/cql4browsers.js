@@ -42361,6 +42361,9 @@ window.executeSimpleELM = function(elm, patientSource, valueSets, parameters) {
     if ((a == null) || (b == null)) {
       return a === b;
     }
+    if (a instanceof Quantity) {
+      return a.equals(b);
+    }
     if (a instanceof Uncertainty) {
       b = Uncertainty.from(b);
     } else if (b instanceof Uncertainty) {
