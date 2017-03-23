@@ -38,4 +38,7 @@ class Quantity extends Expression
       null
       
   equals: (other) ->
-    @unit == other.unit && @value == other.value
+    if other.unit? && other.value?
+      @unit == other.unit && @value == other.value
+    else
+      null

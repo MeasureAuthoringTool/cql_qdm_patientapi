@@ -65,7 +65,8 @@ class CQL_QDM.AssessmentPerformed extends CQL_QDM.QDMDatatype
     components = []
     if @_component
       for value in @_component.values
-        components.push new Component(value)
+        if value?
+          components.push new Component(value)
     components
 
 

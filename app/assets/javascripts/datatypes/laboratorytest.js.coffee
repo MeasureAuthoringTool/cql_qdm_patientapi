@@ -154,7 +154,9 @@ class CQL_QDM.LaboratoryTestPerformed extends CQL_QDM.QDMDatatype
     components = []
     if @_component
       for value in @_component.values
-        components.push new Component(value)
+        if value?
+          debugger
+          components.push new Component(value)
     components
         
 
