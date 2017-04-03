@@ -1,12 +1,13 @@
 ###
-@namespace scoping into the CQL_QDM namespace
+@namespace scoping into the CQL_QDM namespace (all classes and
+their methods will be accessable through the CQL_QDM namespace)
 ###
 @CQL_QDM ||= {}
 
 
 ###
-Represents a patient (using the HDS model) for use by the CQL execution
-engine.
+Represents a patient. The interface aligns with QDM. The internals are
+HDS mapped to the QDM representation.
 
 Typical flow of usage:
 1.  Bonnie takes one of its patient records and creates a CQL_QDM.CQLPatient
@@ -65,7 +66,11 @@ class CQL_QDM.CQLPatient
     else if profile?
       # Requested something else (probably a QDM data type).
 
-      # Strip model details from request
+      # Strip model details from request. The requested profile string contains
+      # a lot of things we don't need or care about. Example, we might see
+      # something like:
+      # "{urn:healthit-gov:qdm:v5_0_draft}PatientCharacteristicEthnicity"
+      # Where we only care about: "PatientCharacteristicEthnicity".
       profile = profile.replace(/ *\{[^)]*\} */g, '')
 
       # Check and handle negation status
@@ -130,7 +135,11 @@ class CQL_QDM.CQLPatient
   @returns {Object}
   ###
   buildDatatypes: ->
+    # HDS based list that describe various QDM concepts.
+    # See lib/health-data-standards/models/record.rb in HDS for the origin
+    # of these types.
     types = [
+      'adverse_events',
       'assessments',
       'allergies',
       'care_goals',
@@ -174,6 +183,8 @@ class CQL_QDM.CQLPatient
           classname = classname.replace(/ /g, '')
           unless data_types[classname]?
             data_types[classname] = []
+          # Checks that the key 'classname' exists in the CQL_QDM object
+          # confirming that a QDM datatype profile has been selected.
           if classname of CQL_QDM
             cql_dc = new CQL_QDM[classname](dc)
             # Keep track of the 'bonnie' type for use in the 'Learn CQL' tool
@@ -190,6 +201,13 @@ class CQL_QDM.CQLPatient
   @returns {Object}
   ###
   getPatientMetadata: ->
+    # Note about 'gender' key:
+    # If the execution engine wants an attribute of the patient
+    # directly, it calls findRecord with a profile of Patient, and
+    # looks at that object for things. Other times CQL might treat
+    # things like gender/sex as a data criteria (i.e. PatientCharacteristicSex),
+    # and calls things like getCode on them. The info['gender'] is for the
+    # former case.
     info = {}
     info['birthDatetime'] = CQL_QDM.Helpers.convertDateTime(@_patient.get('birthdate'))
     info['gender'] = @_patient.get('gender')
@@ -198,6 +216,8 @@ class CQL_QDM.CQLPatient
   ###
   Returns an array of unique data criteria information that exist on this
   patient. This is used for the first pass effort of calculating coverage.
+  The set of data criteria returned by this method constitutes the numerator
+  in the coverage calculation (denominator is all possible data criteria).
 
   TODO: Eventually this can be removed when we fine tune how measure
         coverage is calculated.
