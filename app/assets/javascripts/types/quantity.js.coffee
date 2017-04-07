@@ -1,24 +1,60 @@
-
+###
+Represents a CQL 'quantity' for use in the CQL execution engine.
+###
 class Quantity extends Expression
-  constructor: (json) ->
+  
+  ###
+  @param {Object} quantity - the quantity to represent
+  ###
+  constructor: (quantity) ->
     super
-    @unit = json.unit
-    @value = json.value
+    @unit = quantity.unit
+    @value = parseInt(quantity.value)
 
+  ###
+  @param {Object} ctx - the context to execute this type with
+  ###
   exec: (ctx) ->
     @
-  
-  toString: () ->
+
+  ###
+  Convert this Quantity to a string representation
+  ###
+  toString: ->
     "#{@value} '#{@unit}'"
-  
+
+  ###
+  @param {Quantity} other - the Quantity to compare to
+  ###
   sameOrBefore: (other) ->
-    if other instanceof Quantity and other.unit == @unit then @value <= other.value else null
+    if other instanceof Quantity and other.unit == @unit
+      @value <= parseInt(other.value)
+    else
+      null
 
+  ###
+  @param {Quantity} other - the Quantity to compare to
+  ###
   sameOrAfter: (other) ->
-    if other instanceof Quantity and other.unit == @unit then @value >= other.value else null
+    if other instanceof Quantity and other.unit == @unit
+      @value >= parseInt(other.value)
+    else
+      null
 
+  ###
+  @param {Quantity} other - the Quantity to compare to
+  ###
   after: (other) ->
-    if other instanceof Quantity and other.unit == @unit then @value > other.value else null
+    if other instanceof Quantity and other.unit == @unit
+      @value > parseInt(other.value)
+    else
+      null
 
+  ###
+  @param {Quantity} other - the Quantity to compare to
+  ###
   before: (other) ->
-    if other instanceof Quantity and other.unit == @unit then @value < other.value else null
+    if other instanceof Quantity and other.unit == @unit
+      @value < parseInt(other.value)
+    else
+      null

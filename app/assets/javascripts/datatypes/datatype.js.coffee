@@ -1,5 +1,6 @@
 ###
-@namespace scoping into the CQL_QDM namespace
+@namespace scoping into the CQL_QDM namespace (all classes and
+their methods will be accessable through the CQL_QDM namespace)
 ###
 @CQL_QDM ||= {}
 
@@ -13,6 +14,9 @@ class CQL_QDM.QDMDatatype
     @_codes = @entry.codes
 
   ###
+  Returns any instances of this attribute currently within this namespace.
+
+  @param {String} attribute - the QDM attribute to access
   @returns {Date|Code|Quantity|String}
   ###
   get: (attribute) ->
@@ -25,5 +29,5 @@ class CQL_QDM.QDMDatatype
     allCodes = []
     for system, codes of @_codes
       for code in codes
-        allCodes.push code: code, system: system
+        allCodes.push code: code
     allCodes
