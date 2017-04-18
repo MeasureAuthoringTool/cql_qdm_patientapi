@@ -58,3 +58,9 @@ class Quantity extends Expression
       @value < parseInt(other.value)
     else
       null
+      
+  equals: (other) ->
+    if other.unit? && other.value?
+      @unit == other.unit && @value == other.value
+    else
+      null
