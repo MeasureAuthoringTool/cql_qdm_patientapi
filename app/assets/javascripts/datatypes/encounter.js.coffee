@@ -118,7 +118,7 @@ class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
     @_admissionSource = @entry.admission_source?['name']
-    @_authorDatetime = if @entry.negationReason then CQL_QDM.Helpers.convertDateTime(@entry.start_time) else null
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_diagnosis = @entry.diagnosis
     @_dischargeDisposition = @entry.dischargeDisposition
     @_locationPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.facility?['start_time'])

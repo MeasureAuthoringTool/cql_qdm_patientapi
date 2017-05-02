@@ -19,7 +19,7 @@ class CQL_QDM.DeviceApplied extends CQL_QDM.QDMDatatype
     super @entry
     @_anatomicalApproachSite = @entry.anatomical_approach
     @_anatomicalLocationSite = @entry.anatomical_location
-    @_authorDatetime = if @entry.negationReason then CQL_QDM.Helpers.convertDateTime(@entry.start_time) else null
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
     @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
