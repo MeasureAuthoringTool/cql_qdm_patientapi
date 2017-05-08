@@ -3034,6 +3034,11 @@
     DurationBetween.prototype.exec = function(ctx) {
       var args, ref, result;
       args = this.execArgs(ctx);
+      if(args[0] == null || args[1] == null 
+          || typeof args[0].durationBetween !== 'function'
+          || typeof args[1].durationBetween !== 'function') {
+        return void 0
+      }
       result = args[0].durationBetween(args[1], (ref = this.precision) != null ? ref.toLowerCase() : void 0);
       if (result != null && result.isPoint()) {
         return result.low;
