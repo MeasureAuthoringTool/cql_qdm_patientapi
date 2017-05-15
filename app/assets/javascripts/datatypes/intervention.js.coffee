@@ -101,6 +101,8 @@ class CQL_QDM.InterventionPerformed extends CQL_QDM.QDMDatatype
         new cql.Code(code, code_system)
       else
         parseInt(@_result.scalar)
+    else
+      null
 
   ###
   @returns {Code}
