@@ -130,6 +130,8 @@ class CQL_QDM.PhysicalExamPerformed extends CQL_QDM.QDMDatatype
         new cql.Code(code, code_system)
       else
         parseInt(@_result.scalar)
+    else
+      null
 
 
 ###

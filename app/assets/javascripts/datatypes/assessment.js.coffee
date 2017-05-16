@@ -63,6 +63,8 @@ class CQL_QDM.AssessmentPerformed extends CQL_QDM.QDMDatatype
         CQL_QDM.Helpers.convertDateTime(@_result.scalar)
       else
         parseInt(@_result.scalar)
+    else
+      null
         
   ###
   @returns {Array}
@@ -138,3 +140,5 @@ class CQL_QDM.AssessmentRecommended extends CQL_QDM.QDMDatatype
         new cql.Code(code, code_system)
       else
         parseInt(@_result.scalar)
+    else
+      null
