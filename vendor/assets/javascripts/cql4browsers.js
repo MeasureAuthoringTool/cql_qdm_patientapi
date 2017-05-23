@@ -4947,7 +4947,7 @@
 
     With.prototype.exec = function(ctx) {
       var childCtx, rec, records, returns;
-      records = this.expression.exec(ctx);
+      records = this.expression.exec(ctx) || [];
       returns = (function() {
         var i, len, results;
         results = [];
