@@ -2566,14 +2566,18 @@
       var args, date1, date2;
       args = this.execArgs(ctx);
       // AgeAt should not care about the anything less than a day
-      date1 = args[0];
-      date1.hour = 0;
-      date1.minute = 0;
-      date1.second = 0;
-      date1.millisecond = 0;
-      date1 = date1.toJSDate(true);
-      date2 = args[1].toJSDate(true);
-      return calculateAge(date1, date2, this.precision);
+      if ( args[0] && args[1] ){
+        date1 = args[0];
+        date1.hour = 0;
+        date1.minute = 0;
+        date1.second = 0;
+        date1.millisecond = 0;
+        date1 = date1.toJSDate(true);
+        date2 = args[1].toJSDate(true);
+        return calculateAge(date1, date2, this.precision);
+      }else{
+        return null
+      }
     };
 
     return CalculateAgeAt;
