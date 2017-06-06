@@ -61,11 +61,11 @@ class CQL_QDM.AssessmentPerformed extends CQL_QDM.QDMDatatype
         new cql.Code(code, code_system)
       else if @_result.units == "UnixTime" # A PhysicalQuantity with unit UnixTime is a TimeStamp
         CQL_QDM.Helpers.convertDateTime(@_result.scalar)
-      else
+      else if @_result.scalar?.length && @_result.units?.length
         new Quantity({unit: @_result.units, value: @_result.scalar})
     else
       null
-        
+
   ###
   @returns {Array}
   ###
