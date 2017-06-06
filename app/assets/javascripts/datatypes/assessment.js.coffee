@@ -59,7 +59,8 @@ class CQL_QDM.AssessmentPerformed extends CQL_QDM.QDMDatatype
         code_system = @_result.codes[Object.keys(@_result.codes)[0]]
         code = @_result.codes[code_system]
         new cql.Code(code, code_system)
-      else if @_result.units == "UnixTime" # A PhysicalQuantity with unit UnixTime is a TimeStamp
+      # A PhysicalQuantity with unit UnixTime is a TimeStamp, set in bonnie /lib/measures/patient_builder.rb
+      else if @_result.units == "UnixTime"
         CQL_QDM.Helpers.convertDateTime(@_result.scalar)
       else
         parseInt(@_result.scalar)
