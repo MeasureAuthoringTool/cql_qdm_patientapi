@@ -5,7 +5,7 @@ their methods will be accessable through the CQL_QDM namespace)
 @CQL_QDM ||= {}
 
 ###
-Used to represent a patient characteristic qdm datatype
+Used to represent a patient characteristic QDM datatype
 ###
 class CQL_QDM.PatientCharacteristic extends CQL_QDM.QDMDatatype
   ###
@@ -15,8 +15,7 @@ class CQL_QDM.PatientCharacteristic extends CQL_QDM.QDMDatatype
     super @entry
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_codes = @entry.codes
-    
-    
+        
   ###
   @returns {Date}
   ###
