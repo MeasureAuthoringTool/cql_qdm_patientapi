@@ -5,7 +5,7 @@ their methods will be accessable through the CQL_QDM namespace)
 @CQL_QDM ||= {}
 
 ###
-Used to represent a sex.
+Used to represent a patient characteristic qdm datatype
 ###
 class CQL_QDM.PatientCharacteristic extends CQL_QDM.QDMDatatype
   ###
