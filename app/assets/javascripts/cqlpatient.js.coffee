@@ -105,8 +105,9 @@ class CQL_QDM.CQLPatient
       # Requested deathdate
       [new CQL_QDM.CharacteristicExpired(@_patient)]
     else
-      # Unsupported
-      []
+      # Check if there are PatientCharateristic qdm datatypes that can be returned
+      profile = profile.replace(/ *\{[^)]*\} */g, '')
+      @_datatypes[profile] || []
 
   ###
   Searches the patient's history for data criteria that match the given
