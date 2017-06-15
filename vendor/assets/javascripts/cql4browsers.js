@@ -2485,6 +2485,9 @@
 
     InValueSet.prototype.exec = function(ctx) {
       var code, valueset;
+      if (this.code == null || this.valueset == null) {
+        return false
+      }
       code = this.code.exec(ctx);
       valueset = this.valueset.exec(ctx);
       if ((code != null) && (valueset != null)) {
