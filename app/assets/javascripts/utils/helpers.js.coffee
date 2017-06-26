@@ -30,3 +30,44 @@ class CQL_QDM.Helpers
   ###
   @infinityDateTime: ->
     cql.DateTime.parse('9999-12-31T23:59:59.999+0000')
+
+  
+  ###
+  For DateTime values makes sure value meets the CQL standard.
+  For scalar values:
+    - First checks that the value component is numeric
+    - Second for the unit component attempts to clean up freetext
+      to match a standard version.
+  ###
+  @formatResult: (input) ->
+    if input
+      if input.codes?
+        code_system = input.codes[Object.keys(input.codes)[0]]
+        code = input.codes[code_system]
+        new cql.Code(code, code_system)
+      # A PhysicalQuantity with unit UnixTime is a TimeStamp, set in bonnie /lib/measures/patient_builder.rb
+      else if input.units == 'UnixTime'
+        CQL_QDM.Helpers.convertDateTime(input.scalar)
+      # Check that the scalar portion is a number and the units are a non-zero length string.
+      else if !isNaN(parseFloat(input.scalar)) && input.units.length > 0
+        cleansedUnit = @cleanTimeUnit(input.units)
+        new cql.Quantity({unit: cleansedUnit , value: input.scalar})
+    else
+      null
+  ###
+  Used to try and convert freetext time units to CQL standard units.
+  ###
+  time_units = {'years': 'year', 'yr': 'year', 'yrs': 'year'
+    , 'months': 'month', 'month': 'month'
+    , 'weeks': 'week', 'week': 'week', 'wk': 'week', 'wks': 'week'
+    , 'days': 'day', 'day': 'day', 'd': 'day'
+    , 'hours': 'h', 'hour': 'hour', 'hr': 'hour', 'hrs': 'hour'
+    , 'minutes': 'min', 'minute': 'minute', 'min': 'minute'
+    , 'seconds': 'second', 'second': 'second', 'sec': 'second'
+    , 'milliseconds': 'millisecond', 'millisecond': 'millisecond', 'ms': 'millisecond'}
+
+  ###
+  Take units provided and see if they can be matched to a standard version.
+  ###
+  @cleanTimeUnit: (unit) ->
+    if time_units[unit] then time_units[unit] else unit
