@@ -5193,24 +5193,39 @@
     };
 
     Quantity.prototype.sameOrBefore = function(other) {
+      var otherSmallestDuration, thisSmallestDuration;
       if (other instanceof Quantity && other.unit === this.unit) {
         return this.value <= parseFloat(other.value);
+      } else if (other instanceof Quantity && other.unit in time_units && this.unit in time_units) {
+        thisSmallestDuration = smallestDuration(this);
+        otherSmallestDuration = smallestDuration(other);
+        return thisSmallestDuration <= otherSmallestDuration;
       } else {
         return null;
       }
     };
 
     Quantity.prototype.sameOrAfter = function(other) {
+      var otherSmallestDuration, thisSmallestDuration;
       if (other instanceof Quantity && other.unit === this.unit) {
         return this.value >= parseFloat(other.value);
+      } else if (other instanceof Quantity && other.unit in time_units && this.unit in time_units) {
+        thisSmallestDuration = smallestDuration(this);
+        otherSmallestDuration = smallestDuration(other);
+        return thisSmallestDuration >= otherSmallestDuration;
       } else {
         return null;
       }
     };
 
     Quantity.prototype.after = function(other) {
+      var otherSmallestDuration, thisSmallestDuration;
       if (other instanceof Quantity && other.unit === this.unit) {
         return this.value > parseFloat(other.value);
+      } else if (other instanceof Quantity && other.unit in time_units && this.unit in time_units) {
+        thisSmallestDuration = smallestDuration(this);
+        otherSmallestDuration = smallestDuration(other);
+        return thisSmallestDuration > otherSmallestDuration;
       } else {
         return null;
       }
@@ -5269,21 +5284,31 @@
 
   smallestDuration = function(qty) {
     var millivalue;
-    millivalue = (function() {
-      switch (false) {
-        case clean_unit(qty.unit) !== 'minute':
-          return qty.value * 60000;
-        case clean_unit(qty.unit) !== 'hour':
-          return qty.value * 3600000;
-        case clean_unit(qty.unit) !== 'day':
-          return qty.value * 86400000;
-        case clean_unit(qty.unit) !== 'week':
-          return qty.value * 604800000;
-        default:
-          return qty.value;
-      }
-    })();
-    return millivalue;
+    if (parseFloat(qty.value)) {
+      millivalue = (function() {
+        switch (false) {
+          case clean_unit(qty.unit) !== 'second':
+            return qty.value * 1000;
+          case clean_unit(qty.unit) !== 'minute':
+            return qty.value * 60000;
+          case clean_unit(qty.unit) !== 'hour':
+            return qty.value * 3600000;
+          case clean_unit(qty.unit) !== 'day':
+            return qty.value * 86400000;
+          case clean_unit(qty.unit) !== 'week':
+            return qty.value * 604800000;
+          case clean_unit(qty.unit) !== 'month':
+            return qty.value * 2629746000;
+          case clean_unit(qty.unit) !== 'year':
+            return qty.value * 31556926000;
+          default:
+            return qty.value;
+        }
+      })();
+      return millivalue;
+    } else {
+      return null;
+    }
   };
 
   module.exports.createQuantity = function(value, unit) {
