@@ -5196,7 +5196,7 @@
       var otherSmallestDuration, thisSmallestDuration;
       if (other instanceof Quantity && other.unit === this.unit) {
         return this.value <= parseFloat(other.value);
-      } else if (other instanceof Quantity && other.unit in time_units && this.unit in time_units) {
+      } else if (other instanceof Quantity && (time_units[other.unit] != null) && (time_units[this.unit] != null)) {
         thisSmallestDuration = smallestDuration(this);
         otherSmallestDuration = smallestDuration(other);
         return thisSmallestDuration <= otherSmallestDuration;
@@ -5209,7 +5209,7 @@
       var otherSmallestDuration, thisSmallestDuration;
       if (other instanceof Quantity && other.unit === this.unit) {
         return this.value >= parseFloat(other.value);
-      } else if (other instanceof Quantity && other.unit in time_units && this.unit in time_units) {
+      } else if (other instanceof Quantity && (time_units[other.unit] != null) && (time_units[this.unit] != null)) {
         thisSmallestDuration = smallestDuration(this);
         otherSmallestDuration = smallestDuration(other);
         return thisSmallestDuration >= otherSmallestDuration;
@@ -5222,7 +5222,7 @@
       var otherSmallestDuration, thisSmallestDuration;
       if (other instanceof Quantity && other.unit === this.unit) {
         return this.value > parseFloat(other.value);
-      } else if (other instanceof Quantity && other.unit in time_units && this.unit in time_units) {
+      } else if (other instanceof Quantity && (time_units[other.unit] != null) && (time_units[this.unit] != null)) {
         thisSmallestDuration = smallestDuration(this);
         otherSmallestDuration = smallestDuration(other);
         return thisSmallestDuration > otherSmallestDuration;
@@ -5235,7 +5235,7 @@
       var otherSmallestDuration, thisSmallestDuration;
       if (other instanceof Quantity && other.unit === this.unit) {
         return this.value < parseFloat(other.value);
-      } else if (other instanceof Quantity && other.unit in time_units && this.unit in time_units) {
+      } else if (other instanceof Quantity && (time_units[other.unit] != null) && (time_units[this.unit] != null)) {
         thisSmallestDuration = smallestDuration(this);
         otherSmallestDuration = smallestDuration(other);
         return thisSmallestDuration < otherSmallestDuration;
@@ -5258,20 +5258,21 @@
 
   time_units = {
     'years': 'year',
-    'yr': 'year',
-    'y': 'year',
+    'year': 'year',
     'months': 'month',
+    'month': 'month',
     'weeks': 'week',
-    'wk': 'week',
-    'wks': 'week',
+    'week': 'week',
     'days': 'day',
-    'd': 'day',
+    'day': 'day',
+    'hours': 'hour',
+    'hour': 'hour',
     'minutes': 'minute',
-    'min': 'minute',
+    'minute': 'minute',
     'seconds': 'second',
-    'sec': 'second',
     'second': 'second',
-    'milliseconds': 'millisecond'
+    'milliseconds': 'millisecond',
+    'millisecond': 'millisecond'
   };
 
   clean_unit = function(units) {
