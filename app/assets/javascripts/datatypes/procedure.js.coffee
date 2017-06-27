@@ -63,7 +63,7 @@ class CQL_QDM.ProcedureOrder extends CQL_QDM.QDMDatatype
   @returns {Quantity}
   ###
   radiationDuration: ->
-    new Quantity({unit: @_radiationDuration['unit'], value: @_radiationDuration['value']})
+    new cql.Quantity({unit: @_radiationDuration['unit'], value: @_radiationDuration['value']})
 
   ###
   @returns {Code}
@@ -150,13 +150,13 @@ class CQL_QDM.ProcedurePerformed extends CQL_QDM.QDMDatatype
   @returns {Quantity}
   ###
   radiationDosage: ->
-    new Quantity({unit: @_radiationDosage['unit'], value: @_radiationDosage['value']})
+    new cql.Quantity({unit: @_radiationDosage['unit'], value: @_radiationDosage['value']})
 
   ###
   @returns {Quantity}
   ###
   radiationDuration: ->
-    new Quantity({unit: @_radiationDuration['unit'], value: @_radiationDuration['value']})
+    new cql.Quantity({unit: @_radiationDuration['unit'], value: @_radiationDuration['value']})
 
   ###
   @returns {Code}
@@ -183,7 +183,7 @@ class CQL_QDM.ProcedurePerformed extends CQL_QDM.QDMDatatype
         new cql.Code(code, code_system)
       # Check that the scalar portion is a number and the units are a non-zero length string.
       else if !isNaN(parseFloat(@_result.scalar)) && @_result.units.length > 0
-        new Quantity({unit: @_result.units, value: @_result.scalar})
+        new cql.Quantity({unit: @_result.units, value: @_result.scalar})
     else
       null
 

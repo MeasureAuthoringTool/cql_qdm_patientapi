@@ -123,8 +123,12 @@ class CQL_QDM.CQLPatient
     results = []
     if @_datatypes[profile]?
       for dataCriteria in @_datatypes[profile]
-        if dataCriteria.negationRationale?() == isNegated
-          results.push dataCriteria
+        if isNegated
+          if dataCriteria._negationRationale != null && dataCriteria._negationRationale != undefined
+            results.push dataCriteria
+        else
+          if dataCriteria._negationRationale == null || dataCriteria._negationRationale == undefined
+            results.push dataCriteria
     results
 
   ###
