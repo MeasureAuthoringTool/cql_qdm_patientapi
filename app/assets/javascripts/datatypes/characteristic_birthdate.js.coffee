@@ -19,11 +19,7 @@ class CQL_QDM.CharacteristicBirthdate extends CQL_QDM.QDMDatatype
   @returns {Object}
   ###
   getCode: ->
-    # NOTE: Eventually this could be replaced with actual codes. That would
-    # require modifications to the execution engine in order to handle that
-    # change.
-    code:
-      'Birthdate'
+    '21112-8' # LOINC code for birthdate
 
   ###
   @returns {DateTime}
