@@ -77,10 +77,10 @@ class CQL_QDM.Helpers
   ###
   # TODO: This will need to be updated to handle cleaning other UCUM units
   @cleanTimeUnit: (unit) ->
-    if units == 'Ms'
+    if unit == 'Ms'
       'megaseconds'
-    else if units == 'ms'
+    else if unit == 'ms'
       'millisecond'
-    else if time_units[units.toLowerCase()]
-      time_units[units.toLowerCase()]
-    else units
+    else if time_units[unit.toLowerCase()]
+      time_units[unit.toLowerCase()]
+    else unit
