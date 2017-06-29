@@ -30,13 +30,15 @@ class CQL_QDM.Helpers
   @infinityDateTime: ->
     @convertDateTime('12/31/2999 12:59 PM')
 
-  
   ###
   For DateTime values makes sure value meets the CQL standard.
   For scalar values:
     - First checks that the value component is numeric
     - Second for the unit component attempts to clean up freetext
       to match a standard version.
+  
+  @param {Result} input - the result object to be parsed into a Quantity
+  @returns cql.Quantity
   ###
   @formatResult: (input) ->
     if input
@@ -53,9 +55,11 @@ class CQL_QDM.Helpers
         new cql.Quantity({unit: cleansedUnit , value: input.scalar})
     else
       null
+
   ###
   Used to try and convert freetext time units to CQL standard units.
   ###
+  # TODO: Decide if Bonnie will support MegaSeconds and KiloSeconds
   time_units = {'years': 'year', 'yr': 'year', 'yrs': 'year'
     , 'months': 'month', 'month': 'month'
     , 'weeks': 'week', 'week': 'week', 'wk': 'week', 'wks': 'week'
@@ -67,6 +71,16 @@ class CQL_QDM.Helpers
 
   ###
   Take units provided and see if they can be matched to a standard version.
+
+  @param {String} unit - The unit to validate
+  @returns {String}
   ###
+  # TODO: This will need to be updated to handle cleaning other UCUM units
   @cleanTimeUnit: (unit) ->
-    if time_units[unit] then time_units[unit] else unit
+    if units == 'Ms'
+      'megaseconds'
+    else if units == 'ms'
+      'millisecond'
+    else if time_units[units.toLowerCase()]
+      time_units[units.toLowerCase()]
+    else units
