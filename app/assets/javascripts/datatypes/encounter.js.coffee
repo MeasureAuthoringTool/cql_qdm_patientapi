@@ -56,7 +56,7 @@ class CQL_QDM.EncounterActive extends CQL_QDM.QDMDatatype
   ###
   lengthOfStay: ->
     # Converts Milliseconds to Days.
-    new cql.Quantity({unit: 'days', value: (@entry.end_time - @entry.start_time) / 86400})
+    new cql.Quantity({unit: 'days', value: Math.floor((@entry.end_time - @entry.start_time) / 86400)})
 
   ###
   @returns {Code}
@@ -170,7 +170,7 @@ class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
   ###
   lengthOfStay: ->
     # Converts Milliseconds to Days.
-    new cql.Quantity({unit: 'days', value: (@entry.end_time - @entry.start_time) / 86400})
+    new cql.Quantity({unit: 'days', value: Math.floor((@entry.end_time - @entry.start_time) / 86400)})
 
   ###
   @returns {Interval<Date>}
