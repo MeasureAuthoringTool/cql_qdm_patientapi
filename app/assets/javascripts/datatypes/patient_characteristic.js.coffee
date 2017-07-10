@@ -4,23 +4,23 @@ their methods will be accessable through the CQL_QDM namespace)
 ###
 @CQL_QDM ||= {}
 
-
 ###
-Base QDM datatype class; implements various functions that all implemented
-QDM datatypes must support.
+Used to represent a patient characteristic QDM datatype
 ###
-class CQL_QDM.QDMDatatype
+class CQL_QDM.PatientCharacteristic extends CQL_QDM.QDMDatatype
+  ###
+  @param {Object} patient - the HDS patient object to use
+  ###
   constructor: (@entry) ->
+    super @entry
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_codes = @entry.codes
-
+        
   ###
-  Returns any instances of this attribute currently within this namespace.
-
-  @param {String} attribute - the QDM attribute to access
-  @returns {Date|Code|Quantity|String}
+  @returns {Date}
   ###
-  get: (attribute) ->
-    @[attribute]?()
+  authorDatetime: ->
+    @_authorDatetime
 
   ###
   @returns {Array}

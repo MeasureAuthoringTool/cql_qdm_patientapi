@@ -4,18 +4,14 @@ their methods will be accessable through the CQL_QDM namespace)
 ###
 @CQL_QDM ||= {}
 
+###
+Data elements that meet criteria using this datatype should document the Allergy
+or Intolerance and its corresponding value set.
 
+Timing: The Prevalence Period references the time from the onset date to the
+abatement date.
 ###
-Data elements that meet criteria using this datatype should document the
-Condition/Diagnosis/Problem and its corresponding value set. The onset
-datetime corresponds to the implicit start datetime of the datatype and the
-abatement datetime corresponds to the implicit stop datetime of the datatype.
-If the abatement datetime is null, then the diagnosis is considered to still
-be active. When this datatype is used with timing relationships, the criterion
-is looking for an active diagnosis for the time frame indicated by the timing
-relationships.
-###
-class CQL_QDM.Diagnosis extends CQL_QDM.QDMDatatype
+class CQL_QDM.AllergyIntolerance extends CQL_QDM.QDMDatatype
   ###
   @param {Object} entry - the HDS data criteria object to convert
   ###
@@ -27,14 +23,8 @@ class CQL_QDM.Diagnosis extends CQL_QDM.QDMDatatype
     else
       # No end time; high is set to infinity
       @_prevalencePeriodHigh = CQL_QDM.Helpers.infinityDateTime()
-    @_anatomicalLocationSite = @entry.anatomical_location
     @_severity = @entry.severity
-
-  ###
-  @returns {Code}
-  ###
-  anatomicalLocationSite: ->
-    new cql.Code(@_anatomicalLocationSite?.code, @_anatomicalLocationSite?.code_system)
+    @_type = @entry.type
 
   ###
   @returns {Interval<Date>}
@@ -49,3 +39,9 @@ class CQL_QDM.Diagnosis extends CQL_QDM.QDMDatatype
   ###
   severity: ->
     new cql.Code(@_severity?.code, @_severity?.code_system)
+
+  ###
+  @returns {Code}
+  ###
+  type: ->
+    new cql.Code(@_type?.code, @_type?.code_system)

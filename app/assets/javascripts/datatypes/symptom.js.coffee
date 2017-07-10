@@ -1,5 +1,6 @@
 ###
-@namespace scoping into the CQL_QDM namespace
+@namespace scoping into the CQL_QDM namespace (all classes and
+their methods will be accessable through the CQL_QDM namespace)
 ###
 @CQL_QDM ||= {}
 
@@ -14,26 +15,29 @@ used with timing relationships, the criterion is looking for whether the
 symptom was active for the time frame indicated by the timing relationships.
 ###
 class CQL_QDM.Symptom extends CQL_QDM.QDMDatatype
+  ###
+  @param {Object} entry - the HDS data criteria object to convert
+  ###
   constructor: (@entry) ->
     super @entry
-    @_abatementDatetime = @entry.abatementDatetime
-    @_onsetDatetime = @entry.start_time
+    @_abatementDatetime = CQL_QDM.Helpers.convertDateTime(@entry.abatementDatetime)
+    @_onsetDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_severity = @entry.severity
 
   ###
   @returns {Date}
   ###
   abatementDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_abatementDatetime, 'X').toDate())
+    @_abatementDatetime
 
   ###
   @returns {Date}
   ###
   onsetDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_onsetDatetime, 'X').toDate())
+    @_onsetDatetime
 
   ###
   @returns {Code}
   ###
   severity: ->
-    cql.Code(@_severity.code, @_severity.code_system)
+    new cql.Code(@_severity?.code, @_severity?.code_system)

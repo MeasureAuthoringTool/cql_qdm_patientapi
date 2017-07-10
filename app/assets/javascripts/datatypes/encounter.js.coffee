@@ -1,5 +1,6 @@
 ###
-@namespace scoping into the CQL_QDM namespace
+@namespace scoping into the CQL_QDM namespace (all classes and
+their methods will be accessable through the CQL_QDM namespace)
 ###
 @CQL_QDM ||= {}
 
@@ -12,56 +13,56 @@ the criterion is looking for an encounter that was in progress for the time
 frame indicated by the timing relationships.
 ###
 class CQL_QDM.EncounterActive extends CQL_QDM.QDMDatatype
+  ###
+  @param {Object} entry - the HDS data criteria object to convert
+  ###
   constructor: (@entry) ->
     super @entry
-    @_admissionDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    @_dischargeDatetime = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
-    @_facilityLocation = @entry.facility?['name']
-    @_facilityLocationArrivalDatetime = @entry.facility?['start_time']
-    @_facilityLocationDepartureDatetime = @entry.facility?['end_time']
+    @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
+    if @entry.end_time
+      @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
+    else
+      # No end time; high is set to infinity
+      @_relevantPeriodHigh = CQL_QDM.Helpers.infinityDateTime()
+    @_locationPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.facility?['start_time'])
+    @_locationPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.facility?['end_time'])
+    @_facilityLocation = @entry.facility?.code
     @_reason = @entry.reason
 
   ###
-  @returns {Date}
+  @returns {Interval<Date>}
   ###
-  admissionDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_admissionDatetime, 'X').toDate())
-
-  ###
-  @returns {Date}
-  ###
-  dischargeDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_dischargeDatetime, 'X').toDate())
+  relevantPeriod: ->
+    low = @_relevantPeriodLow
+    high = @_relevantPeriodHigh
+    new cql.Interval(low, high)
 
   ###
   @returns {Code}
   ###
   facilityLocation: ->
-    cql.Code(@_facilityLocation.code, @_facilityLocation.code_system)
+    new cql.Code(@_facilityLocation?.code, @_facilityLocation?.code_system)
 
   ###
-  @returns {Date}
+  @returns {Interval<Date>}
   ###
-  facilityLocationArrivalDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_facilityLocationArrivalDatetime, 'X').toDate())
-
-  ###
-  @returns {Date}
-  ###
-  facilityLocationDepartureDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_facilityLocationDepartureDatetime, 'X').toDate())
+  locationPeriod: ->
+    low = @_locationPeriodLow
+    high = @_locationPeriodHigh
+    new cql.Interval(low, high)
 
   ###
   @returns {Quantity}
   ###
   lengthOfStay: ->
-    new Quantity({unit: 'milliseconds', value: (@_dischargeDatetime - @_admissionDatetime)})
+    # Converts Milliseconds to Days.
+    new cql.Quantity({unit: 'days', value: Math.floor((@entry.end_time - @entry.start_time) / 86400)})
 
   ###
   @returns {Code}
   ###
   reason: ->
-    cql.Code(@_reason.code, @_reason.code_system)
+    new cql.Code(@_reason?.code, @_reason?.code_system)
 
 
 ###
@@ -70,43 +71,39 @@ order for the encounter indicated by the QDM category and its corresponding
 value set has been recommended.
 ###
 class CQL_QDM.EncounterOrder extends CQL_QDM.QDMDatatype
+  ###
+  @param {Object} entry - the HDS data criteria object to convert
+  ###
   constructor: (@entry) ->
     super @entry
-    @_facilityLocation = @entry.facility?['name']
-    @_negationRationale = @entry.negationRationale
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
+    @_facilityLocation = @entry.facility?.code
+    @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
-    @_startDatetime = @entry.admitTime
-    @_stopDatetime = @entry.dischargeTime
+
+  ###
+  @returns {Date}
+  ###
+  authorDatetime: ->
+    @_authorDatetime
 
   ###
   @returns {Code}
   ###
   facilityLocation: ->
-    cql.Code(@_facilityLocation.code, @_facilityLocation.code_system)
+    new cql.Code(@_facilityLocation?.code, @_facilityLocation?.code_system)
 
   ###
   @returns {Code}
   ###
   negationRationale: ->
-    cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+    new cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
 
   ###
   @returns {Code}
   ###
   reason: ->
-    cql.Code(@_reason.code, @_reason.code_system)
-
-  ###
-  @returns {Date}
-  ###
-  startDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_startDatetime, 'X').toDate())
-
-  ###
-  @returns {Date}
-  ###
-  stopDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_stopDatetime, 'X').toDate())
+    new cql.Code(@_reason?.code, @_reason?.code_system)
 
 
 ###
@@ -115,84 +112,99 @@ encounter indicated by the QDM category and its corresponding value set has
 been completed.
 ###
 class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
+  ###
+  @param {Object} entry - the HDS data criteria object to convert
+  ###
   constructor: (@entry) ->
     super @entry
-    @_admissionDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    @_dischargeDatetime = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
+    @_admissionSource = @entry.admission_source?['name']
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_diagnosis = @entry.diagnosis
-    @_dischargeStatus = @entry.dischargeDisposition
-    @_facilityLocation = @entry.facility?['name']
-    @_facilityLocationArrivalDatetime = @entry.facility?['start_time']
-    @_facilityLocationDepartureDatetime = @entry.facility?['end_time']
-    @_negationRationale = @entry.negationRationale
+    @_dischargeDisposition = @entry.dischargeDisposition
+    @_locationPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.facility?['start_time'])
+    @_locationPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.facility?['end_time'])
+    @_facilityLocation = @entry.facility?.code
+    @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
+    @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
+    if @entry.end_time
+      @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
+    else
+      # No end time; high is set to infinity
+      @_relevantPeriodHigh = CQL_QDM.Helpers.infinityDateTime()
     @_principalDiagnosis = @entry.principalDiagnosis
 
   ###
+  @returns {Code}
+  ###
+  admissionSource: ->
+    new cql.Code(@_admissionSource?.code, @_admissionSource?.code_system)
+
+  ###
+  Author date time is only present when this data type has been negated.
   @returns {Date}
   ###
-  admissionDatetime: ->
-    cql.DateTime.fromDate(@_admissionDatetime.toDate())
+  authorDatetime: ->
+    @_authorDatetime
 
   ###
   @returns {Code}
   ###
   diagnosis: ->
-    cql.Code(@_diagnosis.code, @_diagnosis.code_system)
-
-  ###
-  @returns {Date}
-  ###
-  dischargeDatetime: ->
-    cql.DateTime.fromDate(@_dischargeDatetime.toDate())
+    new cql.Code(@_diagnosis?.code, @_diagnosis?.code_system)
 
   ###
   @returns {Code}
   ###
-  dischargeStatus: ->
-    cql.Code(@_dischargeStatus.code, @_dischargeStatus.code_system)
+  dischargeDisposition: ->
+    new cql.Code(@_dischargeDisposition?.code, @_dischargeDisposition?.code_system)
 
   ###
   @returns {Code}
   ###
   facilityLocation: ->
-    cql.Code(@_facilityLocation.code, @_facilityLocation.code_system)
-
-  ###
-  @returns {Date}
-  ###
-  facilityLocationArrivalDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_facilityLocationArrivalDatetime, 'X').toDate())
-
-  ###
-  @returns {Date}
-  ###
-  facilityLocationDepartureDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_facilityLocationDepartureDatetime, 'X').toDate())
+    new cql.Code(@_facilityLocation?.code, @_facilityLocation?.code_system)
 
   ###
   @returns {Quantity}
   ###
   lengthOfStay: ->
-    new Quantity({unit: 'milliseconds', value: (@_dischargeDatetime - @_admissionDatetime)})
+    # Converts Milliseconds to Days.
+    new cql.Quantity({unit: 'days', value: Math.floor((@entry.end_time - @entry.start_time) / 86400)})
+
+  ###
+  @returns {Interval<Date>}
+  ###
+  locationPeriod: ->
+    low = @_locationPeriodLow
+    high = @_locationPeriodHigh
+    new cql.Interval(low, high)
 
   ###
   @returns {Code}
   ###
   negationRationale: ->
-    cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+    new cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
 
   ###
   @returns {Code}
   ###
   reason: ->
-    cql.Code(@_reason.code, @_reason.code_system)
+    new cql.Code(@_reason?.code, @_reason?.code_system)
+
+  ###
+  @returns {Interval<Date>}
+  ###
+  relevantPeriod: ->
+    low = @_relevantPeriodLow
+    high = @_relevantPeriodHigh
+    new cql.Interval(low, high)
 
   ###
   @returns {Code}
   ###
   principalDiagnosis: ->
-    cql.Code(@_principalDiagnosis.code, @_principalDiagnosis.code_system)
+    new cql.Code(@_principalDiagnosis?.code, @_principalDiagnosis?.code_system)
 
 
 ###
@@ -201,40 +213,36 @@ encounter indicated by the QDM category and its corresponding value set has been
 recommended.
 ###
 class CQL_QDM.EncounterRecommended extends CQL_QDM.QDMDatatype
+  ###
+  @param {Object} entry - the HDS data criteria object to convert
+  ###
   constructor: (@entry) ->
     super @entry
-    @_facilityLocation = @entry.facility?['name']
-    @_negationRationale = @entry.negationRationale
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
+    @_facilityLocation = @entry.facility?.code
+    @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
-    @_startDatetime = @entry.admitTime
-    @_stopDatetime = @entry.dischargeTime
+
+  ###
+  @returns {Date}
+  ###
+  authorDatetime: ->
+    @_authorDatetime
 
   ###
   @returns {Code}
   ###
   facilityLocation: ->
-    cql.Code(@_facilityLocation.code, @_facilityLocation.code_system)
+    new cql.Code(@_facilityLocation?.code, @_facilityLocation?.code_system)
 
   ###
   @returns {Code}
   ###
   negationRationale: ->
-    cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+    new cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
 
   ###
   @returns {Code}
   ###
   reason: ->
-    cql.Code(@_reason.code, @_reason.code_system)
-
-  ###
-  @returns {Date}
-  ###
-  startDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_startDatetime, 'X').toDate())
-
-  ###
-  @returns {Date}
-  ###
-  stopDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_stopDatetime, 'X').toDate())
+    new cql.Code(@_reason?.code, @_reason?.code_system)

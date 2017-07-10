@@ -1,99 +1,8 @@
 ###
-@namespace scoping into the CQL_QDM namespace
+@namespace scoping into the CQL_QDM namespace (all classes and
+their methods will be accessable through the CQL_QDM namespace)
 ###
 @CQL_QDM ||= {}
-
-
-###
-Data elements that meet criteria using this datatype should document an
-unexpected or dangerous reaction to the diagnostic study indicated by the QDM
-category and its corresponding value set.
-###
-class CQL_QDM.DiagnosticStudyAdverseEvent extends CQL_QDM.QDMDatatype
-  constructor: (@entry) ->
-    super @entry
-    @_radiationDosage = @entry.radiation_dose
-    @_radiationDuration = @entry.radiation_duration
-    @_reaction = @entry.reaction
-    @_startDatetime = @entry.start_time
-    @_stopDatetime = @entry.end_time
-
-  ###
-  @returns {Quantity}
-  ###
-  radiationDosage: ->
-    new Quantity({unit: @_radiationDosage['unit'], value: @_radiationDosage['value']})
-
-  ###
-  @returns {Quantity}
-  ###
-  radiationDuration: ->
-    new Quantity({unit: @_radiationDuration['unit'], value: @_radiationDuration['value']})
-
-  ###
-  @returns {Code}
-  ###
-  reaction: ->
-    cql.Code(@_reaction.code, @_reaction.code_system)
-
-  ###
-  @returns {Date}
-  ###
-  startDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_startDatetime, 'X').toDate())
-
-  ###
-  @returns {Date}
-  ###
-  stopDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_stopDatetime, 'X').toDate())
-
-
-###
-Data elements that meet criteria using this datatype should document a reaction
-in specific patients who have a low threshold to the normal reported or
-expected reactions of the diagnostic study indicated by the QDM category and its
-corresponding value set.
-###
-class CQL_QDM.DiagnosticStudyIntolerance extends CQL_QDM.QDMDatatype
-  constructor: (@entry) ->
-    super @entry
-    @_radiationDosage = @entry.radiation_dose
-    @_radiationDuration = @entry.radiation_duration
-    @_reaction = @entry.reaction
-    @_startDatetime = @entry.start_time
-    @_stopDatetime = @entry.end_time
-
-  ###
-  @returns {Quantity}
-  ###
-  radiationDosage: ->
-    new Quantity({unit: @_radiationDosage['unit'], value: @_radiationDosage['value']})
-
-  ###
-  @returns {Quantity}
-  ###
-  radiationDuration: ->
-    new Quantity({unit: @_radiationDuration['unit'], value: @_radiationDuration['value']})
-
-  ###
-  @returns {Code}
-  ###
-  reaction: ->
-    cql.Code(@_reaction.code, @_reaction.code_system)
-
-  ###
-  @returns {Date}
-  ###
-  startDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_startDatetime, 'X').toDate())
-
-  ###
-  @returns {Date}
-  ###
-  stopDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_stopDatetime, 'X').toDate())
-
 
 ###
 Data elements that meet criteria using this datatype should document a request
@@ -107,57 +16,53 @@ cardiology studies (electrocardiogram, treadmill stress testing), pulmonary
 function testing, vascular laboratory testing, and others.
 ###
 class CQL_QDM.DiagnosticStudyOrder extends CQL_QDM.QDMDatatype
+  ###
+  @param {Object} entry - the HDS data criteria object to convert
+  ###
   constructor: (@entry) ->
     super @entry
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_method = @entry.method
-    @_negationRationale = @entry.negationRationale
+    @_negationRationale = @entry.negationReason
     @_radiationDosage = @entry.radiation_dose
     @_radiationDuration = @entry.radiation_duration
     @_reason = @entry.reason
-    @_startDatetime = @entry.start_time
-    @_stopDatetime = @entry.end_time
+
+  ###
+  @returns {Date}
+  ###
+  authorDatetime: ->
+    @_authorDatetime
 
   ###
   @returns {Code}
   ###
   method: ->
-    cql.Code(@_method.code, @_method.code_system)
+    new cql.Code(@_method?.code, @_method?.code_system)
 
   ###
   @returns {Code}
   ###
   negationRationale: ->
-    cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+    new cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
 
   ###
   @returns {Quantity}
   ###
   radiationDosage: ->
-    new Quantity({unit: @_radiationDosage['unit'], value: @_radiationDosage['value']})
+    new cql.Quantity({unit: @_radiationDosage['unit'], value: @_radiationDosage['value']})
 
   ###
   @returns {Quantity}
   ###
   radiationDuration: ->
-    new Quantity({unit: @_radiationDuration['unit'], value: @_radiationDuration['value']})
+    new cql.Quantity({unit: @_radiationDuration['unit'], value: @_radiationDuration['value']})
 
   ###
   @returns {Code}
   ###
   reason: ->
-    cql.Code(@_reason.code, @_reason.code_system)
-
-  ###
-  @returns {Date}
-  ###
-  startDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_startDatetime, 'X').toDate())
-
-  ###
-  @returns {Date}
-  ###
-  stopDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_stopDatetime, 'X').toDate())
+    new cql.Code(@_reason?.code, @_reason?.code_system)
 
 
 ###
@@ -166,78 +71,119 @@ completion of the diagnostic study indicated by the QDM category and its
 corresponding value set.
 ###
 class CQL_QDM.DiagnosticStudyPerformed extends CQL_QDM.QDMDatatype
+  ###
+  @param {Object} entry - the HDS data criteria object to convert
+  ###
   constructor: (@entry) ->
     super @entry
-    @_facilityLocation = @entry.facility_location
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
+    @_facilityLocation = @entry.facility?.code
     @_method = @entry.method
-    @_negationRationale = @entry.negationRationale
+    @_negationRationale = @entry.negationReason
     @_radiationDosage = @entry.radiation_dose
     @_radiationDuration = @entry.radiation_duration
     @_reason = @entry.reason
-    @_result = @entry.result
-    @_startDatetime = @entry.start_time
+    if @entry.values? && @entry.values.length > 0
+      @_result = @entry.values?[0]
+    @_resultDatetime = CQL_QDM.Helpers.convertDateTime(@entry.result_date_time)
+    @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
+    if @entry.end_time
+      @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
+    else
+      # No end time; high is set to infinity
+      @_relevantPeriodHigh = CQL_QDM.Helpers.infinityDateTime()
     @_status = @entry.status
-    @_stopDatetime = @entry.end_time
+    @_component = @entry.components
+
+
+  ###
+  Author date time is only present when this data type has been negated.
+  @returns {Date}
+  ###
+  authorDatetime: ->
+    @_authorDatetime
 
   ###
   @returns {Code}
   ###
   facilityLocation: ->
-    cql.Code(@_facilityLocation.code, @_facilityLocation.code_system)
+    new cql.Code(@_facilityLocation?.code, @_facilityLocation?.code_system)
 
   ###
   @returns {Code}
   ###
   method: ->
-    cql.Code(@_method.code, @_method.code_system)
+    new cql.Code(@_method?.code, @_method?.code_system)
 
   ###
   @returns {Code}
   ###
   negationRationale: ->
-    cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+    new cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
 
   ###
   @returns {Quantity}
   ###
   radiationDosage: ->
-    new Quantity({unit: @_radiationDosage['unit'], value: @_radiationDosage['value']})
+    new cql.Quantity({unit: @_radiationDosage['unit'], value: @_radiationDosage['value']})
 
   ###
   @returns {Quantity}
   ###
   radiationDuration: ->
-    new Quantity({unit: @_radiationDuration['unit'], value: @_radiationDuration['value']})
+    new cql.Quantity({unit: @_radiationDuration['unit'], value: @_radiationDuration['value']})
 
   ###
   @returns {Code}
   ###
   reason: ->
-    cql.Code(@_reason.code, @_reason.code_system)
+    new cql.Code(@_reason?.code, @_reason?.code_system)
 
   ###
-  @returns {Code}
+  @returns {Interval<Date>}
+  ###
+  relevantPeriod: ->
+    low = @_relevantPeriodLow
+    high = @_relevantPeriodHigh
+    new cql.Interval(low, high)
+
+  ###
+  @returns {Code|Quantity}
   ###
   result: ->
-    cql.Code(@_result.code, @_result.code_system)
+    if @_result
+      if @_result.codes?
+        code_system = @_result.codes[Object.keys(@_result.codes)[0]]
+        code = @_result.codes[code_system]
+        new cql.Code(code, code_system)
+      # Check that the scalar portion is a number and the units are a non-zero length string.
+      else if !isNaN(parseFloat(@_result.scalar)) && @_result.units.length > 0
+        new cql.Quantity({unit: @_result.units, value: @_result.scalar})
+    else
+      null
 
   ###
   @returns {Date}
   ###
-  startDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_startDatetime, 'X').toDate())
+  resultDatetime: ->
+    @_resultDatetime
 
   ###
   @returns {Code}
   ###
   status: ->
-    cql.Code(@_status.code, @_status.code_system)
-
+    new cql.Code(@_status?.code, @_status?.code_system)
+    
   ###
-  @returns {Date}
+  @returns {Array}
   ###
-  stopDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_stopDatetime, 'X').toDate())
+  component: ->
+    components = []
+    if @_component
+      for value in @_component.values
+        if value?
+          components.push new Component(value)
+    components
 
 
 ###
@@ -247,47 +193,43 @@ provider to an appropriate provider or organization to perform the diagnostic
 study indicated by the QDM category and its corresponding value set.
 ###
 class CQL_QDM.DiagnosticStudyRecommended extends CQL_QDM.QDMDatatype
+  ###
+  @param {Object} entry - the HDS data criteria object to convert
+  ###
   constructor: (@entry) ->
     super @entry
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_method = @entry.method
-    @_negationRationale = @entry.negationRationale
+    @_negationRationale = @entry.negationReason
     @_radiationDosage = @entry.radiation_dose
     @_radiationDuration = @entry.radiation_duration
-    @_startDatetime = @entry.start_time
-    @_stopDatetime = @entry.end_time
+
+  ###
+  @returns {Date}
+  ###
+  authorDatetime: ->
+    @_authorDatetime
 
   ###
   @returns {Code}
   ###
   method: ->
-    cql.Code(@_method.code, @_method.code_system)
+    new cql.Code(@_method?.code, @_method?.code_system)
 
   ###
   @returns {Code}
   ###
   negationRationale: ->
-    cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+    new cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
 
   ###
   @returns {Quantity}
   ###
   radiationDosage: ->
-    new Quantity({unit: @_radiationDosage['unit'], value: @_radiationDosage['value']})
+    new cql.Quantity({unit: @_radiationDosage['unit'], value: @_radiationDosage['value']})
 
   ###
   @returns {Quantity}
   ###
   radiationDuration: ->
-    new Quantity({unit: @_radiationDuration['unit'], value: @_radiationDuration['value']})
-
-  ###
-  @returns {Date}
-  ###
-  startDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_startDatetime, 'X').toDate())
-
-  ###
-  @returns {Date}
-  ###
-  stopDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_stopDatetime, 'X').toDate())
+    new cql.Quantity({unit: @_radiationDuration['unit'], value: @_radiationDuration['value']})
