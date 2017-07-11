@@ -31,14 +31,17 @@ class CQL_QDM.Helpers
   @infinityDateTime: ->
     cql.DateTime.parse('9999-12-31T23:59:59.999+0000')
 
-  
   ###
   For DateTime values makes sure value meets the CQL standard.
   For scalar values:
     - First checks that the value component is numeric
     - Second for the unit component attempts to clean up freetext
       to match a standard version.
+  
+  @param {Result} input - the result object to be parsed into a Quantity
+  @returns cql.Quantity
   ###
+
   @formatResult: (input) ->
     if input
       if input.codes?
@@ -68,6 +71,9 @@ class CQL_QDM.Helpers
 
   ###
   Take units provided and see if they can be matched to a standard version.
+
+  @param {String} unit - The unit to validate
+  @returns {String}
   ###
   @cleanTimeUnit: (unit) ->
     if time_units[unit] then time_units[unit] else unit
