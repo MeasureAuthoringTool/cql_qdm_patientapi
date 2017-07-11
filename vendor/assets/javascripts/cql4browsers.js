@@ -5288,7 +5288,6 @@
     'mo': 'mo_j',
     'MO': 'mo_j',
     'mo_j': 'mo_j',
-    'mo_j': 'mo_j',
     'weeks': 'wk',
     'week': 'wk',
     'wk': 'wk',
