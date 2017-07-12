@@ -53,27 +53,8 @@ class CQL_QDM.Helpers
         CQL_QDM.Helpers.convertDateTime(input.scalar)
       # Check that the scalar portion is a number and the units are a non-zero length string.
       else if !isNaN(parseFloat(input.scalar)) && input.units.length > 0
-        cleansedUnit = @cleanTimeUnit(input.units)
         new cql.Quantity({unit: cleansedUnit , value: input.scalar})
+      else if !isNaN(parseFloat(input.scalar)) && input.units.length == 0
+        new cql.Quantity({value: input.scalar})
     else
       null
-  ###
-  Used to try and convert freetext time units to CQL standard units.
-  ###
-  time_units = {'years': 'year', 'yr': 'year', 'yrs': 'year'
-    , 'months': 'month', 'month': 'month'
-    , 'weeks': 'week', 'week': 'week', 'wk': 'week', 'wks': 'week'
-    , 'days': 'day', 'day': 'day', 'd': 'day'
-    , 'hours': 'h', 'hour': 'hour', 'hr': 'hour', 'hrs': 'hour'
-    , 'minutes': 'min', 'minute': 'minute', 'min': 'minute'
-    , 'seconds': 'second', 'second': 'second', 'sec': 'second'
-    , 'milliseconds': 'millisecond', 'millisecond': 'millisecond', 'ms': 'millisecond'}
-
-  ###
-  Take units provided and see if they can be matched to a standard version.
-
-  @param {String} unit - The unit to validate
-  @returns {String}
-  ###
-  @cleanTimeUnit: (unit) ->
-    if time_units[unit] then time_units[unit] else unit
