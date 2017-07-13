@@ -54,7 +54,12 @@ class CQL_QDM.AssessmentPerformed extends CQL_QDM.QDMDatatype
   @returns {Code|Quantity|Date}
   ###
   result: ->
-    CQL_QDM.Helpers.formatResult(@_result)
+    if @_result
+      # A PhysicalQuantity with unit UnixTime is a TimeStamp, set in bonnie /lib/measures/patient_builder.rb
+      if @_result.units == 'UnixTime'
+        CQL_QDM.Helpers.convertDateTime(@_result.scalar)
+      else
+        CQL_QDM.Helpers.formatResult(@_result)
 
   ###
   @returns {Array}
