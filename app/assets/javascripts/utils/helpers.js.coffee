@@ -29,3 +29,31 @@ class CQL_QDM.Helpers
   ###
   @infinityDateTime: ->
     @convertDateTime('12/31/2999 12:59 PM')
+
+  ###
+  For DateTime values makes sure value meets the CQL standard.
+  For scalar values:
+    - First checks that the value component is numeric
+    - Second for the unit component attempts to clean up freetext
+      to match a standard version.
+  
+  @param {Result} input - the result object to be parsed into a Quantity
+  @returns cql.Quantity
+  ###
+
+  @formatResult: (input) ->
+    if input
+      if input.codes?
+        code_system = Object.keys(input.codes)[0]
+        code = input.codes[code_system][0]
+        new cql.Code(code, code_system)
+      # A PhysicalQuantity with unit UnixTime is a TimeStamp, set in bonnie /lib/measures/patient_builder.rb
+      else if input.units == 'UnixTime'
+        CQL_QDM.Helpers.convertDateTime(input.scalar)
+      # Check that the scalar portion is a number and the units are a non-zero length string.
+      else if !isNaN(parseFloat(input.scalar)) && input.units.length > 0
+        new cql.Quantity({unit: cleansedUnit , value: input.scalar})
+      else if !isNaN(parseFloat(input.scalar)) && input.units.length == 0
+        new cql.Quantity({value: input.scalar})
+    else
+      null
