@@ -19,8 +19,12 @@ class CQL_QDM.CharacteristicExpired extends CQL_QDM.QDMDatatype
   @returns {Object}
   ###
   getCode: ->
+    # NOTE: Eventually this could be replaced with actual codes. That would
+    # require modifications to the execution engine in order to handle that
+    # change.
     if @_patient.get('deathdate')?
-      '419099009'
+      code:
+        'Dead'
     else
       code:
         ''
