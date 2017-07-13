@@ -184,7 +184,7 @@ class CQL_QDM.CQLPatient
           # e.g. "Encounter, Performed: Face-to-Face Interaction" becomes
           # EncounterPerformed
           classname = dc.description.substr(0, dc.description.indexOf(':'))
-          classname = classname.replace(/,/g, '')
+          classname = classname.replace(/,/g, '').replace(/\//g, '')
           classname = classname.replace(/ /g, '')
           unless data_types[classname]?
             data_types[classname] = []
