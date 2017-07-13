@@ -45,8 +45,8 @@ class CQL_QDM.Helpers
   @formatResult: (input) ->
     if input
       if input.codes?
-        code_system = input.codes[Object.keys(input.codes)[0]]
-        code = input.codes[code_system]
+        code_system = Object.keys(input.codes)[0]
+        code = input.codes[code_system][0]
         new cql.Code(code, code_system)
       # A PhysicalQuantity with unit UnixTime is a TimeStamp, set in bonnie /lib/measures/patient_builder.rb
       else if input.units == 'UnixTime'
