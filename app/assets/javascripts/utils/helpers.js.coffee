@@ -23,9 +23,10 @@ class CQL_QDM.Helpers
       cql.DateTime.fromDate(moment.utc(input, 'X').toDate(), 0)
 
   ###
-  Returns an 'infinity' cql.DateTime. This is used for things like diagnosis
-  that have a start time, but no stop time.
+  Returns an 'end of range' cql.DateTime.
+  See Section 3.4.1 "System-Defined Types" in the CQL specification.
+
   @returns cql.DateTime
   ###
   @infinityDateTime: ->
-    @convertDateTime('12/31/2999 12:59 PM')
+    cql.DateTime.parse('9999-12-31T23:59:59.999+0000')
