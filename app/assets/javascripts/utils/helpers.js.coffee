@@ -47,13 +47,11 @@ class CQL_QDM.Helpers
         code_system = Object.keys(input.codes)[0]
         code = input.codes[code_system][0]
         new cql.Code(code, code_system)
-      # A PhysicalQuantity with unit UnixTime is a TimeStamp, set in bonnie /lib/measures/patient_builder.rb
-      else if input.units == 'UnixTime'
-        CQL_QDM.Helpers.convertDateTime(input.scalar)
       # Check that the scalar portion is a number and the units are a non-zero length string.
-      else if !isNaN(parseFloat(input.scalar)) && input.units.length > 0
-        new cql.Quantity({unit: cleansedUnit , value: input.scalar})
-      else if !isNaN(parseFloat(input.scalar)) && input.units.length == 0
-        new cql.Quantity({value: input.scalar})
+      else if (input.scalar.match(/^[-+]?[0-9]*\.?[0-9]+$/) != null) 
+        if input.units.length > 0
+          new cql.Quantity({unit: input.units , value: parseFloat(input.scalar)})
+        else
+          parseFloat(input.scalar)
     else
       null
