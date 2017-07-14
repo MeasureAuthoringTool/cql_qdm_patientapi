@@ -79,6 +79,7 @@ class CQL_QDM.PhysicalExamPerformed extends CQL_QDM.QDMDatatype
       @_relevantPeriodHigh = CQL_QDM.Helpers.infinityDateTime()
     if @entry.values? && @entry.values.length > 0
       @_result = @entry.values?[0]
+    @_component = @entry.components
 
   ###
   @returns {Code}
@@ -124,6 +125,16 @@ class CQL_QDM.PhysicalExamPerformed extends CQL_QDM.QDMDatatype
   ###
   result: ->
     CQL_QDM.Helpers.formatResult(@_result)
+
+  ###
+  @returns {Array}
+  ###
+  component: ->
+    components = []
+    if @_component
+      for value in @_component.values
+        components.push new Component(value)
+    components
 
 
 ###
