@@ -46,7 +46,10 @@ class CQL_QDM.Helpers
     if input
       if input.codes?
         code_system = Object.keys(input.codes)[0]
-        code = input.codes[code_system][0]
+        if input.codes[code_system]?
+          code = input.codes[code_system][0]
+        else
+          code = null
         new cql.Code(code, code_system)
       # Check that the scalar portion is a number and the units are a non-zero length string.
       else if (input.scalar.match(/^[-+]?[0-9]*\.?[0-9]+$/) != null) 
