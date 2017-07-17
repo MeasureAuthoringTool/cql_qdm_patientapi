@@ -55,8 +55,7 @@ class CQL_QDM.EncounterActive extends CQL_QDM.QDMDatatype
   @returns {Quantity}
   ###
   lengthOfStay: ->
-    # Converts Milliseconds to Days.
-    new cql.Quantity({unit: 'days', value: Math.floor((@entry.end_time - @entry.start_time) / 86400)})
+    new cql.Quantity({unit: 'days', value: @_relevantPeriodLow.differenceBetween(@_relevantPeriodHigh, 'day')?.high})
 
   ###
   @returns {Code}
@@ -117,7 +116,7 @@ class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
   ###
   constructor: (@entry) ->
     super @entry
-    @_admissionSource = @entry.admission_source?['name']
+    @_admissionSource = @entry.admission_source
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_diagnosis = @entry.diagnosis
     @_dischargeDisposition = @entry.dischargeDisposition
@@ -169,8 +168,7 @@ class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
   @returns {Quantity}
   ###
   lengthOfStay: ->
-    # Converts Milliseconds to Days.
-    new cql.Quantity({unit: 'days', value: Math.floor((@entry.end_time - @entry.start_time) / 86400)})
+    new cql.Quantity({unit: 'days', value: @_relevantPeriodLow.differenceBetween(@_relevantPeriodHigh, 'day')?.high})
 
   ###
   @returns {Interval<Date>}
