@@ -217,23 +217,3 @@ class CQL_QDM.CQLPatient
     info['birthDatetime'] = CQL_QDM.Helpers.convertDateTime(@_patient.get('birthdate'))
     info['gender'] = @_patient.get('gender')
     [info]
-
-  ###
-  Returns an array of unique data criteria information that exist on this
-  patient. This is used for the first pass effort of calculating coverage.
-  The set of data criteria returned by this method constitutes the numerator
-  in the coverage calculation (denominator is all possible data criteria).
-
-  TODO: Eventually this can be removed when we fine tune how measure
-        coverage is calculated.
-
-  @returns {Array}
-  ###
-  getUniqueCoveredDataCriteria: ->
-    data_criteria = []
-    for type, dc_array of @_datatypes
-      for dc in dc_array
-        # To ensure uniqueness, describe each data criteria by its OID as
-        # well as its description.
-        data_criteria.push(dc.entry.oid + '_' + dc.entry.description)
-    _.uniq(data_criteria)
