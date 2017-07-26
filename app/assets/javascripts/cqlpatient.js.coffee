@@ -183,8 +183,11 @@ class CQL_QDM.CQLPatient
           # Construct a classname from the data criteria
           # e.g. "Encounter, Performed: Face-to-Face Interaction" becomes
           # EncounterPerformed
-          classname = dc.description.substr(0, dc.description.indexOf(':'))
+          classname = dc.description.substr(0, dc.description.lastIndexOf(':'))
           classname = classname.replace(/,/g, '').replace(/\//g, '')
+          classname = classname.replace(/:/g, '').replace(/\//g, '')
+          classname = classname.replace(/\w\S*/g, (txt) ->
+            txt.charAt(0).toUpperCase() + txt.substr(1))
           classname = classname.replace(/ /g, '')
           unless data_types[classname]?
             data_types[classname] = []
