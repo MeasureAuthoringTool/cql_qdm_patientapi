@@ -185,8 +185,9 @@ class CQL_QDM.CQLPatient
           # EncounterPerformed
           # TODO: this needs to be modified to look at the HQMF template OID instead of the description
           classname = dc.description.substr(0, dc.description.lastIndexOf(':'))
-          classname = classname.replace(/,/g, '').replace(/\//g, '')
-          classname = classname.replace(/:/g, '').replace(/\//g, '')
+          # remove commas, slashes, and colons
+          classname = classname.replace(/,/g, '').replace(/\//g, '').replace(/:/g, '')
+          # make all words start upper case
           classname = classname.replace(/\w\S*/g, (txt) ->
             txt.charAt(0).toUpperCase() + txt.substr(1))
           classname = classname.replace(/ /g, '')
