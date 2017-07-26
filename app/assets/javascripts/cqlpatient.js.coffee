@@ -183,6 +183,7 @@ class CQL_QDM.CQLPatient
           # Construct a classname from the data criteria
           # e.g. "Encounter, Performed: Face-to-Face Interaction" becomes
           # EncounterPerformed
+          # TODO: this needs to be modified to look at the HQMF template OID instead of the description
           classname = dc.description.substr(0, dc.description.lastIndexOf(':'))
           classname = classname.replace(/,/g, '').replace(/\//g, '')
           classname = classname.replace(/:/g, '').replace(/\//g, '')
