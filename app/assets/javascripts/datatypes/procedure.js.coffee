@@ -102,6 +102,7 @@ class CQL_QDM.ProcedurePerformed extends CQL_QDM.QDMDatatype
     if @entry.values? && @entry.values.length > 0
       @_result = @entry.values?[0]
     @_status = @entry.status
+    @_component = @entry.components
 
   ###
   @returns {Code}
@@ -183,6 +184,16 @@ class CQL_QDM.ProcedurePerformed extends CQL_QDM.QDMDatatype
   ###
   status: ->
     new cql.Code(@_status?.code, @_status?.code_system)
+
+  ###
+  @returns {Array}
+  ###
+  component: ->
+    components = []
+    if @_component
+      for value in @_component.values
+        components.push new Component(value)
+    components
 
 
 ###
