@@ -1,7 +1,8 @@
 require 'test_helper'
 
-class CqlQdmPatientapiTest < Minitest::Test
-  def test_that_it_has_a_version_number
-    refute_nil ::CqlQdmPatientapi::VERSION
+class CqlQdmPatientapiTest < ActiveSupport::TestCase
+  test "truth" do
+    refute_nil CqlQdmPatientapi::VERSION
+    assert_kind_of Module, CqlQdmPatientapi
   end
 end
