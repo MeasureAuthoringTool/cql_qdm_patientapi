@@ -24,8 +24,6 @@ class CQL_QDM.DiagnosticStudyOrder extends CQL_QDM.QDMDatatype
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_method = @entry.method
     @_negationRationale = @entry.negationReason
-    @_radiationDosage = @entry.radiation_dose
-    @_radiationDuration = @entry.radiation_duration
     @_reason = @entry.reason
 
   ###
@@ -45,18 +43,6 @@ class CQL_QDM.DiagnosticStudyOrder extends CQL_QDM.QDMDatatype
   ###
   negationRationale: ->
     new cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
-
-  ###
-  @returns {Quantity}
-  ###
-  radiationDosage: ->
-    new cql.Quantity({unit: @_radiationDosage['unit'], value: @_radiationDosage['value']})
-
-  ###
-  @returns {Quantity}
-  ###
-  radiationDuration: ->
-    new cql.Quantity({unit: @_radiationDuration['unit'], value: @_radiationDuration['value']})
 
   ###
   @returns {Code}
@@ -80,8 +66,6 @@ class CQL_QDM.DiagnosticStudyPerformed extends CQL_QDM.QDMDatatype
     @_facilityLocation = @entry.facility?.code
     @_method = @entry.method
     @_negationRationale = @entry.negationReason
-    @_radiationDosage = @entry.radiation_dose
-    @_radiationDuration = @entry.radiation_duration
     @_reason = @entry.reason
     if @entry.values? && @entry.values.length > 0
       @_result = @entry.values?[0]
@@ -120,18 +104,6 @@ class CQL_QDM.DiagnosticStudyPerformed extends CQL_QDM.QDMDatatype
   ###
   negationRationale: ->
     new cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
-
-  ###
-  @returns {Quantity}
-  ###
-  radiationDosage: ->
-    new cql.Quantity({unit: @_radiationDosage['unit'], value: @_radiationDosage['value']})
-
-  ###
-  @returns {Quantity}
-  ###
-  radiationDuration: ->
-    new cql.Quantity({unit: @_radiationDuration['unit'], value: @_radiationDuration['value']})
 
   ###
   @returns {Code}
@@ -192,8 +164,6 @@ class CQL_QDM.DiagnosticStudyRecommended extends CQL_QDM.QDMDatatype
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_method = @entry.method
     @_negationRationale = @entry.negationReason
-    @_radiationDosage = @entry.radiation_dose
-    @_radiationDuration = @entry.radiation_duration
 
   ###
   @returns {Date}
@@ -213,14 +183,3 @@ class CQL_QDM.DiagnosticStudyRecommended extends CQL_QDM.QDMDatatype
   negationRationale: ->
     new cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
 
-  ###
-  @returns {Quantity}
-  ###
-  radiationDosage: ->
-    new cql.Quantity({unit: @_radiationDosage['unit'], value: @_radiationDosage['value']})
-
-  ###
-  @returns {Quantity}
-  ###
-  radiationDuration: ->
-    new cql.Quantity({unit: @_radiationDuration['unit'], value: @_radiationDuration['value']})

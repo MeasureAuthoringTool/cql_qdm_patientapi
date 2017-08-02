@@ -20,7 +20,6 @@ class CQL_QDM.ProcedureOrder extends CQL_QDM.QDMDatatype
     @_method = @entry.method
     @_negationRationale = @entry.negationReason
     @_ordinality = @entry.ordinality
-    @_radiationDuration = @entry.radiation_duration
     @_reason = @entry.reason
 
   ###
@@ -60,12 +59,6 @@ class CQL_QDM.ProcedureOrder extends CQL_QDM.QDMDatatype
     new cql.Code(@_ordinality?.code, @_ordinality?.code_system)
 
   ###
-  @returns {Quantity}
-  ###
-  radiationDuration: ->
-    new cql.Quantity({unit: @_radiationDuration['unit'], value: @_radiationDuration['value']})
-
-  ###
   @returns {Code}
   ###
   reason: ->
@@ -90,8 +83,6 @@ class CQL_QDM.ProcedurePerformed extends CQL_QDM.QDMDatatype
     @_method = @entry.method
     @_negationRationale = @entry.negationReason
     @_ordinality = @entry.ordinality
-    @_radiationDosage = @entry.radiation_dose
-    @_radiationDuration = @entry.radiation_duration
     @_reason = @entry.reason
     @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     if @entry.end_time
@@ -145,18 +136,6 @@ class CQL_QDM.ProcedurePerformed extends CQL_QDM.QDMDatatype
   ###
   ordinality: ->
     new cql.Code(@_ordinality?.code, @_ordinality?.code_system)
-
-  ###
-  @returns {Quantity}
-  ###
-  radiationDosage: ->
-    new cql.Quantity({unit: @_radiationDosage['unit'], value: @_radiationDosage['value']})
-
-  ###
-  @returns {Quantity}
-  ###
-  radiationDuration: ->
-    new cql.Quantity({unit: @_radiationDuration['unit'], value: @_radiationDuration['value']})
 
   ###
   @returns {Code}
