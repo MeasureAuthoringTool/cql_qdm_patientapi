@@ -21,6 +21,7 @@ class CQL_QDM.Diagnosis extends CQL_QDM.QDMDatatype
   ###
   constructor: (@entry) ->
     super @entry
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_prevalencePeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     if @entry.end_time
       @_prevalencePeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
@@ -49,3 +50,10 @@ class CQL_QDM.Diagnosis extends CQL_QDM.QDMDatatype
   ###
   severity: ->
     new cql.Code(@_severity?.code, @_severity?.code_system)
+
+  ###
+  Author date time is only present when this data type has been negated.
+  @returns {Date}
+  ###
+  authorDatetime: ->
+    @_authorDatetime
