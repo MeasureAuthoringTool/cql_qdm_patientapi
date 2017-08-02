@@ -28,7 +28,6 @@ class CQL_QDM.AllergyIntolerance extends CQL_QDM.QDMDatatype
     @_type = @entry.type
 
   ###
-  Author date time is only present when this data type has been negated.
   @returns {Date}
   ###
   authorDatetime: ->

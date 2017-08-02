@@ -52,7 +52,6 @@ class CQL_QDM.Diagnosis extends CQL_QDM.QDMDatatype
     new cql.Code(@_severity?.code, @_severity?.code_system)
 
   ###
-  Author date time is only present when this data type has been negated.
   @returns {Date}
   ###
   authorDatetime: ->
