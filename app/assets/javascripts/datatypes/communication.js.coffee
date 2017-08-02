@@ -1,5 +1,6 @@
 ###
-@namespace scoping into the CQL_QDM namespace
+@namespace scoping into the CQL_QDM namespace (all classes and
+their methods will be accessable through the CQL_QDM namespace)
 ###
 @CQL_QDM ||= {}
 
@@ -10,29 +11,25 @@ Communication QDM category and its corresponding value set must be
 communicated from a patient to a provider.
 ###
 class CQL_QDM.CommunicationFromPatientToProvider extends CQL_QDM.QDMDatatype
+  ###
+  @param {Object} entry - the HDS data criteria object to convert
+  ###
   constructor: (@entry) ->
     super @entry
-    @_negationRationale = @entry.negationRationale
-    @_startDatetime = @entry.start_time
-    @_stopDatetime = @entry.end_time
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
+    @_negationRationale = @entry.negationReason
+
+  ###
+  @returns {Date}
+  ###
+  authorDatetime: ->
+    @_authorDatetime
 
   ###
   @returns {Code}
   ###
   negationRationale: ->
-    cql.Code(@_negationRationale.code, @_negationRationale.code_system)
-
-  ###
-  @returns {Date}
-  ###
-  startDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_startDatetime, 'X').toDate())
-
-  ###
-  @returns {Date}
-  ###
-  stopDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_stopDatetime, 'X').toDate())
+    new cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
 
 
 ###
@@ -41,29 +38,25 @@ Communication QDM category and its corresponding value set must be
 communicated from a provider to a patient.
 ###
 class CQL_QDM.CommunicationFromProviderToPatient extends CQL_QDM.QDMDatatype
+  ###
+  @param {Object} entry - the HDS data criteria object to convert
+  ###
   constructor: (@entry) ->
     super @entry
-    @_negationRationale = @entry.negationRationale
-    @_startDatetime = @entry.start_time
-    @_stopDatetime = @entry.end_time
+    @_negationRationale = @entry.negationReason
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
 
   ###
   @returns {Code}
   ###
   negationRationale: ->
-    cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+    new cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
 
   ###
   @returns {Date}
   ###
-  startDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_startDatetime, 'X').toDate())
-
-  ###
-  @returns {Date}
-  ###
-  stopDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_stopDatetime, 'X').toDate())
+  authorDatetime: ->
+    @_authorDatetime
 
 
 ###
@@ -72,26 +65,22 @@ Communication QDM category and its corresponding value set must be
 communicated from one provider to another.
 ###
 class CQL_QDM.CommunicationFromProviderToProvider extends CQL_QDM.QDMDatatype
+  ###
+  @param {Object} entry - the HDS data criteria object to convert
+  ###
   constructor: (@entry) ->
     super @entry
-    @_negationRationale = @entry.negationRationale
-    @_startDatetime = @entry.start_time
-    @_stopDatetime = @entry.end_time
+    @_negationRationale = @entry.negationReason
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
 
   ###
   @returns {Code}
   ###
   negationRationale: ->
-    cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+    new cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
 
   ###
   @returns {Date}
   ###
-  startDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_startDatetime, 'X').toDate())
-
-  ###
-  @returns {Date}
-  ###
-  stopDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_stopDatetime, 'X').toDate())
+  authorDatetime: ->
+    @_authorDatetime

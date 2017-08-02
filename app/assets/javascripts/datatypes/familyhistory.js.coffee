@@ -1,5 +1,6 @@
 ###
-@namespace scoping into the CQL_QDM namespace
+@namespace scoping into the CQL_QDM namespace (all classes and
+their methods will be accessable through the CQL_QDM namespace)
 ###
 @CQL_QDM ||= {}
 
@@ -12,26 +13,22 @@ recorded datetime acts as both the implicit start datetime and implicit stop
 datetime.
 ###
 class CQL_QDM.FamilyHistory extends CQL_QDM.QDMDatatype
+  ###
+  @param {Object} entry - the HDS data criteria object to convert
+  ###
   constructor: (@entry) ->
     super @entry
-    @_onsetAge = @entry.onsetAge
-    @_recordedDatetime = @entry.recordedDatetime
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_relationship = @entry.relationshipToPatient
-
-  ###
-  @returns {Quantity}
-  ###
-  onsetAge: ->
-    new Quantity({unit: @_onsetAge['unit'], value: @_onsetAge['value']})
 
   ###
   @returns {Date}
   ###
-  recordedDatetime: ->
-    cql.DateTime.fromDate(moment.utc(@_recordedDatetime, 'X').toDate())
+  authorDatetime: ->
+    @_authorDatetime
 
   ###
   @returns {Code}
   ###
   relationshipToPatient: ->
-    cql.Code(@_relationship.code, @_relationship.code_system)
+    new cql.Code(@_relationship?.code, @_relationship?.code_system)
