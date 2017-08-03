@@ -118,12 +118,11 @@ class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
     super @entry
     @_admissionSource = @entry.admission_source
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    @_diagnosis = @entry.diagnosis
+    @_diagnoses = @entry.diagnoses
     @_dischargeDisposition = @entry.dischargeDisposition
-    # TODO(Luke): Location Period should be embedded in facility rather than accessible here
     @_locationPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.facility?['start_time'])
     @_locationPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.facility?['end_time'])
-    @_facilityLocation = @entry.facility?.code # TODO(Luke): Encounter, Performed can have multiple facilities, this should be an array of facility objects
+    @_facilityLocations = @entry.facility?.code
     @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
     @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
@@ -150,10 +149,10 @@ class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
   ###
   @returns {Array}
   ###
-  diagnosis: ->
+  diagnoses: ->
     diagnoses = []
-    if @_diagnosis
-      for diagnosis in @_diagnosis.values
+    if @_diagnoses
+      for diagnosis in @_diagnoses.values
         if diagnosis?
           diagnoses.push new cql.Code(diagnosis.code, diagnosis.code_system)
     diagnoses
@@ -165,16 +164,11 @@ class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
     new cql.Code(@_dischargeDisposition?.code, @_dischargeDisposition?.code_system)
 
   ###
-  @returns {Array}
+  @returns {Code}
   ###
-  facilityLocation: ->
-    # This logic is only relevant for Encounter: Performed, not other encounters
-    facility_locations = []
-    if @_facilityLocation
-      for facility_location in @_facilityLocation.values
-        if facility_location?
-          facility_locations.push new cql.Code(facility_location.code, facility_location.code_system)
-    facility_location
+  facilityLocations: ->
+    # TODO: For Encounter Performeed, this will be changed to return an array of facilities
+    new cql.Code(@_facilityLocations?.code, @_facilityLocations?.code_system)
 
   ###
   @returns {Quantity}

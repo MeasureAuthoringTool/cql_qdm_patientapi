@@ -35,10 +35,15 @@ class CQL_QDM.CareGoal extends CQL_QDM.QDMDatatype
     new cql.Interval(low, high)
 
   ###
-  @returns {Code}
+  @returns {Array}
   ###
   relatedTo: ->
-    new cql.Code(@_relatedTo?.code, @_relatedTo?.code_system)
+    relatedToArray = []
+    if @_relatedTo
+      for relatedTo in @_relatedTo.values
+        if relatedTo?
+          relatedToArray.push new cql.Code(relatedTo.code, relatedTo.code_system)
+    relatedToArray
 
   ###
   @returns {Quantity | Code}
