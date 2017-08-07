@@ -118,7 +118,7 @@ class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
     super @entry
     @_admissionSource = @entry.admission_source
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    @_diagnoses = @entry.diagnoses
+    @_diagnoses = @entry.diagnosis
     @_dischargeDisposition = @entry.dischargeDisposition
     @_locationPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.facility?['start_time'])
     @_locationPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.facility?['end_time'])
