@@ -17,6 +17,7 @@ class CQL_QDM.CareGoal extends CQL_QDM.QDMDatatype
   ###
   constructor: (@entry) ->
     super @entry
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     if @entry.end_time
       @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
@@ -25,6 +26,12 @@ class CQL_QDM.CareGoal extends CQL_QDM.QDMDatatype
       @_relevantPeriodHigh = CQL_QDM.Helpers.infinityDateTime()
     @_relatedTo = @entry.relatedTo
     @_targetOutcome = @entry.targetOutcome
+
+  ###
+  @returns {Date}
+  ###
+  authorDatetime: ->
+    @_authorDatetime
 
   ###
   @returns {Interval<Date>}
