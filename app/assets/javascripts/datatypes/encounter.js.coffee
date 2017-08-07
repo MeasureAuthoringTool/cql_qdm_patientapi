@@ -124,7 +124,6 @@ class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
     @_locationPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.facility?['end_time'])
     @_facilityLocation = @entry.facility?.code
     @_negationRationale = @entry.negationReason
-    @_reason = @entry.reason
     @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     if @entry.end_time
       @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
@@ -183,12 +182,6 @@ class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
   ###
   negationRationale: ->
     new cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
-
-  ###
-  @returns {Code}
-  ###
-  reason: ->
-    new cql.Code(@_reason?.code, @_reason?.code_system)
 
   ###
   @returns {Interval<Date>}
