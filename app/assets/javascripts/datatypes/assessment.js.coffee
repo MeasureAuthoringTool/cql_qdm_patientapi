@@ -23,7 +23,7 @@ class CQL_QDM.AssessmentPerformed extends CQL_QDM.QDMDatatype
     @_reason = @entry.reason
     if @entry.values? && @entry.values.length > 0
       @_result = @entry.values?[0]
-    @_component = @entry.components
+    @_components = @entry.components
 
 
   ###
@@ -64,10 +64,10 @@ class CQL_QDM.AssessmentPerformed extends CQL_QDM.QDMDatatype
   ###
   @returns {Array}
   ###
-  component: ->
+  components: ->
     components = []
-    if @_component
-      for value in @_component.values
+    if @_components
+      for value in @_components.values
         if value?
           components.push new Component(value)
     components

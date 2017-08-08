@@ -72,7 +72,7 @@ class CQL_QDM.LaboratoryTestPerformed extends CQL_QDM.QDMDatatype
       @_result = @entry.values?[0]
     @_resultDatetime = CQL_QDM.Helpers.convertDateTime(@entry.result_date_time)
     @_status = @entry.status
-    @_component = @entry.components
+    @_components = @entry.components
 
   ###
   Author date time is only present when this data type has been negated.
@@ -151,10 +151,10 @@ class CQL_QDM.LaboratoryTestPerformed extends CQL_QDM.QDMDatatype
   ###
   @returns {Array}
   ###
-  component: ->
+  components: ->
     components = []
-    if @_component
-      for value in @_component.values
+    if @_components
+      for value in @_components.values
         if value?
           components.push new Component(value)
     components

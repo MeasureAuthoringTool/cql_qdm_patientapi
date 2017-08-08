@@ -58,7 +58,7 @@ class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
     super @entry
     @_admissionSource = @entry.admission_source
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    @_diagnosis = @entry.diagnosis
+    @_diagnoses = @entry.diagnosis
     @_dischargeDisposition = @entry.dischargeDisposition
     @_locationPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.facility?['start_time'])
     @_locationPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.facility?['end_time'])
@@ -86,10 +86,15 @@ class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
     @_authorDatetime
 
   ###
-  @returns {Code}
+  @returns {Array}
   ###
-  diagnosis: ->
-    new cql.Code(@_diagnosis?.code, @_diagnosis?.code_system)
+  diagnoses: ->
+    diagnoses = []
+    if @_diagnoses
+      for diagnosis in @_diagnoses.values
+        if diagnosis?
+          diagnoses.push new cql.Code(diagnosis.code, diagnosis.code_system)
+    diagnoses
 
   ###
   @returns {Code}
@@ -101,6 +106,7 @@ class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   facilityLocation: ->
+    # TODO: For Encounter Performeed, this will be changed to return an array of facilities
     new cql.Code(@_facilityLocation?.code, @_facilityLocation?.code_system)
 
   ###
