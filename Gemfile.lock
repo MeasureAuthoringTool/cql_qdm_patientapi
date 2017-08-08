@@ -3,7 +3,7 @@ PATH
   specs:
     cql_qdm_patientapi (0.1.0)
       coffee-rails (~> 4.2)
-      rails (~> 4.1.16)
+      rails (~> 4.1.12)
 
 GEM
   remote: https://rubygems.org/
