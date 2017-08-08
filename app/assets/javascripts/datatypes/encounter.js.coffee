@@ -118,11 +118,9 @@ class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
     super @entry
     @_admissionSource = @entry.admission_source
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    @_diagnoses = @entry.diagnoses
+    @_diagnoses = @entry.diagnosis
     @_dischargeDisposition = @entry.dischargeDisposition
-    @_locationPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.facility?['start_time'])
-    @_locationPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.facility?['end_time'])
-    @_facilityLocations = @entry.facility?.code
+    @_facilityLocations = @entry.facility 
     @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
     @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
@@ -164,11 +162,16 @@ class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
     new cql.Code(@_dischargeDisposition?.code, @_dischargeDisposition?.code_system)
 
   ###
-  @returns {Code}
+  @returns {Array}
   ###
   facilityLocations: ->
-    # TODO: For Encounter Performeed, this will be changed to return an array of facilities
-    new cql.Code(@_facilityLocations?.code, @_facilityLocations?.code_system)
+    # For Encounter Performeed, there can be multiple Facility Locations
+    facilityLocations = []
+    if @_facilityLocations
+      for facility in @_facilityLocations.values
+        if facility?
+          facilityLocations.push new Facility(facility)
+    facilityLocations
 
   ###
   @returns {Quantity}
@@ -177,12 +180,15 @@ class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
     new cql.Quantity({unit: 'days', value: @_relevantPeriodLow.differenceBetween(@_relevantPeriodHigh, 'day')?.high})
 
   ###
-  @returns {Interval<Date>}
+  @returns {Array}
   ###
-  locationPeriod: ->
-    low = @_locationPeriodLow
-    high = @_locationPeriodHigh
-    new cql.Interval(low, high)
+  locationPeriods: ->
+    locationPeriods = []
+    if @_facilityLocations # Each location period is tied to a facility location
+      for facility in @_facilityLocations.values
+        if facility? && facility.locationPeriod?
+          facilityLocations.push facility.locationPeriod
+    locationPeriods
 
   ###
   @returns {Code}
