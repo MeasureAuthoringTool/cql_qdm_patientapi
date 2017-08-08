@@ -122,7 +122,7 @@ class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
     @_dischargeDisposition = @entry.dischargeDisposition
     @_locationPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.facility?['start_time'])
     @_locationPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.facility?['end_time'])
-    @_facilityLocations = @entry.facility?.code
+    @_facilityLocation = @entry.facility?.code
     @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
     @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
@@ -166,9 +166,9 @@ class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
   ###
   @returns {Code}
   ###
-  facilityLocations: ->
+  facilityLocation: ->
     # TODO: For Encounter Performeed, this will be changed to return an array of facilities
-    new cql.Code(@_facilityLocations?.code, @_facilityLocations?.code_system)
+    new cql.Code(@_facilityLocation?.code, @_facilityLocation?.code_system)
 
   ###
   @returns {Quantity}
