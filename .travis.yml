@@ -2,4 +2,14 @@ sudo: false
 language: ruby
 rvm:
   - 2.2.2
-before_install: gem install bundler -v 1.12.3
+before_install:
+  - "sh -e /etc/init.d/xvfb start"
+before_install: gem install bundler -v 1.15.3
+script:
+  - export DISPLAY=:99.0
+  - bundle exec teaspoon
+notifications:
+  email:
+    recipients:
+      - healthcare-ci@googlegroups.com
+    on_failure: change

@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
-gem 'rails', '>= 4.0.0'
-
 gemspec
+
+group :development, :test do
+  gem "teaspoon-jasmine", "2.3.4"
+  gem "phantomjs"
+end
