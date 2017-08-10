@@ -24,9 +24,7 @@ class CQL_QDM.EncounterActive extends CQL_QDM.QDMDatatype
     else
       # No end time; high is set to infinity
       @_relevantPeriodHigh = CQL_QDM.Helpers.infinityDateTime()
-    @_locationPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.facility?['start_time'])
-    @_locationPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.facility?['end_time'])
-    @_facilityLocation = @entry.facility?.code
+    @_facilityLocation = @entry.facility
     @_reason = @entry.reason
 
   ###
@@ -38,18 +36,11 @@ class CQL_QDM.EncounterActive extends CQL_QDM.QDMDatatype
     new cql.Interval(low, high)
 
   ###
-  @returns {Code}
+  @returns {Facility}
   ###
   facilityLocation: ->
-    new cql.Code(@_facilityLocation?.code, @_facilityLocation?.code_system)
-
-  ###
-  @returns {Interval<Date>}
-  ###
-  locationPeriod: ->
-    low = @_locationPeriodLow
-    high = @_locationPeriodHigh
-    new cql.Interval(low, high)
+    if @_facilityLocation.values[0]?
+      new Facility(@_facilityLocation.values[0])
 
   ###
   @returns {Quantity}
@@ -76,7 +67,7 @@ class CQL_QDM.EncounterOrder extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    @_facilityLocation = @entry.facility?.code
+    @_facilityLocation = @entry.facility
     @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
 
@@ -87,10 +78,11 @@ class CQL_QDM.EncounterOrder extends CQL_QDM.QDMDatatype
     @_authorDatetime
 
   ###
-  @returns {Code}
+  @returns {Facility}
   ###
   facilityLocation: ->
-    new cql.Code(@_facilityLocation?.code, @_facilityLocation?.code_system)
+    if @_facilityLocation.values[0]?
+      new Facility(@_facilityLocation.values[0])
 
   ###
   @returns {Code}
@@ -120,6 +112,7 @@ class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_diagnoses = @entry.diagnosis
     @_dischargeDisposition = @entry.dischargeDisposition
+    debugger
     @_facilityLocations = @entry.facility 
     @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
@@ -180,17 +173,6 @@ class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
     new cql.Quantity({unit: 'days', value: @_relevantPeriodLow.differenceBetween(@_relevantPeriodHigh, 'day')?.high})
 
   ###
-  @returns {Array}
-  ###
-  locationPeriods: ->
-    locationPeriods = []
-    if @_facilityLocations # Each location period is tied to a facility location
-      for facility in @_facilityLocations.values
-        if facility? && facility.locationPeriod?
-          facilityLocations.push facility.locationPeriod
-    locationPeriods
-
-  ###
   @returns {Code}
   ###
   negationRationale: ->
@@ -229,7 +211,7 @@ class CQL_QDM.EncounterRecommended extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    @_facilityLocation = @entry.facility?.code
+    @_facilityLocation = @entry.facility
     @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
 
@@ -240,10 +222,11 @@ class CQL_QDM.EncounterRecommended extends CQL_QDM.QDMDatatype
     @_authorDatetime
 
   ###
-  @returns {Code}
+  @returns {Facility}
   ###
   facilityLocation: ->
-    new cql.Code(@_facilityLocation?.code, @_facilityLocation?.code_system)
+    if @_facilityLocation.values[0]?
+      new Facility(@_facilityLocation.values[0])
 
   ###
   @returns {Code}

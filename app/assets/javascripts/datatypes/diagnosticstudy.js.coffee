@@ -77,7 +77,7 @@ class CQL_QDM.DiagnosticStudyPerformed extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    @_facilityLocation = @entry.facility?.code
+    @_facilityLocation = @entry.facility
     @_method = @entry.method
     @_negationRationale = @entry.negationReason
     @_radiationDosage = @entry.radiation_dose
@@ -104,10 +104,11 @@ class CQL_QDM.DiagnosticStudyPerformed extends CQL_QDM.QDMDatatype
     @_authorDatetime
 
   ###
-  @returns {Code}
+  @returns {Facility}
   ###
   facilityLocation: ->
-    new cql.Code(@_facilityLocation?.code, @_facilityLocation?.code_system)
+    if @_facilityLocation.values[0]?
+      new Facility(@_facilityLocation.values[0])
 
   ###
   @returns {Code}
