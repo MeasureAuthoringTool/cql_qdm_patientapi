@@ -1,4 +1,17 @@
-$LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
-require 'cql_qdm_patientapi'
+# Configure Rails Environment
+ENV["RAILS_ENV"] = "test"
 
-require 'minitest/autorun'
+require File.expand_path("../../test/dummy/config/environment.rb",  __FILE__)
+require "rails/test_help"
+
+# Filter out Minitest backtrace while allowing backtrace from other libraries
+# to be shown.
+Minitest.backtrace_filter = Minitest::BacktraceFilter.new
+
+# Load support files
+Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
+
+# Load fixtures from the engine
+if ActiveSupport::TestCase.method_defined?(:fixture_path=)
+  ActiveSupport::TestCase.fixture_path = File.expand_path("../fixtures", __FILE__)
+end
