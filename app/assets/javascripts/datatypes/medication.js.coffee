@@ -207,6 +207,12 @@ class CQL_QDM.MedicationDispensed extends CQL_QDM.QDMDatatype
     @_refills = @entry.refills
     @_route = @entry.route
     @_supply = @entry.supply
+    @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
+    if @entry.end_time
+      @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
+    else
+      # No end time; high is set to infinity
+      @_relevantPeriodHigh = CQL_QDM.Helpers.infinityDateTime()
 
   ###
   @returns {Date}
@@ -225,6 +231,14 @@ class CQL_QDM.MedicationDispensed extends CQL_QDM.QDMDatatype
   ###
   negationRationale: ->
     new cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
+
+  ###
+  @returns {Interval<Date>}
+  ###
+  relevantPeriod: ->
+    low = @_relevantPeriodLow
+    high = @_relevantPeriodHigh
+    new cql.Interval(low, high)
 
   ###
   @returns {String}
@@ -266,6 +280,12 @@ class CQL_QDM.MedicationOrder extends CQL_QDM.QDMDatatype
     @_refills = @entry.refills
     @_route = @entry.route
     @_supply = @entry.supply
+    @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
+    if @entry.end_time
+      @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
+    else
+      # No end time; high is set to infinity
+      @_relevantPeriodHigh = CQL_QDM.Helpers.infinityDateTime()
 
   ###
   @returns {Date}
@@ -308,6 +328,14 @@ class CQL_QDM.MedicationOrder extends CQL_QDM.QDMDatatype
   ###
   refills: ->
     @_refills
+
+  ###
+  @returns {Interval<Date>}
+  ###
+  relevantPeriod: ->
+    low = @_relevantPeriodLow
+    high = @_relevantPeriodHigh
+    new cql.Interval(low, high)
 
   ###
   @returns {Code}

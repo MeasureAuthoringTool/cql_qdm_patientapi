@@ -15,7 +15,7 @@ Teaspoon.configure do |config|
 
   # Paths that will be appended to the Rails assets paths
   # Note: Relative to `config.root`.
-  config.asset_paths = ["app/assets/javascripts", "spec/javascripts", "spec/javascripts/stylesheets"]
+  config.asset_paths = ["app/assets/javascripts", "spec/javascripts", "spec/javascripts/stylesheets", "spec/javascripts/vendor", "vendor/assets/javascripts"]
 
   # Fixtures are rendered through a controller, which allows using HAML, RABL/JBuilder, etc. Files in these paths will
   # be rendered as fixtures.
@@ -179,7 +179,7 @@ Teaspoon.configure do |config|
 
     # Assets to be ignored when generating coverage reports. Accepts an array of filenames or regular expressions. The
     # default excludes assets from vendor, gems and support libraries.
-    #coverage.ignore = [%r{/lib/ruby/gems/}, %r{/vendor/assets/}, %r{/support/}, %r{/(.+)_helper.}]
+    coverage.ignore = [%r{spec/}, %r{app/assets/javascripts/templates}, %r{vendor/}, %r{gems/}]
 
     # Various thresholds requirements can be defined, and those thresholds will be checked at the end of a run. If any
     # aren't met the run will fail with a message. Thresholds can be defined as a percentage (0-100), or nil.
