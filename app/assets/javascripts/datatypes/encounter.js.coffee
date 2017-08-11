@@ -112,7 +112,6 @@ class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_diagnoses = @entry.diagnosis
     @_dischargeDisposition = @entry.dischargeDisposition
-    debugger
     @_facilityLocations = @entry.facility 
     @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
