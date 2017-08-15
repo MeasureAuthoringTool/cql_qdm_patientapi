@@ -24,7 +24,7 @@ class CQL_QDM.AssessmentPerformed extends CQL_QDM.QDMDatatype
     if @entry.values? && @entry.values.length > 0
       @_result = @entry.values?[0]
     @_components = @entry.components
-
+    @_relatedTo = @entry.relatedTo
 
   ###
   @returns {Date}
@@ -72,6 +72,16 @@ class CQL_QDM.AssessmentPerformed extends CQL_QDM.QDMDatatype
           components.push new Component(value)
     components
 
+  ###
+  @returns {Array}
+  ###
+  relatedTo: ->
+    relatedToArray = []
+    if @_relatedTo
+      for relatedTo in @_relatedTo.values
+        if relatedTo?
+          relatedToArray.push new cql.Code(relatedTo.code, relatedTo.code_system)
+    relatedToArray
 
 ###
 Data elements that meet this criteria using this datatype should document a
