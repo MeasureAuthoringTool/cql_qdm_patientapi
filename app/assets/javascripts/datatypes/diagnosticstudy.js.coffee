@@ -92,7 +92,7 @@ class CQL_QDM.DiagnosticStudyPerformed extends CQL_QDM.QDMDatatype
   ###
   facilityLocation: ->
     if @_facilityLocation.values[0]?
-      new Facility(@_facilityLocation.values[0])
+      new CQL_QDM.Facility(@_facilityLocation.values[0])
 
   ###
   @returns {Code}
