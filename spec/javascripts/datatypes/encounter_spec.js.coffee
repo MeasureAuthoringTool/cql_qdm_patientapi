@@ -19,3 +19,13 @@ describe "Encounter", ->
     it "should show two diagnoses and the principal", ->
       encounterPerformed = new CQL_QDM.EncounterPerformed({'diagnosis': {'type': 'COL', 'values': [{'code_system': 'SNOMED-CT', 'code': '408816000', 'title': 'Artificial Rupture of Membranes'}, {'code_system': 'ICD-10-PCS', 'code': '10D00Z0', 'title': 'Cesarean Birth'}]},'principalDiagnosis': {'_id': '59944a3c02334c775e000012', 'code': '20236002', 'code_system': 'SNOMED-CT', 'title': 'Labor'}})
       expect(JSON.stringify(encounterPerformed.diagnoses())).toEqual "[{\"code\":\"408816000\",\"system\":\"SNOMED-CT\"},{\"code\":\"10D00Z0\",\"system\":\"ICD-10-PCS\"},{\"code\":\"20236002\",\"system\":\"SNOMED-CT\"}]"
+
+    it "should handle add/remove of principal diagnosis", ->
+      encounterPerformed = new CQL_QDM.EncounterPerformed({'diagnosis': {'type': 'COL', 'values': [{'code_system': 'SNOMED-CT', 'code': '408816000', 'title': 'Artificial Rupture of Membranes'}]}})
+      expect(JSON.stringify(encounterPerformed.diagnoses())).toEqual "[{\"code\":\"408816000\",\"system\":\"SNOMED-CT\"}]"
+      # Add on a principal diagnosis
+      encounterPerformed = new CQL_QDM.EncounterPerformed({'diagnosis': {'type': 'COL', 'values': [{'code_system': 'SNOMED-CT', 'code': '408816000', 'title': 'Artificial Rupture of Membranes'}]},'principalDiagnosis': {'_id': '59944a3c02334c775e000012', 'code': '20236002', 'code_system': 'SNOMED-CT', 'title': 'Labor'}})
+      expect(JSON.stringify(encounterPerformed.diagnoses())).toEqual "[{\"code\":\"408816000\",\"system\":\"SNOMED-CT\"},{\"code\":\"20236002\",\"system\":\"SNOMED-CT\"}]"
+      # Remove the principal diagnosis
+      encounterPerformed = new CQL_QDM.EncounterPerformed({'diagnosis': {'type': 'COL', 'values': [{'code_system': 'SNOMED-CT', 'code': '408816000', 'title': 'Artificial Rupture of Membranes'}]}})
+      expect(JSON.stringify(encounterPerformed.diagnoses())).toEqual "[{\"code\":\"408816000\",\"system\":\"SNOMED-CT\"}]"
