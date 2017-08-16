@@ -18,6 +18,7 @@ class CQL_QDM.CommunicationFromPatientToProvider extends CQL_QDM.QDMDatatype
     super @entry
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_negationRationale = @entry.negationReason
+    @_relatedTo = @entry.references
 
   ###
   @returns {Date}
@@ -30,6 +31,17 @@ class CQL_QDM.CommunicationFromPatientToProvider extends CQL_QDM.QDMDatatype
   ###
   negationRationale: ->
     new cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
+
+  ###
+  @returns {Array}
+  ###
+  relatedTo: ->
+    relatedToArray = []
+    if @_relatedTo
+      for relatedTo in @_relatedTo
+        if relatedTo?
+          relatedToArray.push new cql.Code(relatedTo.referenced_id, relatedTo.type)
+    relatedToArray
 
 
 ###
@@ -45,6 +57,7 @@ class CQL_QDM.CommunicationFromProviderToPatient extends CQL_QDM.QDMDatatype
     super @entry
     @_negationRationale = @entry.negationReason
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
+    @_relatedTo = @entry.references
 
   ###
   @returns {Code}
@@ -57,6 +70,17 @@ class CQL_QDM.CommunicationFromProviderToPatient extends CQL_QDM.QDMDatatype
   ###
   authorDatetime: ->
     @_authorDatetime
+
+  ###
+  @returns {Array}
+  ###
+  relatedTo: ->
+    relatedToArray = []
+    if @_relatedTo
+      for relatedTo in @_relatedTo
+        if relatedTo?
+          relatedToArray.push new cql.Code(relatedTo.referenced_id, relatedTo.type)
+    relatedToArray
 
 
 ###
@@ -72,6 +96,7 @@ class CQL_QDM.CommunicationFromProviderToProvider extends CQL_QDM.QDMDatatype
     super @entry
     @_negationRationale = @entry.negationReason
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
+    @_relatedTo = @entry.references
 
   ###
   @returns {Code}
@@ -84,3 +109,14 @@ class CQL_QDM.CommunicationFromProviderToProvider extends CQL_QDM.QDMDatatype
   ###
   authorDatetime: ->
     @_authorDatetime
+
+  ###
+  @returns {Array}
+  ###
+  relatedTo: ->
+    relatedToArray = []
+    if @_relatedTo
+      for relatedTo in @_relatedTo
+        if relatedTo?
+          relatedToArray.push new cql.Code(relatedTo.referenced_id, relatedTo.type)
+    relatedToArray

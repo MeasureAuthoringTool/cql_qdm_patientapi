@@ -23,8 +23,8 @@ class CQL_QDM.AssessmentPerformed extends CQL_QDM.QDMDatatype
     @_reason = @entry.reason
     if @entry.values? && @entry.values.length > 0
       @_result = @entry.values?[0]
+    @_relatedTo = @entry.references
     @_components = @entry.components
-
 
   ###
   @returns {Date}
@@ -60,6 +60,17 @@ class CQL_QDM.AssessmentPerformed extends CQL_QDM.QDMDatatype
         CQL_QDM.Helpers.convertDateTime(@_result.scalar)
       else
         CQL_QDM.Helpers.formatResult(@_result)
+
+  ###
+  @returns {Array}
+  ###
+  relatedTo: ->
+    relatedToArray = []
+    if @_relatedTo
+      for relatedTo in @_relatedTo
+        if relatedTo?
+          relatedToArray.push new cql.Code(relatedTo.referenced_id, relatedTo.type)
+    relatedToArray
 
   ###
   @returns {Array}

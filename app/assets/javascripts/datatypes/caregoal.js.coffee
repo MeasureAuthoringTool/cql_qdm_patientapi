@@ -24,7 +24,7 @@ class CQL_QDM.CareGoal extends CQL_QDM.QDMDatatype
     else
       # No end time; high is set to infinity
       @_relevantPeriodHigh = CQL_QDM.Helpers.infinityDateTime()
-    @_relatedTo = @entry.relatedTo
+    @_relatedTo = @entry.references
     @_targetOutcome = @entry.targetOutcome
 
   ###
@@ -47,9 +47,9 @@ class CQL_QDM.CareGoal extends CQL_QDM.QDMDatatype
   relatedTo: ->
     relatedToArray = []
     if @_relatedTo
-      for relatedTo in @_relatedTo.values
+      for relatedTo in @_relatedTo
         if relatedTo?
-          relatedToArray.push new cql.Code(relatedTo.code, relatedTo.code_system)
+          relatedToArray.push new cql.Code(relatedTo.referenced_id, relatedTo.type)
     relatedToArray
 
   ###
