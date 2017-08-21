@@ -94,6 +94,8 @@ class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
       for diagnosis in @_diagnoses.values
         if diagnosis?
           diagnoses.push new cql.Code(diagnosis.code, diagnosis.code_system)
+    if @_principalDiagnosis?
+      diagnoses.push new cql.Code(@_principalDiagnosis.code, @_principalDiagnosis.code_system)
     diagnoses
 
   ###
