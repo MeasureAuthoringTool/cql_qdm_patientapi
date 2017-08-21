@@ -1,32 +1,25 @@
 describe "Encounter", ->
   describe "Performed", ->
-    it "should show nothing if there is no diagnosis", ->
+    it "should show nothing if there is no facility", ->
       encounterPerformed = new CQL_QDM.EncounterPerformed({})
-      expect(JSON.stringify(encounterPerformed.diagnoses())).toEqual "[]"
+      expect(JSON.stringify(encounterPerformed.facilityLocations())).toEqual "[]"
+    
+    it "should show just the single facilityLocation", ->
+      encounterPerformed = new CQL_QDM.EncounterPerformed({'facility': {"type":"COL","values":[{"code":{"code_system":"HCPCS","code":"G0438"},"display":"Annual Wellness Visit","locationPeriodLow":"08/30/2017 1:00 AM","locationPeriodHigh":"08/31/2017 1:00 AM"}]}})
+      expect(JSON.stringify(encounterPerformed.facilityLocations())).toEqual '[{"code":{"code":"G0438","system":"HCPCS","display":"Annual Wellness Visit"},"locationPeriod":{"low":"2017-08-30T01:00:00.00+0000","high":"2017-08-31T01:00:00.00+0000","lowClosed":true,"highClosed":true}}]'
 
-    it "should show just the single diagnosis", ->
-      encounterPerformed = new CQL_QDM.EncounterPerformed({'diagnosis': {'type': 'COL', 'values': [{'code_system': 'SNOMED-CT', 'code': '408816000', 'title': 'Artificial Rupture of Membranes'}]}})
-      expect(JSON.stringify(encounterPerformed.diagnoses())).toEqual "[{\"code\":\"408816000\",\"system\":\"SNOMED-CT\"}]"
+    it "should show two Facilities", ->
+      encounterPerformed = new CQL_QDM.EncounterPerformed({'facility': {"type":"COL","values":[{"code":{"code_system":"HCPCS","code":"G0438"},"display":"Annual Wellness Visit","locationPeriodLow":"08/30/2017 1:00 AM","locationPeriodHigh":"08/31/2017 1:00 AM"},{"code":{"code_system":"SNOMED-CT","code":"105401000119101"},"display":"Diabetes","locationPeriodLow":"08/30/2017 1:00 AM","locationPeriodHigh":"08/31/2017 1:00 AM"}]}})
+      expect(JSON.stringify(encounterPerformed.facilityLocations())).toEqual '[{"code":{"code":"G0438","system":"HCPCS","display":"Annual Wellness Visit"},"locationPeriod":{"low":"2017-08-30T01:00:00.00+0000","high":"2017-08-31T01:00:00.00+0000","lowClosed":true,"highClosed":true}},{"code":{"code":"105401000119101","system":"SNOMED-CT","display":"Diabetes"},"locationPeriod":{"low":"2017-08-30T01:00:00.00+0000","high":"2017-08-31T01:00:00.00+0000","lowClosed":true,"highClosed":true}}]'
 
-    it "should show two diagnoses", ->
-      encounterPerformed = new CQL_QDM.EncounterPerformed({'diagnosis': {'type': 'COL', 'values': [{'code_system': 'SNOMED-CT', 'code': '408816000', 'title': 'Artificial Rupture of Membranes'}, {'code_system': 'ICD-10-PCS', 'code': '10D00Z0', 'title': 'Cesarean Birth'}]}})
-      expect(JSON.stringify(encounterPerformed.diagnoses())).toEqual "[{\"code\":\"408816000\",\"system\":\"SNOMED-CT\"},{\"code\":\"10D00Z0\",\"system\":\"ICD-10-PCS\"}]"
+    it "should show Facility without locationPeriod if none provided", ->
+      encounterPerformed = new CQL_QDM.EncounterPerformed({'facility': {"type":"COL","values":[{"code":{"code_system":"HCPCS","code":"G0438"},"display":"Annual Wellness Visit","locationPeriodLow":null,"locationPeriodHigh":null}]}})
+      expect(JSON.stringify(encounterPerformed.facilityLocations())).toEqual '[{"code":{"code":"G0438","system":"HCPCS","display":"Annual Wellness Visit"}}]'
 
-    it "should show just the principal", ->
-      encounterPerformed = new CQL_QDM.EncounterPerformed({'principalDiagnosis': {'_id': '59944a3c02334c775e000012', 'code': '20236002', 'code_system': 'SNOMED-CT', 'title': 'Labor'}})
-      expect(JSON.stringify(encounterPerformed.diagnoses())).toEqual "[{\"code\":\"20236002\",\"system\":\"SNOMED-CT\"}]"
+    it "should show locationPeriod with undefined end date", ->
+      encounterPerformed = new CQL_QDM.EncounterPerformed({'facility': {"type":"COL","values":[{"code":{"code_system":"HCPCS","code":"G0438"},"display":"Annual Wellness Visit","locationPeriodLow":"08/30/2017","locationPeriodHigh":null}]}})
+      expect(JSON.stringify(encounterPerformed.facilityLocations())).toEqual '[{"code":{"code":"G0438","system":"HCPCS","display":"Annual Wellness Visit"},"locationPeriod":{"low":"1970-01-01T00:00:08.00+0000","lowClosed":true,"highClosed":true}}]'
 
-    it "should show two diagnoses and the principal", ->
-      encounterPerformed = new CQL_QDM.EncounterPerformed({'diagnosis': {'type': 'COL', 'values': [{'code_system': 'SNOMED-CT', 'code': '408816000', 'title': 'Artificial Rupture of Membranes'}, {'code_system': 'ICD-10-PCS', 'code': '10D00Z0', 'title': 'Cesarean Birth'}]},'principalDiagnosis': {'_id': '59944a3c02334c775e000012', 'code': '20236002', 'code_system': 'SNOMED-CT', 'title': 'Labor'}})
-      expect(JSON.stringify(encounterPerformed.diagnoses())).toEqual "[{\"code\":\"408816000\",\"system\":\"SNOMED-CT\"},{\"code\":\"10D00Z0\",\"system\":\"ICD-10-PCS\"},{\"code\":\"20236002\",\"system\":\"SNOMED-CT\"}]"
-
-    it "should handle add/remove of principal diagnosis", ->
-      encounterPerformed = new CQL_QDM.EncounterPerformed({'diagnosis': {'type': 'COL', 'values': [{'code_system': 'SNOMED-CT', 'code': '408816000', 'title': 'Artificial Rupture of Membranes'}]},'principalDiagnosis': {'_id': '59944a3c02334c775e000012', 'code': '20236002', 'code_system': 'SNOMED-CT', 'title': 'Labor'}})
-      # Display both the Principal Diagnosis and the Diagnosis
-      expect(JSON.stringify(encounterPerformed.diagnoses())).toEqual "[{\"code\":\"408816000\",\"system\":\"SNOMED-CT\"},{\"code\":\"20236002\",\"system\":\"SNOMED-CT\"}]"
-      # Remove the principal diagnosis
-      encounterPerformed._principalDiagnosis = null
-      expect(JSON.stringify(encounterPerformed.diagnoses())).toEqual "[{\"code\":\"408816000\",\"system\":\"SNOMED-CT\"}]"
-      # Add the Principal Diagnosis back
-      encounterPerformed._principalDiagnosis = {'_id': '5994b76d9eebbc2676000018', 'code': '20236002', 'code_system': 'SNOMED-CT', 'title': 'Labor'}
-      expect(JSON.stringify(encounterPerformed.diagnoses())).toEqual "[{\"code\":\"408816000\",\"system\":\"SNOMED-CT\"},{\"code\":\"20236002\",\"system\":\"SNOMED-CT\"}]"
+    it "should show locationPeriod with undefined start date", ->
+      encounterPerformed = new CQL_QDM.EncounterPerformed({'facility': {"type":"COL","values":[{"code":{"code_system":"HCPCS","code":"G0438"},"display":"Annual Wellness Visit","locationPeriodLow":null,"locationPeriodHigh":"08/31/2017 8:00 AM"}]}})
+      expect(JSON.stringify(encounterPerformed.facilityLocations())).toEqual '[{"code":{"code":"G0438","system":"HCPCS","display":"Annual Wellness Visit"},"locationPeriod":{"high":"2017-08-31T08:00:00.00+0000","lowClosed":true,"highClosed":true}}]'

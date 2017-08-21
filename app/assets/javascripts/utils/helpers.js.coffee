@@ -17,7 +17,7 @@ class CQL_QDM.Helpers
   @returns cql.DateTime
   ###
   @convertDateTime: (input) ->
-    if moment.utc(input, 'MM/DD/YYYY hh:mm A', true).isValid()
+    if moment.utc(input, 'MM/DD/YYYY hh:mm A', true).isValid() || moment.utc(input, 'MM/DD/YYYY h:mm A', true).isValid()
       cql.DateTime.fromDate(moment.utc(input, 'MM/DD/YYYY hh:mm A').toDate(), 0)
     else
       cql.DateTime.fromDate(moment.utc(input, 'X').toDate(), 0)
