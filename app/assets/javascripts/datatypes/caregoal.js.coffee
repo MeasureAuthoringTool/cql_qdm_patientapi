@@ -45,12 +45,7 @@ class CQL_QDM.CareGoal extends CQL_QDM.QDMDatatype
   @returns {Array}
   ###
   relatedTo: ->
-    relatedToArray = []
-    if @_relatedTo
-      for relatedTo in @_relatedTo
-        if relatedTo?
-          relatedToArray.push new cql.Code(relatedTo.referenced_id, relatedTo.type)
-    relatedToArray
+    CQL_QDM.Helpers.relatedTo(@_relatedTo)
 
   ###
   @returns {Quantity | Code}

@@ -36,12 +36,7 @@ class CQL_QDM.CommunicationFromPatientToProvider extends CQL_QDM.QDMDatatype
   @returns {Array}
   ###
   relatedTo: ->
-    relatedToArray = []
-    if @_relatedTo
-      for relatedTo in @_relatedTo
-        if relatedTo?
-          relatedToArray.push new cql.Code(relatedTo.referenced_id, relatedTo.type)
-    relatedToArray
+    CQL_QDM.Helpers.relatedTo(@_relatedTo)
 
 
 ###
@@ -75,12 +70,7 @@ class CQL_QDM.CommunicationFromProviderToPatient extends CQL_QDM.QDMDatatype
   @returns {Array}
   ###
   relatedTo: ->
-    relatedToArray = []
-    if @_relatedTo
-      for relatedTo in @_relatedTo
-        if relatedTo?
-          relatedToArray.push new cql.Code(relatedTo.referenced_id, relatedTo.type)
-    relatedToArray
+    CQL_QDM.Helpers.relatedTo(@_relatedTo)
 
 
 ###
@@ -114,9 +104,4 @@ class CQL_QDM.CommunicationFromProviderToProvider extends CQL_QDM.QDMDatatype
   @returns {Array}
   ###
   relatedTo: ->
-    relatedToArray = []
-    if @_relatedTo
-      for relatedTo in @_relatedTo
-        if relatedTo?
-          relatedToArray.push new cql.Code(relatedTo.referenced_id, relatedTo.type)
-    relatedToArray
+    CQL_QDM.Helpers.relatedTo(@_relatedTo)
