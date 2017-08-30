@@ -55,3 +55,14 @@ class CQL_QDM.Helpers
           parseFloat(input.scalar)
     else
       null
+
+  ###
+  @returns {Array}
+  ###
+  @relatedTo: (relatedToInput) ->
+    relatedToArray = []
+    if relatedToInput
+      for relatedTo in relatedToInput
+        if relatedTo?
+          relatedToArray.push new cql.Code(relatedTo.referenced_id, relatedTo.type)
+    relatedToArray
