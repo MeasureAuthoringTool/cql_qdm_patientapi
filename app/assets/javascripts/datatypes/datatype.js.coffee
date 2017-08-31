@@ -31,3 +31,14 @@ class CQL_QDM.QDMDatatype
       for code in codes
         allCodes.push code: code
     allCodes
+
+  ###
+  Returns the QDM Id of this entry. If there is no entry for this instance, return null.
+
+  @returns {Id}
+  ###
+  id: ->
+    if @entry?._id?
+      return new CQL_QDM.Id(@entry._id)
+    else
+      null
