@@ -140,6 +140,9 @@ class CQL_QDM.CQLPatient
   @returns {Object}
   ###
   buildDatatypes: ->
+    # TODO: this datatypes scheme needs to be made more robust. It is too dependent
+    # on matching strings that don't always match.
+
     # HDS based list that describe various QDM concepts.
     # See lib/health-data-standards/models/record.rb in HDS for the origin
     # of these types.
@@ -190,6 +193,11 @@ class CQL_QDM.CQLPatient
           # make all words start upper case
           classname = classname.replace(/\w\S*/g, (txt) ->
             txt.charAt(0).toUpperCase() + txt.substr(1))
+          # both 'discharge' and 'order' are present tense when positive and past tense when negative.
+          # need to make consistently present tense (this is what is in the model-info file).
+          classname = classname.replace(/Ordered$/g, "Order")
+          classname = classname.replace(/Discharged$/g, "Discharge")
+          # remove spaces
           classname = classname.replace(/ /g, '')
           unless data_types[classname]?
             data_types[classname] = []
