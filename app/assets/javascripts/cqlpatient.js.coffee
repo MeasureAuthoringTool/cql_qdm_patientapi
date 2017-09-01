@@ -140,7 +140,7 @@ class CQL_QDM.CQLPatient
   @returns {Object}
   ###
   buildDatatypes: ->
-    # TODO: this datatypes scheme needs to be made more rubust. It is too dependent
+    # TODO: this datatypes scheme needs to be made more robust. It is too dependent
     # on matching strings that don't always match.
 
     # HDS based list that describe various QDM concepts.
