@@ -58,6 +58,10 @@ class CQL_QDM.Helpers
         code = input.code.code
         display = input.description
         new cql.Code(code, code_system, null, display || null)
+      else if input.numerator?
+        numerator = input.numerator
+        denominator = input.denominator
+        new Ratio(numerator, denominator)
       # Check that the scalar portion is a number and the units are a non-zero length string.
       else if (input.scalar?.match(/^[-+]?[0-9]*\.?[0-9]+$/) != null)
         if input.units.length > 0
