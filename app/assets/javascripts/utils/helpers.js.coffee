@@ -64,5 +64,5 @@ class CQL_QDM.Helpers
     if relatedToInput
       for relatedTo in relatedToInput
         if relatedTo?
-          relatedToArray.push new cql.Code(relatedTo.referenced_id, relatedTo.type)
+          relatedToArray.push new CQL_QDM.Id(relatedTo.referenced_id)
     relatedToArray
