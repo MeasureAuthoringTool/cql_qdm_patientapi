@@ -47,6 +47,10 @@ class CQL_QDM.Helpers
         code_system = Object.keys(input.codes)?[0]
         code = input.codes[code_system]?[0]
         new cql.Code(code, code_system)
+      else if input.numerator?
+        numerator = input.numerator
+        denominator = input.denominator
+        new Ratio(numerator, denominator)
       # Check that the scalar portion is a number and the units are a non-zero length string.
       else if (input.scalar.match(/^[-+]?[0-9]*\.?[0-9]+$/) != null) 
         if input.units.length > 0
