@@ -133,7 +133,7 @@ class CQL_QDM.PhysicalExamPerformed extends CQL_QDM.QDMDatatype
     components = []
     if @_components
       for value in @_components.values
-        components.push new Component(value)
+        components.push new CQL_QDM.Component(value)
     components
 
 

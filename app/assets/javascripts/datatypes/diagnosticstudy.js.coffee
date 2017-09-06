@@ -146,7 +146,7 @@ class CQL_QDM.DiagnosticStudyPerformed extends CQL_QDM.QDMDatatype
     if @_components
       for value in @_components.values
         if value?
-          components.push new Component(value)
+          components.push new CQL_QDM.Component(value)
     components
 
 

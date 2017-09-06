@@ -156,7 +156,8 @@ class CQL_QDM.LaboratoryTestPerformed extends CQL_QDM.QDMDatatype
     if @_components
       for value in @_components.values
         if value?
-          components.push new Component(value)
+          # Lab test performed uses ResultComponent, which has a range
+          components.push new CQL_QDM.ResultComponent(value)
     components
         
 
