@@ -30,7 +30,10 @@ class CQL_QDM.CommunicationFromPatientToProvider extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   negationRationale: ->
-    new cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
+    if @negationRationale?
+      new cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+    else
+      null
 
   ###
   @returns {Array}
@@ -58,7 +61,10 @@ class CQL_QDM.CommunicationFromProviderToPatient extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   negationRationale: ->
-    new cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
+    if @negationRationale?
+      new cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+    else
+      null
 
   ###
   @returns {Date}
@@ -92,7 +98,10 @@ class CQL_QDM.CommunicationFromProviderToProvider extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   negationRationale: ->
-    new cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
+    if @_negationRationale?
+      new cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+    else
+      null
 
   ###
   @returns {Date}

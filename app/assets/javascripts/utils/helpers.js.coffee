@@ -12,7 +12,7 @@ class CQL_QDM.Helpers
 
   ###
   Used to convert a Bonnie date + time into a compatible cql DateTime.
-  
+
   @param {String} input - the date time to convert
   @returns cql.DateTime
   ###
@@ -37,7 +37,7 @@ class CQL_QDM.Helpers
     - First checks that the value component is numeric
     - Second for the unit component attempts to clean up freetext
       to match a standard version.
-  
+
   @param {Result} input - the result object to be parsed into a Quantity
   @returns cql.Quantity
   ###
@@ -48,7 +48,7 @@ class CQL_QDM.Helpers
         code = input.codes[code_system]?[0]
         new cql.Code(code, code_system)
       # Check that the scalar portion is a number and the units are a non-zero length string.
-      else if (input.scalar.match(/^[-+]?[0-9]*\.?[0-9]+$/) != null) 
+      else if (input.scalar.match(/^[-+]?[0-9]*\.?[0-9]+$/) != null)
         if input.units.length > 0
           new cql.Quantity({unit: input.units , value: parseFloat(input.scalar)})
         else
@@ -66,3 +66,27 @@ class CQL_QDM.Helpers
         if relatedTo?
           relatedToArray.push new CQL_QDM.Id(relatedTo.referenced_id)
     relatedToArray
+
+  ###
+  @returns {Array}
+  ###
+  @components: (componentsInput) ->
+    components = []
+    if componentsInput
+      for value in componentsInput.values
+        if value?
+          components.push new CQL_QDM.Component(value)
+    components
+
+  ###
+  @returns {Array}
+  ###
+  @diagnoses: (diagnosesInput, principalDiagnosisInput) ->
+    diagnoses = []
+    if diagnosesInput?
+      for diagnosis in diagnosesInput.values
+        if diagnosis?
+          diagnoses.push new cql.Code(diagnosis.code, diagnosis.code_system)
+    if principalDiagnosisInput?
+      diagnoses.push new cql.Code(principalDiagnosisInput.code, principalDiagnosisInput.code_system)
+    diagnoses

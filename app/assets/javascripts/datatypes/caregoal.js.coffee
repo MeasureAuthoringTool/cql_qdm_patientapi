@@ -39,7 +39,10 @@ class CQL_QDM.CareGoal extends CQL_QDM.QDMDatatype
   relevantPeriod: ->
     low = @_relevantPeriodLow
     high = @_relevantPeriodHigh
-    new cql.Interval(low, high)
+    if low? || high?
+      new cql.Interval(low, high)
+    else
+      null
 
   ###
   @returns {Array}
@@ -51,7 +54,10 @@ class CQL_QDM.CareGoal extends CQL_QDM.QDMDatatype
   @returns {Quantity | Code}
   ###
   targetOutcome: ->
-    if @_targetOutcome?['unit']?
-      new cql.Quantity({unit: @_targetOutcome['unit'], value: @_targetOutcome['value']})
+    if @_targetOutcome?
+      if @_targetOutcome?['unit']?
+        new cql.Quantity({unit: @_targetOutcome['unit'], value: @_targetOutcome['value']})
+      else
+        new cql.Code(@_targetOutcome.code, @_targetOutcome.code_system)
     else
-      new cql.Code(@_targetOutcome?.code, @_targetOutcome?.code_system)
+      null

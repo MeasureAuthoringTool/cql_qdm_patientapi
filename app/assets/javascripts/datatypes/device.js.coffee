@@ -33,13 +33,19 @@ class CQL_QDM.DeviceApplied extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   anatomicalApproachSite: ->
-    new cql.Code(@_anatomicalApproachSite?.code, @_anatomicalApproachSite?.code_system)
+    if @anatomicalApproachSite?
+      new cql.Code(@_anatomicalApproachSite.code, @_anatomicalApproachSite.code_system)
+    else
+      end
 
   ###
   @returns {Code}
   ###
   anatomicalLocationSite: ->
-    new cql.Code(@_anatomicalLocationSite?.code, @_anatomicalLocationSite?.code_system)
+    if @anatomicalLocationSite?
+      new cql.Code(@_anatomicalLocationSite.code, @_anatomicalLocationSite.code_system)
+    else
+      null
 
   ###
   Author date time is only present when this data type has been negated.
@@ -52,13 +58,19 @@ class CQL_QDM.DeviceApplied extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   negationRationale: ->
-    new cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
+    if @negationRationale?
+      new cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+    else
+      null
 
   ###
   @returns {Code}
   ###
   reason: ->
-    new cql.Code(@_reason?.code, @_reason?.code_system)
+    if @reason?
+      new cql.Code(@_reason.code, @_reason.code_system)
+    else
+      null
 
   ###
   @returns {Interval<Date>}
@@ -66,7 +78,10 @@ class CQL_QDM.DeviceApplied extends CQL_QDM.QDMDatatype
   relevantPeriod: ->
     low = @_relevantPeriodLow
     high = @_relevantPeriodHigh
-    new cql.Interval(low, high)
+    if low? || high?
+      new cql.Interval(low, high)
+    else
+      null
 
 
 ###
@@ -87,13 +102,19 @@ class CQL_QDM.DeviceOrder extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   negationRationale: ->
-    new cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
+    if @negationRationale?
+      new cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+    else
+      null
 
   ###
   @returns {Code}
   ###
   reaction: ->
-    new cql.Code(@_reaction?.code, @_reaction?.code_system)
+    if @reaction?
+      new cql.Code(@_reaction.code, @_reaction.code_system)
+    else
+      null
 
   ###
   @returns {Date}
@@ -127,10 +148,16 @@ class CQL_QDM.DeviceRecommended extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   negationRationale: ->
-    new cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
+    if @_negationRationale?
+      new cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+    else
+      null
 
   ###
   @returns {Code}
   ###
   reason: ->
-    new cql.Code(@_reason?.code, @_reason?.code_system)
+    if @_reason?
+      new cql.Code(@_reason.code, @_reason.code_system)
+    else
+      null

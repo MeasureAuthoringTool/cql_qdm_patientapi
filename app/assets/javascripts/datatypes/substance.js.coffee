@@ -40,13 +40,19 @@ class CQL_QDM.SubstanceAdministered extends CQL_QDM.QDMDatatype
   @returns {Quantity}
   ###
   dosage: ->
-    new cql.Quantity({unit: @_dosage['unit'], value: @_dosage['value']})
+    if @_dosage?
+      new cql.Quantity({unit: @_dosage['unit'], value: @_dosage['value']})
+    else
+      null
 
   ###
   @returns {Code}
   ###
   negationRationale: ->
-    new cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
+    if @_negationRationale?
+      new cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+    else
+      null
 
   ###
   @returns {Interval<Date>}
@@ -54,19 +60,28 @@ class CQL_QDM.SubstanceAdministered extends CQL_QDM.QDMDatatype
   relevantPeriod: ->
     low = @_relevantPeriodLow
     high = @_relevantPeriodHigh
-    new cql.Interval(low, high)
+    if low? || high?
+      new cql.Interval(low, high)
+    else
+      null
 
   ###
   @returns {Code}
   ###
   route: ->
-    new cql.Code(@_route?.code, @_route?.code_system)
+    if @_route?
+      new cql.Code(@_route.code, @_route.code_system)
+    else
+      null
 
   ###
   @returns {Quantity}
   ###
   supply: ->
-    new cql.Quantity({unit: @_supply['unit'], value: @_supply['value']})
+    if @_supply?
+      new cql.Quantity({unit: @_supply['unit'], value: @_supply['value']})
+    else
+      null
 
 
 ###
@@ -99,25 +114,37 @@ class CQL_QDM.SubstanceOrder extends CQL_QDM.QDMDatatype
   @returns {Quantity}
   ###
   dosage: ->
-    new cql.Quantity({unit: @_dosage['unit'], value: @_dosage['value']})
+    if @_dosage?
+      new cql.Quantity({unit: @_dosage['unit'], value: @_dosage['value']})
+    else
+      null
 
   ###
   @returns {Code}
   ###
   method: ->
-    new cql.Code(@_method?.code, @_method?.code_system)
+    if @_method?
+      new cql.Code(@_method.code, @_method.code_system)
+    else
+      null
 
   ###
   @returns {Code}
   ###
   negationRationale: ->
-    new cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
+    if @_negationRationale?
+      new cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+    else
+      null
 
   ###
   @returns {Code}
   ###
   reason: ->
-    new cql.Code(@_reason?.code, @_reason?.code_system)
+    if @_reason?
+      new cql.Code(@_reason.code, @_reason.code_system)
+    else
+      null
 
   ###
   @returns {String}
@@ -129,13 +156,19 @@ class CQL_QDM.SubstanceOrder extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   route: ->
-    new cql.Code(@_route?.code, @_route?.code_system)
+    if @_route?
+      new cql.Code(@_route.code, @_route.code_system)
+    else
+      null
 
   ###
   @returns {Quantity}
   ###
   supply: ->
-    new cql.Quantity({unit: @_supply['unit'], value: @_supply['value']})
+    if @_supply?
+      new cql.Quantity({unit: @_supply['unit'], value: @_supply['value']})
+    else
+      null
 
 
 ###
@@ -169,25 +202,37 @@ class CQL_QDM.SubstanceRecommended extends CQL_QDM.QDMDatatype
   @returns {Quantity}
   ###
   dosage: ->
-    new cql.Quantity({unit: @_dosage['unit'], value: @_dosage['value']})
+    if @_dosage?
+      new cql.Quantity({unit: @_dosage['unit'], value: @_dosage['value']})
+    else
+      null
 
   ###
   @returns {Code}
   ###
   method: ->
-    new cql.Code(@_method?.code, @_method?.code_system)
+    if @_method?
+      new cql.Code(@_method.code, @_method.code_system)
+    else
+      null
 
   ###
   @returns {Code}
   ###
   negationRationale: ->
-    new cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
+    if @_negationRationale?
+      new cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+    else
+      null
 
   ###
   @returns {Code}
   ###
   reason: ->
-    new cql.Code(@_reason?.code, @_reason?.code_system)
+    if @_reason?
+      new cql.Code(@_reason.code, @_reason.code_system)
+    else
+      null
 
   ###
   @returns {String}
@@ -199,10 +244,16 @@ class CQL_QDM.SubstanceRecommended extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   route: ->
-    new cql.Code(@_route?.code, @_route?.code_system)
+    if @_route?
+      new cql.Code(@_route.code, @_route.code_system)
+    else
+      null
 
   ###
   @returns {Quantity}
   ###
   supply: ->
-    new cql.Quantity({unit: @_supply['unit'], value: @_supply['value']})
+    if @_supply?
+      new cql.Quantity({unit: @_supply['unit'], value: @_supply['value']})
+    else
+      null

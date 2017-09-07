@@ -28,7 +28,10 @@ class CQL_QDM.PhysicalExamOrder extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   anatomicalLocationSite: ->
-    new cql.Code(@_anatomicalLocationSite?.code, @_anatomicalLocationSite?.code_system)
+    if @_anatomicalLocationSite?
+      new cql.Code(@_anatomicalLocationSite.code, @_anatomicalLocationSite.code_system)
+    else
+      null
 
   ###
   @returns {Date}
@@ -40,19 +43,28 @@ class CQL_QDM.PhysicalExamOrder extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   method: ->
-    new cql.Code(@_method?.code, @_method?.code_system)
+    if @_method?
+      new cql.Code(@_method.code, @_method.code_system)
+    else
+      null
 
   ###
   @returns {Code}
   ###
   negationRationale: ->
-    new cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
+    if @_negationRationale?
+      new cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+    else
+      null
 
   ###
   @returns {Code}
   ###
   reason: ->
-    new cql.Code(@_reason?.code, @_reason?.code_system)
+    if @_reason?
+      new cql.Code(@_reason.code, @_reason.code_system)
+    else
+      null
 
 
 ###
@@ -85,7 +97,10 @@ class CQL_QDM.PhysicalExamPerformed extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   anatomicalLocationSite: ->
-    new cql.Code(@_anatomicalLocationSite?.code, @_anatomicalLocationSite?.code_system)
+    if @_anatomicalLocationSite?
+      new cql.Code(@_anatomicalLocationSite.code, @_anatomicalLocationSite.code_system)
+    else
+      null
 
   ###
   Author date time is only present when this data type has been negated.
@@ -98,19 +113,28 @@ class CQL_QDM.PhysicalExamPerformed extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   method: ->
-    new cql.Code(@_method?.code, @_method?.code_system)
+    if @_method?
+      new cql.Code(@_method.code, @_method.code_system)
+    else
+      null
 
   ###
   @returns {Code}
   ###
   negationRationale: ->
-    new cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
+    if @_negationRationale?
+      new cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+    else
+      null
 
   ###
   @returns {Code}
   ###
   reason: ->
-    new cql.Code(@_reason?.code, @_reason?.code_system)
+    if @_reason?
+      new cql.Code(@_reason.code, @_reason.code_system)
+    else
+      null
 
   ###
   @returns {Interval<Date>}
@@ -118,7 +142,10 @@ class CQL_QDM.PhysicalExamPerformed extends CQL_QDM.QDMDatatype
   relevantPeriod: ->
     low = @_relevantPeriodLow
     high = @_relevantPeriodHigh
-    new cql.Interval(low, high)
+    if low? || high?
+      new cql.Interval(low, high)
+    else
+      null
 
   ###
   @returns {Code|Quantity}
@@ -130,11 +157,7 @@ class CQL_QDM.PhysicalExamPerformed extends CQL_QDM.QDMDatatype
   @returns {Array}
   ###
   components: ->
-    components = []
-    if @_components
-      for value in @_components.values
-        components.push new CQL_QDM.Component(value)
-    components
+    CQL_QDM.Helpers.components(@_components)
 
 
 ###
@@ -158,7 +181,10 @@ class CQL_QDM.PhysicalExamRecommended extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   anatomicalLocationSite: ->
-    new cql.Code(@_anatomicalLocationSite?.code, @_anatomicalLocationSite?.code_system)
+    if @_anatomicalLocationSite?
+      new cql.Code(@_anatomicalLocationSite.code, @_anatomicalLocationSite.code_system)
+    else
+      null
 
   ###
   @returns {Date}
@@ -170,16 +196,25 @@ class CQL_QDM.PhysicalExamRecommended extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   method: ->
-    new cql.Code(@_method?.code, @_method?.code_system)
+    if @_method?
+      new cql.Code(@_method.code, @_method.code_system)
+    else
+      null
 
   ###
   @returns {Code}
   ###
   negationRationale: ->
-    new cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
+    if @_negationRationale?
+      new cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+    else
+      null
 
   ###
   @returns {Code}
   ###
   reason: ->
-    new cql.Code(@_reason?.code, @_reason?.code_system)
+    if @_reason?
+      new cql.Code(@_reason.code, @_reason.code_system)
+    else
+      null

@@ -39,16 +39,25 @@ class CQL_QDM.AllergyIntolerance extends CQL_QDM.QDMDatatype
   prevalencePeriod: ->
     low = @_prevalencePeriodLow
     high = @_prevalencePeriodHigh
-    new cql.Interval(low, high)
+    if low? || high?
+      new cql.Interval(low, high)
+    else
+      null
 
   ###
   @returns {Code}
   ###
   severity: ->
-    new cql.Code(@_severity?.code, @_severity?.code_system)
+    if @_severity?
+      new cql.Code(@_severity.code, @_severity.code_system)
+    else
+      null
 
   ###
   @returns {Code}
   ###
   type: ->
-    new cql.Code(@_type?.code, @_type?.code_system)
+    if @_type?
+      new cql.Code(@_type.code, @_type.code_system)
+    else
+      null

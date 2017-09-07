@@ -27,14 +27,7 @@ class CQL_QDM.PatientCharacteristicPayer extends CQL_QDM.QDMDatatype
   relevantPeriod: ->
     low = @_relevantPeriodLow
     high = @_relevantPeriodHigh
-    new cql.Interval(low, high)
-
-  ###
-  @returns {Array}
-  ###
-  getCode: ->
-    allCodes = []
-    for system, codes of @_codes
-      for code in codes
-        allCodes.push code: code
-    allCodes
+    if low? || high?
+      new cql.Interval(low, high)
+    else
+      null
