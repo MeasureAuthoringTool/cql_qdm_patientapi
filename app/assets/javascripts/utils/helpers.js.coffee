@@ -42,7 +42,7 @@ class CQL_QDM.Helpers
   @returns cql.Quantity
   ###
   @formatResult: (input) ->
-    if input
+    if input?
       if input.codes?
         code_system = Object.keys(input.codes)?[0]
         code = input.codes[code_system]?[0]
@@ -61,7 +61,7 @@ class CQL_QDM.Helpers
   ###
   @relatedTo: (relatedToInput) ->
     relatedToArray = []
-    if relatedToInput
+    if relatedToInput?
       for relatedTo in relatedToInput
         if relatedTo?
           relatedToArray.push new CQL_QDM.Id(relatedTo.referenced_id)
@@ -72,7 +72,7 @@ class CQL_QDM.Helpers
   ###
   @components: (componentsInput) ->
     components = []
-    if componentsInput
+    if componentsInput?
       for value in componentsInput.values
         if value?
           components.push new CQL_QDM.Component(value)

@@ -211,7 +211,7 @@ class CQL_QDM.MedicationDischarge extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   route: ->
-    if @_route
+    if @_route?
       new cql.Code(@_route.code, @_route.code_system)
     else
       null
@@ -275,7 +275,7 @@ class CQL_QDM.MedicationDispensed extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   negationRationale: ->
-    if @_negationRationale
+    if @_negationRationale?
       new cql.Code(@_negationRationale.code, @_negationRationale.code_system)
     else
       null
@@ -378,7 +378,7 @@ class CQL_QDM.MedicationOrder extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   negationRationale: ->
-    if @_negationRationale
+    if @_negationRationale?
       new cql.Code(@_negationRationale.code, @_negationRationale.code_system)
     else
       null
