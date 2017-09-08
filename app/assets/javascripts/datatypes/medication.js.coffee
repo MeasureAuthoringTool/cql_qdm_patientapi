@@ -113,7 +113,7 @@ class CQL_QDM.MedicationAdministered extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   negationRationale: ->
-    if @negationRationale?
+    if @_negationRationale?
       new cql.Code(@_negationRationale.code, @_negationRationale.code_system)
     else
       null

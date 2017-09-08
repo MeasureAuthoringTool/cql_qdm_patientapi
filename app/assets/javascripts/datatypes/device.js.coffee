@@ -33,7 +33,7 @@ class CQL_QDM.DeviceApplied extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   anatomicalApproachSite: ->
-    if @anatomicalApproachSite?
+    if @_anatomicalApproachSite?
       new cql.Code(@_anatomicalApproachSite.code, @_anatomicalApproachSite.code_system)
     else
       end
@@ -42,7 +42,7 @@ class CQL_QDM.DeviceApplied extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   anatomicalLocationSite: ->
-    if @anatomicalLocationSite?
+    if @_anatomicalLocationSite?
       new cql.Code(@_anatomicalLocationSite.code, @_anatomicalLocationSite.code_system)
     else
       null
@@ -58,7 +58,7 @@ class CQL_QDM.DeviceApplied extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   negationRationale: ->
-    if @negationRationale?
+    if @_negationRationale?
       new cql.Code(@_negationRationale.code, @_negationRationale.code_system)
     else
       null
@@ -67,7 +67,7 @@ class CQL_QDM.DeviceApplied extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   reason: ->
-    if @reason?
+    if @_reason?
       new cql.Code(@_reason.code, @_reason.code_system)
     else
       null
@@ -102,7 +102,7 @@ class CQL_QDM.DeviceOrder extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   negationRationale: ->
-    if @negationRationale?
+    if @_negationRationale?
       new cql.Code(@_negationRationale.code, @_negationRationale.code_system)
     else
       null
@@ -111,7 +111,7 @@ class CQL_QDM.DeviceOrder extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   reaction: ->
-    if @reaction?
+    if @_reaction?
       new cql.Code(@_reaction.code, @_reaction.code_system)
     else
       null
