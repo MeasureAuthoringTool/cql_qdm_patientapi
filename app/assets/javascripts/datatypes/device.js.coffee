@@ -78,7 +78,7 @@ class CQL_QDM.DeviceApplied extends CQL_QDM.QDMDatatype
   relevantPeriod: ->
     low = @_relevantPeriodLow
     high = @_relevantPeriodHigh
-    if low? || high?
+    if low?
       new cql.Interval(low, high)
     else
       null

@@ -138,7 +138,7 @@ class CQL_QDM.LaboratoryTestPerformed extends CQL_QDM.QDMDatatype
         value:
           @_referenceRangeLow['value']
       low = new cql.Quantity(low_obj)
-    if low? || high?
+    if low?
       new cql.Interval(low, high)
     else
       null
@@ -149,7 +149,7 @@ class CQL_QDM.LaboratoryTestPerformed extends CQL_QDM.QDMDatatype
   relevantPeriod: ->
     low = @_relevantPeriodLow
     high = @_relevantPeriodHigh
-    if low? || high?
+    if low?
       new cql.Interval(low, high)
     else
       null

@@ -138,7 +138,7 @@ class CQL_QDM.DiagnosticStudyPerformed extends CQL_QDM.QDMDatatype
   relevantPeriod: ->
     low = @_relevantPeriodLow
     high = @_relevantPeriodHigh
-    if low? || high?
+    if low?
       new cql.Interval(low, high)
     else
       null

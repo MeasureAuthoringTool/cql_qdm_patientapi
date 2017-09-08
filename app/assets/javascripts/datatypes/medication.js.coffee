@@ -53,7 +53,7 @@ class CQL_QDM.MedicationActive extends CQL_QDM.QDMDatatype
   relevantPeriod: ->
     low = @_relevantPeriodLow
     high = @_relevantPeriodHigh
-    if low? || high?
+    if low?
       new cql.Interval(low, high)
     else
       null
@@ -133,7 +133,7 @@ class CQL_QDM.MedicationAdministered extends CQL_QDM.QDMDatatype
   relevantPeriod: ->
     low = @_relevantPeriodLow
     high = @_relevantPeriodHigh
-    if low? || high?
+    if low?
       new cql.Interval(low, high)
     else
       null
@@ -286,7 +286,7 @@ class CQL_QDM.MedicationDispensed extends CQL_QDM.QDMDatatype
   relevantPeriod: ->
     low = @_relevantPeriodLow
     high = @_relevantPeriodHigh
-    if low? || high?
+    if low?
       new cql.Interval(low, high)
     else
       null
@@ -404,7 +404,7 @@ class CQL_QDM.MedicationOrder extends CQL_QDM.QDMDatatype
   relevantPeriod: ->
     low = @_relevantPeriodLow
     high = @_relevantPeriodHigh
-    if low? || high?
+    if low?
       new cql.Interval(low, high)
     else
       null

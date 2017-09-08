@@ -46,7 +46,7 @@ class CQL_QDM.Diagnosis extends CQL_QDM.QDMDatatype
   prevalencePeriod: ->
     low = @_prevalencePeriodLow
     high = @_prevalencePeriodHigh
-    if low? || high?
+    if low?
       new cql.Interval(low, high)
     else
       null
