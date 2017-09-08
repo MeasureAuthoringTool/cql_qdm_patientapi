@@ -9,10 +9,7 @@ Represents a CQL 'component' for use in the CQL execution engine.
 ###
 class CQL_QDM.Component
   constructor: (component) ->
-    result = {}
-    result["unit"] = component.result.units
-    result["value"] = component.result.scalar
-    @result = new cql.Quantity(result)
+    @result = CQL_QDM.Helpers.formatResult(component.result)
     @code = new cql.Code(component.code.code, component.code.code_system)
 
   exec: (ctx) ->
