@@ -19,7 +19,7 @@ class CQL_QDM.AssessmentPerformed extends CQL_QDM.QDMDatatype
     super @entry
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_method = @entry.method
-    @_negationRationale = @entry.negationReasonv
+    @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
     if @entry.values? && @entry.values.length > 0
       @_result = @entry.values?[0]
