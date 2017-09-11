@@ -19,7 +19,7 @@ class CQL_QDM.AssessmentPerformed extends CQL_QDM.QDMDatatype
     super @entry
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_method = @entry.method
-    @_negationRationale = @entry.negationReasonv
+    @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
     if @entry.values? && @entry.values.length > 0
       @_result = @entry.values?[0]
@@ -36,19 +36,28 @@ class CQL_QDM.AssessmentPerformed extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   method: ->
-    new cql.Code(@_method?.code, @_method?.code_system)
+    if @_method?
+      new cql.Code(@_method.code, @_method.code_system)
+    else
+      null
 
   ###
   @returns {Code}
   ###
   negationRationale: ->
-    new cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
+    if @_negationRationale?
+      new cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+    else
+      null
 
   ###
   @returns {Code}
   ###
   reason: ->
-    new cql.Code(@_reason?.code, @_reason?.code_system)
+    if @_reason?
+      new cql.Code(@_reason.code, @_reason.code_system)
+    else
+      null
 
   ###
   @returns {Code|Quantity|Date}
@@ -60,6 +69,8 @@ class CQL_QDM.AssessmentPerformed extends CQL_QDM.QDMDatatype
         CQL_QDM.Helpers.convertDateTime(@_result.scalar)
       else
         CQL_QDM.Helpers.formatResult(@_result)
+    else
+      null
 
   ###
   @returns {Array}
@@ -71,12 +82,7 @@ class CQL_QDM.AssessmentPerformed extends CQL_QDM.QDMDatatype
   @returns {Array}
   ###
   components: ->
-    components = []
-    if @_components
-      for value in @_components.values
-        if value?
-          components.push new CQL_QDM.Component(value)
-    components
+    CQL_QDM.Helpers.components(@_components)
 
 
 ###
@@ -116,19 +122,28 @@ class CQL_QDM.AssessmentRecommended extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   method: ->
-    new cql.Code(@_method?.code, @_method?.code_system)
+    if @_method?
+      new cql.Code(@_method.code, @_method.code_system)
+    else
+      null
 
   ###
   @returns {Code}
   ###
   negationRationale: ->
-    new cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
+    if @_negationRationale?
+      new cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+    else
+      null
 
   ###
   @returns {Code}
   ###
   reason: ->
-    new cql.Code(@_reason?.code, @_reason?.code_system)
+    if @_reason?
+      new cql.Code(@_reason.code, @_reason.code_system)
+    else
+      null
 
   ###
   @returns {Code|Quantity}

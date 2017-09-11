@@ -5,3 +5,11 @@ describe "CareGoal", ->
     referenceId = new CQL_QDM.Id('1234567890')
     relatedToArray = careGoal.relatedTo()
     expect(relatedToArray[0]).toEqual referenceId
+
+  it "should show null relevantPeriod", ->
+    careGoal = new CQL_QDM.CareGoal({})
+    expect(careGoal.relevantPeriod()).toEqual null
+
+  it "should show valid relevantPeriod", ->
+    careGoal = new CQL_QDM.CareGoal({'start_time': '08/31/2017 1:00 AM', 'end_time': '08/31/2017 2:00 AM'})
+    expect(JSON.stringify(careGoal.relevantPeriod())).toEqual '{"low":"2017-08-31T01:00:00.00+0000","high":"2017-08-31T02:00:00.00+0000","lowClosed":true,"highClosed":true}'

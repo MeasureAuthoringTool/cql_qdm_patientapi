@@ -24,19 +24,28 @@ class CQL_QDM.LaboratoryTestOrder extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   method: ->
-    new cql.Code(@_method?.code, @_method?.code_system)
+    if @_method?
+      new cql.Code(@_method.code, @_method.code_system)
+    else
+      null
 
   ###
   @returns {Code}
   ###
   negationRationale: ->
-    new cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
+    if @_negationRationale?
+      new cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+    else
+      null
 
   ###
   @returns {Code}
   ###
   reason: ->
-    new cql.Code(@_reason?.code, @_reason?.code_system)
+    if @_reason?
+      new cql.Code(@_reason.code, @_reason.code_system)
+    else
+      null
 
   ###
   @returns {Date}
@@ -85,19 +94,28 @@ class CQL_QDM.LaboratoryTestPerformed extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   method: ->
-    new cql.Code(@_method?.code, @_method?.code_system)
+    if @_method?
+      new cql.Code(@_method.code, @_method.code_system)
+    else
+      null
 
   ###
   @returns {Code}
   ###
   negationRationale: ->
-    new cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
+    if @_negationRationale?
+      new cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+    else
+      null
 
   ###
   @returns {Code}
   ###
   reason: ->
-    new cql.Code(@_reason?.code, @_reason?.code_system)
+    if @_reason?
+      new cql.Code(@_reason.code, @_reason.code_system)
+    else
+      null
 
   ###
   @returns {Interval}
@@ -120,7 +138,10 @@ class CQL_QDM.LaboratoryTestPerformed extends CQL_QDM.QDMDatatype
         value:
           @_referenceRangeLow['value']
       low = new cql.Quantity(low_obj)
-    new cql.Interval(low, high)
+    if low?
+      new cql.Interval(low, high)
+    else
+      null
 
   ###
   @returns {Interval<Date>}
@@ -128,7 +149,10 @@ class CQL_QDM.LaboratoryTestPerformed extends CQL_QDM.QDMDatatype
   relevantPeriod: ->
     low = @_relevantPeriodLow
     high = @_relevantPeriodHigh
-    new cql.Interval(low, high)
+    if low?
+      new cql.Interval(low, high)
+    else
+      null
 
   ###
   @returns {Code|Quantity}
@@ -146,12 +170,17 @@ class CQL_QDM.LaboratoryTestPerformed extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   status: ->
-    new cql.Code(@_status?.code, @_status?.code_system)
-    
+    if @_status?
+      new cql.Code(@_status.code, @_status.code_system)
+    else
+      null
+
   ###
   @returns {Array}
   ###
   components: ->
+    # Note, this components differs from the one defined in the helpers
+    # in that it has a reference range.
     components = []
     if @_components
       for value in @_components.values
@@ -159,7 +188,7 @@ class CQL_QDM.LaboratoryTestPerformed extends CQL_QDM.QDMDatatype
           # Lab test performed uses ResultComponent, which has a range
           components.push new CQL_QDM.ResultComponent(value)
     components
-        
+
 
 ###
 Data elements that meet criteria using this datatype should document a
@@ -187,16 +216,25 @@ class CQL_QDM.LaboratoryTestRecommended extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   method: ->
-    new cql.Code(@_method?.code, @_method?.code_system)
+    if @_method?
+      new cql.Code(@_method.code, @_method.code_system)
+    else
+      null
 
   ###
   @returns {Code}
   ###
   negationRationale: ->
-    new cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
+    if @_negationRationale?
+      new cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+    else
+      null
 
   ###
   @returns {Code}
   ###
   reason: ->
-    new cql.Code(@_reason?.code, @_reason?.code_system)
+    if @_reason?
+      new cql.Code(@_reason.code, @_reason.code_system)
+    else
+      null

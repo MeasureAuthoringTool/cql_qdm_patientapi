@@ -33,31 +33,46 @@ class CQL_QDM.ImmunizationAdministered extends CQL_QDM.QDMDatatype
   @returns {Quantity}
   ###
   dosage: ->
-    new cql.Quantity({unit: @_dosage['unit'], value: @_dosage['value']})
+    if @_dosage?
+      new cql.Quantity({unit: @_dosage['unit'], value: @_dosage['value']})
+    else
+      null
 
   ###
   @returns {Code}
   ###
   negationRationale: ->
-    new cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
+    if @_negationRationale?
+      new cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+    else
+      null
 
   ###
   @returns {Code}
   ###
   reason: ->
-    new cql.Code(@_reason?.code, @_reason?.code_system)
+    if @_reason?
+      new cql.Code(@_reason.code, @_reason.code_system)
+    else
+      null
 
   ###
   @returns {Code}
   ###
   route: ->
-    new cql.Code(@_route?.code, @_route?.code_system)
+    if @_route?
+      new cql.Code(@_route.code, @_route.code_system)
+    else
+      null
 
   ###
   @returns {Quantity}
   ###
   supply: ->
-    new cql.Quantity({unit: @_supply['unit'], value: @_supply['value']})
+    if @_supply?
+      new cql.Quantity({unit: @_supply['unit'], value: @_supply['value']})
+    else
+      null
 
 
 ###
@@ -95,28 +110,43 @@ class CQL_QDM.ImmunizationOrder extends CQL_QDM.QDMDatatype
   @returns {Quantity}
   ###
   dosage: ->
-    new cql.Quantity({unit: @_dosage['unit'], value: @_dosage['value']})
+    if @_dosage?
+      new cql.Quantity({unit: @_dosage['unit'], value: @_dosage['value']})
+    else
+      null
 
   ###
   @returns {Code}
   ###
   negationRationale: ->
-    new cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
+    if @_negationRationale?
+      new cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+    else
+      null
 
   ###
   @returns {Code}
   ###
   reason: ->
-    new cql.Code(@_reason?.code, @_reason?.code_system)
+    if @_reason?
+      new cql.Code(@_reason.code, @_reason.code_system)
+    else
+      null
 
   ###
   @returns {Code}
   ###
   route: ->
-    new cql.Code(@_route?.code, @_route?.code_system)
+    if @_route?
+      new cql.Code(@_route.code, @_route.code_system)
+    else
+      null
 
   ###
   @returns {Quantity}
   ###
   supply: ->
-    new cql.Quantity({unit: @_supply['unit'], value: @_supply['value']})
+    if @_supply?
+      new cql.Quantity({unit: @_supply['unit'], value: @_supply['value']})
+    else
+      null

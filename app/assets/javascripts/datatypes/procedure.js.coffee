@@ -26,13 +26,19 @@ class CQL_QDM.ProcedureOrder extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   anatomicalApproachSite: ->
-    new cql.Code(@_anatomicalApproachSite?.code, @_anatomicalApproachSite?.code_system)
+    if @_anatomicalApproachSite?
+      new cql.Code(@_anatomicalApproachSite.code, @_anatomicalApproachSite.code_system)
+    else
+      null
 
   ###
   @returns {Code}
   ###
   anatomicalLocationSite: ->
-    new cql.Code(@_anatomicalLocationSite?.code, @_anatomicalLocationSite?.code_system)
+    if @_anatomicalLocationSite?
+      new cql.Code(@_anatomicalLocationSite.code, @_anatomicalLocationSite.code_system)
+    else
+      null
 
   ###
   @returns {Date}
@@ -44,25 +50,37 @@ class CQL_QDM.ProcedureOrder extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   method: ->
-    new cql.Code(@_method?.code, @_method?.code_system)
+    if @_method?
+      new cql.Code(@_method.code, @_method.code_system)
+    else
+      null
 
   ###
   @returns {Code}
   ###
   negationRationale: ->
-    new cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
+    if @_negationRationale?
+      new cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+    else
+      null
 
   ###
   @returns {Code}
   ###
   ordinality: ->
-    new cql.Code(@_ordinality?.code, @_ordinality?.code_system)
+    if @_ordinality?
+      new cql.Code(@_ordinality.code, @_ordinality.code_system)
+    else
+      null
 
   ###
   @returns {Code}
   ###
   reason: ->
-    new cql.Code(@_reason?.code, @_reason?.code_system)
+    if @_reason?
+      new cql.Code(@_reason.code, @_reason.code_system)
+    else
+      null
 
 
 ###
@@ -99,13 +117,19 @@ class CQL_QDM.ProcedurePerformed extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   anatomicalApproachSite: ->
-    new cql.Code(@_anatomicalApproachSite?.code, @_anatomicalApproachSite?.code_system)
+    if @_anatomicalApproachSite?
+      new cql.Code(@_anatomicalApproachSite.code, @_anatomicalApproachSite.code_system)
+    else
+      null
 
   ###
   @returns {Code}
   ###
   anatomicalLocationSite: ->
-    new cql.Code(@_anatomicalLocationSite?.code, @_anatomicalLocationSite?.code_system)
+    if @_anatomicalLocationSite?
+      new cql.Code(@_anatomicalLocationSite.code, @_anatomicalLocationSite.code_system)
+    else
+      null
 
   ###
   Author date time is only present when this data type has been negated.
@@ -124,25 +148,37 @@ class CQL_QDM.ProcedurePerformed extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   method: ->
-    new cql.Code(@_method?.code, @_method?.code_system)
+    if @_method?
+      new cql.Code(@_method.code, @_method.code_system)
+    else
+      null
 
   ###
   @returns {Code}
   ###
   negationRationale: ->
-    new cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
+    if @_negationRationale?
+      new cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+    else
+      null
 
   ###
   @returns {Code}
   ###
   ordinality: ->
-    new cql.Code(@_ordinality?.code, @_ordinality?.code_system)
+    if @_ordinality?
+      new cql.Code(@_ordinality.code, @_ordinality.code_system)
+    else
+      null
 
   ###
   @returns {Code}
   ###
   reason: ->
-    new cql.Code(@_reason?.code, @_reason?.code_system)
+    if @_reason?
+      new cql.Code(@_reason.code, @_reason.code_system)
+    else
+      null
 
   ###
   @returns {Interval<Date>}
@@ -150,7 +186,10 @@ class CQL_QDM.ProcedurePerformed extends CQL_QDM.QDMDatatype
   relevantPeriod: ->
     low = @_relevantPeriodLow
     high = @_relevantPeriodHigh
-    new cql.Interval(low, high)
+    if low?
+      new cql.Interval(low, high)
+    else
+      null
 
   ###
   @returns {Code|Quantity}
@@ -162,17 +201,16 @@ class CQL_QDM.ProcedurePerformed extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   status: ->
-    new cql.Code(@_status?.code, @_status?.code_system)
+    if @_status?
+      new cql.Code(@_status.code, @_status.code_system)
+    else
+      null
 
   ###
   @returns {Array}
   ###
   components: ->
-    components = []
-    if @_components
-      for value in @_components.values
-        components.push new CQL_QDM.Component(value)
-    components
+    CQL_QDM.Helpers.components(@_components)
 
 
 ###
@@ -198,13 +236,19 @@ class CQL_QDM.ProcedureRecommended extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   anatomicalApproachSite: ->
-    new cql.Code(@_anatomicalApproachSite?.code, @_anatomicalApproachSite?.code_system)
+    if @_anatomicalApproachSite?
+      new cql.Code(@_anatomicalApproachSite.code, @_anatomicalApproachSite.code_system)
+    else
+      null
 
   ###
   @returns {Code}
   ###
   anatomicalLocationSite: ->
-    new cql.Code(@_anatomicalLocationSite?.code, @_anatomicalLocationSite?.code_system)
+    if @_anatomicalLocationSite?
+      new cql.Code(@_anatomicalLocationSite.code, @_anatomicalLocationSite.code_system)
+    else
+      null
 
   ###
   @returns {Date}
@@ -216,22 +260,34 @@ class CQL_QDM.ProcedureRecommended extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   method: ->
-    new cql.Code(@_method?.code, @_method?.code_system)
+    if @_method?
+      new cql.Code(@_method.code, @_method.code_system)
+    else
+      null
 
   ###
   @returns {Code}
   ###
   negationRationale: ->
-    new cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
+    if @_negationRationale?
+      new cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+    else
+      null
 
   ###
   @returns {Code}
   ###
   ordinality: ->
-    new cql.Code(@_ordinality?.code, @_ordinality?.code_system)
+    if @_ordinality?
+      new cql.Code(@_ordinality.code, @_ordinality.code_system)
+    else
+      null
 
   ###
   @returns {Code}
   ###
   reason: ->
-    new cql.Code(@_reason?.code, @_reason?.code_system)
+    if @_reason?
+      new cql.Code(@_reason.code, @_reason.code_system)
+    else
+      null

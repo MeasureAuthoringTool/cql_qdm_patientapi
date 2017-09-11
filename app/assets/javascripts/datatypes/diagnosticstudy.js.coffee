@@ -36,19 +36,28 @@ class CQL_QDM.DiagnosticStudyOrder extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   method: ->
-    new cql.Code(@_method?.code, @_method?.code_system)
+    if @_method?
+      new cql.Code(@_method.code, @_method.code_system)
+    else
+      null
 
   ###
   @returns {Code}
   ###
   negationRationale: ->
-    new cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
+    if @_negationRationale?
+      new cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+    else
+      null
 
   ###
   @returns {Code}
   ###
   reason: ->
-    new cql.Code(@_reason?.code, @_reason?.code_system)
+    if @_reason?
+      new cql.Code(@_reason.code, @_reason.code_system)
+    else
+      null
 
 
 ###
@@ -91,26 +100,37 @@ class CQL_QDM.DiagnosticStudyPerformed extends CQL_QDM.QDMDatatype
   @returns {Facility}
   ###
   facilityLocation: ->
-    if @_facilityLocation.values[0]?
+    if @_facilityLocation?.values?[0]?
       new CQL_QDM.Facility(@_facilityLocation.values[0])
+    else
+      null
 
   ###
   @returns {Code}
   ###
   method: ->
-    new cql.Code(@_method?.code, @_method?.code_system)
+    if @_method?
+      new cql.Code(@_method.code, @_method.code_system)
+    else
+      null
 
   ###
   @returns {Code}
   ###
   negationRationale: ->
-    new cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
+    if @_negationRationale?
+      new cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+    else
+      null
 
   ###
   @returns {Code}
   ###
   reason: ->
-    new cql.Code(@_reason?.code, @_reason?.code_system)
+    if @_reason?
+      new cql.Code(@_reason.code, @_reason.code_system)
+    else
+      null
 
   ###
   @returns {Interval<Date>}
@@ -118,7 +138,10 @@ class CQL_QDM.DiagnosticStudyPerformed extends CQL_QDM.QDMDatatype
   relevantPeriod: ->
     low = @_relevantPeriodLow
     high = @_relevantPeriodHigh
-    new cql.Interval(low, high)
+    if low?
+      new cql.Interval(low, high)
+    else
+      null
 
   ###
   @returns {Code|Quantity}
@@ -136,18 +159,16 @@ class CQL_QDM.DiagnosticStudyPerformed extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   status: ->
-    new cql.Code(@_status?.code, @_status?.code_system)
-    
+    if @_status?
+      new cql.Code(@_status.code, @_status.code_system)
+    else
+      null
+
   ###
   @returns {Array}
   ###
   components: ->
-    components = []
-    if @_components
-      for value in @_components.values
-        if value?
-          components.push new CQL_QDM.Component(value)
-    components
+    CQL_QDM.Helpers.components(@_components)
 
 
 ###
@@ -176,11 +197,16 @@ class CQL_QDM.DiagnosticStudyRecommended extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   method: ->
-    new cql.Code(@_method?.code, @_method?.code_system)
+    if @_method?
+      new cql.Code(@_method.code, @_method.code_system)
+    else
+      null
 
   ###
   @returns {Code}
   ###
   negationRationale: ->
-    new cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
-
+    if @_negationRationale?
+      new cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+    else
+      null

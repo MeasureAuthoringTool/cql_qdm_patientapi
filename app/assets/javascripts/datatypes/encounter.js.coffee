@@ -30,20 +30,28 @@ class CQL_QDM.EncounterOrder extends CQL_QDM.QDMDatatype
   @returns {Facility}
   ###
   facilityLocation: ->
-    if @_facilityLocation.values[0]?
+    if @_facilityLocation?.values?[0]?
       new CQL_QDM.Facility(@_facilityLocation.values[0])
+    else
+      null
 
   ###
   @returns {Code}
   ###
   negationRationale: ->
-    new cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
+    if @_negationRationale?
+      new cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+    else
+      null
 
   ###
   @returns {Code}
   ###
   reason: ->
-    new cql.Code(@_reason?.code, @_reason?.code_system)
+    if @_reason?
+      new cql.Code(@_reason.code, @_reason.code_system)
+    else
+      null
 
 
 ###
@@ -61,7 +69,7 @@ class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_diagnoses = @entry.diagnosis
     @_dischargeDisposition = @entry.dischargeDisposition
-    @_facilityLocations = @entry.facility 
+    @_facilityLocations = @entry.facility
     @_negationRationale = @entry.negationReason
     @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     if @entry.end_time
@@ -75,7 +83,10 @@ class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   admissionSource: ->
-    new cql.Code(@_admissionSource?.code, @_admissionSource?.code_system)
+    if @_admissionSource?
+      new cql.Code(@_admissionSource.code, @_admissionSource.code_system)
+    else
+      null
 
   ###
   Author date time is only present when this data type has been negated.
@@ -88,28 +99,24 @@ class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
   @returns {Array}
   ###
   diagnoses: ->
-    diagnoses = []
-    if @_diagnoses
-      for diagnosis in @_diagnoses.values
-        if diagnosis?
-          diagnoses.push new cql.Code(diagnosis.code, diagnosis.code_system)
-    if @_principalDiagnosis?
-      diagnoses.push new cql.Code(@_principalDiagnosis.code, @_principalDiagnosis.code_system)
-    diagnoses
+    CQL_QDM.Helpers.diagnoses(@_diagnoses, @_principalDiagnosis)
 
   ###
   @returns {Code}
   ###
   dischargeDisposition: ->
-    new cql.Code(@_dischargeDisposition?.code, @_dischargeDisposition?.code_system)
+    if @_dischargeDisposition?
+      new cql.Code(@_dischargeDisposition.code, @_dischargeDisposition.code_system)
+    else
+      null
 
   ###
   @returns {Array}
   ###
   facilityLocations: ->
-    # For Encounter Performeed, there can be multiple Facility Locations
+    # For Encounter Performed, there can be multiple Facility Locations
     facilityLocations = []
-    if @_facilityLocations
+    if @_facilityLocations?
       for facility in @_facilityLocations.values
         if facility?
           facilityLocations.push new CQL_QDM.Facility(facility)
@@ -119,13 +126,21 @@ class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
   @returns {Quantity}
   ###
   lengthOfStay: ->
-    new cql.Quantity({unit: 'days', value: @_relevantPeriodLow.differenceBetween(@_relevantPeriodHigh, 'day')?.high})
+    low = @_relevantPeriodLow
+    high = @_relevantPeriodHigh
+    if low?
+      new cql.Quantity({unit: 'days', value: low.differenceBetween(high, 'day')?.high})
+    else
+      null
 
   ###
   @returns {Code}
   ###
   negationRationale: ->
-    new cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
+    if @_negationRationale?
+      new cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+    else
+      null
 
   ###
   @returns {Interval<Date>}
@@ -133,13 +148,19 @@ class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
   relevantPeriod: ->
     low = @_relevantPeriodLow
     high = @_relevantPeriodHigh
-    new cql.Interval(low, high)
+    if low?
+      new cql.Interval(low, high)
+    else
+      null
 
   ###
   @returns {Code}
   ###
   principalDiagnosis: ->
-    new cql.Code(@_principalDiagnosis?.code, @_principalDiagnosis?.code_system)
+    if @_principalDiagnosis?
+      new cql.Code(@_principalDiagnosis.code, @_principalDiagnosis.code_system)
+    else
+      null
 
 
 ###
@@ -168,17 +189,25 @@ class CQL_QDM.EncounterRecommended extends CQL_QDM.QDMDatatype
   @returns {Facility}
   ###
   facilityLocation: ->
-    if @_facilityLocation.values[0]?
+    if @_facilityLocation?.values?[0]?
       new CQL_QDM.Facility(@_facilityLocation.values[0])
+    else
+      null
 
   ###
   @returns {Code}
   ###
   negationRationale: ->
-    new cql.Code(@_negationRationale?.code, @_negationRationale?.code_system)
+    if @_negationRationale?
+      new cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+    else
+      null
 
   ###
   @returns {Code}
   ###
   reason: ->
-    new cql.Code(@_reason?.code, @_reason?.code_system)
+    if @_reason?
+      new cql.Code(@_reason.code, @_reason.code_system)
+    else
+      null

@@ -15,19 +15,9 @@ class CQL_QDM.PatientCharacteristic extends CQL_QDM.QDMDatatype
     super @entry
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_codes = @entry.codes
-        
+
   ###
   @returns {Date}
   ###
   authorDatetime: ->
     @_authorDatetime
-
-  ###
-  @returns {Array}
-  ###
-  getCode: ->
-    allCodes = []
-    for system, codes of @_codes
-      for code in codes
-        allCodes.push code: code
-    allCodes

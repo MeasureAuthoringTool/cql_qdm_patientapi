@@ -35,8 +35,10 @@ class CQL_QDM.AdverseEvent extends CQL_QDM.QDMDatatype
   @returns {Facility}
   ###
   facilityLocation: ->
-    if @_facilityLocation.values[0]?
+    if @_facilityLocation?.values?[0]?
       new CQL_QDM.Facility(@_facilityLocation.values[0])
+    else
+      null
 
   ###
   @returns {Interval<Date>}
@@ -44,16 +46,25 @@ class CQL_QDM.AdverseEvent extends CQL_QDM.QDMDatatype
   relevantPeriod: ->
     low = @_relevantPeriodLow
     high = @_relevantPeriodHigh
-    new cql.Interval(low, high)
+    if low?
+      new cql.Interval(low, high)
+    else
+      null
 
   ###
   @returns {Code}
   ###
   severity: ->
-    new cql.Code(@_severity?.code, @_severity?.code_system)
+    if @_severity?
+      new cql.Code(@_severity.code, @_severity.code_system)
+    else
+      null
 
   ###
   @returns {Code}
   ###
   type: ->
-    new cql.Code(@_type?.code, @_type?.code_system)
+    if @_type?
+      new cql.Code(@_type.code, @_type.code_system)
+    else
+      null

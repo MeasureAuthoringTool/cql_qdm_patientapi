@@ -35,7 +35,10 @@ class CQL_QDM.Diagnosis extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   anatomicalLocationSite: ->
-    new cql.Code(@_anatomicalLocationSite?.code, @_anatomicalLocationSite?.code_system)
+    if @_anatomicalLocationSite?
+      new cql.Code(@_anatomicalLocationSite.code, @_anatomicalLocationSite.code_system)
+    else
+      null
 
   ###
   @returns {Interval<Date>}
@@ -43,13 +46,19 @@ class CQL_QDM.Diagnosis extends CQL_QDM.QDMDatatype
   prevalencePeriod: ->
     low = @_prevalencePeriodLow
     high = @_prevalencePeriodHigh
-    new cql.Interval(low, high)
+    if low?
+      new cql.Interval(low, high)
+    else
+      null
 
   ###
   @returns {Code}
   ###
   severity: ->
-    new cql.Code(@_severity?.code, @_severity?.code_system)
+    if @_severity?
+      new cql.Code(@_severity.code, @_severity.code_system)
+    else
+      null
 
   ###
   @returns {Date}

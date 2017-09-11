@@ -40,4 +40,7 @@ class CQL_QDM.Symptom extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   severity: ->
-    new cql.Code(@_severity?.code, @_severity?.code_system)
+    if @_severity?
+      new cql.Code(@_severity.code, @_severity.code_system)
+    else
+      null
