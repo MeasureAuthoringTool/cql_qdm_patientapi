@@ -14,8 +14,10 @@ RDoc::Task.new(:rdoc) do |rdoc|
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
 
-
-
+# This allows `bundle exec rake teaspoon` to work from top dir instead of /test/
+task :teaspoon do
+  sh 'bundle exec teaspoon', verbose: false
+end
 
 require 'rake/testtask'
 
