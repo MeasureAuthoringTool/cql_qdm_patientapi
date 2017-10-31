@@ -20,21 +20,24 @@ class CQL_QDM.Symptom extends CQL_QDM.QDMDatatype
   ###
   constructor: (@entry) ->
     super @entry
-    @_abatementDatetime = CQL_QDM.Helpers.convertDateTime(@entry.abatementDatetime)
-    @_onsetDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
+    @_prevalencePeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
+    if @entry.end_time
+      @_prevalencePeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
+    else
+      # No end time; high is set to infinity
+      @_prevalencePeriodHigh = CQL_QDM.Helpers.infinityDateTime()
     @_severity = @entry.severity
 
   ###
-  @returns {Date}
+  @returns {Interval<Date>}
   ###
-  abatementDatetime: ->
-    @_abatementDatetime
-
-  ###
-  @returns {Date}
-  ###
-  onsetDatetime: ->
-    @_onsetDatetime
+  prevalencePeriod: ->
+    low = @_prevalencePeriodLow
+    high = @_prevalencePeriodHigh
+    if low?
+      new cql.Interval(low, high)
+    else
+      null
 
   ###
   @returns {Code}
