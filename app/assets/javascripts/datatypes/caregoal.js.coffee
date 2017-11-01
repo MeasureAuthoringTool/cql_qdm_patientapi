@@ -28,12 +28,6 @@ class CQL_QDM.CareGoal extends CQL_QDM.QDMDatatype
     @_targetOutcome = @entry.targetOutcome
 
   ###
-  @returns {Date}
-  ###
-  authorDatetime: ->
-    @_authorDatetime
-
-  ###
   @returns {Interval<Date>}
   ###
   relevantPeriod: ->
