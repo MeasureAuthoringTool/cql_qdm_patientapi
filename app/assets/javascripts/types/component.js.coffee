@@ -55,7 +55,7 @@ class CQL_QDM.ResultComponent extends CQL_QDM.Component
     @
 
   toString: () ->
-    "#{@result.toString()} '#{@code.toString()}' '#{@range.toString()}'"
+    "'#{@_referenceRange.toString()}'"
 
   ###
   @returns {Interval<Quantity>}

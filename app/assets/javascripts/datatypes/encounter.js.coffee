@@ -27,11 +27,11 @@ class CQL_QDM.EncounterOrder extends CQL_QDM.QDMDatatype
     @_authorDatetime
 
   ###
-  @returns {Facility}
+  @returns {FacilityLocation}
   ###
   facilityLocation: ->
     if @_facilityLocation?.values?[0]?
-      new CQL_QDM.Facility(@_facilityLocation.values[0])
+      new CQL_QDM.FacilityLocation(@_facilityLocation.values[0])
     else
       null
 
@@ -119,7 +119,7 @@ class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
     if @_facilityLocations?
       for facility in @_facilityLocations.values
         if facility?
-          facilityLocations.push new CQL_QDM.Facility(facility)
+          facilityLocations.push new CQL_QDM.FacilityLocation(facility)
     facilityLocations
 
   ###
@@ -186,11 +186,11 @@ class CQL_QDM.EncounterRecommended extends CQL_QDM.QDMDatatype
     @_authorDatetime
 
   ###
-  @returns {Facility}
+  @returns {FacilityLocation}
   ###
   facilityLocation: ->
     if @_facilityLocation?.values?[0]?
-      new CQL_QDM.Facility(@_facilityLocation.values[0])
+      new CQL_QDM.FacilityLocation(@_facilityLocation.values[0])
     else
       null
 

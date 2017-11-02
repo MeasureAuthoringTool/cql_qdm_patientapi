@@ -32,11 +32,11 @@ class CQL_QDM.AdverseEvent extends CQL_QDM.QDMDatatype
     @_authorDatetime
 
   ###
-  @returns {Facility}
+  @returns {FacilityLocation}
   ###
   facilityLocation: ->
     if @_facilityLocation?.values?[0]?
-      new CQL_QDM.Facility(@_facilityLocation.values[0])
+      new CQL_QDM.FacilityLocation(@_facilityLocation.values[0])
     else
       null
 
