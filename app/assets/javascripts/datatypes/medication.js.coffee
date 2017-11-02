@@ -41,6 +41,15 @@ class CQL_QDM.MedicationActive extends CQL_QDM.QDMDatatype
   ###
   @returns {Code}
   ###
+  frequency: ->
+    if @_frequency?
+      new cql.Code(@_frequency.code, @_frequency.code_system)
+    else
+      null
+
+  ###
+  @returns {Code}
+  ###
   route: ->
     if @_route?
       new cql.Code(@_route.code, @_route.code_system)
@@ -106,6 +115,15 @@ class CQL_QDM.MedicationAdministered extends CQL_QDM.QDMDatatype
   dosage: ->
     if @_dosage?
       new cql.Quantity({unit: @_dosage['unit'], value: @_dosage['value']})
+    else
+      null
+
+  ###
+  @returns {code}
+  ###
+  frequency: ->
+    if @_frequency?
+      new cql.Code(@_frequency.code, @_frequency.code_system)
     else
       null
 
@@ -195,6 +213,15 @@ class CQL_QDM.MedicationDischarge extends CQL_QDM.QDMDatatype
   ###
   @returns {Code}
   ###
+  frequency: ->
+    if @_frequency?
+      new cql.Code(@_frequency.code, @_frequency.code_system)
+    else
+      null
+
+  ###
+  @returns {Code}
+  ###
   negationRationale: ->
     if @_negationRationale?
       new cql.Code(@_negationRationale.code, @_negationRationale.code_system)
@@ -268,6 +295,15 @@ class CQL_QDM.MedicationDispensed extends CQL_QDM.QDMDatatype
   dosage: ->
     if @_dosage?
       new cql.Quantity({unit: @_dosage['unit'], value: @_dosage['value']})
+    else
+      null
+
+  ###
+  @returns {Code}
+  ###
+  frequency: ->
+    if @_frequency?
+      new cql.Code(@_frequency.code, @_frequency.code_system)
     else
       null
 
@@ -362,6 +398,15 @@ class CQL_QDM.MedicationOrder extends CQL_QDM.QDMDatatype
   dosage: ->
     if @_dosage?
       new cql.Quantity({unit: @_dosage['unit'], value: @_dosage['value']})
+    else
+      null
+
+  ###
+  @returns {Code}
+  ###
+  frequency: ->
+    if @_frequency?
+      new cql.Code(@_frequency.code, @_frequency.code_system)
     else
       null
 

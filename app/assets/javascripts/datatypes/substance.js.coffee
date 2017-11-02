@@ -48,6 +48,15 @@ class CQL_QDM.SubstanceAdministered extends CQL_QDM.QDMDatatype
   ###
   @returns {Code}
   ###
+  frequency: ->
+    if @_frequency?
+      new cql.Code(@_frequency.code, @_frequency.code_system)
+    else
+      null
+
+  ###
+  @returns {Code}
+  ###
   negationRationale: ->
     if @_negationRationale?
       new cql.Code(@_negationRationale.code, @_negationRationale.code_system)
@@ -116,6 +125,15 @@ class CQL_QDM.SubstanceOrder extends CQL_QDM.QDMDatatype
   dosage: ->
     if @_dosage?
       new cql.Quantity({unit: @_dosage['unit'], value: @_dosage['value']})
+    else
+      null
+
+  ###
+  @returns {Code}
+  ###
+  frequency: ->
+    if @_frequency?
+      new cql.Code(@_frequency.code, @_frequency.code_system)
     else
       null
 
@@ -204,6 +222,15 @@ class CQL_QDM.SubstanceRecommended extends CQL_QDM.QDMDatatype
   dosage: ->
     if @_dosage?
       new cql.Quantity({unit: @_dosage['unit'], value: @_dosage['value']})
+    else
+      null
+
+  ###
+  @returns {Code}
+  ###
+  frequency: ->
+    if @_frequency?
+      new cql.Code(@_frequency.code, @_frequency.code_system)
     else
       null
 
