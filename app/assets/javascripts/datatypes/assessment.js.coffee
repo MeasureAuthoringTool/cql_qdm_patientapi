@@ -81,10 +81,7 @@ class CQL_QDM.AssessmentPerformed extends CQL_QDM.QDMDatatype
   ###
   @returns {Array}
   ###
-  # TODO: this got pluralized in the documentation but wasn't in the diff notes
-  # wasn't made plural in the model-info file. Should it have been? Need to ask.
-  # TODO: This needs to be updated for everything using a component
-  component: ->
+  components: ->
     CQL_QDM.Helpers.components(@_components)
 
 
