@@ -95,7 +95,7 @@ class CQL_QDM.DeviceOrder extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
     @_negationRationale = @entry.negationReason
-    @_reaction = @entry.reaction
+    @_reason = @entry.reason
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
 
   ###
@@ -110,9 +110,9 @@ class CQL_QDM.DeviceOrder extends CQL_QDM.QDMDatatype
   ###
   @returns {Code}
   ###
-  reaction: ->
-    if @_reaction?
-      new cql.Code(@_reaction.code, @_reaction.code_system)
+  reason: ->
+    if @_reason?
+      new cql.Code(@_reason.code, @_reason.code_system)
     else
       null
 
