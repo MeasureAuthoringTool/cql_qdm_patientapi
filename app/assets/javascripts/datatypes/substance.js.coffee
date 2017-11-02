@@ -165,10 +165,11 @@ class CQL_QDM.SubstanceOrder extends CQL_QDM.QDMDatatype
       null
 
   ###
-  @returns {String}
+  @returns {Integer}
   ###
   refills: ->
-    @_refills
+    # TODO: Refills should represent 'The number of refills allowed by the prescription.'
+    throw new Error('Bonnie does not currently support SubstanceOrder.refills')
 
   ###
   @returns {Code}
@@ -262,10 +263,11 @@ class CQL_QDM.SubstanceRecommended extends CQL_QDM.QDMDatatype
       null
 
   ###
-  @returns {String}
+  @returns {Integer}
   ###
   refills: ->
-    @_refills
+    # TODO: Refills should represent 'The number of refills allowed by the prescription.'
+    throw new Error('Bonnie does not currently support SubstanceRecommended.refills')
 
   ###
   @returns {Code}

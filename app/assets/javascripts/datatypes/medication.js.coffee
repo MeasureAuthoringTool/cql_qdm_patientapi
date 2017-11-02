@@ -229,10 +229,11 @@ class CQL_QDM.MedicationDischarge extends CQL_QDM.QDMDatatype
       null
 
   ###
-  @returns {String}
+  @returns {Integer}
   ###
   refills: ->
-    @_refills
+    # TODO: Refills should represent 'The number of refills allowed by the prescription.'
+    throw new Error('Bonnie does not currently support MedicationDischarge.refills')
 
   ###
   @returns {Code}
@@ -328,10 +329,11 @@ class CQL_QDM.MedicationDispensed extends CQL_QDM.QDMDatatype
       null
 
   ###
-  @returns {String}
+  @returns {Integer}
   ###
   refills: ->
-    @_refills
+    # TODO: Refills should represent 'The number of refills allowed by the prescription.'
+    throw new Error('Bonnie does not currently support MedicationDispensed.refills')
 
   ###
   @returns {Code}
@@ -438,10 +440,11 @@ class CQL_QDM.MedicationOrder extends CQL_QDM.QDMDatatype
       null
 
   ###
-  @returns {String}
+  @returns {Integer}
   ###
   refills: ->
-    @_refills
+    # TODO: Refills should represent 'The number of refills allowed by the prescription.'
+    throw new Error('Bonnie does not currently support MedicationOrder.refills')
 
   ###
   @returns {Interval<Date>}
