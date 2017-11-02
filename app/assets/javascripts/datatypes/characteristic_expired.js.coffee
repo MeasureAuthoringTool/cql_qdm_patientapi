@@ -26,6 +26,12 @@ class CQL_QDM.PatientCharacteristicExpired extends CQL_QDM.QDMDatatype
         ''
 
   ###
+  @returns {Code}
+  ###
+  cause: ->
+    throw new Error('Bonnie does not currently support PatientCharacteristicExpired.cause')
+
+  ###
   @returns {DateTime}
   ###
   expiredDatetime: ->
