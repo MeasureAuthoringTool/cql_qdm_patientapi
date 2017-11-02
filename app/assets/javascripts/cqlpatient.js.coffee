@@ -100,7 +100,7 @@ class CQL_QDM.CQLPatient
       [new CQL_QDM.CharacteristicSex(@_patient)]
     else if /PatientCharacteristicBirthdate/.test profile
       # Requested birthdate
-      [new CQL_QDM.CharacteristicBirthdate(@_patient)]
+      [new CQL_QDM.PatientCharacteristicBirthdate(@_patient)]
     else if /PatientCharacteristicExpired/.test profile
       # Requested deathdate
       [new CQL_QDM.CharacteristicExpired(@_patient)]
