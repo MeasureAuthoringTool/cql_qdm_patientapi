@@ -103,7 +103,7 @@ class CQL_QDM.CQLPatient
       [new CQL_QDM.PatientCharacteristicBirthdate(@_patient)]
     else if /PatientCharacteristicExpired/.test profile
       # Requested deathdate
-      [new CQL_QDM.CharacteristicExpired(@_patient)]
+      [new CQL_QDM.PatientCharacteristicExpired(@_patient)]
     else
       # Check if there are PatientCharateristic qdm datatypes that can be returned
       profile = profile.replace(/ *\{[^)]*\} */g, '')
