@@ -95,7 +95,7 @@ class CQL_QDM.CQLPatient
   @returns {Array of Objects}
   ###
   getPatientCharacteristic: (profile) ->
-    if /PatientPatientCharacteristicSex/.test profile
+    if /PatientCharacteristicSex/.test profile
       # Requested sex
       [new CQL_QDM.PatientCharacteristicSex(@_patient)]
     else if /PatientCharacteristicBirthdate/.test profile
