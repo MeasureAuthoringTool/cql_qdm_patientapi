@@ -42,6 +42,8 @@ class CQL_QDM.MedicationActive extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   frequency: ->
+  # TODO: Frequency currently not in HDS model.  Can probably add by calculating based off of dose & regimen
+  throw new Error('Bonnie does not currently support MedicationActive.frequency')
     if @_frequency?
       new cql.Code(@_frequency.code, @_frequency.code_system)
     else
@@ -122,6 +124,8 @@ class CQL_QDM.MedicationAdministered extends CQL_QDM.QDMDatatype
   @returns {code}
   ###
   frequency: ->
+  # TODO: Frequency currently not in HDS model.  Can probably add by calculating based off of dose & regimen
+  throw new Error('Bonnie does not currently support MedicationAdministered.frequency')
     if @_frequency?
       new cql.Code(@_frequency.code, @_frequency.code_system)
     else
@@ -214,6 +218,8 @@ class CQL_QDM.MedicationDischarge extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   frequency: ->
+  # TODO: Frequency currently not in HDS model.  Can probably add by calculating based off of dose & regimen
+  throw new Error('Bonnie does not currently support MedicationDischarge.frequency')
     if @_frequency?
       new cql.Code(@_frequency.code, @_frequency.code_system)
     else
@@ -303,6 +309,8 @@ class CQL_QDM.MedicationDispensed extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   frequency: ->
+  # TODO: Frequency currently not in HDS model.  Can probably add by calculating based off of dose & regimen
+  throw new Error('Bonnie does not currently support MedicationDispensed.frequency')
     if @_frequency?
       new cql.Code(@_frequency.code, @_frequency.code_system)
     else
@@ -407,6 +415,8 @@ class CQL_QDM.MedicationOrder extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   frequency: ->
+  # TODO: Frequency currently not in HDS model.  Can probably add by calculating based off of dose & regimen
+  throw new Error('Bonnie does not currently support MedicationOrder.frequency')
     if @_frequency?
       new cql.Code(@_frequency.code, @_frequency.code_system)
     else
