@@ -49,8 +49,8 @@ class CQL_QDM.SubstanceAdministered extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   frequency: ->
-  # TODO: Frequency currently not in HDS model.  Can probably add by calculating based off of dose & regimen
-  throw new Error('Bonnie does not currently support SubstanceAdministered.frequency')
+    # TODO: Frequency currently not in HDS model.  Can probably add by calculating based off of dose & regimen
+    throw new Error('Bonnie does not currently support SubstanceAdministered.frequency')
     if @_frequency?
       new cql.Code(@_frequency.code, @_frequency.code_system)
     else
@@ -134,8 +134,8 @@ class CQL_QDM.SubstanceOrder extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   frequency: ->
-  # TODO: Frequency currently not in HDS model.  Can probably add by calculating based off of dose & regimen
-  throw new Error('Bonnie does not currently support SubstanceOrder.frequency')
+    # TODO: Frequency currently not in HDS model.  Can probably add by calculating based off of dose & regimen
+    throw new Error('Bonnie does not currently support SubstanceOrder.frequency')
     if @_frequency?
       new cql.Code(@_frequency.code, @_frequency.code_system)
     else
@@ -234,8 +234,8 @@ class CQL_QDM.SubstanceRecommended extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   frequency: ->
-  # TODO: Frequency currently not in HDS model.  Can probably add by calculating based off of dose & regimen
-  throw new Error('Bonnie does not currently support SubstanceRecommended.frequency')
+    # TODO: Frequency currently not in HDS model.  Can probably add by calculating based off of dose & regimen
+    throw new Error('Bonnie does not currently support SubstanceRecommended.frequency')
     if @_frequency?
       new cql.Code(@_frequency.code, @_frequency.code_system)
     else
