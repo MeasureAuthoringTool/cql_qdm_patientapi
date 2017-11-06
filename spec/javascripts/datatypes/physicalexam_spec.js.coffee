@@ -2,7 +2,7 @@ describe "Physical Exam", ->
   describe "Performed", ->
     it "should show null relevantPeriod", ->
       physicalExamPerformed = new CQL_QDM.PhysicalExamPerformed({})
-      expect(physicalExamPerformed.relevantPeriod()).toEqual null
+      expect(physicalExamPerformed.relevantPeriod()).toBeNull
 
     it "should show valid relevantPeriod", ->
       physicalExamPerformed = new CQL_QDM.PhysicalExamPerformed({'start_time': '08/31/2017 1:00 AM', 'end_time': '08/31/2017 2:00 AM'})

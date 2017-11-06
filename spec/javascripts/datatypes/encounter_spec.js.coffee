@@ -26,8 +26,17 @@ describe "Encounter", ->
 
     it "should show null relevantPeriod", ->
       encounterPerformed = new CQL_QDM.EncounterPerformed({})
-      expect(encounterPerformed.relevantPeriod()).toEqual null
+      expect(encounterPerformed.relevantPeriod()).toBeNull
 
     it "should show valid relevantPeriod", ->
       encounterPerformed = new CQL_QDM.EncounterPerformed({'start_time': '08/31/2017 1:00 AM', 'end_time': '08/31/2017 2:00 AM'})
       expect(JSON.stringify(encounterPerformed.relevantPeriod())).toEqual '{"low":"2017-08-31T01:00:00.00+0000","high":"2017-08-31T02:00:00.00+0000","lowClosed":true,"highClosed":true}'
+
+  describe "Order", ->
+    it "should return null for a null facility location", ->
+      encounterOrder = new CQL_QDM.EncounterOrder({})
+      expect(encounterOrder.facilityLocation()).toBeNull
+
+    it "should show valid facility location", ->
+      encounterOrder = new CQL_QDM.EncounterOrder({'facility': {'values': [{'code': {'code': '123456', 'code_system': 'Foo'}, 'display': 'A Facility'}]}})
+      expect(JSON.stringify(encounterOrder.facilityLocation())).toEqual('{"_code":{"code":"123456","system":"Foo","display":"A Facility"}}')
