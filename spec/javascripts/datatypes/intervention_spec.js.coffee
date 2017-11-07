@@ -2,7 +2,7 @@ describe "Intervention", ->
   describe "Performed", ->
     it "should show null relevantPeriod", ->
       interventionPerformed = new CQL_QDM.InterventionPerformed({})
-      expect(interventionPerformed.relevantPeriod()).toEqual null
+      expect(interventionPerformed.relevantPeriod()).toBeNull
 
     it "should show valid relevantPeriod", ->
       interventionPerformed = new CQL_QDM.InterventionPerformed({'start_time': '08/31/2017 1:00 AM', 'end_time': '08/31/2017 2:00 AM'})

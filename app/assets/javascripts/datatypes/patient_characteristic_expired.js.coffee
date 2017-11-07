@@ -8,7 +8,7 @@ their methods will be accessable through the CQL_QDM namespace)
 ###
 Used to represent a birthdate.
 ###
-class CQL_QDM.CharacteristicExpired extends CQL_QDM.QDMDatatype
+class CQL_QDM.PatientCharacteristicExpired extends CQL_QDM.QDMDatatype
   ###
   @param {Object} patient - the HDS patient object to use
   ###
@@ -24,6 +24,12 @@ class CQL_QDM.CharacteristicExpired extends CQL_QDM.QDMDatatype
     else
       code:
         ''
+
+  ###
+  @returns {Code}
+  ###
+  cause: ->
+    throw new Error('Bonnie does not currently support PatientCharacteristicExpired.cause')
 
   ###
   @returns {DateTime}

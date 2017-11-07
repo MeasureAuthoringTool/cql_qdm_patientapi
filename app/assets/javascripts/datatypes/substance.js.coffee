@@ -48,6 +48,17 @@ class CQL_QDM.SubstanceAdministered extends CQL_QDM.QDMDatatype
   ###
   @returns {Code}
   ###
+  frequency: ->
+    # TODO: Frequency currently not in HDS model.  Can probably add by calculating based off of dose & regimen
+    throw new Error('Bonnie does not currently support SubstanceAdministered.frequency')
+    if @_frequency?
+      new cql.Code(@_frequency.code, @_frequency.code_system)
+    else
+      null
+
+  ###
+  @returns {Code}
+  ###
   negationRationale: ->
     if @_negationRationale?
       new cql.Code(@_negationRationale.code, @_negationRationale.code_system)
@@ -122,6 +133,17 @@ class CQL_QDM.SubstanceOrder extends CQL_QDM.QDMDatatype
   ###
   @returns {Code}
   ###
+  frequency: ->
+    # TODO: Frequency currently not in HDS model.  Can probably add by calculating based off of dose & regimen
+    throw new Error('Bonnie does not currently support SubstanceOrder.frequency')
+    if @_frequency?
+      new cql.Code(@_frequency.code, @_frequency.code_system)
+    else
+      null
+
+  ###
+  @returns {Code}
+  ###
   method: ->
     if @_method?
       new cql.Code(@_method.code, @_method.code_system)
@@ -147,10 +169,11 @@ class CQL_QDM.SubstanceOrder extends CQL_QDM.QDMDatatype
       null
 
   ###
-  @returns {String}
+  @returns {Integer}
   ###
   refills: ->
-    @_refills
+    # TODO: Refills should represent 'The number of refills allowed by the prescription.'
+    throw new Error('Bonnie does not currently support SubstanceOrder.refills')
 
   ###
   @returns {Code}
@@ -210,6 +233,17 @@ class CQL_QDM.SubstanceRecommended extends CQL_QDM.QDMDatatype
   ###
   @returns {Code}
   ###
+  frequency: ->
+    # TODO: Frequency currently not in HDS model.  Can probably add by calculating based off of dose & regimen
+    throw new Error('Bonnie does not currently support SubstanceRecommended.frequency')
+    if @_frequency?
+      new cql.Code(@_frequency.code, @_frequency.code_system)
+    else
+      null
+
+  ###
+  @returns {Code}
+  ###
   method: ->
     if @_method?
       new cql.Code(@_method.code, @_method.code_system)
@@ -235,10 +269,11 @@ class CQL_QDM.SubstanceRecommended extends CQL_QDM.QDMDatatype
       null
 
   ###
-  @returns {String}
+  @returns {Integer}
   ###
   refills: ->
-    @_refills
+    # TODO: Refills should represent 'The number of refills allowed by the prescription.'
+    throw new Error('Bonnie does not currently support SubstanceRecommended.refills')
 
   ###
   @returns {Code}

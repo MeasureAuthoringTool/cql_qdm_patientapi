@@ -8,7 +8,7 @@ their methods will be accessable through the CQL_QDM namespace)
 ###
 Used to represent a birthdate.
 ###
-class CQL_QDM.CharacteristicBirthdate extends CQL_QDM.QDMDatatype
+class CQL_QDM.PatientCharacteristicBirthdate extends CQL_QDM.QDMDatatype
   ###
   @param {Object} patient - the HDS patient object to use
   ###

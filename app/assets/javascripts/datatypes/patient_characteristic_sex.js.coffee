@@ -8,7 +8,7 @@ their methods will be accessable through the CQL_QDM namespace)
 ###
 Used to represent a sex.
 ###
-class CQL_QDM.CharacteristicSex extends CQL_QDM.QDMDatatype
+class CQL_QDM.PatientCharacteristicSex extends CQL_QDM.QDMDatatype
   ###
   @param {Object} patient - the HDS patient object to use
   ###

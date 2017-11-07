@@ -60,6 +60,10 @@ class CQL_QDM.AssessmentPerformed extends CQL_QDM.QDMDatatype
       null
 
   ###
+  The model_info_file also lists Integer, Decimal, DateTime, Time, and Ratio.
+  Decimal and Integer are covered under Quantity with a nil unit.
+  Ratio is not yet supported with CQL although it appears in the QDM model.
+  Time and Datetime are covered by Date
   @returns {Code|Quantity|Date}
   ###
   result: ->
@@ -146,7 +150,10 @@ class CQL_QDM.AssessmentRecommended extends CQL_QDM.QDMDatatype
       null
 
   ###
-  @returns {Code|Quantity}
+  @returns {Code}
   ###
-  result: ->
-    CQL_QDM.Helpers.formatResult(@_result)
+  method: ->
+    if @_method?
+      new cql.Code(@_method.code, @_method.code_system)
+    else
+      null

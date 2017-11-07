@@ -97,13 +97,13 @@ class CQL_QDM.CQLPatient
   getPatientCharacteristic: (profile) ->
     if /PatientCharacteristicSex/.test profile
       # Requested sex
-      [new CQL_QDM.CharacteristicSex(@_patient)]
+      [new CQL_QDM.PatientCharacteristicSex(@_patient)]
     else if /PatientCharacteristicBirthdate/.test profile
       # Requested birthdate
-      [new CQL_QDM.CharacteristicBirthdate(@_patient)]
+      [new CQL_QDM.PatientCharacteristicBirthdate(@_patient)]
     else if /PatientCharacteristicExpired/.test profile
       # Requested deathdate
-      [new CQL_QDM.CharacteristicExpired(@_patient)]
+      [new CQL_QDM.PatientCharacteristicExpired(@_patient)]
     else
       # Check if there are PatientCharateristic qdm datatypes that can be returned
       profile = profile.replace(/ *\{[^)]*\} */g, '')
@@ -223,7 +223,7 @@ class CQL_QDM.CQLPatient
     # If the execution engine wants an attribute of the patient
     # directly, it calls findRecord with a profile of Patient, and
     # looks at that object for things. Other times CQL might treat
-    # things like gender/sex as a data criteria (i.e. PatientCharacteristicSex),
+    # things like gender/sex as a data criteria (i.e. PatientPatientCharacteristicSex),
     # and calls things like getCode on them. The info['gender'] is for the
     # former case.
     info = {}

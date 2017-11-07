@@ -36,5 +36,5 @@ describe "QDMDatatype", ->
     expect(diagnosis.id()).toEqual(new CQL_QDM.Id("59a8395e5cc9753dad000011"))
 
   it "should return null for a datatype not based on an entry", ->
-    birthdate = new CQL_QDM.CharacteristicBirthdate({_id: "1234567890", birthdate: "1246400000"})
-    expect(birthdate.id()).toBeNull()
+    birthdate = new CQL_QDM.PatientCharacteristicBirthdate({_id: "1234567890", birthdate: "1246400000"})
+    expect(birthdate.id()).toBeNull

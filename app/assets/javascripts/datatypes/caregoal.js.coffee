@@ -28,12 +28,6 @@ class CQL_QDM.CareGoal extends CQL_QDM.QDMDatatype
     @_targetOutcome = @entry.targetOutcome
 
   ###
-  @returns {Date}
-  ###
-  authorDatetime: ->
-    @_authorDatetime
-
-  ###
   @returns {Interval<Date>}
   ###
   relevantPeriod: ->
@@ -51,6 +45,9 @@ class CQL_QDM.CareGoal extends CQL_QDM.QDMDatatype
     CQL_QDM.Helpers.relatedTo(@_relatedTo)
 
   ###
+  The model_info_file also lists Integer, Decimal, and Ratio.
+  Decimal and Integer are covered under Quantity with a nil unit.
+  Ratio is not yet supported with CQL although it appears in the QDM model.
   @returns {Quantity | Code}
   ###
   targetOutcome: ->

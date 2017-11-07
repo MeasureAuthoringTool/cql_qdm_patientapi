@@ -9,15 +9,36 @@ Represents a CQL 'component' for use in the CQL execution engine.
 ###
 class CQL_QDM.Component
   constructor: (component) ->
-    @result = CQL_QDM.Helpers.formatResult(component.result)
-    @code = new cql.Code(component.code.code, component.code.code_system)
+    @_result = CQL_QDM.Helpers.formatResult(component.result)
+    @_code = new cql.Code(component.code.code, component.code.code_system)
 
   exec: (ctx) ->
     @
   
   toString: () ->
-    "#{@result.toString()} '#{@code.toString()}'"
+    "#{@_result.toString()} '#{@_code.toString()}'"
 
+  ###
+  @returns {Code}
+  ###
+  code: ->
+    if @_code?
+      @_code
+    else
+      null
+
+  ###
+  The model_info_file also lists Integer, Decimal, DateTime, Time, and Ratio.
+  Decimal and Integer are covered under Quantity with a nil unit.
+  Ratio is not yet supported with CQL although it appears in the QDM model.
+  Time and Datetime are covered by Date
+  @returns {Code|Quantity}
+  ###
+  result: ->
+    if @_result?
+      @_result
+    else
+      null
 
 ###
 Represents a CQL 'component' for Laboratory Test Performed, which has a reference range.
@@ -31,11 +52,20 @@ class CQL_QDM.ResultComponent extends CQL_QDM.Component
     referenceRangeHigh_value = referenceRangeHigh.scalar if referenceRangeHigh
 
     # If only one of low/high is defined, make interval with undefined endpoint
-    @range = new cql.Interval(referenceRangeLow_value, referenceRangeHigh_value) if referenceRangeLow_value || referenceRangeHigh_value
+    @_referenceRange = new cql.Interval(referenceRangeLow_value, referenceRangeHigh_value) if referenceRangeLow_value || referenceRangeHigh_value
     # TODO: might need to deal with units in the future
 
   exec: (ctx) ->
     @
 
   toString: () ->
-    "#{@result.toString()} '#{@code.toString()}' '#{@range.toString()}'"
+    "'#{@_referenceRange.toString()}'"
+
+  ###
+  @returns {Interval<Quantity>}
+  ###
+  referenceRange: ->
+    if @_referenceRange?
+      @_referenceRange
+    else
+      null
