@@ -148,6 +148,9 @@ class CQL_QDM.PhysicalExamPerformed extends CQL_QDM.QDMDatatype
       null
 
   ###
+  The model_info_file also lists Integer, Decimal, and Ratio.
+  Decimal and Integer are covered under Quantity with a nil unit.
+  Ratio is not yet supported with CQL although it appears in the QDM model.
   @returns {Code|Quantity}
   ###
   result: ->
