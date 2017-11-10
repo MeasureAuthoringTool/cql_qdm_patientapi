@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    cql_qdm_patientapi (0.1.0)
+    cql_qdm_patientapi (1.0.0)
       coffee-rails (>= 4.1.0)
       rails (>= 4.1.0)
 
@@ -99,4 +99,4 @@ DEPENDENCIES
   teaspoon-jasmine (= 2.3.4)
 
 BUNDLED WITH
-   1.15.3
+   1.15.4
