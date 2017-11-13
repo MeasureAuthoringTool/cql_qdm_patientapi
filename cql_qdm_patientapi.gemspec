@@ -20,6 +20,6 @@ Gem::Specification.new do |spec|
   spec.license       = "Apache-2.0"
 
   spec.add_dependency 'rails', '~> 4.2'
-  spec.add_dependency 'coffee-rails', '~> 4.2'
-
+  spec.add_dependency 'coffee-rails', '~> 4.1'
+  spec.add_dependency 'sprockets-rails', '~> 2.3'
 end
