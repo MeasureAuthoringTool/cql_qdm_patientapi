@@ -6,8 +6,8 @@ require 'cql_qdm_patientapi/version'
 Gem::Specification.new do |spec|
   spec.name          = "cql_qdm_patientapi"
   spec.version       = CqlQdmPatientapi::VERSION
-  spec.authors     = ['Adam M. Holmes', 'James Bradley']
-  spec.email       = ['aholmes@mitre.org', 'jhbradley@mitre.org']
+  spec.authors     = ['The MITRE Corporation']
+  spec.email       = ['tacoma-list@lists.mitre.org']
 
   spec.summary     = 'Interface from HDS patient model to QDM CQL execution engine'
   spec.description = 'Interface from HDS patient model to QDM CQL execution engine'
