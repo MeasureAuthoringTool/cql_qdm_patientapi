@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors     = ['The MITRE Corporation']
   spec.email       = ['tacoma-list@lists.mitre.org']
 
-  spec.summary     = 'Interface from HDS patient model to QDM CQL execution engine'
+  spec.summary     = 'QDM CQL execution engine and HDS patient model interface'
   spec.description = 'Interface from HDS patient model to QDM CQL execution engine'
   spec.homepage    = 'https://github.com/projecttacoma/cql_qdm_patientapi'
 
@@ -17,8 +17,9 @@ Gem::Specification.new do |spec|
   spec.bindir        = "exe"
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
+  spec.license       = "Apache-2.0"
 
-  spec.add_dependency 'rails', '>= 4.1.0'
-  spec.add_dependency 'coffee-rails', '>= 4.1.0'
-
+  spec.add_dependency 'rails', '~> 4.2'
+  spec.add_dependency 'coffee-rails', '~> 4.1'
+  spec.add_dependency 'sprockets-rails', '~> 2.3'
 end
