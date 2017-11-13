@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors     = ['The MITRE Corporation']
   spec.email       = ['tacoma-list@lists.mitre.org']
 
-  spec.summary     = 'QDM CQL execution engine'
+  spec.summary     = 'QDM CQL execution engine and HDS patient model interface'
   spec.description = 'Interface from HDS patient model to QDM CQL execution engine'
   spec.homepage    = 'https://github.com/projecttacoma/cql_qdm_patientapi'
 
