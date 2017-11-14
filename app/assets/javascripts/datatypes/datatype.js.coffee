@@ -29,7 +29,7 @@ class CQL_QDM.QDMDatatype
     allCodes = []
     for system, codes of @_codes
       for code in codes
-        allCodes.push code: code
+        allCodes.push system: system, code: code
     allCodes
 
   ###
@@ -42,3 +42,14 @@ class CQL_QDM.QDMDatatype
       return new CQL_QDM.Id(@entry._id)
     else
       null
+
+  ###
+  @returns {Code}
+  ###
+  code: ->
+    codeArray = @getCode()
+    if codeArray.length > 0 and codeArray[0].code? and codeArray[0].system?
+      new cql.Code(codeArray[0].code, codeArray[0].system)
+    else
+      null
+
