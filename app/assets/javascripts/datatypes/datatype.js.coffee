@@ -47,9 +47,11 @@ class CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   code: ->
-    codeArray = @getCode()
-    if codeArray.length > 0 and codeArray[0].code? and codeArray[0].system?
-      new cql.Code(codeArray[0].code, codeArray[0].system)
-    else
-      null
+    for system, codes of @_codes
+      for code in codes
+        # return the first code of the first system in @_codes
+        return new cql.Code(code, system)
+        break
+      break
+    null
 
