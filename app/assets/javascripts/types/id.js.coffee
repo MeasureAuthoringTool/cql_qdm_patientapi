@@ -20,4 +20,4 @@ namingSystem: ->
 @returns {String}
 ###
 value: ->
-  @namingSystem
+  @value

@@ -8,7 +8,7 @@ describe "CareGoal", ->
 
   it "should show null relevantPeriod", ->
     careGoal = new CQL_QDM.CareGoal({})
-    expect(careGoal.relevantPeriod()).toBeNull
+    expect(careGoal.relevantPeriod()).toBeNull()
 
   it "should show valid relevantPeriod", ->
     careGoal = new CQL_QDM.CareGoal({'start_time': '08/31/2017 1:00 AM', 'end_time': '08/31/2017 2:00 AM'})
@@ -16,4 +16,4 @@ describe "CareGoal", ->
 
   it "should show not respond to authorDatetime", ->
     careGoal = new CQL_QDM.CareGoal({})
-    expect(careGoal.authorDatetime).not.toBeDefined
+    expect(careGoal.authorDatetime).not.toBeDefined()

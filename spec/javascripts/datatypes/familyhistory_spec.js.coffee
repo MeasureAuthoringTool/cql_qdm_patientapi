@@ -1,7 +1,7 @@
 describe "FamilyHistory", ->
   it "should return null for a null relationship", ->
     familyHistory = new CQL_QDM.FamilyHistory({})
-    expect(familyHistory.relationship()).toBeNull
+    expect(familyHistory.relationship()).toBeNull()
 
   it "should show valid relationship", ->
     familyHistory = new CQL_QDM.FamilyHistory({'relationshipToPatient': {'code': '12345', 'code_system': 'Bar'}})
