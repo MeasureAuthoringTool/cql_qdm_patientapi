@@ -2,7 +2,7 @@ describe "Substance", ->
   describe "Administered", ->
     it "should show null relevantPeriod", ->
       substanceAdministered = new CQL_QDM.SubstanceAdministered({})
-      expect(substanceAdministered.relevantPeriod()).toBeNull
+      expect(substanceAdministered.relevantPeriod()).toBeNull()
 
     it "should show valid relevantPeriod", ->
       substanceAdministered = new CQL_QDM.SubstanceAdministered({'start_time': '08/31/2017 1:00 AM', 'end_time': '08/31/2017 2:00 AM'})
@@ -10,7 +10,7 @@ describe "Substance", ->
 
     it "should throw an error if refills() is called", ->
       substanceAdministered = new CQL_QDM.SubstanceAdministered({'start_time': '08/31/2017 1:00 AM', 'end_time': '08/31/2017 2:00 AM'})
-      expect(substanceAdministered.refills).not.toBeDefined
+      expect(substanceAdministered.refills).not.toBeDefined()
       expect(substanceAdministered.frequency).toThrowError('Bonnie does not currently support SubstanceAdministered.frequency')
 
   describe "Order", ->

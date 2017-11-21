@@ -1,7 +1,7 @@
 describe "Patient Characteristic Expired", ->
   xit "should show null deathdate", ->
     patientCharacteristicExpired = new CQL_QDM.PatientCharacteristicExpired({})
-    expect(patientCharacteristicExpired.expiredDatetime()).toBeNull
+    expect(patientCharacteristicExpired.expiredDatetime()).toBeNull()
 
   xit "should show valid deathdate", ->
     patientCharacteristicExpired = new CQL_QDM.PatientCharacteristicExpired({'deathdate': '08/31/2017 1:00 AM'})

@@ -16,7 +16,7 @@ describe "Medication", ->
 
     it "should show null relevantPeriod", ->
       medicationDispensed = new CQL_QDM.MedicationDispensed({})
-      expect(medicationDispensed.relevantPeriod()).toBeNull
+      expect(medicationDispensed.relevantPeriod()).toBeNull()
 
     it "should show valid relevantPeriod", ->
       medicationDispensed = new CQL_QDM.MedicationDispensed({'start_time': '08/31/2017 1:00 AM', 'end_time': '08/31/2017 2:00 AM'})
@@ -45,7 +45,7 @@ describe "Medication", ->
 
     it "should show null relevantPeriod", ->
       medicationOrdered = new CQL_QDM.MedicationOrder({})
-      expect(medicationOrdered.relevantPeriod()).toBeNull
+      expect(medicationOrdered.relevantPeriod()).toBeNull()
 
     it "should show valid relevantPeriod", ->
       medicationOrdered = new CQL_QDM.MedicationOrder({'start_time': '08/31/2017 1:00 AM', 'end_time': '08/31/2017 2:00 AM'})
@@ -59,7 +59,7 @@ describe "Medication", ->
   describe "Active", ->
     it "should show null relevantPeriod", ->
       medicationActive = new CQL_QDM.MedicationActive({})
-      expect(medicationActive.relevantPeriod()).toBeNull
+      expect(medicationActive.relevantPeriod()).toBeNull()
 
     it "should show valid relevantPeriod", ->
       medicationActive = new CQL_QDM.MedicationActive({'start_time': '08/31/2017 1:00 AM', 'end_time': '08/31/2017 2:00 AM'})
@@ -68,7 +68,7 @@ describe "Medication", ->
   describe "Administered", ->
     it "should show null relevantPeriod", ->
       medicationAdministered = new CQL_QDM.MedicationAdministered({})
-      expect(medicationAdministered.relevantPeriod()).toBeNull
+      expect(medicationAdministered.relevantPeriod()).toBeNull()
 
     it "should show valid relevantPeriod", ->
       medicationAdministered = new CQL_QDM.MedicationAdministered({'start_time': '08/31/2017 1:00 AM', 'end_time': '08/31/2017 2:00 AM'})
@@ -77,7 +77,7 @@ describe "Medication", ->
     it "should not support refills()", ->
       # MedicationAdministered does not support refills, according to the model info file
       medicationAdministered = new CQL_QDM.MedicationAdministered({'refills': 2})
-      expect(medicationAdministered.refills).not.toBeDefined
+      expect(medicationAdministered.refills).not.toBeDefined()
 
     it "should throw an error if frequency() is called", ->
       medicationAdministered = new CQL_QDM.MedicationAdministered({'start_time': '08/31/2017 1:00 AM', 'end_time': '08/31/2017 2:00 AM'})

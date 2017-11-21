@@ -30,7 +30,7 @@ describe "Laboratory Test", ->
 
     it "should show null relevantPeriod", ->
       laboratoryTestPerformed = new CQL_QDM.AdverseEvent({})
-      expect(laboratoryTestPerformed.relevantPeriod()).toBeNull
+      expect(laboratoryTestPerformed.relevantPeriod()).toBeNull()
 
     it "should show valid relevantPeriod", ->
       laboratoryTestPerformed = new CQL_QDM.AdverseEvent({'start_time': '08/31/2017 1:00 AM', 'end_time': '08/31/2017 2:00 AM'})

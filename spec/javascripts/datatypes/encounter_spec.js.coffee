@@ -26,7 +26,7 @@ describe "Encounter", ->
 
     it "should show null relevantPeriod", ->
       encounterPerformed = new CQL_QDM.EncounterPerformed({})
-      expect(encounterPerformed.relevantPeriod()).toBeNull
+      expect(encounterPerformed.relevantPeriod()).toBeNull()
 
     it "should show valid relevantPeriod", ->
       encounterPerformed = new CQL_QDM.EncounterPerformed({'start_time': '08/31/2017 1:00 AM', 'end_time': '08/31/2017 2:00 AM'})
@@ -35,7 +35,7 @@ describe "Encounter", ->
   describe "Order", ->
     it "should return null for a null facility location", ->
       encounterOrder = new CQL_QDM.EncounterOrder({})
-      expect(encounterOrder.facilityLocation()).toBeNull
+      expect(encounterOrder.facilityLocation()).toBeNull()
 
     it "should show valid facility location", ->
       encounterOrder = new CQL_QDM.EncounterOrder({'facility': {'values': [{'code': {'code': '123456', 'code_system': 'Foo'}, 'display': 'A Facility'}]}})

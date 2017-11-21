@@ -2,7 +2,7 @@ describe "Device", ->
   describe "Applied", ->
     it "should show null relevantPeriod", ->
       deviceApplied = new CQL_QDM.DeviceApplied({})
-      expect(deviceApplied.relevantPeriod()).toBeNull
+      expect(deviceApplied.relevantPeriod()).toBeNull()
 
     it "should show valid relevantPeriod", ->
       deviceApplied = new CQL_QDM.DeviceApplied({'start_time': '08/31/2017 1:00 AM', 'end_time': '08/31/2017 2:00 AM'})
