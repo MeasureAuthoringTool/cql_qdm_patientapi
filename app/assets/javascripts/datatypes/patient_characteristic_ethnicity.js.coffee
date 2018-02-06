@@ -12,12 +12,14 @@ class CQL_QDM.PatientCharacteristicEthnicity extends CQL_QDM.QDMDatatype
   ###
   @param {Object} patient - the HDS patient object to use
   ###
-  constructor: (patient) ->
-    @_patient = patient
+
+  constructor: (@patient) ->
+    super @patient
+    @_patient = @patient
 
 
   getCode: ->
-    if @_patient?.has('ethnicity')
+    if @_patient?.ethnicity?
       code: @_patient.get('ethnicity')
     else
       null
