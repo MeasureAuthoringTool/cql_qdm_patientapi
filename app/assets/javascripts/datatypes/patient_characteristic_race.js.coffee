@@ -12,9 +12,8 @@ class CQL_QDM.PatientCharacteristicRace extends CQL_QDM.QDMDatatype
   ###
   @param {Object} patient - the HDS patient object to use
   ###
-  constructor: (@patient) ->
-    super @patient
-    @_patient = @patient
+  constructor: (patient) ->
+    @_patient = patient
 
 
   getCode: ->
