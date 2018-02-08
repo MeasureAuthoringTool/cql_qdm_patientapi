@@ -19,7 +19,7 @@ class CQL_QDM.PatientCharacteristicEthnicity extends CQL_QDM.QDMDatatype
 
 
   getCode: ->
-    if @_patient?.ethnicity?
+    if @_patient?.has('ethnicity')
       code: @_patient.get('ethnicity')
     else
       null
