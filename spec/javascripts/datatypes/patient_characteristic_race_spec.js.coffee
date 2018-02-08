@@ -1,3 +1,6 @@
+# The cql_qdm_patientapi datatypes for patient Characteristics use the patient
+# thorax model which uses .get and .has functions to access attributes. For testing
+# purposes we need to mock this functionality.
 class ThoraxModelMock
   constructor: (attr) ->
     @attrs = attr
