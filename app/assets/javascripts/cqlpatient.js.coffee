@@ -104,6 +104,12 @@ class CQL_QDM.CQLPatient
     else if /PatientCharacteristicExpired/.test profile
       # Requested deathdate
       [new CQL_QDM.PatientCharacteristicExpired(@_patient)]
+    else if /PatientCharacteristicRace/.test profile
+      # Requested race
+      [new CQL_QDM.PatientCharacteristicRace(@_patient)]
+    else if /PatientCharacteristicEthnicity/.test profile
+      # Requested ethnicity
+      [new CQL_QDM.PatientCharacteristicEthnicity(@_patient)]
     else
       # Check if there are PatientCharateristic qdm datatypes that can be returned
       profile = profile.replace(/ *\{[^)]*\} */g, '')
