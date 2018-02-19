@@ -7,6 +7,7 @@ before_install:
 before_install: gem install bundler -v 1.15.3
 script:
   - export DISPLAY=:99.0
+  - bundle exec bundle-audit check --update
   - bundle exec teaspoon
 notifications:
   email:
