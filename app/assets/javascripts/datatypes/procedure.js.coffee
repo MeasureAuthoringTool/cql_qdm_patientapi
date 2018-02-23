@@ -15,7 +15,7 @@ class CQL_QDM.ProcedureOrder extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
     @_anatomicalApproachSite = @entry.anatomical_approach
-    @_anatomicalLocationSite = @entry.anatomicalLocation
+    @_anatomicalLocationSite = @entry.anatomical_location
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_method = @entry.method
     @_negationRationale = @entry.negationReason
@@ -95,7 +95,7 @@ class CQL_QDM.ProcedurePerformed extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
     @_anatomicalApproachSite = @entry.anatomical_approach
-    @_anatomicalLocationSite = @entry.anatomicalLocation
+    @_anatomicalLocationSite = @entry.anatomical_location
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_incisionDatetime = CQL_QDM.Helpers.convertDateTime(@entry.incisionTime)
     @_method = @entry.method
@@ -228,7 +228,7 @@ class CQL_QDM.ProcedureRecommended extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
     @_anatomicalApproachSite = @entry.anatomical_approach
-    @_anatomicalLocationSite = @entry.anatomicalLocation
+    @_anatomicalLocationSite = @entry.anatomical_location
     @_method = @entry.method
     @_negationRationale = @entry.negationReason
     @_ordinality = @entry.ordinality
