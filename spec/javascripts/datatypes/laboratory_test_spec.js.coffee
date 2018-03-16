@@ -35,3 +35,12 @@ describe "Laboratory Test", ->
     it "should show valid relevantPeriod", ->
       laboratoryTestPerformed = new CQL_QDM.AdverseEvent({'start_time': '08/31/2017 1:00 AM', 'end_time': '08/31/2017 2:00 AM'})
       expect(JSON.stringify(laboratoryTestPerformed.relevantPeriod())).toEqual '{"low":"2017-08-31T01:00:00.00+0000","high":"2017-08-31T02:00:00.00+0000","lowClosed":true,"highClosed":true}'
+
+    it "should not return a result", ->
+      laboratoryTestPerformed = new CQL_QDM.LaboratoryTestPerformed({})
+      expect(JSON.stringify(laboratoryTestPerformed.result())).toEqual('null')
+
+    it "should return a result", ->
+      laboratoryTestPerformed = new CQL_QDM.LaboratoryTestPerformed({'values': [
+          {_id: "5aabbc4692d04e71f32f7619", codes: { 'SNOMED-CT': ["164059009"]}, description: "Pass Or Refer"}]})
+      expect(JSON.stringify(laboratoryTestPerformed.result())).toEqual('{"code":"164059009","system":"SNOMED-CT"}')

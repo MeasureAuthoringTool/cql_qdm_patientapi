@@ -21,3 +21,12 @@ describe "Procedure", ->
     it "should return anatomicalLocationSite", ->
       procedureRecommended = new CQL_QDM.ProcedureRecommended({anatomical_location: {code_system: "SNOMED-CT", code: "24028007", title: "Right"}})
       expect(procedureRecommended.anatomicalLocationSite()).toEqual(new cql.Code("24028007", "SNOMED-CT"))
+
+    it "should not return a result", ->
+      procedurePerformed = new CQL_QDM.ProcedurePerformed({})
+      expect(JSON.stringify(procedurePerformed.result())).toEqual('null')
+
+    it "should return a result", ->
+      procedurePerformed = new CQL_QDM.ProcedurePerformed({'values': [
+          {_id: "5aabbc4692d04e71f32f7619", codes: { 'SNOMED-CT': ["164059009"]}, description: "Pass Or Refer"}]})
+      expect(JSON.stringify(procedurePerformed.result())).toEqual('{"code":"164059009","system":"SNOMED-CT"}')
