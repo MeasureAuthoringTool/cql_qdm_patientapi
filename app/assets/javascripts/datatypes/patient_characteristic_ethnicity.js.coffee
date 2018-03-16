@@ -15,6 +15,7 @@ class CQL_QDM.PatientCharacteristicEthnicity extends CQL_QDM.QDMDatatype
   constructor: (patient) ->
     @_patient = patient
 
+
   getCode: ->
     if @_patient?.has('ethnicity')
       code: @_patient.get('ethnicity')
