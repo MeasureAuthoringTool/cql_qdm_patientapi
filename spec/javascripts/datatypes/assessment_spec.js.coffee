@@ -6,3 +6,12 @@ describe "Assessment", ->
       referenceId = new CQL_QDM.Id('1234567890')
       relatedToArray = assessmentPerformed.relatedTo()
       expect(relatedToArray[0]).toEqual referenceId
+
+    it "should not return a result", ->
+      assessmentPerformed = new CQL_QDM.AssessmentPerformed({})
+      expect(JSON.stringify(assessmentPerformed.result())).toEqual('null')
+
+    it "should return a result", ->
+      assessmentPerformed = new CQL_QDM.AssessmentPerformed({'values': [
+          {_id: "5aabbc4692d04e71f32f7619", codes: { 'SNOMED-CT': ["164059009"]}, description: "Pass Or Refer"}]})
+      expect(JSON.stringify(assessmentPerformed.result())).toEqual('{"code":"164059009","system":"SNOMED-CT"}')

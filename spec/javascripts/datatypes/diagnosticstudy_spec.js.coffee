@@ -15,3 +15,12 @@ describe "Diagnostic Study", ->
     it "should show valid facility location", ->
       diagnosticStudyPerformed = new CQL_QDM.DiagnosticStudyPerformed({'facility': {'values': [{'code': {'code': '123456', 'code_system': 'Foo'}, 'display': 'A Facility'}]}})
       expect(JSON.stringify(diagnosticStudyPerformed.facilityLocation())).toEqual('{"_code":{"code":"123456","system":"Foo","display":"A Facility"}}')
+
+    it "should not return a result", ->
+      diagnosticStudyPerformed = new CQL_QDM.DiagnosticStudyPerformed({})
+      expect(JSON.stringify(diagnosticStudyPerformed.result())).toEqual('null')
+
+    it "should return a result", ->
+      diagnosticStudyPerformed = new CQL_QDM.DiagnosticStudyPerformed({'values': [
+          {_id: "5aabbc4692d04e71f32f7619", codes: { 'SNOMED-CT': ["164059009"]}, description: "Pass Or Refer"}]})
+      expect(JSON.stringify(diagnosticStudyPerformed.result())).toEqual('{"code":"164059009","system":"SNOMED-CT"}')
