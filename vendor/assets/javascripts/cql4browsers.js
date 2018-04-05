@@ -423,7 +423,7 @@
 
     Code.prototype.hasMatch = function(code) {
       if (typeof code === 'string') {
-        return false;
+        return code === this.code;
       } else {
         return codesInList(toCodeList(code), [this]);
       }
