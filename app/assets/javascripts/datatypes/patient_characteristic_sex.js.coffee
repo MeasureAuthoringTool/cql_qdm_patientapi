@@ -19,5 +19,7 @@ class CQL_QDM.PatientCharacteristicSex extends CQL_QDM.QDMDatatype
     # NOTE: Eventually this could be replaced with actual codes. That would
     # require modifications to the execution engine in order to handle that
     # change.
-    code:
-      @_patient.get('gender')
+
+    # Only return string as code system is not accessible on the model and a
+    # Code object without a code system fails calculations
+    @_patient.get('gender')
