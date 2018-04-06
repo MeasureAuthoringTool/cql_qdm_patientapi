@@ -116,7 +116,7 @@ class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
   facilityLocations: ->
     # For Encounter Performed, there can be multiple Facility Locations
     facilityLocations = []
-    if @_facilityLocations?
+    if @_facilityLocations? && @_facilityLocations.values?
       for facility in @_facilityLocations.values
         if facility?
           facilityLocations.push new CQL_QDM.FacilityLocation(facility)

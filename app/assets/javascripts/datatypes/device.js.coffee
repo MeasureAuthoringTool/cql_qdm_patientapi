@@ -36,7 +36,7 @@ class CQL_QDM.DeviceApplied extends CQL_QDM.QDMDatatype
     if @_anatomicalApproachSite?
       new cql.Code(@_anatomicalApproachSite.code, @_anatomicalApproachSite.code_system)
     else
-      end
+      null
 
   ###
   @returns {Code}
