@@ -10,7 +10,9 @@ Represents a CQL 'component' for use in the CQL execution engine.
 class CQL_QDM.Component
   constructor: (component) ->
     @_result = CQL_QDM.Helpers.formatResult(component.result)
-    @_code = new cql.Code(component.code.code, component.code.code_system)
+    code = component?.code?.code
+    code_system = component?.code?.code_system
+    @_code = new cql.Code(code, code_system)
 
   exec: (ctx) ->
     @
@@ -46,8 +48,8 @@ Represents a CQL 'component' for Laboratory Test Performed, which has a referenc
 class CQL_QDM.ResultComponent extends CQL_QDM.Component
   constructor: (component) ->
     super(component)
-    referenceRangeLow = component.referenceRangeLow if component.referenceRangeLow.scalar    # {"scalar": scalar, "unit": unit}}
-    referenceRangeHigh = component.referenceRangeHigh if component.referenceRangeHigh.scalar 
+    referenceRangeLow = component.referenceRangeLow if component.referenceRangeLow && component.referenceRangeLow.scalar    # {"scalar": scalar, "unit": unit}}
+    referenceRangeHigh = component.referenceRangeHigh if component.referenceRangeHigh && component.referenceRangeHigh.scalar
     referenceRangeLow_value = referenceRangeLow.scalar if referenceRangeLow
     referenceRangeHigh_value = referenceRangeHigh.scalar if referenceRangeHigh
 

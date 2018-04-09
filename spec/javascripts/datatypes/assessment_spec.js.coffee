@@ -15,3 +15,10 @@ describe "Assessment", ->
       assessmentPerformed = new CQL_QDM.AssessmentPerformed({'values': [
           {_id: "5aabbc4692d04e71f32f7619", codes: { 'SNOMED-CT': ["164059009"]}, description: "Pass Or Refer"}]})
       expect(JSON.stringify(assessmentPerformed.result())).toEqual('{"code":"164059009","system":"SNOMED-CT"}')
+
+describe "Assessment", ->
+  describe "Recommended", ->
+    it "should not return a negationRationale", ->
+      assessmentRecommended = new CQL_QDM.AssessmentRecommended({})
+      expect(assessmentRecommended.negationRationale()).toBeNull()
+

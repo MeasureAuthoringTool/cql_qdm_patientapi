@@ -9,7 +9,10 @@ Represents a CQL 'facility' for use in the CQL execution engine.
 ###
 class CQL_QDM.FacilityLocation
   constructor: (facility) ->
-    @_code = new cql.Code(facility.code.code, facility.code.code_system, undefined, facility.display)
+    code = facility?.code?.code
+    code_system = facility?.code?.code_system
+    display = facility?.display
+    @_code = new cql.Code(code, code_system, undefined, display)
 
     locationPeriodLow = CQL_QDM.Helpers.convertDateTime(facility.locationPeriodLow) if facility.locationPeriodLow
     locationPeriodHigh = CQL_QDM.Helpers.convertDateTime(facility.locationPeriodHigh) if facility.locationPeriodHigh

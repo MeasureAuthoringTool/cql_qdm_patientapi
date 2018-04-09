@@ -185,7 +185,7 @@ class CQL_QDM.LaboratoryTestPerformed extends CQL_QDM.QDMDatatype
     # Note, this components differs from the one defined in the helpers
     # in that it has a reference range.
     components = []
-    if @_components
+    if @_components && @_components.values?
       for value in @_components.values
         if value?
           # Lab test performed uses ResultComponent, which has a range
