@@ -12,8 +12,8 @@ describe "Adverse Event", ->
     expect(adverseEvent.type()).toBeNull()
 
   it "should show valid type", ->
-    adverseEvent = new CQL_QDM.AdverseEvent({'type': {'code': '12345', 'code_system': 'Bar'}})
-    expect(JSON.stringify(adverseEvent.type())).toEqual('{"code":"12345","system":"Bar"}')
+    adverseEvent = new CQL_QDM.AdverseEvent({'type': {'code': '12345', 'code_system': 'Bar', 'title': 'FooBar'}})
+    expect(JSON.stringify(adverseEvent.type())).toEqual('{"code":"12345","system":"Bar","version":null,"display":"FooBar"}')
 
   it "should return null for a null facility location", ->
     adverseEvent = new CQL_QDM.AdverseEvent({})

@@ -37,7 +37,7 @@ class CQL_QDM.AssessmentPerformed extends CQL_QDM.QDMDatatype
   ###
   method: ->
     if @_method?
-      new cql.Code(@_method.code, @_method.code_system)
+      new cql.Code(@_method.code, @_method.code_system, null, @_method.title)
     else
       null
 
@@ -46,7 +46,7 @@ class CQL_QDM.AssessmentPerformed extends CQL_QDM.QDMDatatype
   ###
   negationRationale: ->
     if @_negationRationale?
-      new cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+      new cql.Code(@_negationRationale.code, @_negationRationale.code_system, null, @_negationRationale.title)
     else
       null
 
@@ -55,7 +55,7 @@ class CQL_QDM.AssessmentPerformed extends CQL_QDM.QDMDatatype
   ###
   reason: ->
     if @_reason?
-      new cql.Code(@_reason.code, @_reason.code_system)
+      new cql.Code(@_reason.code, @_reason.code_system, null, @_reason.title)
     else
       null
 
@@ -127,7 +127,7 @@ class CQL_QDM.AssessmentRecommended extends CQL_QDM.QDMDatatype
   ###
   method: ->
     if @_method?
-      new cql.Code(@_method.code, @_method.code_system)
+      new cql.Code(@_method.code, @_method.code_system, null, @_method.title)
     else
       null
 
@@ -136,7 +136,7 @@ class CQL_QDM.AssessmentRecommended extends CQL_QDM.QDMDatatype
   ###
   negationRationale: ->
     if @_negationRationale?
-      new cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+      new cql.Code(@_negationRationale.code, @_negationRationale.code_system, null, @_negationRationale.title)
     else
       null
 
@@ -145,7 +145,7 @@ class CQL_QDM.AssessmentRecommended extends CQL_QDM.QDMDatatype
   ###
   reason: ->
     if @_reason?
-      new cql.Code(@_reason.code, @_reason.code_system)
+      new cql.Code(@_reason.code, @_reason.code_system, null, @_reason.title)
     else
       null
 
@@ -154,6 +154,6 @@ class CQL_QDM.AssessmentRecommended extends CQL_QDM.QDMDatatype
   ###
   method: ->
     if @_method?
-      new cql.Code(@_method.code, @_method.code_system)
+      new cql.Code(@_method.code, @_method.code_system, null, @_method.title)
     else
       null

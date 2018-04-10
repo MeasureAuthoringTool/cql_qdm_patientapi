@@ -36,7 +36,7 @@ class CQL_QDM.Diagnosis extends CQL_QDM.QDMDatatype
   ###
   anatomicalLocationSite: ->
     if @_anatomicalLocationSite?
-      new cql.Code(@_anatomicalLocationSite.code, @_anatomicalLocationSite.code_system)
+      new cql.Code(@_anatomicalLocationSite.code, @_anatomicalLocationSite.code_system, null, @_anatomicalLocationSite.title)
     else
       null
 
@@ -56,7 +56,7 @@ class CQL_QDM.Diagnosis extends CQL_QDM.QDMDatatype
   ###
   severity: ->
     if @_severity?
-      new cql.Code(@_severity.code, @_severity.code_system)
+      new cql.Code(@_severity.code, @_severity.code_system, null, @_severity.title)
     else
       null
 

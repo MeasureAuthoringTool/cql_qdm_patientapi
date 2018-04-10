@@ -2,7 +2,7 @@ describe "Procedure", ->
   describe "Order", ->
     it "should return anatomicalLocationSite", ->
       procedureOrder = new CQL_QDM.ProcedureOrder({anatomical_location: {code_system: "SNOMED-CT", code: "24028007", title: "Right"}})
-      expect(procedureOrder.anatomicalLocationSite()).toEqual(new cql.Code("24028007", "SNOMED-CT"))
+      expect(procedureOrder.anatomicalLocationSite()).toEqual(new cql.Code("24028007", "SNOMED-CT", null, "Right"))
 
   describe "Performed", ->
     it "should show null relevantPeriod", ->
@@ -15,12 +15,12 @@ describe "Procedure", ->
 
     it "should return anatomicalLocationSite", ->
       procedurePerformed = new CQL_QDM.ProcedurePerformed({anatomical_location: {code_system: "SNOMED-CT", code: "24028007", title: "Right"}})
-      expect(procedurePerformed.anatomicalLocationSite()).toEqual(new cql.Code("24028007", "SNOMED-CT"))
+      expect(procedurePerformed.anatomicalLocationSite()).toEqual(new cql.Code("24028007", "SNOMED-CT", null, "Right"))
 
   describe "Recommended", ->
     it "should return anatomicalLocationSite", ->
       procedureRecommended = new CQL_QDM.ProcedureRecommended({anatomical_location: {code_system: "SNOMED-CT", code: "24028007", title: "Right"}})
-      expect(procedureRecommended.anatomicalLocationSite()).toEqual(new cql.Code("24028007", "SNOMED-CT"))
+      expect(procedureRecommended.anatomicalLocationSite()).toEqual(new cql.Code("24028007", "SNOMED-CT", null, "Right"))
 
     it "should not return a result", ->
       procedurePerformed = new CQL_QDM.ProcedurePerformed({})

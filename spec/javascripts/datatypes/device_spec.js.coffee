@@ -13,5 +13,5 @@ describe "Device", ->
       expect(deviceApplied.anatomicalApproachSite()).toBeNull()
   describe "Order", ->
     it "should show a valid reason", ->
-      deviceOrder = new CQL_QDM.DeviceOrder({'reason': {'code': 'foo', 'code_system': 'bar'}})
-      expect(JSON.stringify(deviceOrder.reason())).toEqual('{"code":"foo","system":"bar"}')
+      deviceOrder = new CQL_QDM.DeviceOrder({'reason': {'code': 'foo', 'code_system': 'bar', 'title': 'FooBar'}})
+      expect(JSON.stringify(deviceOrder.reason())).toEqual('{"code":"foo","system":"bar","version":null,"display":"FooBar"}')
