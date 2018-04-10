@@ -56,7 +56,7 @@ class CQL_QDM.AdverseEvent extends CQL_QDM.QDMDatatype
   ###
   severity: ->
     if @_severity?
-      new cql.Code(@_severity.code, @_severity.code_system)
+      new cql.Code(@_severity.code, @_severity.code_system, null, @_severity.title || null)
     else
       null
 
@@ -65,6 +65,6 @@ class CQL_QDM.AdverseEvent extends CQL_QDM.QDMDatatype
   ###
   type: ->
     if @_type?
-      new cql.Code(@_type.code, @_type.code_system)
+      new cql.Code(@_type.code, @_type.code_system, null, @_type.title || null)
     else
       null
