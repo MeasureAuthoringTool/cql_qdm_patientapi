@@ -49,10 +49,13 @@ class CQL_QDM.Helpers
       if input?.units == 'UnixTime'
         CQL_QDM.Helpers.convertDateTime(input.scalar)
       else if input.codes?
-        code_system = Object.keys(input.codes)?[0]
-        code = input.codes[code_system]?[0]
-        display = input.description
-        new cql.Code(code, code_system, null, display)
+        codesArray = []
+        for code_system, codes of input.codes
+          for code in codes
+            if code?
+              display = input.description
+              codesArray.push new cql.Code(code, code_system, null, display)
+        codesArray
       else if input.code?
         code_system = input.code.code_system
         code = input.code.code
