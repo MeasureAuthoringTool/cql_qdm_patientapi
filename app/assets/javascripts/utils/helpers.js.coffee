@@ -62,6 +62,8 @@ class CQL_QDM.Helpers
           new cql.Quantity({unit: input.units , value: parseFloat(input.scalar)})
         else
           parseFloat(input.scalar)
+      else if input.scalar?
+          throw new Error("\'#{input.scalar}\' is not a valid scalar value.")
     else
       null
 
@@ -95,7 +97,7 @@ class CQL_QDM.Helpers
     if diagnosesInput?
       for diagnosis in diagnosesInput.values
         if diagnosis?
-          diagnoses.push new cql.Code(diagnosis.code, diagnosis.code_system)
+          diagnoses.push new cql.Code(diagnosis.code, diagnosis.code_system, null, diagnoses.title)
     if principalDiagnosisInput?
-      diagnoses.push new cql.Code(principalDiagnosisInput.code, principalDiagnosisInput.code_system)
+      diagnoses.push new cql.Code(principalDiagnosisInput.code, principalDiagnosisInput.code_system, null, principalDiagnosisInput.title)
     diagnoses

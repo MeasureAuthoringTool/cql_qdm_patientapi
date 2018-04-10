@@ -45,7 +45,7 @@ class CQL_QDM.MedicationActive extends CQL_QDM.QDMDatatype
     # TODO: Frequency currently not in HDS model.  Can probably add by calculating based off of dose & regimen
     throw new Error('Bonnie does not currently support MedicationActive.frequency')
     if @_frequency?
-      new cql.Code(@_frequency.code, @_frequency.code_system)
+      new cql.Code(@_frequency.code, @_frequency.code_system, null, @_frequency.title)
     else
       null
 
@@ -54,7 +54,7 @@ class CQL_QDM.MedicationActive extends CQL_QDM.QDMDatatype
   ###
   route: ->
     if @_route?
-      new cql.Code(@_route.code, @_route.code_system)
+      new cql.Code(@_route.code, @_route.code_system, null, @_route.title)
     else
       null
 
@@ -127,7 +127,7 @@ class CQL_QDM.MedicationAdministered extends CQL_QDM.QDMDatatype
     # TODO: Frequency currently not in HDS model.  Can probably add by calculating based off of dose & regimen
     throw new Error('Bonnie does not currently support MedicationAdministered.frequency')
     if @_frequency?
-      new cql.Code(@_frequency.code, @_frequency.code_system)
+      new cql.Code(@_frequency.code, @_frequency.code_system, null, @_frequency.title)
     else
       null
 
@@ -136,7 +136,7 @@ class CQL_QDM.MedicationAdministered extends CQL_QDM.QDMDatatype
   ###
   negationRationale: ->
     if @_negationRationale?
-      new cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+      new cql.Code(@_negationRationale.code, @_negationRationale.code_system, null, @_negationRationale.title)
     else
       null
 
@@ -145,7 +145,7 @@ class CQL_QDM.MedicationAdministered extends CQL_QDM.QDMDatatype
   ###
   reason: ->
     if @_reason?
-      new cql.Code(@_reason.code, @_reason.code_system)
+      new cql.Code(@_reason.code, @_reason.code_system, null, @_reason.title)
     else
       null
 
@@ -165,7 +165,7 @@ class CQL_QDM.MedicationAdministered extends CQL_QDM.QDMDatatype
   ###
   route: ->
     if @_route?
-      new cql.Code(@_route.code, @_route.code_system)
+      new cql.Code(@_route.code, @_route.code_system, null, @_route.title)
     else
       null
 
@@ -221,7 +221,7 @@ class CQL_QDM.MedicationDischarge extends CQL_QDM.QDMDatatype
     # TODO: Frequency currently not in HDS model.  Can probably add by calculating based off of dose & regimen
     throw new Error('Bonnie does not currently support MedicationDischarge.frequency')
     if @_frequency?
-      new cql.Code(@_frequency.code, @_frequency.code_system)
+      new cql.Code(@_frequency.code, @_frequency.code_system, null, @_frequency.title)
     else
       null
 
@@ -230,7 +230,7 @@ class CQL_QDM.MedicationDischarge extends CQL_QDM.QDMDatatype
   ###
   negationRationale: ->
     if @_negationRationale?
-      new cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+      new cql.Code(@_negationRationale.code, @_negationRationale.code_system, null, @_negationRationale.title)
     else
       null
 
@@ -246,7 +246,7 @@ class CQL_QDM.MedicationDischarge extends CQL_QDM.QDMDatatype
   ###
   route: ->
     if @_route?
-      new cql.Code(@_route.code, @_route.code_system)
+      new cql.Code(@_route.code, @_route.code_system, null, @_route.title)
     else
       null
 
@@ -321,7 +321,7 @@ class CQL_QDM.MedicationDispensed extends CQL_QDM.QDMDatatype
   ###
   negationRationale: ->
     if @_negationRationale?
-      new cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+      new cql.Code(@_negationRationale.code, @_negationRationale.code_system, null, @_negationRationale.title)
     else
       null
 
@@ -348,7 +348,7 @@ class CQL_QDM.MedicationDispensed extends CQL_QDM.QDMDatatype
   ###
   route: ->
     if @_route?
-      new cql.Code(@_route.code, @_route.code_system)
+      new cql.Code(@_route.code, @_route.code_system, null, @_route.title)
     else
       null
 
@@ -418,7 +418,7 @@ class CQL_QDM.MedicationOrder extends CQL_QDM.QDMDatatype
     # TODO: Frequency currently not in HDS model.  Can probably add by calculating based off of dose & regimen
     throw new Error('Bonnie does not currently support MedicationOrder.frequency')
     if @_frequency?
-      new cql.Code(@_frequency.code, @_frequency.code_system)
+      new cql.Code(@_frequency.code, @_frequency.code_system, null, @_frequency.title)
     else
       null
 
@@ -427,7 +427,7 @@ class CQL_QDM.MedicationOrder extends CQL_QDM.QDMDatatype
   ###
   method: ->
     if @_method?
-      new cql.Code(@_method.code, @_method.code_system)
+      new cql.Code(@_method.code, @_method.code_system, null, @_method.title)
     else
       null
 
@@ -436,7 +436,7 @@ class CQL_QDM.MedicationOrder extends CQL_QDM.QDMDatatype
   ###
   negationRationale: ->
     if @_negationRationale?
-      new cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+      new cql.Code(@_negationRationale.code, @_negationRationale.code_system, null, @_negationRationale.title)
     else
       null
 
@@ -445,7 +445,7 @@ class CQL_QDM.MedicationOrder extends CQL_QDM.QDMDatatype
   ###
   reason: ->
     if @_reason?
-      new cql.Code(@_reason.code, @_reason.code_system)
+      new cql.Code(@_reason.code, @_reason.code_system, null, @_reason.title)
     else
       null
 
@@ -472,7 +472,7 @@ class CQL_QDM.MedicationOrder extends CQL_QDM.QDMDatatype
   ###
   route: ->
     if @_route?
-      new cql.Code(@_route.code, @_route.code_system)
+      new cql.Code(@_route.code, @_route.code_system, null, @_route.title)
     else
       null
 
