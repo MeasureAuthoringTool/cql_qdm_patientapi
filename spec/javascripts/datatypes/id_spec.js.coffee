@@ -1,13 +1,14 @@
 describe 'ID', ->
-  it 'Should handle a blank namingSystem', ->
-    id = new CQL_QDM.Id(null, null)
-    expect(id.namingSystem).toBeNull()
+  it 'should handle a blank referenced_type', ->
+    id = new CQL_QDM.Id(null, null, null)
+    expect(id.referenced_type).toBeNull()
 
-  it 'Should handle a blank value', ->
+  it 'should handle a blank value', ->
     id = new CQL_QDM.Id()
     expect(id.value).not.toBeDefined()
 
-  it 'Should handle a present namingSystem and value', ->
-    id = new CQL_QDM.Id(5, 'foo')
+  it 'should handle a present value, referenced_type, and type', ->
+    id = new CQL_QDM.Id(5, 'foo', 'bar')
     expect(id.value).toEqual 5
-    expect(id.namingSystem).toEqual('foo')
+    expect(id.referenced_type).toEqual('foo')
+    expect(id.type).toEqual('bar')

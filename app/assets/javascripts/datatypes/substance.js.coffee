@@ -50,7 +50,7 @@ class CQL_QDM.SubstanceAdministered extends CQL_QDM.QDMDatatype
   ###
   frequency: ->
     if @_frequency?
-      new cql.Code(@_frequency.code, @_frequency.code_system, @_frequency.version, @_frequency.title)
+      new cql.Code(@_frequency.code, @_frequency.code_system, null, @_frequency.title || null)
     else
       null
 
@@ -59,7 +59,7 @@ class CQL_QDM.SubstanceAdministered extends CQL_QDM.QDMDatatype
   ###
   negationRationale: ->
     if @_negationRationale?
-      new cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+      new cql.Code(@_negationRationale.code, @_negationRationale.code_system, null, @_negationRationale.title || null)
     else
       null
 
@@ -79,7 +79,7 @@ class CQL_QDM.SubstanceAdministered extends CQL_QDM.QDMDatatype
   ###
   route: ->
     if @_route?
-      new cql.Code(@_route.code, @_route.code_system)
+      new cql.Code(@_route.code, @_route.code_system, null, @_route.title || null)
     else
       null
 
@@ -133,7 +133,7 @@ class CQL_QDM.SubstanceOrder extends CQL_QDM.QDMDatatype
   ###
   frequency: ->
     if @_frequency?
-      new cql.Code(@_frequency.code, @_frequency.code_system, @_frequency.version, @_frequency.title)
+      new cql.Code(@_frequency.code, @_frequency.code_system, null, @_frequency.title || null)
     else
       null
 
@@ -142,7 +142,7 @@ class CQL_QDM.SubstanceOrder extends CQL_QDM.QDMDatatype
   ###
   method: ->
     if @_method?
-      new cql.Code(@_method.code, @_method.code_system)
+      new cql.Code(@_method.code, @_method.code_system, null, @_method.title || null)
     else
       null
 
@@ -151,7 +151,7 @@ class CQL_QDM.SubstanceOrder extends CQL_QDM.QDMDatatype
   ###
   negationRationale: ->
     if @_negationRationale?
-      new cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+      new cql.Code(@_negationRationale.code, @_negationRationale.code_system, null, @_negationRationale.title || null)
     else
       null
 
@@ -160,7 +160,7 @@ class CQL_QDM.SubstanceOrder extends CQL_QDM.QDMDatatype
   ###
   reason: ->
     if @_reason?
-      new cql.Code(@_reason.code, @_reason.code_system)
+      new cql.Code(@_reason.code, @_reason.code_system, null, @_reason.title || null)
     else
       null
 
@@ -178,7 +178,7 @@ class CQL_QDM.SubstanceOrder extends CQL_QDM.QDMDatatype
   ###
   route: ->
     if @_route?
-      new cql.Code(@_route.code, @_route.code_system)
+      new cql.Code(@_route.code, @_route.code_system, null, @_route.title || null)
     else
       null
 
@@ -233,7 +233,7 @@ class CQL_QDM.SubstanceRecommended extends CQL_QDM.QDMDatatype
   ###
   frequency: ->
     if @_frequency?
-      new cql.Code(@_frequency.code, @_frequency.code_system, @_frequency.version, @_frequency.title)
+      new cql.Code(@_frequency.code, @_frequency.code_system, null, @_frequency.title || null)
     else
       null
 
@@ -242,7 +242,7 @@ class CQL_QDM.SubstanceRecommended extends CQL_QDM.QDMDatatype
   ###
   method: ->
     if @_method?
-      new cql.Code(@_method.code, @_method.code_system)
+      new cql.Code(@_method.code, @_method.code_system, null, @_method.title || null)
     else
       null
 
@@ -251,7 +251,7 @@ class CQL_QDM.SubstanceRecommended extends CQL_QDM.QDMDatatype
   ###
   negationRationale: ->
     if @_negationRationale?
-      new cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+      new cql.Code(@_negationRationale.code, @_negationRationale.code_system, null, @_negationRationale.title || null)
     else
       null
 
@@ -260,7 +260,7 @@ class CQL_QDM.SubstanceRecommended extends CQL_QDM.QDMDatatype
   ###
   reason: ->
     if @_reason?
-      new cql.Code(@_reason.code, @_reason.code_system)
+      new cql.Code(@_reason.code, @_reason.code_system, null, @_reason.title || null)
     else
       null
 
@@ -278,7 +278,7 @@ class CQL_QDM.SubstanceRecommended extends CQL_QDM.QDMDatatype
   ###
   route: ->
     if @_route?
-      new cql.Code(@_route.code, @_route.code_system)
+      new cql.Code(@_route.code, @_route.code_system, null, @_route.title || null)
     else
       null
 
