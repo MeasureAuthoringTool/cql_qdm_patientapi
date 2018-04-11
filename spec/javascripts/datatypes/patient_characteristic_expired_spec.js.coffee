@@ -32,4 +32,4 @@ describe "Patient Characteristic Expired", ->
   it "Should return no code when patient does not have deathdate", ->
     emptyMockThorax = new ThoraxModelMock({})
     patientCharacteristicExpired = new CQL_QDM.PatientCharacteristicExpired(emptyMockThorax)
-    expect(patientCharacteristicExpired.getCode()).toEqual  null
+    expect(patientCharacteristicExpired.getCode()).toBeNull()
