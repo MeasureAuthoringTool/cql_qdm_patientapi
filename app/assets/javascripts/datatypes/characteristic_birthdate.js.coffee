@@ -19,7 +19,9 @@ class CQL_QDM.PatientCharacteristicBirthdate extends CQL_QDM.QDMDatatype
   @returns {Object}
   ###
   getCode: ->
-    '21112-8' # LOINC code for birthdate
+    # NOTE: hard coding the code system. this will be removed when we switch
+    # to the QDM patient model
+    new cql.Code('21112-8', 'LOINC')
 
   ###
   @returns {DateTime}

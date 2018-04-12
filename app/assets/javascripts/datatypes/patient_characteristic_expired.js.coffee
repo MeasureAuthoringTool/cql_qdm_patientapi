@@ -20,10 +20,11 @@ class CQL_QDM.PatientCharacteristicExpired extends CQL_QDM.QDMDatatype
   ###
   getCode: ->
     if @_patient.get('deathdate')?
-      '419099009'
+      # NOTE: hard coding the code system. this will be removed when we switch
+      # to the QDM patient model
+      new cql.Code('419099009', 'SNOMED-CT')
     else
-      code:
-        ''
+      null
 
   ###
   @returns {Code}
