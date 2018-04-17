@@ -18,6 +18,8 @@ class CQL_QDM.PatientCharacteristicRace extends CQL_QDM.QDMDatatype
 
   getCode: ->
     if @_patient?.has('race')
-      code: @_patient.get('race')
+      # NOTE: hard coding the code system. this will be removed when we switch
+      # to the QDM patient model
+      new cql.Code(@_patient.get('race'), 'CDC Race')
     else
       null
