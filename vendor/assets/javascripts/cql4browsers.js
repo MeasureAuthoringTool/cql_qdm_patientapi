@@ -43853,6 +43853,9 @@
           return a[p] === b[p];
         });
       case '[object Array]':
+        if (a.includes(null) || a.includes(void 0) || b.includes(null) || b.includes(void 0)) {
+          return null;
+        }
         return compareEveryItemInArrays(a, b, equals);
       case '[object Object]':
         return compareObjects(a, b, equals);
