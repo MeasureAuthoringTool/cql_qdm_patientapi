@@ -54,13 +54,13 @@ class CQL_QDM.Helpers
           for code in codes
             if code?
               display = input.description
-              codesArray.push new cql.Code(code, code_system, null, display)
+              codesArray.push new cql.Code(code, code_system, null, display || null)
         codesArray
       else if input.code?
         code_system = input.code.code_system
         code = input.code.code
         display = input.description
-        new cql.Code(code, code_system, null, display)
+        new cql.Code(code, code_system, null, display || null)
       # Check that the scalar portion is a number and the units are a non-zero length string.
       else if (input.scalar?.match(/^[-+]?[0-9]*\.?[0-9]+$/) != null)
         if input.units.length > 0
@@ -68,7 +68,7 @@ class CQL_QDM.Helpers
         else
           parseFloat(input.scalar)
       else if input.scalar?
-          throw new Error("\'#{input.scalar}\' is not a valid scalar value.")
+          input.scalar
     else
       null
 

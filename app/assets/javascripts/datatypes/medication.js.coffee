@@ -34,7 +34,10 @@ class CQL_QDM.MedicationActive extends CQL_QDM.QDMDatatype
   ###
   dosage: ->
     if @_dosage?
-      new cql.Quantity({unit: @_dosage['units'], value: @_dosage['scalar']})
+      if @_dosage['unit']? || @_dosage['value']?
+        new cql.Quantity({unit: @_dosage['unit'], value: @_dosage['value']})
+      else
+        new cql.Quantity({unit: @_dosage['units'], value: @_dosage['scalar']})
     else
       null
 
@@ -114,7 +117,10 @@ class CQL_QDM.MedicationAdministered extends CQL_QDM.QDMDatatype
   ###
   dosage: ->
     if @_dosage?
-      new cql.Quantity({unit: @_dosage['units'], value: @_dosage['scalar']})
+      if @_dosage['unit']? || @_dosage['value']?
+        new cql.Quantity({unit: @_dosage['unit'], value: @_dosage['value']})
+      else
+        new cql.Quantity({unit: @_dosage['units'], value: @_dosage['scalar']})
     else
       null
 
@@ -206,7 +212,10 @@ class CQL_QDM.MedicationDischarge extends CQL_QDM.QDMDatatype
   ###
   dosage: ->
     if @_dosage?
-      new cql.Quantity({unit: @_dosage['units'], value: @_dosage['scalar']})
+      if @_dosage['unit']? || @_dosage['value']?
+        new cql.Quantity({unit: @_dosage['unit'], value: @_dosage['value']})
+      else
+        new cql.Quantity({unit: @_dosage['units'], value: @_dosage['scalar']})
     else
       null
 
@@ -297,7 +306,10 @@ class CQL_QDM.MedicationDispensed extends CQL_QDM.QDMDatatype
   ###
   dosage: ->
     if @_dosage?
-      new cql.Quantity({unit: @_dosage['units'], value: @_dosage['scalar']})
+      if @_dosage['unit']? || @_dosage['value']?
+        new cql.Quantity({unit: @_dosage['unit'], value: @_dosage['value']})
+      else
+        new cql.Quantity({unit: @_dosage['units'], value: @_dosage['scalar']})
     else
       null
 
@@ -396,7 +408,10 @@ class CQL_QDM.MedicationOrder extends CQL_QDM.QDMDatatype
   ###
   dosage: ->
     if @_dosage?
-      new cql.Quantity({unit: @_dosage['units'], value: @_dosage['scalar']})
+      if @_dosage['unit']? || @_dosage['value']?
+        new cql.Quantity({unit: @_dosage['unit'], value: @_dosage['value']})
+      else
+        new cql.Quantity({unit: @_dosage['units'], value: @_dosage['scalar']})
     else
       null
 

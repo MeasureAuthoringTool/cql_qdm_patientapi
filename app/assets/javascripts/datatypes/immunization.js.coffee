@@ -34,7 +34,10 @@ class CQL_QDM.ImmunizationAdministered extends CQL_QDM.QDMDatatype
   ###
   dosage: ->
     if @_dosage?
-      new cql.Quantity({unit: @_dosage['units'], value: @_dosage['scalar']})
+      if @_dosage['unit']? || @_dosage['value']?
+        new cql.Quantity({unit: @_dosage['unit'], value: @_dosage['value']})
+      else
+        new cql.Quantity({unit: @_dosage['units'], value: @_dosage['scalar']})
     else
       null
 
@@ -117,7 +120,10 @@ class CQL_QDM.ImmunizationOrder extends CQL_QDM.QDMDatatype
   ###
   dosage: ->
     if @_dosage?
-      new cql.Quantity({unit: @_dosage['units'], value: @_dosage['scalar']})
+      if @_dosage['unit']? || @_dosage['value']?
+        new cql.Quantity({unit: @_dosage['unit'], value: @_dosage['value']})
+      else
+        new cql.Quantity({unit: @_dosage['units'], value: @_dosage['scalar']})
     else
       null
 
