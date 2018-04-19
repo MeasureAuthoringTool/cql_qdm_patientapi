@@ -43,4 +43,4 @@ describe "Laboratory Test", ->
     it "should return a result", ->
       laboratoryTestPerformed = new CQL_QDM.LaboratoryTestPerformed({'values': [
           {_id: "5aabbc4692d04e71f32f7619", codes: { 'SNOMED-CT': ["164059009"]}, description: "Pass Or Refer"}]})
-      expect(JSON.stringify(laboratoryTestPerformed.result())).toEqual('{"code":"164059009","system":"SNOMED-CT"}')
+      expect(JSON.stringify(laboratoryTestPerformed.result())).toEqual('[{"code":"164059009","system":"SNOMED-CT","version":null,"display":"Pass Or Refer"}]')

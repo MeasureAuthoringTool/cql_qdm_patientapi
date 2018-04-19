@@ -32,6 +32,6 @@ class CQL_QDM.FamilyHistory extends CQL_QDM.QDMDatatype
   ###
   relationship: ->
     if @_relationship?
-      new cql.Code(@_relationship.code, @_relationship.code_system)
+      new cql.Code(@_relationship.code, @_relationship.code_system, null, @_relationship.title || null)
     else
       null
