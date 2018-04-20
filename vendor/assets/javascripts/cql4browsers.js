@@ -43741,10 +43741,7 @@
     if ((a == null) && (b == null)) {
       return true;
     }
-    if (a == null) {
-      return false;
-    }
-    if (b == null) {
+    if (!((a != null) && (b != null))) {
       return false;
     }
     if (isCode(a)) {
