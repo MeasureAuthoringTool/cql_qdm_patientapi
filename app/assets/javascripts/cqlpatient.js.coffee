@@ -180,7 +180,8 @@ class CQL_QDM.CQLPatient
       'provider_characteristics',
       'substances',
       'system_characteristics',
-      'transfers'
+      'transfers',
+      'participations'
     ]
     data_types = {}
     for type in types
