@@ -19,7 +19,7 @@ class CQL_QDM.MedicationActive extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
     @_dosage = @entry.dose
-    @_frequency = @entry.frequency
+    @_frequency = @entry.administrationTiming
     @_route = @entry.route
     @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     if @entry.end_time
@@ -42,10 +42,8 @@ class CQL_QDM.MedicationActive extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   frequency: ->
-    # TODO: Frequency currently not in HDS model.  Can probably add by calculating based off of dose & regimen
-    throw new Error('Bonnie does not currently support MedicationActive.frequency')
     if @_frequency?
-      new cql.Code(@_frequency.code, @_frequency.code_system)
+      new cql.Code(@_frequency.code, @_frequency.code_system, @_frequency.version, @_frequency.title)
     else
       null
 
@@ -92,7 +90,7 @@ class CQL_QDM.MedicationAdministered extends CQL_QDM.QDMDatatype
     super @entry
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_dosage = @entry.dose
-    @_frequency = @entry.frequency
+    @_frequency = @entry.administrationTiming
     @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
     @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
@@ -124,10 +122,8 @@ class CQL_QDM.MedicationAdministered extends CQL_QDM.QDMDatatype
   @returns {code}
   ###
   frequency: ->
-    # TODO: Frequency currently not in HDS model.  Can probably add by calculating based off of dose & regimen
-    throw new Error('Bonnie does not currently support MedicationAdministered.frequency')
     if @_frequency?
-      new cql.Code(@_frequency.code, @_frequency.code_system)
+      new cql.Code(@_frequency.code, @_frequency.code_system, @_frequency.version, @_frequency.title)
     else
       null
 
@@ -193,7 +189,7 @@ class CQL_QDM.MedicationDischarge extends CQL_QDM.QDMDatatype
     super @entry
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_dosage = @entry.dose
-    @_frequency = @entry.frequency
+    @_frequency = @entry.administrationTiming
     @_negationRationale = @entry.negationReason
     @_refills = @entry.refills
     @_route = @entry.route
@@ -218,10 +214,8 @@ class CQL_QDM.MedicationDischarge extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   frequency: ->
-    # TODO: Frequency currently not in HDS model.  Can probably add by calculating based off of dose & regimen
-    throw new Error('Bonnie does not currently support MedicationDischarge.frequency')
     if @_frequency?
-      new cql.Code(@_frequency.code, @_frequency.code_system)
+      new cql.Code(@_frequency.code, @_frequency.code_system, @_frequency.version, @_frequency.title)
     else
       null
 
@@ -238,8 +232,10 @@ class CQL_QDM.MedicationDischarge extends CQL_QDM.QDMDatatype
   @returns {Integer}
   ###
   refills: ->
-    # TODO: Refills should represent 'The number of refills allowed by the prescription.'
-    throw new Error('Bonnie does not currently support MedicationDischarge.refills')
+    if @_refills?
+      @_refills['scalar']
+    else
+      null
 
   ###
   @returns {Code}
@@ -278,7 +274,7 @@ class CQL_QDM.MedicationDispensed extends CQL_QDM.QDMDatatype
     super @entry
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_dosage = @entry.dose
-    @_frequency = @entry.frequency
+    @_frequency = @entry.administrationTiming
     @_negationRationale = @entry.negationReason
     @_refills = @entry.refills
     @_route = @entry.route
@@ -309,10 +305,8 @@ class CQL_QDM.MedicationDispensed extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   frequency: ->
-    # TODO: Frequency currently not in HDS model.  Can probably add by calculating based off of dose & regimen
-    throw new Error('Bonnie does not currently support MedicationDispensed.frequency')
     if @_frequency?
-      new cql.Code(@_frequency.code, @_frequency.code_system)
+      new cql.Code(@_frequency.code, @_frequency.code_system, @_frequency.version, @_frequency.title)
     else
       null
 
@@ -340,8 +334,10 @@ class CQL_QDM.MedicationDispensed extends CQL_QDM.QDMDatatype
   @returns {Integer}
   ###
   refills: ->
-    # TODO: Refills should represent 'The number of refills allowed by the prescription.'
-    throw new Error('Bonnie does not currently support MedicationDispensed.refills')
+    if @_refills?
+      @_refills['scalar']
+    else
+      null
 
   ###
   @returns {Code}
@@ -415,10 +411,8 @@ class CQL_QDM.MedicationOrder extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   frequency: ->
-    # TODO: Frequency currently not in HDS model.  Can probably add by calculating based off of dose & regimen
-    #throw new Error('Bonnie does not currently support MedicationOrder.frequency')
     if @_frequency?
-      new cql.Code(@_frequency.code, @_frequency.code_system)
+      new cql.Code(@_frequency.code, @_frequency.code_system, @_frequency.version, @_frequency.title)
     else
       null
 
@@ -453,10 +447,8 @@ class CQL_QDM.MedicationOrder extends CQL_QDM.QDMDatatype
   @returns {Integer}
   ###
   refills: ->
-    # TODO: Refills should represent 'The number of refills allowed by the prescription.'
-    #throw new Error('Bonnie does not currently support MedicationOrder.refills')
     if @_refills?
-      parseInt(@_refills['scalar'])
+      @_refills['scalar']
     else
       null
 

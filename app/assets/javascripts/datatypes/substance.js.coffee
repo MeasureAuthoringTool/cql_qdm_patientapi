@@ -18,7 +18,7 @@ class CQL_QDM.SubstanceAdministered extends CQL_QDM.QDMDatatype
     super @entry
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_dosage = @entry.dose
-    @_frequency = @entry.frequency
+    @_frequency = @entry.administrationTiming
     @_negationRationale = @entry.negationReason
     @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     if @entry.end_time
@@ -41,7 +41,7 @@ class CQL_QDM.SubstanceAdministered extends CQL_QDM.QDMDatatype
   ###
   dosage: ->
     if @_dosage?
-      new cql.Quantity({unit: @_dosage['unit'], value: @_dosage['value']})
+      new cql.Quantity({unit: @_dosage['unit'], value: @_dosage['scalar']})
     else
       null
 
@@ -49,10 +49,8 @@ class CQL_QDM.SubstanceAdministered extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   frequency: ->
-    # TODO: Frequency currently not in HDS model.  Can probably add by calculating based off of dose & regimen
-    throw new Error('Bonnie does not currently support SubstanceAdministered.frequency')
     if @_frequency?
-      new cql.Code(@_frequency.code, @_frequency.code_system)
+      new cql.Code(@_frequency.code, @_frequency.code_system, @_frequency.version, @_frequency.title)
     else
       null
 
@@ -90,7 +88,7 @@ class CQL_QDM.SubstanceAdministered extends CQL_QDM.QDMDatatype
   ###
   supply: ->
     if @_supply?
-      new cql.Quantity({unit: @_supply['unit'], value: @_supply['value']})
+      new cql.Quantity({unit: @_supply['unit'], value: @_supply['scalar']})
     else
       null
 
@@ -107,7 +105,7 @@ class CQL_QDM.SubstanceOrder extends CQL_QDM.QDMDatatype
     super @entry
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_dosage = @entry.dose
-    @_frequency = @entry.frequency
+    @_frequency = @entry.administrationTiming
     @_method = @entry.method
     @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
@@ -126,7 +124,7 @@ class CQL_QDM.SubstanceOrder extends CQL_QDM.QDMDatatype
   ###
   dosage: ->
     if @_dosage?
-      new cql.Quantity({unit: @_dosage['unit'], value: @_dosage['value']})
+      new cql.Quantity({unit: @_dosage['unit'], value: @_dosage['scalar']})
     else
       null
 
@@ -134,10 +132,8 @@ class CQL_QDM.SubstanceOrder extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   frequency: ->
-    # TODO: Frequency currently not in HDS model.  Can probably add by calculating based off of dose & regimen
-    throw new Error('Bonnie does not currently support SubstanceOrder.frequency')
     if @_frequency?
-      new cql.Code(@_frequency.code, @_frequency.code_system)
+      new cql.Code(@_frequency.code, @_frequency.code_system, @_frequency.version, @_frequency.title)
     else
       null
 
@@ -172,8 +168,10 @@ class CQL_QDM.SubstanceOrder extends CQL_QDM.QDMDatatype
   @returns {Integer}
   ###
   refills: ->
-    # TODO: Refills should represent 'The number of refills allowed by the prescription.'
-    throw new Error('Bonnie does not currently support SubstanceOrder.refills')
+    if @_refills?
+      @_refills['scalar']
+    else
+      null
 
   ###
   @returns {Code}
@@ -189,7 +187,7 @@ class CQL_QDM.SubstanceOrder extends CQL_QDM.QDMDatatype
   ###
   supply: ->
     if @_supply?
-      new cql.Quantity({unit: @_supply['unit'], value: @_supply['value']})
+      new cql.Quantity({unit: @_supply['unit'], value: @_supply['scalar']})
     else
       null
 
@@ -207,7 +205,7 @@ class CQL_QDM.SubstanceRecommended extends CQL_QDM.QDMDatatype
     super @entry
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_dosage = @entry.dose
-    @_frequency = @entry.frequency
+    @_frequency = @entry.administrationTiming
     @_method = @entry.method
     @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
@@ -226,7 +224,7 @@ class CQL_QDM.SubstanceRecommended extends CQL_QDM.QDMDatatype
   ###
   dosage: ->
     if @_dosage?
-      new cql.Quantity({unit: @_dosage['unit'], value: @_dosage['value']})
+      new cql.Quantity({unit: @_dosage['unit'], value: @_dosage['scalar']})
     else
       null
 
@@ -234,10 +232,8 @@ class CQL_QDM.SubstanceRecommended extends CQL_QDM.QDMDatatype
   @returns {Code}
   ###
   frequency: ->
-    # TODO: Frequency currently not in HDS model.  Can probably add by calculating based off of dose & regimen
-    throw new Error('Bonnie does not currently support SubstanceRecommended.frequency')
     if @_frequency?
-      new cql.Code(@_frequency.code, @_frequency.code_system)
+      new cql.Code(@_frequency.code, @_frequency.code_system, @_frequency.version, @_frequency.title)
     else
       null
 
@@ -272,8 +268,10 @@ class CQL_QDM.SubstanceRecommended extends CQL_QDM.QDMDatatype
   @returns {Integer}
   ###
   refills: ->
-    # TODO: Refills should represent 'The number of refills allowed by the prescription.'
-    throw new Error('Bonnie does not currently support SubstanceRecommended.refills')
+    if @_refills?
+      @_refills['scalar']
+    else
+      null
 
   ###
   @returns {Code}
@@ -289,6 +287,6 @@ class CQL_QDM.SubstanceRecommended extends CQL_QDM.QDMDatatype
   ###
   supply: ->
     if @_supply?
-      new cql.Quantity({unit: @_supply['unit'], value: @_supply['value']})
+      new cql.Quantity({unit: @_supply['unit'], value: @_supply['scalar']})
     else
       null
