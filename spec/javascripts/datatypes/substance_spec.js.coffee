@@ -9,8 +9,8 @@ describe "Substance", ->
       expect(JSON.stringify(substanceAdministered.relevantPeriod())).toEqual '{"low":"2017-08-31T01:00:00.00+0000","high":"2017-08-31T02:00:00.00+0000","lowClosed":true,"highClosed":true}'
 
     it "should return a coded frequency", ->
-      substanceAdministered = new CQL_QDM.SubstanceAdministered({'administrationTiming': {code: '1234', code_system: 'SNOMED-CT', version: '', title: 'Test Code'}})
-      expect(substanceAdministered.frequency()).toEqual new cql.Code('1234', 'SNOMED-CT', '', 'Test Code')
+      substanceAdministered = new CQL_QDM.SubstanceAdministered({'administrationTiming': {code: '1234', code_system: 'SNOMED-CT'}})
+      expect(substanceAdministered.frequency()).toEqual new cql.Code('1234', 'SNOMED-CT')
 
     it "should return a dosage quantity", ->
       substanceAdministered = new CQL_QDM.SubstanceAdministered({'dose': {unit: 'g', scalar: 10}})
@@ -23,13 +23,13 @@ describe "Substance", ->
       expect(substanceAdministered.dosage()).toEqual null
 
   describe "Order", ->
-    it "should return an integer of the number or refills", ->
+    it "should return an integer of the number of refills", ->
       substanceOrder = new CQL_QDM.SubstanceOrder({'start_time': '08/31/2017 1:00 AM', 'end_time': '08/31/2017 2:00 AM', 'refills': {unit: '', scalar: 5}})
       expect(substanceOrder.refills()).toEqual 5
 
     it "should return a coded frequency", ->
-      substanceOrder = new CQL_QDM.SubstanceOrder({'administrationTiming': {code: '1234', code_system: 'SNOMED-CT', version: '', title: 'Test Code'}})
-      expect(substanceOrder.frequency()).toEqual new cql.Code('1234', 'SNOMED-CT', '', 'Test Code')
+      substanceOrder = new CQL_QDM.SubstanceOrder({'administrationTiming': {code: '1234', code_system: 'SNOMED-CT'}})
+      expect(substanceOrder.frequency()).toEqual new cql.Code('1234', 'SNOMED-CT')
 
     it "should return a dosage quantity", ->
       substanceOrder = new CQL_QDM.SubstanceOrder({'dose': {unit: 'g', scalar: 10}})
@@ -43,13 +43,13 @@ describe "Substance", ->
       expect(substanceOrder.dosage()).toEqual null
 
   describe "Recommended", ->
-    it "should return an integer of the number or refills", ->
+    it "should return an integer of the number of refills", ->
       substanceRecommended = new CQL_QDM.SubstanceRecommended({'start_time': '08/31/2017 1:00 AM', 'end_time': '08/31/2017 2:00 AM', 'refills': {unit: '', scalar: 5}})
       expect(substanceRecommended.refills()).toEqual 5
 
     it "should return a coded frequency", ->
-      substanceRecommended = new CQL_QDM.SubstanceRecommended({'administrationTiming': {code: '1234', code_system: 'SNOMED-CT', version: '', title: 'Test Code'}})
-      expect(substanceRecommended.frequency()).toEqual new cql.Code('1234', 'SNOMED-CT', '', 'Test Code')
+      substanceRecommended = new CQL_QDM.SubstanceRecommended({'administrationTiming': {code: '1234', code_system: 'SNOMED-CT'}})
+      expect(substanceRecommended.frequency()).toEqual new cql.Code('1234', 'SNOMED-CT')
 
     it "should return a dosage quantity", ->
       substanceRecommended = new CQL_QDM.SubstanceRecommended({'dose': {unit: 'g', scalar: 10}})
