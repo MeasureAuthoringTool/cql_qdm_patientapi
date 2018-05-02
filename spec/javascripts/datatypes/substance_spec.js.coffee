@@ -23,7 +23,7 @@ describe "Substance", ->
       expect(substanceAdministered.dosage()).toEqual null
 
   describe "Order", ->
-    it "should return an integer of the number or refills", ->
+    it "should return an integer of the number of refills", ->
       substanceOrder = new CQL_QDM.SubstanceOrder({'start_time': '08/31/2017 1:00 AM', 'end_time': '08/31/2017 2:00 AM', 'refills': {unit: '', scalar: 5}})
       expect(substanceOrder.refills()).toEqual 5
 
@@ -43,7 +43,7 @@ describe "Substance", ->
       expect(substanceOrder.dosage()).toEqual null
 
   describe "Recommended", ->
-    it "should return an integer of the number or refills", ->
+    it "should return an integer of the number of refills", ->
       substanceRecommended = new CQL_QDM.SubstanceRecommended({'start_time': '08/31/2017 1:00 AM', 'end_time': '08/31/2017 2:00 AM', 'refills': {unit: '', scalar: 5}})
       expect(substanceRecommended.refills()).toEqual 5
 

@@ -22,7 +22,7 @@ describe "Medication", ->
       medicationDispensed = new CQL_QDM.MedicationDispensed({'start_time': '08/31/2017 1:00 AM', 'end_time': '08/31/2017 2:00 AM'})
       expect(JSON.stringify(medicationDispensed.relevantPeriod())).toEqual '{"low":"2017-08-31T01:00:00.00+0000","high":"2017-08-31T02:00:00.00+0000","lowClosed":true,"highClosed":true}'
 
-    it "should return an integer of the number or refills", ->
+    it "should return an integer of the number of refills", ->
       medicationDispensed = new CQL_QDM.MedicationDispensed({'start_time': '08/31/2017 1:00 AM', 'end_time': '08/31/2017 2:00 AM', 'refills': {unit: '', scalar: 5}})
       expect(medicationDispensed.refills()).toEqual 5
 
@@ -65,7 +65,7 @@ describe "Medication", ->
       medicationOrdered = new CQL_QDM.MedicationOrder({'start_time': '08/31/2017 1:00 AM', 'end_time': '08/31/2017 2:00 AM'})
       expect(JSON.stringify(medicationOrdered.relevantPeriod())).toEqual '{"low":"2017-08-31T01:00:00.00+0000","high":"2017-08-31T02:00:00.00+0000","lowClosed":true,"highClosed":true}'
 
-    it "should return an integer of the number or refills", ->
+    it "should return an integer of the number of refills", ->
       medicationOrdered = new CQL_QDM.MedicationOrder({'start_time': '08/31/2017 1:00 AM', 'end_time': '08/31/2017 2:00 AM', 'refills': {unit: '', scalar: 5}})
       expect(medicationOrdered.refills()).toEqual 5
 
@@ -135,7 +135,7 @@ describe "Medication", ->
       medicationDischarge = new CQL_QDM.MedicationDischarge({'administrationTiming': {code: '1234', code_system: 'SNOMED-CT', version: '', title: 'Test Code'}})
       expect(medicationDischarge.frequency()).toEqual new cql.Code('1234', 'SNOMED-CT', '', 'Test Code')
 
-    it "should return an integer of the number or refills", ->
+    it "should return an integer of the number of refills", ->
       medicationDischarge = new CQL_QDM.MedicationDispensed({'start_time': '08/31/2017 1:00 AM', 'end_time': '08/31/2017 2:00 AM', 'refills': {unit: '', scalar: 5}})
       expect(medicationDischarge.refills()).toEqual 5
       
