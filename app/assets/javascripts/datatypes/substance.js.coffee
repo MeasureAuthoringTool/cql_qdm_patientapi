@@ -50,7 +50,7 @@ class CQL_QDM.SubstanceAdministered extends CQL_QDM.QDMDatatype
   ###
   frequency: ->
     if @_frequency?
-      new cql.Code(@_frequency.code, @_frequency.code_system)
+      new cql.Code(@_frequency.code, @_frequency.code_system, @_frequency.version, @_frequency.title)
     else
       null
 
@@ -133,7 +133,7 @@ class CQL_QDM.SubstanceOrder extends CQL_QDM.QDMDatatype
   ###
   frequency: ->
     if @_frequency?
-      new cql.Code(@_frequency.code, @_frequency.code_system)
+      new cql.Code(@_frequency.code, @_frequency.code_system, @_frequency.version, @_frequency.title)
     else
       null
 
@@ -233,7 +233,7 @@ class CQL_QDM.SubstanceRecommended extends CQL_QDM.QDMDatatype
   ###
   frequency: ->
     if @_frequency?
-      new cql.Code(@_frequency.code, @_frequency.code_system)
+      new cql.Code(@_frequency.code, @_frequency.code_system, @_frequency.version, @_frequency.title)
     else
       null
 

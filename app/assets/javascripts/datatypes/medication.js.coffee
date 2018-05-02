@@ -43,7 +43,7 @@ class CQL_QDM.MedicationActive extends CQL_QDM.QDMDatatype
   ###
   frequency: ->
     if @_frequency?
-      new cql.Code(@_frequency.code, @_frequency.code_system)
+      new cql.Code(@_frequency.code, @_frequency.code_system, @_frequency.version, @_frequency.title)
     else
       null
 
@@ -123,7 +123,7 @@ class CQL_QDM.MedicationAdministered extends CQL_QDM.QDMDatatype
   ###
   frequency: ->
     if @_frequency?
-      new cql.Code(@_frequency.code, @_frequency.code_system)
+      new cql.Code(@_frequency.code, @_frequency.code_system, @_frequency.version, @_frequency.title)
     else
       null
 
@@ -215,7 +215,7 @@ class CQL_QDM.MedicationDischarge extends CQL_QDM.QDMDatatype
   ###
   frequency: ->
     if @_frequency?
-      new cql.Code(@_frequency.code, @_frequency.code_system)
+      new cql.Code(@_frequency.code, @_frequency.code_system, @_frequency.version, @_frequency.title)
     else
       null
 
@@ -306,7 +306,7 @@ class CQL_QDM.MedicationDispensed extends CQL_QDM.QDMDatatype
   ###
   frequency: ->
     if @_frequency?
-      new cql.Code(@_frequency.code, @_frequency.code_system)
+      new cql.Code(@_frequency.code, @_frequency.code_system, @_frequency.version, @_frequency.title)
     else
       null
 
@@ -412,7 +412,7 @@ class CQL_QDM.MedicationOrder extends CQL_QDM.QDMDatatype
   ###
   frequency: ->
     if @_frequency?
-      new cql.Code(@_frequency.code, @_frequency.code_system)
+      new cql.Code(@_frequency.code, @_frequency.code_system, @_frequency.version, @_frequency.title)
     else
       null
 
