@@ -32,7 +32,7 @@ class CQL_QDM.Helpers
   @returns cql.DateTime
   ###
   @infinityDateTime: ->
-    cql.DateTime.parse('9999-12-31T23:59:59.999+0000')
+    cql.DateTime.parse('9999-12-31T23:59:59.999+00:00')
 
   ###
   For DateTime values makes sure value meets the CQL standard.
