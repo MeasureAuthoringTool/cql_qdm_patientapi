@@ -55,3 +55,25 @@ class CQL_QDM.QDMDatatype
       break
     null
 
+  ###
+  Returns a human readable representation of this datatype.
+
+  An example looks like:
+   "Encounter, Performed: Outpatient Consultation
+    START: 09/30/2012 2:00 PM
+    STOP: 09/30/2012 2:15 PM
+    CODE: CPT 99241"
+
+  @returns {String}
+  ###
+  toString: ->
+    # Grab description from entry; if blank use classname
+    description = if @entry.description then "#{@entry.description}\n" else "#{@constructor.name}\n"
+    # Grab start and end time, format for proper display
+    startTime = if @entry.start_time then "START: #{moment.utc(@entry.start_time, 'X').format('MM/DD/YYYY h:mm A')}\n" else ""
+    endTime = if @entry.end_time then "STOP: #{moment.utc(@entry.end_time, 'X').format('MM/DD/YYYY h:mm A')}\n" else ""
+    # Get code if this datatype has one
+    code = @code()
+    codeDisplay = if code then "CODE: #{code['system']} #{code['code']}" else ""
+    # Return human readable representation of this datatype
+    "#{description}#{startTime}#{endTime}#{codeDisplay}"
