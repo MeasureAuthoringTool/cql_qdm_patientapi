@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    cql_qdm_patientapi (1.1.0)
+    cql_qdm_patientapi (1.1.1)
       coffee-rails (~> 4.1)
       rails (~> 4.2)
       sprockets-rails (~> 2.3)
