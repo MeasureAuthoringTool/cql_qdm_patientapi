@@ -11,7 +11,7 @@ QDM datatypes must support.
 ###
 class CQL_QDM.QDMDatatype
   constructor: (@entry) ->
-    @_codes = @entry.codes
+    @_codes = @entry?.codes
 
   ###
   Returns any instances of this attribute currently within this namespace.
