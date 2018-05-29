@@ -61,9 +61,10 @@ describe "Laboratory Test", ->
        laboratoryTestPerformed = new CQL_QDM.LaboratoryTestPerformed({})
        expect(laboratoryTestPerformed.authorDatetime()).toEqual null
 
-    # it "should return a method Code", ->
-    #    laboratoryTestPerformed = new CQL_QDM.LaboratoryTestPerformed(laboratoryTestPerformedEntry)
-    #    expect(laboratoryTestPerformed.method()).toEqual 'something'
+    # TODO: Add method attribute to laboratoryTestPerformed
+    xit "should return a method Code", ->
+       laboratoryTestPerformed = new CQL_QDM.LaboratoryTestPerformed(laboratoryTestPerformedEntry)
+       expect(laboratoryTestPerformed.method()).toEqual 'something'
 
     it "should return null if no method is specified", ->
        laboratoryTestPerformed = new CQL_QDM.LaboratoryTestPerformed({})
@@ -82,9 +83,9 @@ describe "Laboratory Test", ->
       expect(laboratoryTestPerformed.reason()).toEqual null
 
     # TODO: Implement test once referencerange low and high have been changed to hash type in HDS model lab_result.rb
-    # it "should return a reference range low quantity", ->
-    #   laboratoryTestPerformed = new CQL_QDM.LaboratoryTestPerformed(laboratoryTestPerformedEntry)
-    #   expect(laboratoryTestPerformed.referenceRange()).toEqual new cql.Interval(1,2)
+    xit "should return a reference range low quantity", ->
+      laboratoryTestPerformed = new CQL_QDM.LaboratoryTestPerformed(laboratoryTestPerformedEntry)
+      expect(laboratoryTestPerformed.referenceRange()).toEqual new cql.Interval(1,2)
 
     it "should return null if no reference range is specified ", ->
       laboratoryTestPerformed = new CQL_QDM.LaboratoryTestPerformed({})
@@ -114,9 +115,10 @@ describe "Laboratory Test", ->
       laboratoryTestPerformed = new CQL_QDM.LaboratoryTestPerformed({})
       expect(laboratoryTestPerformed.resultDatetime()).toEqual null
 
-    # it "should return a status code", ->
-    #   laboratoryTestPerformed = new CQL_QDM.LaboratoryTestPerformed(laboratoryTestPerformedEntry)
-    #   expect(laboratoryTestPerformed.status()).toEqual new cql.Code()
+    # TODO: Change source or status code in labratorytest.js.coffee
+    xit "should return a status code", ->
+      laboratoryTestPerformed = new CQL_QDM.LaboratoryTestPerformed(laboratoryTestPerformedEntry)
+      expect(laboratoryTestPerformed.status()).toEqual new cql.Code()
 
     it "should return null if no status is specified", ->
       laboratoryTestPerformed = new CQL_QDM.LaboratoryTestPerformed({})
