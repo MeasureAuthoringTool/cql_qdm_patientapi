@@ -182,9 +182,9 @@ describe "Substance", ->
       expect(substanceOrder.frequency()).toEqual null
 
     # TODO: Method is missing from Substance.js.coffee
-    # it "should return a method Code", ->
-    #    laboratoryTestPerformed = new CQL_QDM.LaboratoryTestPerformed(laboratoryTestPerformedEntry)
-    #    expect(laboratoryTestPerformed.method()).toEqual 'something'
+    xit "should return a method Code", ->
+       laboratoryTestPerformed = new CQL_QDM.LaboratoryTestPerformed(laboratoryTestPerformedEntry)
+       expect(laboratoryTestPerformed.method()).toEqual 'something'
 
     it "should return null if no method is specified", ->
        substanceOrder = new CQL_QDM.SubstanceOrder({})
@@ -316,9 +316,9 @@ describe "Substance", ->
       expect(substanceRecommended.frequency()).toEqual null
 
     # TODO: Method is missing from Substance.js.coffee
-    # it "should return a method Code", ->
-    #    substanceRecommended = new CQL_QDM.SubstanceRecommended(substanceRecommendedEntry)
-    #    expect(substanceRecommended.method()).toEqual 'something'
+    xit "should return a method Code", ->
+       substanceRecommended = new CQL_QDM.SubstanceRecommended(substanceRecommendedEntry)
+       expect(substanceRecommended.method()).toEqual 'something'
 
     it "should return null if no method is specified", ->
        substanceRecommended = new CQL_QDM.SubstanceRecommended({})
