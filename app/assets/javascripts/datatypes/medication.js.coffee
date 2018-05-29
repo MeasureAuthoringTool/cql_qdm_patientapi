@@ -34,7 +34,7 @@ class CQL_QDM.MedicationActive extends CQL_QDM.QDMDatatype
   ###
   dosage: ->
     if @_dosage?
-      new cql.Quantity({unit: @_dosage['unit'], value: @_dosage['scalar']})
+      new cql.Quantity({unit: @_dosage['units'], value: @_dosage['scalar']})
     else
       null
 
@@ -43,7 +43,7 @@ class CQL_QDM.MedicationActive extends CQL_QDM.QDMDatatype
   ###
   frequency: ->
     if @_frequency?
-      new cql.Code(@_frequency.code, @_frequency.code_system, @_frequency.version, @_frequency.title)
+      new cql.Code(@_frequency.code, @_frequency.code_system)
     else
       null
 
@@ -72,7 +72,7 @@ class CQL_QDM.MedicationActive extends CQL_QDM.QDMDatatype
   ###
   supply: ->
     if @_supply?
-      new cql.Quantity({unit: @_supply['unit'], value: @_supply['scalar']})
+      new cql.Quantity({unit: @_supply['units'], value: @_supply['scalar']})
     else
       null
 
@@ -114,7 +114,7 @@ class CQL_QDM.MedicationAdministered extends CQL_QDM.QDMDatatype
   ###
   dosage: ->
     if @_dosage?
-      new cql.Quantity({unit: @_dosage['unit'], value: @_dosage['scalar']})
+      new cql.Quantity({unit: @_dosage['units'], value: @_dosage['scalar']})
     else
       null
 
@@ -123,7 +123,7 @@ class CQL_QDM.MedicationAdministered extends CQL_QDM.QDMDatatype
   ###
   frequency: ->
     if @_frequency?
-      new cql.Code(@_frequency.code, @_frequency.code_system, @_frequency.version, @_frequency.title)
+      new cql.Code(@_frequency.code, @_frequency.code_system)
     else
       null
 
@@ -170,7 +170,7 @@ class CQL_QDM.MedicationAdministered extends CQL_QDM.QDMDatatype
   ###
   supply: ->
     if @_supply?
-      new cql.Quantity({unit: @_supply['unit'], value: @_supply['scalar']})
+      new cql.Quantity({unit: @_supply['units'], value: @_supply['scalar']})
     else
       null
 
@@ -206,7 +206,7 @@ class CQL_QDM.MedicationDischarge extends CQL_QDM.QDMDatatype
   ###
   dosage: ->
     if @_dosage?
-      new cql.Quantity({unit: @_dosage['unit'], value: @_dosage['scalar']})
+      new cql.Quantity({unit: @_dosage['units'], value: @_dosage['scalar']})
     else
       null
 
@@ -215,7 +215,7 @@ class CQL_QDM.MedicationDischarge extends CQL_QDM.QDMDatatype
   ###
   frequency: ->
     if @_frequency?
-      new cql.Code(@_frequency.code, @_frequency.code_system, @_frequency.version, @_frequency.title)
+      new cql.Code(@_frequency.code, @_frequency.code_system)
     else
       null
 
@@ -251,7 +251,7 @@ class CQL_QDM.MedicationDischarge extends CQL_QDM.QDMDatatype
   ###
   supply: ->
     if @_supply?
-      new cql.Quantity({unit: @_supply['unit'], value: @_supply['scalar']})
+      new cql.Quantity({unit: @_supply['units'], value: @_supply['scalar']})
     else
       null
 
@@ -297,7 +297,7 @@ class CQL_QDM.MedicationDispensed extends CQL_QDM.QDMDatatype
   ###
   dosage: ->
     if @_dosage?
-      new cql.Quantity({unit: @_dosage['unit'], value: @_dosage['scalar']})
+      new cql.Quantity({unit: @_dosage['units'], value: @_dosage['scalar']})
     else
       null
 
@@ -306,7 +306,7 @@ class CQL_QDM.MedicationDispensed extends CQL_QDM.QDMDatatype
   ###
   frequency: ->
     if @_frequency?
-      new cql.Code(@_frequency.code, @_frequency.code_system, @_frequency.version, @_frequency.title)
+      new cql.Code(@_frequency.code, @_frequency.code_system)
     else
       null
 
@@ -353,7 +353,7 @@ class CQL_QDM.MedicationDispensed extends CQL_QDM.QDMDatatype
   ###
   supply: ->
     if @_supply?
-      new cql.Quantity({unit: @_supply['unit'], value: @_supply['scalar']})
+      new cql.Quantity({unit: @_supply['units'], value: @_supply['scalar']})
     else
       null
 
@@ -403,7 +403,7 @@ class CQL_QDM.MedicationOrder extends CQL_QDM.QDMDatatype
   ###
   dosage: ->
     if @_dosage?
-      new cql.Quantity({unit: @_dosage['unit'], value: @_dosage['scalar']})
+      new cql.Quantity({unit: @_dosage['units'], value: @_dosage['scalar']})
     else
       null
 
@@ -412,7 +412,7 @@ class CQL_QDM.MedicationOrder extends CQL_QDM.QDMDatatype
   ###
   frequency: ->
     if @_frequency?
-      new cql.Code(@_frequency.code, @_frequency.code_system, @_frequency.version, @_frequency.title)
+      new cql.Code(@_frequency.code, @_frequency.code_system)
     else
       null
 
@@ -477,6 +477,6 @@ class CQL_QDM.MedicationOrder extends CQL_QDM.QDMDatatype
   ###
   supply: ->
     if @_supply?
-      new cql.Quantity({unit: @_supply['unit'], value: @_supply['scalar']})
+      new cql.Quantity({unit: @_supply['units'], value: @_supply['scalar']})
     else
       null

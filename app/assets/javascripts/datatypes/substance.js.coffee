@@ -41,7 +41,7 @@ class CQL_QDM.SubstanceAdministered extends CQL_QDM.QDMDatatype
   ###
   dosage: ->
     if @_dosage?
-      new cql.Quantity({unit: @_dosage['unit'], value: @_dosage['scalar']})
+      new cql.Quantity({unit: @_dosage['units'], value: @_dosage['scalar']})
     else
       null
 
@@ -88,7 +88,7 @@ class CQL_QDM.SubstanceAdministered extends CQL_QDM.QDMDatatype
   ###
   supply: ->
     if @_supply?
-      new cql.Quantity({unit: @_supply['unit'], value: @_supply['scalar']})
+      new cql.Quantity({unit: @_supply['units'], value: @_supply['scalar']})
     else
       null
 
@@ -124,7 +124,7 @@ class CQL_QDM.SubstanceOrder extends CQL_QDM.QDMDatatype
   ###
   dosage: ->
     if @_dosage?
-      new cql.Quantity({unit: @_dosage['unit'], value: @_dosage['scalar']})
+      new cql.Quantity({unit: @_dosage['units'], value: @_dosage['scalar']})
     else
       null
 
@@ -187,7 +187,7 @@ class CQL_QDM.SubstanceOrder extends CQL_QDM.QDMDatatype
   ###
   supply: ->
     if @_supply?
-      new cql.Quantity({unit: @_supply['unit'], value: @_supply['scalar']})
+      new cql.Quantity({unit: @_supply['units'], value: @_supply['scalar']})
     else
       null
 
@@ -224,7 +224,7 @@ class CQL_QDM.SubstanceRecommended extends CQL_QDM.QDMDatatype
   ###
   dosage: ->
     if @_dosage?
-      new cql.Quantity({unit: @_dosage['unit'], value: @_dosage['scalar']})
+      new cql.Quantity({unit: @_dosage['units'], value: @_dosage['scalar']})
     else
       null
 
@@ -287,6 +287,6 @@ class CQL_QDM.SubstanceRecommended extends CQL_QDM.QDMDatatype
   ###
   supply: ->
     if @_supply?
-      new cql.Quantity({unit: @_supply['unit'], value: @_supply['scalar']})
+      new cql.Quantity({unit: @_supply['units'], value: @_supply['scalar']})
     else
       null

@@ -124,19 +124,19 @@ class CQL_QDM.LaboratoryTestPerformed extends CQL_QDM.QDMDatatype
     # According to documentation, this is assumed to be a 'Quantity'
     high = null
     low = null
-    if @_referenceRangeHigh?['unit']?
+    if @_referenceRangeHigh?['units']?
       high_obj =
         unit:
-          @_referenceRangeHigh['unit']
+          @_referenceRangeHigh['units']
         value:
-          @_referenceRangeHigh['value']
+          @_referenceRangeHigh['scalar']
       high = new cql.Quantity(high_obj)
-    if @_referenceRangeLow?['unit']?
+    if @_referenceRangeLow?['units']?
       low_obj =
         unit:
-          @_referenceRangeLow['unit']
+          @_referenceRangeLow['units']
         value:
-          @_referenceRangeLow['value']
+          @_referenceRangeLow['scalar']
       low = new cql.Quantity(low_obj)
     if low?
       new cql.Interval(low, high)
