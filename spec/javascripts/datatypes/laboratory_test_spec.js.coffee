@@ -27,6 +27,32 @@ describe "Laboratory Test", ->
       "values":[{"_id":"5afc788b08fa1813ddc0a04e","codes":{"CDC Race":["2135-2"]},"description":"Ethnicity"}]
     }
 
+    laboratoryTestPerformedEntryTwoComponents = { 
+      "_id":"5b0d4cec92d04eda90d60f10",
+      "codes":{"LOINC":["34714-6"]},
+      "components":{"type":"COL","values":[{"code":{"code_system":"SNOMED-CT","code":"195080001"},"result":{"code":{"code_system":"SNOMED-CT","code":"419099009"},"title":"Dead"},"referenceRangeLow":{"scalar":"12","units":"mg"},"referenceRangeHigh":{"scalar":"14","units":"mg"}},{"code":{"code_system":"SNOMED-CT","code":"195080001"},"result":{"scalar":"15","units":"mg"},"referenceRangeLow":{"scalar":"12","units":"mg"},"referenceRangeHigh":{"scalar":"14","units":"mg"}}]},
+      "description":"Laboratory Test, Performed: INR",
+      "end_time":1338279300,
+      "health_record_field":null,
+      "interpretation":null,
+      "method":null,
+      "mood_code":"EVN",
+      "negationInd":null,
+      "negationReason":null,
+      "oid":"2.16.840.1.113883.3.560.1.5",
+      "qdm_status":null,
+      "reaction":null,
+      "reason":null,
+      "referenceRange":null,
+      "referenceRangeHigh":null,
+      "referenceRangeLow":null,
+      "result_date_time":null,
+      "specifics":null,
+      "start_time":1338278400,
+      "status_code":{"HL7 ActStatus":["performed"]},
+      "time":null
+    }
+
     it "should return an author DateTime", ->
       laboratoryTestPerformed = new CQL_QDM.LaboratoryTestPerformed(laboratoryTestPerformedEntry)
       expect(laboratoryTestPerformed.authorDatetime()).toEqual new cql.DateTime(2012, 5, 16, 8, 0, 0, 0, 0)
@@ -55,7 +81,8 @@ describe "Laboratory Test", ->
       laboratoryTestPerformed = new CQL_QDM.LaboratoryTestPerformed({})
       expect(laboratoryTestPerformed.reason()).toEqual null
 
-    # it "should return a reference range interval", ->
+    # TODO: Implement test once referencerange low and high have been changed to hash type in HDS model lab_result.rb
+    # it "should return a reference range low quantity", ->
     #   laboratoryTestPerformed = new CQL_QDM.LaboratoryTestPerformed(laboratoryTestPerformedEntry)
     #   expect(laboratoryTestPerformed.referenceRange()).toEqual new cql.Interval(1,2)
 
@@ -103,17 +130,13 @@ describe "Laboratory Test", ->
       laboratoryTestPerformed = new CQL_QDM.LaboratoryTestPerformed({})
       expect(JSON.stringify(laboratoryTestPerformed.components())).toEqual "[]"
 
-    it "should show just a single Component", ->
-      laboratoryTestPerformed = new CQL_QDM.LaboratoryTestPerformed({'components': {"type":"COL","values":[{"code":{"code_system":"ICD-10-PCS","code":"0270346"},"result":{"scalar":"1","units":""},"referenceRangeLow":{"scalar":"","units":""},"referenceRangeHigh":{"scalar":"","units":""}}]}})
-      expect(JSON.stringify(laboratoryTestPerformed.components())).toEqual '[{"_result":1,"_code":{"code":"0270346","system":"ICD-10-PCS"}}]'
-
     it "should show two Components", ->
-      laboratoryTestPerformed = new CQL_QDM.LaboratoryTestPerformed({'components': {"type":"COL","values":[{"code":{"code_system":"ICD-10-PCS","code":"0270346"},"result":{"scalar":"1","units":""},"referenceRangeLow":{"scalar":"","units":""},"referenceRangeHigh":{"scalar":"","units":""}},{"code":{"code_system":"Source of Payment Typology","code":"1"},"result":{"scalar":"1","units":""},"referenceRangeLow":{"scalar":"","units":""},"referenceRangeHigh":{"scalar":"","units":""}}]}})
-      expect(JSON.stringify(laboratoryTestPerformed.components())).toEqual '[{"_result":1,"_code":{"code":"0270346","system":"ICD-10-PCS"}},{"_result":1,"_code":{"code":"1","system":"Source of Payment Typology"}}]'
+      laboratoryTestPerformed = new CQL_QDM.LaboratoryTestPerformed(laboratoryTestPerformedEntryTwoComponents)
+      expect(JSON.stringify(laboratoryTestPerformed.components())).toEqual '[{"_result":{"code":"419099009","system":"SNOMED-CT"},"_code":{"code":"195080001","system":"SNOMED-CT"},"_referenceRange":{"low":"12","high":"14","lowClosed":true,"highClosed":true}},{"_result":{"unit":"mg","value":15},"_code":{"code":"195080001","system":"SNOMED-CT"},"_referenceRange":{"low":"12","high":"14","lowClosed":true,"highClosed":true}}]'
 
     it "should show Component with referenceRange low and high with units", ->
-      laboratoryTestPerformed = new CQL_QDM.LaboratoryTestPerformed({'components': {"type":"COL","values":[{"code":{"code_system":"ICD-10-PCS","code":"0270346"},"result":{"scalar":"2","units":"mg"},"referenceRangeLow":{"scalar":"1","units":"mg"},"referenceRangeHigh":{"scalar":"3","units":"mg"}}]}})
-      expect(JSON.stringify(laboratoryTestPerformed.components())).toEqual '[{"_result":{"unit":"mg","value":2},"_code":{"code":"0270346","system":"ICD-10-PCS"},"_referenceRange":{"low":"1","high":"3","lowClosed":true,"highClosed":true}}]'
+      laboratoryTestPerformed = new CQL_QDM.LaboratoryTestPerformed(laboratoryTestPerformedEntryTwoComponents)
+      expect(JSON.stringify(laboratoryTestPerformed.components()[1])).toEqual '{"_result":{"unit":"mg","value":15},"_code":{"code":"195080001","system":"SNOMED-CT"},"_referenceRange":{"low":"12","high":"14","lowClosed":true,"highClosed":true}}'
 
     it "should show Component with referenceRange low and high without units", ->
       laboratoryTestPerformed = new CQL_QDM.LaboratoryTestPerformed({'components': {"type":"COL","values":[{"code":{"code_system":"ICD-10-PCS","code":"0270346"},"result":{"scalar":"2","units":""},"referenceRangeLow":{"scalar":"1","units":""},"referenceRangeHigh":{"scalar":"3","units":""}}]}})
@@ -140,6 +163,5 @@ describe "Laboratory Test", ->
       expect(JSON.stringify(laboratoryTestPerformed.result())).toEqual('null')
 
     it "should return a result", ->
-      laboratoryTestPerformed = new CQL_QDM.LaboratoryTestPerformed({'values': [
-          {_id: "5aabbc4692d04e71f32f7619", codes: { 'SNOMED-CT': ["164059009"]}, description: "Pass Or Refer"}]})
-      expect(JSON.stringify(laboratoryTestPerformed.result())).toEqual('{"code":"164059009","system":"SNOMED-CT"}')
+      laboratoryTestPerformed = new CQL_QDM.LaboratoryTestPerformed(laboratoryTestPerformedEntry)
+      expect(JSON.stringify(laboratoryTestPerformed.result())).toEqual('{"code":"2135-2","system":"CDC Race"}')

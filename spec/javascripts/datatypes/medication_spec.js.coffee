@@ -259,6 +259,10 @@ describe "Medication", ->
       medicationActive = new CQL_QDM.MedicationActive(medicationActiveEntry)
       expect(medicationActive.route()).toEqual new cql.Code('995218', 'RxNorm')
 
+    it "should return a supply quantity", ->
+      medicationActive = new CQL_QDM.MedicationActive(medicationActiveEntry)
+      expect(medicationActive.supply()).toEqual new cql.Quantity({unit: 'g', value: '1000'})
+
     it "should return null when field is not on constructing entry", ->
       medicationActive = new CQL_QDM.MedicationActive({'start_time': '08/31/2017 1:00 AM', 'end_time': '08/31/2017 2:00 AM'})
       expect(medicationActive.frequency()).toEqual null
@@ -414,6 +418,10 @@ describe "Medication", ->
     it "should return an integer of the number of refills", ->
       medicationDispensed = new CQL_QDM.MedicationDischarge(medicationDischargeEntry)
       expect(medicationDispensed.refills()).toEqual '100'
+
+    it "should return a supply quantity", ->
+      medicationDispensed = new CQL_QDM.MedicationDischarge(medicationDischargeEntry)
+      expect(medicationDispensed.supply()).toEqual new cql.Quantity({unit: 'mg', value: '100'})
 
     it "should return null when field is not on constructing entry", ->
       medicationDischarge = new CQL_QDM.MedicationDischarge({'start_time': '08/31/2017 1:00 AM', 'end_time': '08/31/2017 2:00 AM'})
