@@ -8,17 +8,17 @@ describe "Laboratory Test", ->
       "end_time":1337156100,
       "health_record_field":null,
       "interpretation":null,
-      "method":null,
+      "method":{"code_system":"SNOMED-CT","code":"133918004","title":"Comfort Measures"},
       "mood_code":"EVN",
       "negationInd":null,
       "negationReason":null,
       "oid":"2.16.840.1.113883.3.560.1.5",
-      "qdm_status":{"code_system":"ICD-10-PCS","code":"0T1307B","title":"Urological Surgery"},
+      "qdm_status":{"code_system":"SNOMED-CT","code":"419099009","title":"Dead"},
       "reaction":null,
       "reason":{"code_system":"ICD-10-PCS","code":"0QPD0JZ","title":"Knee Replacement Surgery"},
       "referenceRange":null,
-      "referenceRangeHigh":"{\"scalar\"=>\"35\", \"units\"=>\"mg\"}",
-      "referenceRangeLow":"{\"scalar\"=>\"23\", \"units\"=>\"mg\"}",
+      "referenceRangeHigh":{"scalar":"10000","units":"mg"},
+      "referenceRangeLow":{"scalar":"100","units":"mg"},
       "result_date_time":491126400,
       "specifics":null,
       "start_time":1337155200,
@@ -35,12 +35,12 @@ describe "Laboratory Test", ->
       "end_time":1338279300,
       "health_record_field":null,
       "interpretation":null,
-      "method":null,
+      "method":{"code_system":"SNOMED-CT","code":"133918004","title":"Comfort Measures"},
       "mood_code":"EVN",
       "negationInd":null,
       "negationReason":null,
       "oid":"2.16.840.1.113883.3.560.1.5",
-      "qdm_status":null,
+      "qdm_status":{"code_system":"SNOMED-CT","code":"419099009","title":"Dead"},
       "reaction":null,
       "reason":null,
       "referenceRange":null,
@@ -61,10 +61,9 @@ describe "Laboratory Test", ->
        laboratoryTestPerformed = new CQL_QDM.LaboratoryTestPerformed({})
        expect(laboratoryTestPerformed.authorDatetime()).toEqual null
 
-    # TODO: Add method attribute to laboratoryTestPerformed
-    xit "should return a method Code", ->
+    it "should return a method Code", ->
        laboratoryTestPerformed = new CQL_QDM.LaboratoryTestPerformed(laboratoryTestPerformedEntry)
-       expect(laboratoryTestPerformed.method()).toEqual 'something'
+       expect(laboratoryTestPerformed.method()).toEqual new cql.Code('133918004', 'SNOMED-CT')
 
     it "should return null if no method is specified", ->
        laboratoryTestPerformed = new CQL_QDM.LaboratoryTestPerformed({})
@@ -82,10 +81,11 @@ describe "Laboratory Test", ->
       laboratoryTestPerformed = new CQL_QDM.LaboratoryTestPerformed({})
       expect(laboratoryTestPerformed.reason()).toEqual null
 
-    # TODO: Implement test once referencerange low and high have been changed to hash type in HDS model lab_result.rb
-    xit "should return a reference range low quantity", ->
+    it "should return a reference range low quantity", ->
       laboratoryTestPerformed = new CQL_QDM.LaboratoryTestPerformed(laboratoryTestPerformedEntry)
-      expect(laboratoryTestPerformed.referenceRange()).toEqual new cql.Interval(1,2)
+      intervalLow = new cql.Quantity({value:"100", unit:"mg"})
+      intervalHigh = new cql.Quantity({value:"10000", unit:"mg"})
+      expect(laboratoryTestPerformed.referenceRange()).toEqual new cql.Interval(intervalLow, intervalHigh)
 
     it "should return null if no reference range is specified ", ->
       laboratoryTestPerformed = new CQL_QDM.LaboratoryTestPerformed({})
@@ -115,10 +115,9 @@ describe "Laboratory Test", ->
       laboratoryTestPerformed = new CQL_QDM.LaboratoryTestPerformed({})
       expect(laboratoryTestPerformed.resultDatetime()).toEqual null
 
-    # TODO: Change source or status code in labratorytest.js.coffee
-    xit "should return a status code", ->
+    it "should return a status code", ->
       laboratoryTestPerformed = new CQL_QDM.LaboratoryTestPerformed(laboratoryTestPerformedEntry)
-      expect(laboratoryTestPerformed.status()).toEqual new cql.Code()
+      expect(laboratoryTestPerformed.status()).toEqual new cql.Code('419099009', 'SNOMED-CT')
 
     it "should return null if no status is specified", ->
       laboratoryTestPerformed = new CQL_QDM.LaboratoryTestPerformed({})

@@ -135,7 +135,7 @@ describe "Substance", ->
       "fulfillmentInstructions":null,
       "health_record_field":null,
       "indication":null,
-      "method":null,
+      "method":{"code_system":"LOINC","code":"29463-7","title":"Body Weight"},
       "mood_code":"EVN",
       "negationInd":true,
       "negationReason":{"code_system":"LOINC","code":"29463-7"},
@@ -181,10 +181,9 @@ describe "Substance", ->
       substanceOrder = new CQL_QDM.SubstanceOrder({})
       expect(substanceOrder.frequency()).toEqual null
 
-    # TODO: Method is missing from Substance.js.coffee
-    xit "should return a method Code", ->
-       laboratoryTestPerformed = new CQL_QDM.LaboratoryTestPerformed(laboratoryTestPerformedEntry)
-       expect(laboratoryTestPerformed.method()).toEqual 'something'
+    it "should return a method Code", ->
+      substanceOrder = new CQL_QDM.SubstanceOrder(substanceOrderEntry)
+      expect(substanceOrder.method()).toEqual new cql.Code('29463-7', 'LOINC')
 
     it "should return null if no method is specified", ->
        substanceOrder = new CQL_QDM.SubstanceOrder({})
@@ -269,7 +268,7 @@ describe "Substance", ->
       "fulfillmentInstructions":null,
       "health_record_field":null,
       "indication":null,
-      "method":null,
+      "method":{"code_system":"LOINC","code":"29463-7","title":"Body Weight"},
       "mood_code":"EVN",
       "negationInd":true,
       "negationReason":{"code_system":"CDC Race","code":"1002-5"},
@@ -315,10 +314,9 @@ describe "Substance", ->
       substanceRecommended = new CQL_QDM.SubstanceRecommended({})
       expect(substanceRecommended.frequency()).toEqual null
 
-    # TODO: Method is missing from Substance.js.coffee
-    xit "should return a method Code", ->
+    it "should return a method Code", ->
        substanceRecommended = new CQL_QDM.SubstanceRecommended(substanceRecommendedEntry)
-       expect(substanceRecommended.method()).toEqual 'something'
+       expect(substanceRecommended.method()).toEqual new cql.Code('29463-7', 'LOINC')
 
     it "should return null if no method is specified", ->
        substanceRecommended = new CQL_QDM.SubstanceRecommended({})

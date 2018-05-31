@@ -19,6 +19,7 @@ class CQL_QDM.LaboratoryTestOrder extends CQL_QDM.QDMDatatype
     @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
+    @_status = @entry.qdm_status
 
   ###
   @returns {Code}
@@ -53,6 +54,15 @@ class CQL_QDM.LaboratoryTestOrder extends CQL_QDM.QDMDatatype
   authorDatetime: ->
     @_authorDatetime
 
+  ###
+  @returns {Code}
+  ###
+  status: ->
+    if @_status?
+      new cql.Code(@_status.code, @_status.code_system)
+    else
+      null
+
 
 ###
 Data elements that meet criteria using this datatype should document the
@@ -80,7 +90,7 @@ class CQL_QDM.LaboratoryTestPerformed extends CQL_QDM.QDMDatatype
     if @entry.values? && @entry.values.length > 0
       @_result = @entry.values?[0]
     @_resultDatetime = CQL_QDM.Helpers.convertDateTime(@entry.result_date_time)
-    @_status = @entry.status
+    @_status = @entry.qdm_status
     @_components = @entry.components
 
   ###
@@ -208,6 +218,7 @@ class CQL_QDM.LaboratoryTestRecommended extends CQL_QDM.QDMDatatype
     @_method = @entry.method
     @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
+    @_status = @entry.qdm_status
 
   ###
   @returns {Date}
@@ -239,5 +250,14 @@ class CQL_QDM.LaboratoryTestRecommended extends CQL_QDM.QDMDatatype
   reason: ->
     if @_reason?
       new cql.Code(@_reason.code, @_reason.code_system)
+    else
+      null
+
+  ###
+  @returns {Code}
+  ###
+  status: ->
+    if @_status?
+      new cql.Code(@_status.code, @_status.code_system)
     else
       null

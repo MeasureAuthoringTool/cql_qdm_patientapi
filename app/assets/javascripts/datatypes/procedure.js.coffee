@@ -110,7 +110,7 @@ class CQL_QDM.ProcedurePerformed extends CQL_QDM.QDMDatatype
       @_relevantPeriodHigh = CQL_QDM.Helpers.infinityDateTime()
     if @entry.values? && @entry.values.length > 0
       @_result = @entry.values?[0]
-    @_status = @entry.status
+    @_status = @entry.qdm_status
     @_components = @entry.components
 
   ###

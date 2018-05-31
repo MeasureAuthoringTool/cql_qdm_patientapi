@@ -85,7 +85,7 @@ class CQL_QDM.DiagnosticStudyPerformed extends CQL_QDM.QDMDatatype
     else
       # No end time; high is set to infinity
       @_relevantPeriodHigh = CQL_QDM.Helpers.infinityDateTime()
-    @_status = @entry.status
+    @_status = @entry.qdm_status
     @_components = @entry.components
 
 
