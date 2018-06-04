@@ -86,8 +86,14 @@ class CQL_QDM.ImmunizationOrder extends CQL_QDM.QDMDatatype
   ###
   constructor: (@entry) ->
     super @entry
-    @_activeDatetime = CQL_QDM.Helpers.convertDateTime(@entry.active_datetime)
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
+
+    # if activeDatetime is provided, use it, otherwise default to authorDatetime per QDM spec
+    if @entry.active_datetime?
+      @_activeDatetime = CQL_QDM.Helpers.convertDateTime(@entry.active_datetime)
+    else
+      @_activeDatetime = @_authorDatetime
+
     @_dosage = @entry.dose
     @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
