@@ -369,7 +369,6 @@ class CQL_QDM.MedicationOrder extends CQL_QDM.QDMDatatype
   ###
   constructor: (@entry) ->
     super @entry
-    @_activeDatetime = CQL_QDM.Helpers.convertDateTime(@entry.active_datetime)
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_dosage = @entry.dose
     @_frequency = @entry.administrationTiming
@@ -385,12 +384,6 @@ class CQL_QDM.MedicationOrder extends CQL_QDM.QDMDatatype
     else
       # No end time; high is set to infinity
       @_relevantPeriodHigh = CQL_QDM.Helpers.infinityDateTime()
-
-  ###
-  @returns {Date}
-  ###
-  activeDatetime: ->
-    @_activeDatetime
 
   ###
   @returns {Date}
