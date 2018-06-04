@@ -166,3 +166,71 @@ describe "Laboratory Test", ->
     it "should return a result", ->
       laboratoryTestPerformed = new CQL_QDM.LaboratoryTestPerformed(laboratoryTestPerformedEntry)
       expect(JSON.stringify(laboratoryTestPerformed.result())).toEqual('{"code":"2135-2","system":"CDC Race"}')
+
+  describe "Order", ->
+    laboratoryTestOrderEntry = {
+      "_id":"5b152a7d92d04e5c9d5ee163",
+      "codes":{"LOINC":["24320-4"]},
+      "components":{"type":"COL","values":[{"code":{"code_system":"SNOMED-CT","code":"103705002"},
+      "result":{"scalar":"12","units":"mg"}}]},
+      "description":"Laboratory Test, Order: Laboratory Tests for Hypertension",
+      "end_time":null,
+      "health_record_field":{"code_system":"RxNorm","code":"1000001",
+      "title":"Anti-Hypertensive Pharmacologic Therapy"},
+      "interpretation":null,
+      "method":{"code_system":"LOINC","code":"8462-4","title":"Diastolic blood pressure"},
+      "mood_code":"EVN",
+      "negationInd":true,
+      "negationReason":{"code_system":"RxNorm","code":"1000001"},
+      "oid":"2.16.840.1.113883.3.560.1.150",
+      "qdm_status":{"code_system":"CDC Race","code":"2135-2","title":"Ethnicity"},
+      "reaction":null,
+      "reason":{"code_system":"SNOMED-CT","code":"183452005","title":"Encounter Inpatient"},
+      "referenceRange":null,
+      "referenceRangeHigh":{"scalar":"1000","units":"mg"},
+      "referenceRangeLow":{"scalar":"500","units":"mg"},
+      "result_date_time":1528876800,"specifics":null,
+      "start_time":1338796800,
+      "status_code":{"HL7 ActStatus":["ordered"]},
+      "time":null
+    }
+
+    it "should return an author DateTime", ->
+      laboratoryTestOrdered = new CQL_QDM.LaboratoryTestOrder(laboratoryTestOrderEntry)
+      expect(laboratoryTestOrdered.authorDatetime()).toEqual new cql.DateTime(2012, 6, 4, 8, 0, 0, 0, 0)
+
+    it "should return null authorDateTime when no is start_time is specified", ->
+       laboratoryTestOrdered = new CQL_QDM.LaboratoryTestOrder({})
+       expect(laboratoryTestOrdered.authorDatetime()).toEqual null
+
+    it "should return a method Code", ->
+       laboratoryTestOrdered = new CQL_QDM.LaboratoryTestOrder(laboratoryTestOrderEntry)
+       expect(laboratoryTestOrdered.method()).toEqual new cql.Code('8462-4', 'LOINC')
+
+    it "should return null if no method is specified", ->
+       laboratoryTestOrdered = new CQL_QDM.LaboratoryTestOrder({})
+       expect(laboratoryTestOrdered.method()).toEqual null
+
+    it "should return null if no negation rationale is specified", ->
+      laboratoryTestOrdered = new CQL_QDM.LaboratoryTestOrder({})
+      expect(laboratoryTestOrdered.negationRationale()).toEqual null
+
+    it "should return a negation rationale code", ->
+      laboratoryTestOrdered = new CQL_QDM.LaboratoryTestOrder(laboratoryTestOrderEntry)
+      expect(laboratoryTestOrdered.negationRationale()).toEqual new cql.Code('1000001', 'RxNorm')
+
+    it "should return a reason code", ->
+      laboratoryTestOrdered = new CQL_QDM.LaboratoryTestOrder(laboratoryTestOrderEntry)
+      expect(laboratoryTestOrdered.reason()).toEqual new cql.Code('183452005', 'SNOMED-CT')
+
+    it "should return null if no reason is specified", ->
+      laboratoryTestOrdered = new CQL_QDM.LaboratoryTestOrder({})
+      expect(laboratoryTestOrdered.reason()).toEqual null
+
+    it "should return a status code", ->
+      laboratoryTestOrdered = new CQL_QDM.LaboratoryTestOrder(laboratoryTestOrderEntry)
+      expect(laboratoryTestOrdered.status()).toEqual new cql.Code('2135-2', 'CDC Race')
+
+    it "should return null if no status is specified", ->
+      laboratoryTestOrdered = new CQL_QDM.LaboratoryTestOrder({})
+      expect(laboratoryTestOrdered.status()).toEqual null
