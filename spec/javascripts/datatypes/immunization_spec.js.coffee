@@ -128,10 +128,54 @@ describe "Immunization", ->
         "typeOfMedication":null,
         "vehicle":null
     }
+
+    immunizationOrderedEntryWithActiveDatetime = {
+        "_id": "5b15401b5cc975a41dc1ab0e",
+        "active_datetime": 1325750400,
+        "administrationTiming": null,
+        "allowedAdministrations": null,
+        "anatomical_approach": null,
+        "codes": { "CVX": ["135"] },
+        "cumulativeMedicationDuration": null,
+        "deliveryMethod": null,
+        "description": "Immunization, Order: Influenza Vaccine",
+        "dose": null,
+        "doseIndicator": null,
+        "doseRestriction": null,
+        "end_time": null,
+        "freeTextSig": null,
+        "fulfillmentInstructions": null,
+        "health_record_field": null,
+        "indication": null,
+        "method": null,
+        "mood_code": "EVN",
+        "negationInd": null,
+        "negationReason": null,
+        "oid": null,
+        "patientInstructions": null,
+        "productForm": null,
+        "reaction": null,
+        "reason": null,
+        "refills": null,
+        "route": null,
+        "signed_datetime": null,
+        "specifics": null,
+        "start_time": 1325664000,
+        "statusOfMedication": null,
+        "status_code": { "HL7 ActStatus": ["ordered"] },
+        "supply": null,
+        "time": null,
+        "typeOfMedication": null,
+        "vehicle": null
+    }
  
-    it "should return an active DateTime", ->
+    it "should return authorDatetime for activeDatetime when active_datetime is NOT provided", ->
       immunizationOrdered = new CQL_QDM.ImmunizationOrder(immunizationOrderedEntry)
-      expect(immunizationOrdered.activeDatetime()).toEqual null
+      expect(immunizationOrdered.activeDatetime()).toEqual new cql.DateTime(2012, 5, 16, 8, 0, 0, 0, 0)
+
+    it "should return activeDatetime for activeDatetime active_datetime is provided", ->
+      immunizationOrdered = new CQL_QDM.ImmunizationOrder(immunizationOrderedEntryWithActiveDatetime)
+      expect(immunizationOrdered.activeDatetime()).toEqual new cql.DateTime(2012, 1, 5, 8, 0, 0, 0, 0)
 
     it "should return null if no active datetime is specified", ->
       immunizationOrdered = new CQL_QDM.ImmunizationOrder({})
