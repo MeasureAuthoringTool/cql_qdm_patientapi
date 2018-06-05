@@ -67,7 +67,7 @@ class CQL_QDM.InterventionPerformed extends CQL_QDM.QDMDatatype
       @_relevantPeriodHigh = CQL_QDM.Helpers.infinityDateTime()
     if @entry.values? && @entry.values.length > 0
       @_result = @entry.values?[0]
-    @_status = @entry.status
+    @_status = @entry.qdm_status
 
   ###
   Author date time is only present when this data type has been negated.

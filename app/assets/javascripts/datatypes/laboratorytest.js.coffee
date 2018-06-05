@@ -53,7 +53,6 @@ class CQL_QDM.LaboratoryTestOrder extends CQL_QDM.QDMDatatype
   authorDatetime: ->
     @_authorDatetime
 
-
 ###
 Data elements that meet criteria using this datatype should document the
 laboratory test indicated by the QDM category and its corresponding value set
@@ -80,7 +79,7 @@ class CQL_QDM.LaboratoryTestPerformed extends CQL_QDM.QDMDatatype
     if @entry.values? && @entry.values.length > 0
       @_result = @entry.values?[0]
     @_resultDatetime = CQL_QDM.Helpers.convertDateTime(@entry.result_date_time)
-    @_status = @entry.status
+    @_status = @entry.qdm_status
     @_components = @entry.components
 
   ###
