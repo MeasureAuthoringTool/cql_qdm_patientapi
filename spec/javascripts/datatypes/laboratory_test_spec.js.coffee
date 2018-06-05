@@ -183,7 +183,6 @@ describe "Laboratory Test", ->
       "negationInd":true,
       "negationReason":{"code_system":"RxNorm","code":"1000001"},
       "oid":"2.16.840.1.113883.3.560.1.150",
-      "qdm_status":{"code_system":"CDC Race","code":"2135-2","title":"Ethnicity"},
       "reaction":null,
       "reason":{"code_system":"SNOMED-CT","code":"183452005","title":"Encounter Inpatient"},
       "referenceRange":null,
@@ -227,14 +226,6 @@ describe "Laboratory Test", ->
       laboratoryTestOrdered = new CQL_QDM.LaboratoryTestOrder({})
       expect(laboratoryTestOrdered.reason()).toEqual null
 
-    it "should return a status code", ->
-      laboratoryTestOrdered = new CQL_QDM.LaboratoryTestOrder(laboratoryTestOrderEntry)
-      expect(laboratoryTestOrdered.status()).toEqual new cql.Code('2135-2', 'CDC Race')
-
-    it "should return null if no status is specified", ->
-      laboratoryTestOrdered = new CQL_QDM.LaboratoryTestOrder({})
-      expect(laboratoryTestOrdered.status()).toEqual null
-
   describe "Recommended", ->
     laboratoryTestRecommendedEntry = {
       "_id":"5b15a35792d04e2a00f60398",
@@ -249,7 +240,6 @@ describe "Laboratory Test", ->
       "negationInd":null,
       "negationReason":null,
       "oid":"2.16.840.1.113883.3.560.1.90",
-      "qdm_status":{"code_system":"LOINC","code":"24320-4","title":"Laboratory Tests for Hypertension"},
       "reaction":null,
       "reason":{"code_system":"CDC Race","code":"2135-2","title":"Ethnicity"},
       "referenceRange":null,
@@ -285,11 +275,3 @@ describe "Laboratory Test", ->
     it "should return null if no reason is specified", ->
       laboratoryTestRecommended = new CQL_QDM.LaboratoryTestRecommended({})
       expect(laboratoryTestRecommended.reason()).toEqual null
-
-    it "should return a status code", ->
-      laboratoryTestRecommended = new CQL_QDM.LaboratoryTestRecommended(laboratoryTestRecommendedEntry)
-      expect(laboratoryTestRecommended.status()).toEqual new cql.Code('24320-4', 'LOINC')
-
-    it "should return null if no status is specified", ->
-      laboratoryTestRecommended = new CQL_QDM.LaboratoryTestRecommended({})
-      expect(laboratoryTestRecommended.status()).toEqual null
