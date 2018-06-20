@@ -8,4 +8,4 @@ their methods will be accessable through the CQL_QDM namespace)
 Represents the QDM.Id used in the execution engine.
 ###
 class CQL_QDM.Id
-  constructor: (@value, @referenced_type, @type) ->
+  constructor: (@value, @namingSystem = null) ->

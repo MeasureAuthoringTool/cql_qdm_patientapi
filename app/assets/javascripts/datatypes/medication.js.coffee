@@ -318,7 +318,7 @@ class CQL_QDM.MedicationDispensed extends CQL_QDM.QDMDatatype
   ###
   frequency: ->
     if @_frequency?
-      new cql.Code(@_frequency.code, @_frequency.code_system)
+      new cql.Code(@_frequency.code, @_frequency.code_system, null, @_frequency.title || null)
     else
       null
 
