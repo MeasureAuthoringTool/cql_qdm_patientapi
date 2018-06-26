@@ -12,7 +12,8 @@ class CQL_QDM.Component
     @_result = CQL_QDM.Helpers.formatResult(component.result)
     code = component?.code?.code
     code_system = component?.code?.code_system
-    @_code = new cql.Code(code, code_system)
+    display = component?.result?.title
+    @_code = new cql.Code(code, code_system, null, display || null)
 
   exec: (ctx) ->
     @

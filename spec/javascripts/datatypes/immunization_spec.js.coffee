@@ -58,7 +58,7 @@ describe "Immunization", ->
 
     it "should return a negation rationale code", ->
       immunizationAdministered = new CQL_QDM.ImmunizationAdministered(immunizationAdministeredEntry)
-      expect(immunizationAdministered.negationRationale()).toEqual new cql.Code('10082001', 'SNOMED-CT')
+      expect(immunizationAdministered.negationRationale()).toEqual new cql.Code('10082001', 'SNOMED-CT', null, null)
 
     it "should return null if no negation rationale is specified", ->
       immunizationAdministered = new CQL_QDM.ImmunizationAdministered({})
@@ -66,7 +66,7 @@ describe "Immunization", ->
 
     it "should return a reason code", ->
       immunizationAdministered = new CQL_QDM.ImmunizationAdministered(immunizationAdministeredEntry)
-      expect(immunizationAdministered.reason()).toEqual new cql.Code('120', 'CVX')
+      expect(immunizationAdministered.reason()).toEqual new cql.Code('120', 'CVX', null, 'Haemophilus Influenzae Type B (HiB) Vaccine')
 
     it "should return null if no reason is specified", ->
       immunizationAdministered = new CQL_QDM.ImmunizationAdministered({})
@@ -74,7 +74,7 @@ describe "Immunization", ->
 
     it "should return a route code", ->
       immunizationAdministered = new CQL_QDM.ImmunizationAdministered(immunizationAdministeredEntry)
-      expect(immunizationAdministered.route()).toEqual new cql.Code('100', 'CVX')
+      expect(immunizationAdministered.route()).toEqual new cql.Code('100', 'CVX', null, 'Pneumococcal Conjugate Vaccine')
 
     it "should return null if no route is specified", ->
       immunizationAdministered = new CQL_QDM.ImmunizationAdministered({})
@@ -199,7 +199,7 @@ describe "Immunization", ->
 
     it "should return a negation rationale code", ->
       immunizationOrdered = new CQL_QDM.ImmunizationOrder(immunizationOrderedEntry)
-      expect(immunizationOrdered.negationRationale()).toEqual new cql.Code('128731000119101', 'SNOMED-CT')
+      expect(immunizationOrdered.negationRationale()).toEqual new cql.Code('128731000119101', 'SNOMED-CT', null, null)
 
     it "should return null if no negation rationale is specified", ->
       immunizationOrdered = new CQL_QDM.ImmunizationOrder({})
@@ -207,7 +207,7 @@ describe "Immunization", ->
 
     it "should return a reason code", ->
       immunizationOrdered = new CQL_QDM.ImmunizationOrder(immunizationOrderedEntry)
-      expect(immunizationOrdered.reason()).toEqual new cql.Code('241935008', 'SNOMED-CT')
+      expect(immunizationOrdered.reason()).toEqual new cql.Code('241935008', 'SNOMED-CT', null, 'Anaphylactic Reaction to Eggs')
 
     it "should return null if no reason is specified", ->
       immunizationOrdered = new CQL_QDM.ImmunizationOrder({})
@@ -215,7 +215,7 @@ describe "Immunization", ->
 
     it "should return a route code", ->
       immunizationOrdered = new CQL_QDM.ImmunizationOrder(immunizationOrderedEntry)
-      expect(immunizationOrdered.route()).toEqual new cql.Code('185900003', 'SNOMED-CT')
+      expect(immunizationOrdered.route()).toEqual new cql.Code('185900003', 'SNOMED-CT', null, 'IMM2 Previous Receipt of Influenza Vaccine')
 
     it "should return null if no route is specified", ->
       immunizationOrdered = new CQL_QDM.ImmunizationOrder({})
