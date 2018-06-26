@@ -55,6 +55,6 @@ class CQL_QDM.CareGoal extends CQL_QDM.QDMDatatype
       if @_targetOutcome?['units']?
         new cql.Quantity({unit: @_targetOutcome['units'], value: @_targetOutcome['scalar']})
       else
-        new cql.Code(@_targetOutcome.code, @_targetOutcome.code_system)
+        new cql.Code(@_targetOutcome.code, @_targetOutcome.code_system, null, @_targetOutcome.title || null)
     else
       null

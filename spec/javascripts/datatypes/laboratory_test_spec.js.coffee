@@ -63,7 +63,7 @@ describe "Laboratory Test", ->
 
     it "should return a method Code", ->
        laboratoryTestPerformed = new CQL_QDM.LaboratoryTestPerformed(laboratoryTestPerformedEntry)
-       expect(laboratoryTestPerformed.method()).toEqual new cql.Code('133918004', 'SNOMED-CT')
+       expect(laboratoryTestPerformed.method()).toEqual new cql.Code('133918004', 'SNOMED-CT', null, 'Comfort Measures')
 
     it "should return null if no method is specified", ->
        laboratoryTestPerformed = new CQL_QDM.LaboratoryTestPerformed({})
@@ -75,7 +75,7 @@ describe "Laboratory Test", ->
 
     it "should return a reason code", ->
       laboratoryTestPerformed = new CQL_QDM.LaboratoryTestPerformed(laboratoryTestPerformedEntry)
-      expect(laboratoryTestPerformed.reason()).toEqual new cql.Code('0QPD0JZ', 'ICD-10-PCS')
+      expect(laboratoryTestPerformed.reason()).toEqual new cql.Code('0QPD0JZ', 'ICD-10-PCS', null, 'Knee Replacement Surgery')
 
     it "should return null if no reason is specified", ->
       laboratoryTestPerformed = new CQL_QDM.LaboratoryTestPerformed({})
@@ -101,7 +101,7 @@ describe "Laboratory Test", ->
 
     it "should return a result object", ->
       laboratoryTestPerformed = new CQL_QDM.LaboratoryTestPerformed(laboratoryTestPerformedEntry)
-      expect(laboratoryTestPerformed.result()).toEqual new cql.Code('2135-2', 'CDC Race')
+      expect(laboratoryTestPerformed.result()).toEqual new cql.Code('2135-2', 'CDC Race', null, 'Ethnicity')
 
     it "should return null if no result is specified ", ->
       laboratoryTestPerformed = new CQL_QDM.LaboratoryTestPerformed({})
@@ -117,7 +117,7 @@ describe "Laboratory Test", ->
 
     it "should return a status code", ->
       laboratoryTestPerformed = new CQL_QDM.LaboratoryTestPerformed(laboratoryTestPerformedEntry)
-      expect(laboratoryTestPerformed.status()).toEqual new cql.Code('419099009', 'SNOMED-CT')
+      expect(laboratoryTestPerformed.status()).toEqual new cql.Code('419099009', 'SNOMED-CT', null, 'Dead')
 
     it "should return null if no status is specified", ->
       laboratoryTestPerformed = new CQL_QDM.LaboratoryTestPerformed({})
@@ -125,7 +125,7 @@ describe "Laboratory Test", ->
 
     it "should return a component", ->
       laboratoryTestPerformed = new CQL_QDM.LaboratoryTestPerformed(laboratoryTestPerformedEntry)
-      expect(JSON.stringify(laboratoryTestPerformed.components())).toEqual '[{"_result":{"code":"309904001","system":"SNOMED-CT"},"_code":{"code":"0SQ90ZZ","system":"ICD-10-PCS"},"_referenceRange":{"low":"23","high":"35","lowClosed":true,"highClosed":true}}]'
+      expect(JSON.stringify(laboratoryTestPerformed.components())).toEqual '[{"_result":{"code":"309904001","system":"SNOMED-CT","version":null,"display":null},"_code":{"code":"0SQ90ZZ","system":"ICD-10-PCS","version":null,"display":"Intensive Care Unit"},"_referenceRange":{"low":"23","high":"35","lowClosed":true,"highClosed":true}}]'
 
     it "should show nothing if there is no Component", ->
       laboratoryTestPerformed = new CQL_QDM.LaboratoryTestPerformed({})
@@ -133,23 +133,23 @@ describe "Laboratory Test", ->
 
     it "should show two Components", ->
       laboratoryTestPerformed = new CQL_QDM.LaboratoryTestPerformed(laboratoryTestPerformedEntryTwoComponents)
-      expect(JSON.stringify(laboratoryTestPerformed.components())).toEqual '[{"_result":{"code":"419099009","system":"SNOMED-CT"},"_code":{"code":"195080001","system":"SNOMED-CT"},"_referenceRange":{"low":"12","high":"14","lowClosed":true,"highClosed":true}},{"_result":{"unit":"mg","value":15},"_code":{"code":"195080001","system":"SNOMED-CT"},"_referenceRange":{"low":"12","high":"14","lowClosed":true,"highClosed":true}}]'
+      expect(JSON.stringify(laboratoryTestPerformed.components())).toEqual '[{"_result":{"code":"419099009","system":"SNOMED-CT","version":null,"display":null},"_code":{"code":"195080001","system":"SNOMED-CT","version":null,"display":"Dead"},"_referenceRange":{"low":"12","high":"14","lowClosed":true,"highClosed":true}},{"_result":{"unit":"mg","value":15},"_code":{"code":"195080001","system":"SNOMED-CT","version":null,"display":null},"_referenceRange":{"low":"12","high":"14","lowClosed":true,"highClosed":true}}]'
 
     it "should show Component with referenceRange low and high with units", ->
       laboratoryTestPerformed = new CQL_QDM.LaboratoryTestPerformed(laboratoryTestPerformedEntryTwoComponents)
-      expect(JSON.stringify(laboratoryTestPerformed.components()[1])).toEqual '{"_result":{"unit":"mg","value":15},"_code":{"code":"195080001","system":"SNOMED-CT"},"_referenceRange":{"low":"12","high":"14","lowClosed":true,"highClosed":true}}'
+      expect(JSON.stringify(laboratoryTestPerformed.components()[1])).toEqual '{"_result":{"unit":"mg","value":15},"_code":{"code":"195080001","system":"SNOMED-CT","version":null,"display":null},"_referenceRange":{"low":"12","high":"14","lowClosed":true,"highClosed":true}}'
 
     it "should show Component with referenceRange low and high without units", ->
       laboratoryTestPerformed = new CQL_QDM.LaboratoryTestPerformed({'components': {"type":"COL","values":[{"code":{"code_system":"ICD-10-PCS","code":"0270346"},"result":{"scalar":"2","units":""},"referenceRangeLow":{"scalar":"1","units":""},"referenceRangeHigh":{"scalar":"3","units":""}}]}})
-      expect(JSON.stringify(laboratoryTestPerformed.components())).toEqual '[{"_result":2,"_code":{"code":"0270346","system":"ICD-10-PCS"},"_referenceRange":{"low":"1","high":"3","lowClosed":true,"highClosed":true}}]'
+      expect(JSON.stringify(laboratoryTestPerformed.components())).toEqual '[{"_result":2,"_code":{"code":"0270346","system":"ICD-10-PCS","version":null,"display":null},"_referenceRange":{"low":"1","high":"3","lowClosed":true,"highClosed":true}}]'
 
     it "should show Component with referenceRange low only", ->
       laboratoryTestPerformed = new CQL_QDM.LaboratoryTestPerformed({'components': {"type":"COL","values":[{"code":{"code_system":"ICD-10-PCS","code":"0270346"},"result":{"scalar":"2","units":""},"referenceRangeLow":{"scalar":"1","units":""},"referenceRangeHigh":{"scalar":"","units":""}}]}})
-      expect(JSON.stringify(laboratoryTestPerformed.components())).toEqual '[{"_result":2,"_code":{"code":"0270346","system":"ICD-10-PCS"},"_referenceRange":{"low":"1","lowClosed":true,"highClosed":true}}]'
+      expect(JSON.stringify(laboratoryTestPerformed.components())).toEqual '[{"_result":2,"_code":{"code":"0270346","system":"ICD-10-PCS","version":null,"display":null},"_referenceRange":{"low":"1","lowClosed":true,"highClosed":true}}]'
 
     it "should show Component with referenceRange high only", ->
       laboratoryTestPerformed = new CQL_QDM.LaboratoryTestPerformed({'components': {"type":"COL","values":[{"code":{"code_system":"ICD-10-PCS","code":"0270346"},"result":{"scalar":"2","units":""},"referenceRangeLow":{"scalar":"","units":""},"referenceRangeHigh":{"scalar":"3","units":""}}]}})
-      expect(JSON.stringify(laboratoryTestPerformed.components())).toEqual '[{"_result":2,"_code":{"code":"0270346","system":"ICD-10-PCS"},"_referenceRange":{"high":"3","lowClosed":true,"highClosed":true}}]'
+      expect(JSON.stringify(laboratoryTestPerformed.components())).toEqual '[{"_result":2,"_code":{"code":"0270346","system":"ICD-10-PCS","version":null,"display":null},"_referenceRange":{"high":"3","lowClosed":true,"highClosed":true}}]'
 
     it "should show null relevantPeriod", ->
       laboratoryTestPerformed = new CQL_QDM.LaboratoryTestPerformed({})
@@ -165,7 +165,7 @@ describe "Laboratory Test", ->
 
     it "should return a result", ->
       laboratoryTestPerformed = new CQL_QDM.LaboratoryTestPerformed(laboratoryTestPerformedEntry)
-      expect(JSON.stringify(laboratoryTestPerformed.result())).toEqual('{"code":"2135-2","system":"CDC Race"}')
+      expect(JSON.stringify(laboratoryTestPerformed.result())).toEqual('{"code":"2135-2","system":"CDC Race","version":null,"display":"Ethnicity"}')
 
   describe "Order", ->
     laboratoryTestOrderEntry = {
@@ -216,11 +216,11 @@ describe "Laboratory Test", ->
 
     it "should return a negation rationale code", ->
       laboratoryTestOrdered = new CQL_QDM.LaboratoryTestOrder(laboratoryTestOrderEntry)
-      expect(laboratoryTestOrdered.negationRationale()).toEqual new cql.Code('1000001', 'RxNorm')
+      expect(laboratoryTestOrdered.negationRationale()).toEqual new cql.Code('1000001', 'RxNorm', null, null)
 
     it "should return a reason code", ->
       laboratoryTestOrdered = new CQL_QDM.LaboratoryTestOrder(laboratoryTestOrderEntry)
-      expect(laboratoryTestOrdered.reason()).toEqual new cql.Code('183452005', 'SNOMED-CT')
+      expect(laboratoryTestOrdered.reason()).toEqual new cql.Code('183452005', 'SNOMED-CT', null, 'Encounter Inpatient')
 
     it "should return null if no reason is specified", ->
       laboratoryTestOrdered = new CQL_QDM.LaboratoryTestOrder({})
@@ -262,7 +262,7 @@ describe "Laboratory Test", ->
 
     it "should return a method Code", ->
        laboratoryTestRecommended = new CQL_QDM.LaboratoryTestRecommended(laboratoryTestRecommendedEntry)
-       expect(laboratoryTestRecommended.method()).toEqual new cql.Code('200031', 'RxNorm')
+       expect(laboratoryTestRecommended.method()).toEqual new cql.Code('200031', 'RxNorm', null, 'Beta Blocker Therapy for LVSD')
 
     it "should return null if no method is specified", ->
        laboratoryTestRecommended = new CQL_QDM.LaboratoryTestRecommended({})
@@ -270,7 +270,7 @@ describe "Laboratory Test", ->
 
     it "should return a reason code", ->
       laboratoryTestRecommended = new CQL_QDM.LaboratoryTestRecommended(laboratoryTestRecommendedEntry)
-      expect(laboratoryTestRecommended.reason()).toEqual new cql.Code('2135-2', 'CDC Race')
+      expect(laboratoryTestRecommended.reason()).toEqual new cql.Code('2135-2', 'CDC Race', null, 'Ethnicity')
 
     it "should return null if no reason is specified", ->
       laboratoryTestRecommended = new CQL_QDM.LaboratoryTestRecommended({})

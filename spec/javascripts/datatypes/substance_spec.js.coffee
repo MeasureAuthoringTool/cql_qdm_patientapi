@@ -59,7 +59,7 @@ describe "Substance", ->
 
     it "should return a frequency code", ->
       substanceAdministered = new CQL_QDM.SubstanceAdministered(substanceAdministeredEntry)
-      expect(substanceAdministered.frequency()).toEqual new cql.Code('1002293','RxNorm', undefined, 'Common substances for allergy and intolerance documentation')
+      expect(substanceAdministered.frequency()).toEqual new cql.Code('1002293','RxNorm', null, 'Common substances for allergy and intolerance documentation')
 
     it "should return a frequency code", ->
       substanceAdministered = new CQL_QDM.SubstanceAdministered({})
@@ -67,7 +67,7 @@ describe "Substance", ->
 
     it "should return a negationRationale code", ->
       substanceAdministered = new CQL_QDM.SubstanceAdministered(substanceAdministeredEntry)
-      expect(substanceAdministered.negationRationale()).toEqual new cql.Code('1002-5','CDC Race')
+      expect(substanceAdministered.negationRationale()).toEqual new cql.Code('1002-5','CDC Race', null, null)
 
     it "should return a negationRationale code", ->
       substanceAdministered = new CQL_QDM.SubstanceAdministered({})
@@ -83,7 +83,7 @@ describe "Substance", ->
 
     it "should return a route code", ->
       substanceAdministered = new CQL_QDM.SubstanceAdministered(substanceAdministeredEntry)
-      expect(substanceAdministered.route()).toEqual new cql.Code('995218', 'RxNorm')
+      expect(substanceAdministered.route()).toEqual new cql.Code('995218', 'RxNorm', null, 'Hydroxyzine')
 
     it "should return null if no route is specified", ->
       substanceAdministered = new CQL_QDM.SubstanceAdministered({})
@@ -107,7 +107,7 @@ describe "Substance", ->
 
     it "should return a coded frequency", ->
       substanceAdministered = new CQL_QDM.SubstanceAdministered({'administrationTiming': {code: '1234', code_system: 'SNOMED-CT', version: '', title: 'Test Code'}})
-      expect(substanceAdministered.frequency()).toEqual new cql.Code('1234', 'SNOMED-CT', '', 'Test Code')
+      expect(substanceAdministered.frequency()).toEqual new cql.Code('1234', 'SNOMED-CT', null, 'Test Code')
 
     it "should return null when field is not on constructing entry", ->
       substanceAdministered = new CQL_QDM.SubstanceAdministered({'start_time': '08/31/2017 1:00 AM', 'end_time': '08/31/2017 2:00 AM'})
@@ -175,7 +175,7 @@ describe "Substance", ->
 
     it "should return a frequency code", ->
       substanceOrder = new CQL_QDM.SubstanceOrder(substanceOrderEntry)
-      expect(substanceOrder.frequency()).toEqual new cql.Code('1010600','RxNorm', undefined, 'Opioid Pain Medications')
+      expect(substanceOrder.frequency()).toEqual new cql.Code('1010600','RxNorm', null, 'Opioid Pain Medications')
 
     it "should return a frequency code", ->
       substanceOrder = new CQL_QDM.SubstanceOrder({})
@@ -183,7 +183,7 @@ describe "Substance", ->
 
     it "should return a method Code", ->
       substanceOrder = new CQL_QDM.SubstanceOrder(substanceOrderEntry)
-      expect(substanceOrder.method()).toEqual new cql.Code('29463-7', 'LOINC')
+      expect(substanceOrder.method()).toEqual new cql.Code('29463-7', 'LOINC', null, 'Body Weight')
 
     it "should return null if no method is specified", ->
        substanceOrder = new CQL_QDM.SubstanceOrder({})
@@ -191,7 +191,7 @@ describe "Substance", ->
 
     it "should return a negationRationale code", ->
       substanceOrder = new CQL_QDM.SubstanceOrder(substanceOrderEntry)
-      expect(substanceOrder.negationRationale()).toEqual new cql.Code('29463-7','LOINC')
+      expect(substanceOrder.negationRationale()).toEqual new cql.Code('29463-7','LOINC', null, null)
 
     it "should return a negationRationale code", ->
       substanceOrder = new CQL_QDM.SubstanceOrder({})
@@ -199,7 +199,7 @@ describe "Substance", ->
 
     it "should return a reason code", ->
       substanceOrder = new CQL_QDM.SubstanceOrder(substanceOrderEntry)
-      expect(substanceOrder.reason()).toEqual new cql.Code('1010600', 'RxNorm')
+      expect(substanceOrder.reason()).toEqual new cql.Code('1010600', 'RxNorm', null, 'Opioid Pain Medications')
 
     it "should return null if no reason is specified", ->
       substanceOrder = new CQL_QDM.SubstanceOrder({})
@@ -215,7 +215,7 @@ describe "Substance", ->
 
     it "should return a route code", ->
       substanceOrder = new CQL_QDM.SubstanceOrder(substanceOrderEntry)
-      expect(substanceOrder.route()).toEqual new cql.Code('1002293', 'RxNorm')
+      expect(substanceOrder.route()).toEqual new cql.Code('1002293', 'RxNorm', null, 'Common substances for allergy and intolerance documentation')
 
     it "should return null if no route is specified", ->
       substanceOrder = new CQL_QDM.SubstanceOrder({})
@@ -235,7 +235,7 @@ describe "Substance", ->
 
     it "should return a coded frequency", ->
       substanceOrder = new CQL_QDM.SubstanceOrder({'administrationTiming': {code: '1234', code_system: 'SNOMED-CT', version: '', title: 'Test Code'}})
-      expect(substanceOrder.frequency()).toEqual new cql.Code('1234', 'SNOMED-CT', '', 'Test Code')
+      expect(substanceOrder.frequency()).toEqual new cql.Code('1234', 'SNOMED-CT', null, 'Test Code')
 
     it "should return a dosage quantity", ->
       substanceOrder = new CQL_QDM.SubstanceOrder({'dose': {units: 'g', scalar: 10}})
@@ -308,7 +308,7 @@ describe "Substance", ->
 
     it "should return a frequency code", ->
       substanceRecommended = new CQL_QDM.SubstanceRecommended(substanceRecommendedEntry)
-      expect(substanceRecommended.frequency()).toEqual new cql.Code('10725009','SNOMED-CT', undefined, 'Essential Hypertension')
+      expect(substanceRecommended.frequency()).toEqual new cql.Code('10725009','SNOMED-CT', null, 'Essential Hypertension')
 
     it "should return a frequency code", ->
       substanceRecommended = new CQL_QDM.SubstanceRecommended({})
@@ -316,7 +316,7 @@ describe "Substance", ->
 
     it "should return a method Code", ->
        substanceRecommended = new CQL_QDM.SubstanceRecommended(substanceRecommendedEntry)
-       expect(substanceRecommended.method()).toEqual new cql.Code('29463-7', 'LOINC')
+       expect(substanceRecommended.method()).toEqual new cql.Code('29463-7', 'LOINC', null, 'Body Weight')
 
     it "should return null if no method is specified", ->
        substanceRecommended = new CQL_QDM.SubstanceRecommended({})
@@ -324,7 +324,7 @@ describe "Substance", ->
 
     it "should return a negationRationale code", ->
       substanceRecommended = new CQL_QDM.SubstanceRecommended(substanceRecommendedEntry)
-      expect(substanceRecommended.negationRationale()).toEqual new cql.Code('1002-5','CDC Race')
+      expect(substanceRecommended.negationRationale()).toEqual new cql.Code('1002-5','CDC Race', null, null)
 
     it "should return a negationRationale code", ->
       substanceRecommended = new CQL_QDM.SubstanceRecommended({})
@@ -332,7 +332,7 @@ describe "Substance", ->
 
     it "should return a reason code", ->
       substanceRecommended = new CQL_QDM.SubstanceRecommended(substanceRecommendedEntry)
-      expect(substanceRecommended.reason()).toEqual new cql.Code('995218', 'RxNorm')
+      expect(substanceRecommended.reason()).toEqual new cql.Code('995218', 'RxNorm', null, 'Hydroxyzine')
 
     it "should return null if no reason is specified", ->
       substanceRecommended = new CQL_QDM.SubstanceRecommended({})
@@ -348,7 +348,7 @@ describe "Substance", ->
 
     it "should return a route code", ->
       substanceRecommended = new CQL_QDM.SubstanceRecommended(substanceRecommendedEntry)
-      expect(substanceRecommended.route()).toEqual new cql.Code('10725009', 'SNOMED-CT')
+      expect(substanceRecommended.route()).toEqual new cql.Code('10725009', 'SNOMED-CT', null, 'Essential Hypertension')
 
     it "should return null if no route is specified", ->
       substanceRecommended = new CQL_QDM.SubstanceRecommended({})
@@ -368,7 +368,7 @@ describe "Substance", ->
 
     it "should return a coded frequency", ->
       substanceRecommended = new CQL_QDM.SubstanceRecommended({'administrationTiming': {code: '1234', code_system: 'SNOMED-CT', version: '', title: 'Test Code'}})
-      expect(substanceRecommended.frequency()).toEqual new cql.Code('1234', 'SNOMED-CT', '', 'Test Code')
+      expect(substanceRecommended.frequency()).toEqual new cql.Code('1234', 'SNOMED-CT', null, 'Test Code')
 
     it "should return a dosage quantity", ->
       substanceRecommended = new CQL_QDM.SubstanceRecommended({'dose': {units: 'g', scalar: 10}})

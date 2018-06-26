@@ -51,17 +51,21 @@ class CQL_QDM.Helpers
       else if input.codes?
         code_system = Object.keys(input.codes)?[0]
         code = input.codes[code_system]?[0]
-        new cql.Code(code, code_system)
+        display = input.description
+        new cql.Code(code, code_system, null, display || null)
       else if input.code?
         code_system = input.code.code_system
         code = input.code.code
-        new cql.Code(code, code_system)
+        display = input.description
+        new cql.Code(code, code_system, null, display || null)
       # Check that the scalar portion is a number and the units are a non-zero length string.
       else if (input.scalar?.match(/^[-+]?[0-9]*\.?[0-9]+$/) != null)
         if input.units.length > 0
           new cql.Quantity({unit: input.units , value: parseFloat(input.scalar)})
         else
           parseFloat(input.scalar)
+      else if input.scalar?
+          input.scalar
     else
       null
 
@@ -73,7 +77,7 @@ class CQL_QDM.Helpers
     if relatedToInput?
       for relatedTo in relatedToInput
         if relatedTo?
-          relatedToArray.push new CQL_QDM.Id(relatedTo.referenced_id)
+          relatedToArray.push new CQL_QDM.Id(relatedTo.referenced_id, null)
     relatedToArray
 
   ###
@@ -95,7 +99,7 @@ class CQL_QDM.Helpers
     if diagnosesInput?
       for diagnosis in diagnosesInput.values
         if diagnosis?
-          diagnoses.push new cql.Code(diagnosis.code, diagnosis.code_system)
+          diagnoses.push new cql.Code(diagnosis.code, diagnosis.code_system, null, diagnosis.title || null)
     if principalDiagnosisInput?
-      diagnoses.push new cql.Code(principalDiagnosisInput.code, principalDiagnosisInput.code_system)
+      diagnoses.push new cql.Code(principalDiagnosisInput.code, principalDiagnosisInput.code_system, null, principalDiagnosisInput.title || null)
     diagnoses

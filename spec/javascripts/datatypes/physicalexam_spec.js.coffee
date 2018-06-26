@@ -15,4 +15,4 @@ describe "Physical Exam", ->
     it "should return a result", ->
       physicalExamPerformed = new CQL_QDM.PhysicalExamPerformed({'values': [
           {_id: "5aabbc4692d04e71f32f7619", codes: { 'SNOMED-CT': ["164059009"]}, description: "Pass Or Refer"}]})
-      expect(JSON.stringify(physicalExamPerformed.result())).toEqual('{"code":"164059009","system":"SNOMED-CT"}')
+      expect(JSON.stringify(physicalExamPerformed.result())).toEqual('{"code":"164059009","system":"SNOMED-CT","version":null,"display":"Pass Or Refer"}')
