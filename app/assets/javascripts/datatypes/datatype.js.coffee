@@ -72,8 +72,12 @@ class CQL_QDM.QDMDatatype
     # Grab start and end time, format for proper display
     startTime = if @entry?.start_time then "START: #{moment.utc(@entry.start_time, 'X').format('MM/DD/YYYY h:mm A')}\n" else ""
     endTime = if @entry?.end_time then "STOP: #{moment.utc(@entry.end_time, 'X').format('MM/DD/YYYY h:mm A')}\n" else ""
-    # Get code if this datatype has one
-    code = @code() if @_codes
+    # If it is a patient characteristic, use getCode() instead of code()
+    if /PatientCharacteristic/.test(@constructor.name)
+      code = @getCode()
+    else
+      # Get code if this datatype has any
+      code = @code() if @_codes
     codeDisplay = if code then "CODE: #{code['system']} #{code['code']}" else ""
     # Return human readable representation of this datatype
     "#{description}#{startTime}#{endTime}#{codeDisplay}".replace /\n$/, ''
