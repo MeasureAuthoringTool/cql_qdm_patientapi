@@ -25,6 +25,7 @@ class CQL_QDM.AssessmentPerformed extends CQL_QDM.QDMDatatype
       @_result = @entry.values?[0]
     @_relatedTo = @entry.references
     @_components = @entry.components
+    delete @entry.end_time
 
   ###
   @returns {Date}
@@ -115,6 +116,7 @@ class CQL_QDM.AssessmentRecommended extends CQL_QDM.QDMDatatype
     @_reason = @entry.reason
     if @entry.values? && @entry.values.length > 0
       @_result = @entry.values?[0]
+     delete @entry.end_time
 
   ###
   @returns {Date}

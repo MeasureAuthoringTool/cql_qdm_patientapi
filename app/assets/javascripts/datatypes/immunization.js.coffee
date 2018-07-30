@@ -22,6 +22,7 @@ class CQL_QDM.ImmunizationAdministered extends CQL_QDM.QDMDatatype
     @_reason = @entry.reason
     @_route = @entry.route
     @_supply = @entry.supply
+    delete @entry.end_time
 
   ###
   @returns {Date}
@@ -102,6 +103,7 @@ class CQL_QDM.ImmunizationOrder extends CQL_QDM.QDMDatatype
     @_reason = @entry.reason
     @_route = @entry.route
     @_supply = @entry.supply
+    delete @entry.end_time
 
   ###
   @returns {Date}

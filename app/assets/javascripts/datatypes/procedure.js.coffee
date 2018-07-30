@@ -21,6 +21,7 @@ class CQL_QDM.ProcedureOrder extends CQL_QDM.QDMDatatype
     @_negationRationale = @entry.negationReason
     @_ordinality = @entry.ordinality
     @_reason = @entry.reason
+    delete @entry.end_time
 
   ###
   @returns {Code}
@@ -234,6 +235,7 @@ class CQL_QDM.ProcedureRecommended extends CQL_QDM.QDMDatatype
     @_ordinality = @entry.ordinality
     @_reason = @entry.reason
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
+    delete @entry.end_time
 
   ###
   @returns {Code}

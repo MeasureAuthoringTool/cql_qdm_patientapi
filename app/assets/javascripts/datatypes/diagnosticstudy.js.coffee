@@ -25,6 +25,7 @@ class CQL_QDM.DiagnosticStudyOrder extends CQL_QDM.QDMDatatype
     @_method = @entry.method
     @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
+    delete @entry.end_time
 
   ###
   @returns {Date}
@@ -189,6 +190,7 @@ class CQL_QDM.DiagnosticStudyRecommended extends CQL_QDM.QDMDatatype
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_method = @entry.method
     @_negationRationale = @entry.negationReason
+    delete @entry.end_time
 
   ###
   @returns {Date}

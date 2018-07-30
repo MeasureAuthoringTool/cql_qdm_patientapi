@@ -115,6 +115,7 @@ class CQL_QDM.SubstanceOrder extends CQL_QDM.QDMDatatype
     @_refills = @entry.refills
     @_route = @entry.route
     @_supply = @entry.supply
+    delete @entry.end_time
 
   ###
   @returns {Date}
@@ -218,6 +219,7 @@ class CQL_QDM.SubstanceRecommended extends CQL_QDM.QDMDatatype
     @_refills = @entry.refills
     @_route = @entry.route
     @_supply = @entry.supply
+    delete @entry.end_time
 
   ###
   @returns {Date}

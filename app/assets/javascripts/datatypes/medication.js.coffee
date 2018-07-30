@@ -200,6 +200,7 @@ class CQL_QDM.MedicationDischarge extends CQL_QDM.QDMDatatype
     @_refills = @entry.refills
     @_route = @entry.route
     @_supply = @entry.supply
+    delete @entry.end_time
 
   ###
   @returns {Date}
