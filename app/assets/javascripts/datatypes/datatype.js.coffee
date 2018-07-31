@@ -75,9 +75,9 @@ class CQL_QDM.QDMDatatype
     # If it is a patient characteristic, use getCode() instead of code()
     if /PatientCharacteristic/.test(@constructor.name)
       code = @getCode()
-    else
+    else if @_codes
       # Get code if this datatype has any
-      code = @code() if @_codes
+      code = @code()
     codeDisplay = if code then "CODE: #{code['system']} #{code['code']}" else ""
     # Return human readable representation of this datatype
     "#{description}#{startTime}#{endTime}#{codeDisplay}".replace /\n$/, ''
