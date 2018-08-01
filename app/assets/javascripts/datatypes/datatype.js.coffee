@@ -25,6 +25,7 @@ class CQL_QDM.QDMDatatype
   ###
   @returns {Array}
   ###
+  # TODO: This should be changed to getCodes, but it will involve changing the cql-execution engine.
   getCode: ->
     allCodes = []
     for system, codes of @_codes
@@ -72,8 +73,13 @@ class CQL_QDM.QDMDatatype
     # Grab start and end time, format for proper display
     startTime = if @entry?.start_time then "START: #{moment.utc(@entry.start_time, 'X').format('MM/DD/YYYY h:mm A')}\n" else ""
     endTime = if @entry?.end_time then "STOP: #{moment.utc(@entry.end_time, 'X').format('MM/DD/YYYY h:mm A')}\n" else ""
-    # Get code if this datatype has one
-    code = @code() if @_codes
+    # TODO: Refactor getCode()/code() so that this special logic is not necessary.
+    # If it is a patient characteristic (other than payer), use getCode() instead of code()
+    if /PatientCharacteristic/.test(this.constructor.name) and this.constructor.name != 'PatientCharacteristicPayer'
+      code = @getCode()
+    else if @_codes
+      # Get code if this datatype has any
+      code = @code()
     codeDisplay = if code then "CODE: #{code['system']} #{code['code']}" else ""
     # Return human readable representation of this datatype
     "#{description}#{startTime}#{endTime}#{codeDisplay}".replace /\n$/, ''

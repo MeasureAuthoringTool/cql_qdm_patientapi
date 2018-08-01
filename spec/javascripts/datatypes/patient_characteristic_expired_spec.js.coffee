@@ -33,3 +33,8 @@ describe "Patient Characteristic Expired", ->
     emptyMockThorax = new ThoraxModelMock({})
     patientCharacteristicExpired = new CQL_QDM.PatientCharacteristicExpired(emptyMockThorax)
     expect(patientCharacteristicExpired.getCode()).toBeNull()
+
+  it "Should have CODE in toString()", ->
+    populatedMockThorax = new ThoraxModelMock({'deathdate': '08/31/2017 1:00 AM'})
+    patientCharacteristicExpired = new CQL_QDM.PatientCharacteristicExpired(populatedMockThorax)
+    expect(patientCharacteristicExpired.toString()).toEqual 'PatientCharacteristicExpired\nCODE: SNOMED-CT 419099009'

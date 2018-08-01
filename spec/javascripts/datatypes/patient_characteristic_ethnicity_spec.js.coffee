@@ -19,3 +19,8 @@ describe "Patient Characteristic Ethnicity", ->
     populatedMockThorax = new ThoraxModelMock({'ethnicity': '2186-5'})
     patientCharacteristicEthnicity = new CQL_QDM.PatientCharacteristicEthnicity(populatedMockThorax)
     expect(patientCharacteristicEthnicity.getCode()).toEqual new cql.Code('2186-5', 'CDC Race')
+
+  it "should show code in toString", ->
+    populatedMockThorax = new ThoraxModelMock({'ethnicity': '2186-5'})
+    patientCharacteristicEthnicity = new CQL_QDM.PatientCharacteristicEthnicity(populatedMockThorax)
+    expect(patientCharacteristicEthnicity.toString()).toEqual 'PatientCharacteristicEthnicity\nCODE: CDC Race 2186-5'
