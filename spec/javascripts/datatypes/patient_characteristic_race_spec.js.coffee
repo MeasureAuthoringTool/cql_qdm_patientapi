@@ -14,8 +14,13 @@ describe "Patient Characteristic Race", ->
     emptyMockThorax = new ThoraxModelMock({})
     patientCharacteristicRace = new CQL_QDM.PatientCharacteristicRace(emptyMockThorax)
     expect(patientCharacteristicRace.getCode()).toBeNull()
-  
+
   it "should show code", ->
     populatedMockThorax = new ThoraxModelMock({'race': '2106-3'})
     patientCharacteristicRace = new CQL_QDM.PatientCharacteristicRace(populatedMockThorax)
     expect(patientCharacteristicRace.getCode()).toEqual new cql.Code('2106-3', 'CDC Race')
+
+  it 'should have CODE in toString', ->
+    populatedMockThorax = new ThoraxModelMock({'race': '2106-3'})
+    patientCharacteristicRace = new CQL_QDM.PatientCharacteristicRace(populatedMockThorax)
+    expect(patientCharacteristicRace.toString()).toEqual 'PatientCharacteristicRace\nCODE: CDC Race 2106-3'
