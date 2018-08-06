@@ -23,6 +23,7 @@ class CQL_QDM.PhysicalExamOrder extends CQL_QDM.QDMDatatype
     @_method = @entry.method
     @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
+    delete @entry.end_time
 
   ###
   @returns {Code}
@@ -179,6 +180,7 @@ class CQL_QDM.PhysicalExamRecommended extends CQL_QDM.QDMDatatype
     @_method = @entry.method
     @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
+    delete @entry.end_time
 
   ###
   @returns {Code}

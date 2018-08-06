@@ -1251,6 +1251,19 @@
       }
     });
 
+    Interval.prototype.copy = function() {
+      var newHigh, newLow;
+      newLow = this.low;
+      newHigh = this.high;
+      if (typeof this.low.copy === 'function') {
+        newLow = this.low.copy();
+      }
+      if (typeof this.high.copy === 'function') {
+        newHigh = this.high.copy();
+      }
+      return new Interval(newLow, newHigh, this.lowClosed, this.highClosed);
+    };
+
     Interval.prototype.contains = function(item, precision) {
       var closed;
       if (item instanceof Interval) {
@@ -1698,6 +1711,19 @@
         ref = [this.high, this.low], this.low = ref[0], this.high = ref[1];
       }
     }
+
+    Uncertainty.prototype.copy = function() {
+      var newHigh, newLow;
+      newLow = this.low;
+      newHigh = this.high;
+      if (typeof this.low.copy === 'function') {
+        newLow = this.low.copy();
+      }
+      if (typeof this.high.copy === 'function') {
+        newHigh = this.high.copy();
+      }
+      return new Uncertainty(newLow, newHigh);
+    };
 
     Uncertainty.prototype.isPoint = function() {
       var gte, lte;
@@ -4286,6 +4312,12 @@
         collapsedIntervals = [];
         a = intervals.shift();
         b = intervals.shift();
+        if (typeof a.copy === 'function') {
+          a = a.copy();
+        }
+        if (typeof b.copy === 'function') {
+          b = b.copy();
+        }
         while (b) {
           if (typeof b.low.sameOrBefore === 'function') {
             if (b.low.sameOrBefore(a.high)) {

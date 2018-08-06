@@ -20,6 +20,7 @@ class CQL_QDM.FamilyHistory extends CQL_QDM.QDMDatatype
     super @entry
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_relationship = @entry.relationshipToPatient
+    delete @entry.end_time
 
   ###
   @returns {Date}

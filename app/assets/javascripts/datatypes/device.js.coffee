@@ -97,6 +97,7 @@ class CQL_QDM.DeviceOrder extends CQL_QDM.QDMDatatype
     @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
+    delete @entry.end_time
 
   ###
   @returns {Code}
@@ -137,6 +138,7 @@ class CQL_QDM.DeviceRecommended extends CQL_QDM.QDMDatatype
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
+    delete @entry.end_time
 
   ###
   @returns {Date}

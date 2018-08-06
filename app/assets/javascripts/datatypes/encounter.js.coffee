@@ -19,6 +19,7 @@ class CQL_QDM.EncounterOrder extends CQL_QDM.QDMDatatype
     @_facilityLocation = @entry.facility
     @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
+    delete @entry.end_time
 
   ###
   @returns {Date}
@@ -178,6 +179,7 @@ class CQL_QDM.EncounterRecommended extends CQL_QDM.QDMDatatype
     @_facilityLocation = @entry.facility
     @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
+    delete @entry.end_time
 
   ###
   @returns {Date}

@@ -17,6 +17,7 @@ class CQL_QDM.PatientCareExperience extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
+    delete @entry.end_time
 
   ###
   @returns {Date}
