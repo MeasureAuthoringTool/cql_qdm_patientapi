@@ -116,7 +116,7 @@ class CQL_QDM.AssessmentRecommended extends CQL_QDM.QDMDatatype
     @_reason = @entry.reason
     if @entry.values? && @entry.values.length > 0
       @_result = @entry.values?[0]
-     delete @entry.end_time
+    delete @entry.end_time
 
   ###
   @returns {Date}
