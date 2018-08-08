@@ -19,6 +19,7 @@ class CQL_QDM.InterventionOrder extends CQL_QDM.QDMDatatype
     @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
+    delete @entry.end_time
 
   ###
   @returns {Date}
@@ -31,7 +32,7 @@ class CQL_QDM.InterventionOrder extends CQL_QDM.QDMDatatype
   ###
   negationRationale: ->
     if @_negationRationale?
-      new cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+      new cql.Code(@_negationRationale.code, @_negationRationale.code_system, null, @_negationRationale.title || null)
     else
       null
 
@@ -40,7 +41,7 @@ class CQL_QDM.InterventionOrder extends CQL_QDM.QDMDatatype
   ###
   reason: ->
     if @_reason?
-      new cql.Code(@_reason.code, @_reason.code_system)
+      new cql.Code(@_reason.code, @_reason.code_system, null, @_reason.title || null)
     else
       null
 
@@ -81,7 +82,7 @@ class CQL_QDM.InterventionPerformed extends CQL_QDM.QDMDatatype
   ###
   negationRationale: ->
     if @_negationRationale?
-      new cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+      new cql.Code(@_negationRationale.code, @_negationRationale.code_system, null, @_negationRationale.title || null)
     else
       null
 
@@ -90,7 +91,7 @@ class CQL_QDM.InterventionPerformed extends CQL_QDM.QDMDatatype
   ###
   reason: ->
     if @_reason?
-      new cql.Code(@_reason.code, @_reason.code_system)
+      new cql.Code(@_reason.code, @_reason.code_system, null, @_reason.title || null)
     else
       null
 
@@ -119,7 +120,7 @@ class CQL_QDM.InterventionPerformed extends CQL_QDM.QDMDatatype
   ###
   status: ->
     if @_status?
-      new cql.Code(@_status.code, @_status.code_system)
+      new cql.Code(@_status.code, @_status.code_system, null, @_status.title || null)
     else
       null
 
@@ -138,6 +139,7 @@ class CQL_QDM.InterventionRecommended extends CQL_QDM.QDMDatatype
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
+    delete @entry.end_time
 
   ###
   @returns {Date}
@@ -150,7 +152,7 @@ class CQL_QDM.InterventionRecommended extends CQL_QDM.QDMDatatype
   ###
   negationRationale: ->
     if @_negationRationale?
-      new cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+      new cql.Code(@_negationRationale.code, @_negationRationale.code_system, null, @_negationRationale.title || null)
     else
       null
 
@@ -159,6 +161,6 @@ class CQL_QDM.InterventionRecommended extends CQL_QDM.QDMDatatype
   ###
   reason: ->
     if @_reason?
-      new cql.Code(@_reason.code, @_reason.code_system)
+      new cql.Code(@_reason.code, @_reason.code_system, null, @_reason.title || null)
     else
       null

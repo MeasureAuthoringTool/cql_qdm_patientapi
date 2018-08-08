@@ -71,7 +71,7 @@ describe "Medication", ->
 
     it "should return a coded frequency", ->
       medicationDispensed = new CQL_QDM.MedicationDispensed(medicationDispensedEntry)
-      expect(medicationDispensed.frequency()).toEqual new cql.Code('29463-7', 'LOINC')
+      expect(medicationDispensed.frequency()).toEqual new cql.Code('29463-7', 'LOINC', null, 'Body Weight')
 
     it "should return a dosage quantity", ->
       medicationDispensed = new CQL_QDM.MedicationDispensed(medicationDispensedEntry)
@@ -79,11 +79,11 @@ describe "Medication", ->
 
     it "should return a negation rationale code", ->
       medicationDispensed = new CQL_QDM.MedicationDispensed(medicationDispensedEntry)
-      expect(medicationDispensed.negationRationale()).toEqual new cql.Code('10725009', 'SNOMED-CT')
+      expect(medicationDispensed.negationRationale()).toEqual new cql.Code('10725009', 'SNOMED-CT', null, null)
 
     it "should return a route code", ->
       medicationDispensed = new CQL_QDM.MedicationDispensed(medicationDispensedEntry)
-      expect(medicationDispensed.route()).toEqual new cql.Code('29463-7', 'LOINC')
+      expect(medicationDispensed.route()).toEqual new cql.Code('29463-7', 'LOINC', null, 'Body Weight')
 
     it "should return a supply quantity", ->
       medicationDispensed = new CQL_QDM.MedicationDispensed(medicationDispensedEntry)
@@ -169,7 +169,7 @@ describe "Medication", ->
 
     it "should return a coded frequency", ->
       medicationOrdered = new CQL_QDM.MedicationOrder(medicationOrderEntry)
-      expect(medicationOrdered.frequency()).toEqual new cql.Code('1002293', 'RxNorm')
+      expect(medicationOrdered.frequency()).toEqual new cql.Code('1002293', 'RxNorm', null, 'Common substances for allergy and intolerance documentation')
 
     it "should return a dosage quantity", ->
       medicationOrdered = new CQL_QDM.MedicationOrder(medicationOrderEntry)
@@ -177,11 +177,11 @@ describe "Medication", ->
 
     it "should return a negation rationale code", ->
       medicationOrdered = new CQL_QDM.MedicationOrder(medicationOrderEntry)
-      expect(medicationOrdered.negationRationale()).toEqual new cql.Code('1002293', 'RxNorm')
+      expect(medicationOrdered.negationRationale()).toEqual new cql.Code('1002293', 'RxNorm', null, null)
 
     it "should return a route code", ->
       medicationOrdered = new CQL_QDM.MedicationOrder(medicationOrderEntry)
-      expect(medicationOrdered.route()).toEqual new cql.Code('29463-7', 'LOINC')
+      expect(medicationOrdered.route()).toEqual new cql.Code('29463-7', 'LOINC', null, 'Body Weight')
 
     it "should return a supply quantity", ->
       medicationOrdered = new CQL_QDM.MedicationOrder(medicationOrderEntry)
@@ -249,7 +249,7 @@ describe "Medication", ->
 
     it "should return a coded frequency", ->
       medicationActive = new CQL_QDM.MedicationActive(medicationActiveEntry)
-      expect(medicationActive.frequency()).toEqual new cql.Code('1002293', 'RxNorm')
+      expect(medicationActive.frequency()).toEqual new cql.Code('1002293', 'RxNorm', null, 'Common substances for allergy and intolerance documentation')
 
     it "should return a dosage quantity", ->
       medicationActive = new CQL_QDM.MedicationActive(medicationActiveEntry)
@@ -257,7 +257,7 @@ describe "Medication", ->
 
     it "should return a route code", ->
       medicationActive = new CQL_QDM.MedicationActive(medicationActiveEntry)
-      expect(medicationActive.route()).toEqual new cql.Code('995218', 'RxNorm')
+      expect(medicationActive.route()).toEqual new cql.Code('995218', 'RxNorm', null, 'Hydroxyzine')
 
     it "should return a supply quantity", ->
       medicationActive = new CQL_QDM.MedicationActive(medicationActiveEntry)
@@ -323,7 +323,7 @@ describe "Medication", ->
 
     it "should return a coded frequency", ->
       medicationAdministered = new CQL_QDM.MedicationAdministered(medicationAdministeredEntry)
-      expect(medicationAdministered.frequency()).toEqual new cql.Code('1002293', 'RxNorm')
+      expect(medicationAdministered.frequency()).toEqual new cql.Code('1002293', 'RxNorm', null, 'Common substances for allergy and intolerance documentation')
 
     it "should return a dosage quantity", ->
       medicationAdministered = new CQL_QDM.MedicationAdministered(medicationAdministeredEntry)
@@ -331,15 +331,15 @@ describe "Medication", ->
 
     it "should return a negation rationale code", ->
       medicationAdministered = new CQL_QDM.MedicationAdministered(medicationAdministeredEntry)
-      expect(medicationAdministered.negationRationale()).toEqual new cql.Code('10725009', 'SNOMED-CT')
+      expect(medicationAdministered.negationRationale()).toEqual new cql.Code('10725009', 'SNOMED-CT', null, null)
 
     it "should return a reason code", ->
       medicationAdministered = new CQL_QDM.MedicationAdministered(medicationAdministeredEntry)
-      expect(medicationAdministered.reason()).toEqual new cql.Code('10725009', 'SNOMED-CT')
+      expect(medicationAdministered.reason()).toEqual new cql.Code('10725009', 'SNOMED-CT', null, 'Essential Hypertension')
 
     it "should return a route code", ->
       medicationAdministered = new CQL_QDM.MedicationAdministered(medicationAdministeredEntry)
-      expect(medicationAdministered.route()).toEqual new cql.Code('1002293', 'RxNorm')
+      expect(medicationAdministered.route()).toEqual new cql.Code('1002293', 'RxNorm', null, 'Common substances for allergy and intolerance documentation')
 
     it "should return a supply quantity", ->
       medicationAdministered = new CQL_QDM.MedicationAdministered(medicationAdministeredEntry)
@@ -397,7 +397,7 @@ describe "Medication", ->
     }
     it "should return a coded frequency", ->
       medicationDischarge = new CQL_QDM.MedicationDischarge(medicationDischargeEntry)
-      expect(medicationDischarge.frequency()).toEqual new cql.Code('10725009', 'SNOMED-CT')
+      expect(medicationDischarge.frequency()).toEqual new cql.Code('10725009', 'SNOMED-CT', null, 'Essential Hypertension')
 
     it "should return an integer of the number of refills", ->
       medicationDischarge = new CQL_QDM.MedicationDischarge(medicationDischargeEntry)
@@ -409,11 +409,11 @@ describe "Medication", ->
 
     it "should return a negation rationale code", ->
       medicationDischarge = new CQL_QDM.MedicationDischarge(medicationDischargeEntry)
-      expect(medicationDischarge.negationRationale()).toEqual new cql.Code('29463-7', 'LOINC')
+      expect(medicationDischarge.negationRationale()).toEqual new cql.Code('29463-7', 'LOINC', null, null)
 
     it "should return a route code", ->
       medicationDischarge = new CQL_QDM.MedicationDischarge(medicationDischargeEntry)
-      expect(medicationDischarge.route()).toEqual new cql.Code('995218', 'RxNorm')
+      expect(medicationDischarge.route()).toEqual new cql.Code('995218', 'RxNorm', null, 'Hydroxyzine')
 
     it "should return an integer of the number of refills", ->
       medicationDispensed = new CQL_QDM.MedicationDischarge(medicationDischargeEntry)

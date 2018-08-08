@@ -34,7 +34,7 @@ class CQL_QDM.DeviceApplied extends CQL_QDM.QDMDatatype
   ###
   anatomicalApproachSite: ->
     if @_anatomicalApproachSite?
-      new cql.Code(@_anatomicalApproachSite.code, @_anatomicalApproachSite.code_system)
+      new cql.Code(@_anatomicalApproachSite.code, @_anatomicalApproachSite.code_system, null, @_anatomicalApproachSite.title || null)
     else
       null
 
@@ -43,7 +43,7 @@ class CQL_QDM.DeviceApplied extends CQL_QDM.QDMDatatype
   ###
   anatomicalLocationSite: ->
     if @_anatomicalLocationSite?
-      new cql.Code(@_anatomicalLocationSite.code, @_anatomicalLocationSite.code_system)
+      new cql.Code(@_anatomicalLocationSite.code, @_anatomicalLocationSite.code_system, null, @_anatomicalLocationSite.title || null)
     else
       null
 
@@ -59,7 +59,7 @@ class CQL_QDM.DeviceApplied extends CQL_QDM.QDMDatatype
   ###
   negationRationale: ->
     if @_negationRationale?
-      new cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+      new cql.Code(@_negationRationale.code, @_negationRationale.code_system, null, @_negationRationale.title || null)
     else
       null
 
@@ -68,7 +68,7 @@ class CQL_QDM.DeviceApplied extends CQL_QDM.QDMDatatype
   ###
   reason: ->
     if @_reason?
-      new cql.Code(@_reason.code, @_reason.code_system)
+      new cql.Code(@_reason.code, @_reason.code_system, null, @_reason.title || null)
     else
       null
 
@@ -97,13 +97,14 @@ class CQL_QDM.DeviceOrder extends CQL_QDM.QDMDatatype
     @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
+    delete @entry.end_time
 
   ###
   @returns {Code}
   ###
   negationRationale: ->
     if @_negationRationale?
-      new cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+      new cql.Code(@_negationRationale.code, @_negationRationale.code_system, null, @_negationRationale.title || null)
     else
       null
 
@@ -112,7 +113,7 @@ class CQL_QDM.DeviceOrder extends CQL_QDM.QDMDatatype
   ###
   reason: ->
     if @_reason?
-      new cql.Code(@_reason.code, @_reason.code_system)
+      new cql.Code(@_reason.code, @_reason.code_system, null, @_reason.title || null)
     else
       null
 
@@ -137,6 +138,7 @@ class CQL_QDM.DeviceRecommended extends CQL_QDM.QDMDatatype
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
+    delete @entry.end_time
 
   ###
   @returns {Date}
@@ -149,7 +151,7 @@ class CQL_QDM.DeviceRecommended extends CQL_QDM.QDMDatatype
   ###
   negationRationale: ->
     if @_negationRationale?
-      new cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+      new cql.Code(@_negationRationale.code, @_negationRationale.code_system, null, @_negationRationale.title || null)
     else
       null
 
@@ -158,6 +160,6 @@ class CQL_QDM.DeviceRecommended extends CQL_QDM.QDMDatatype
   ###
   reason: ->
     if @_reason?
-      new cql.Code(@_reason.code, @_reason.code_system)
+      new cql.Code(@_reason.code, @_reason.code_system, null, @_reason.title || null)
     else
       null

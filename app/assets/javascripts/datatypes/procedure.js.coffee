@@ -21,13 +21,14 @@ class CQL_QDM.ProcedureOrder extends CQL_QDM.QDMDatatype
     @_negationRationale = @entry.negationReason
     @_ordinality = @entry.ordinality
     @_reason = @entry.reason
+    delete @entry.end_time
 
   ###
   @returns {Code}
   ###
   anatomicalApproachSite: ->
     if @_anatomicalApproachSite?
-      new cql.Code(@_anatomicalApproachSite.code, @_anatomicalApproachSite.code_system)
+      new cql.Code(@_anatomicalApproachSite.code, @_anatomicalApproachSite.code_system, null, @_anatomicalApproachSite.title || null)
     else
       null
 
@@ -36,7 +37,7 @@ class CQL_QDM.ProcedureOrder extends CQL_QDM.QDMDatatype
   ###
   anatomicalLocationSite: ->
     if @_anatomicalLocationSite?
-      new cql.Code(@_anatomicalLocationSite.code, @_anatomicalLocationSite.code_system)
+      new cql.Code(@_anatomicalLocationSite.code, @_anatomicalLocationSite.code_system, null, @_anatomicalLocationSite.title || null)
     else
       null
 
@@ -51,7 +52,7 @@ class CQL_QDM.ProcedureOrder extends CQL_QDM.QDMDatatype
   ###
   method: ->
     if @_method?
-      new cql.Code(@_method.code, @_method.code_system)
+      new cql.Code(@_method.code, @_method.code_system, null, @_method.title || null)
     else
       null
 
@@ -60,7 +61,7 @@ class CQL_QDM.ProcedureOrder extends CQL_QDM.QDMDatatype
   ###
   negationRationale: ->
     if @_negationRationale?
-      new cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+      new cql.Code(@_negationRationale.code, @_negationRationale.code_system, null, @_negationRationale.title || null)
     else
       null
 
@@ -69,7 +70,7 @@ class CQL_QDM.ProcedureOrder extends CQL_QDM.QDMDatatype
   ###
   ordinality: ->
     if @_ordinality?
-      new cql.Code(@_ordinality.code, @_ordinality.code_system)
+      new cql.Code(@_ordinality.code, @_ordinality.code_system, null, @_ordinality.title || null)
     else
       null
 
@@ -78,7 +79,7 @@ class CQL_QDM.ProcedureOrder extends CQL_QDM.QDMDatatype
   ###
   reason: ->
     if @_reason?
-      new cql.Code(@_reason.code, @_reason.code_system)
+      new cql.Code(@_reason.code, @_reason.code_system, null, @_reason.title || null)
     else
       null
 
@@ -118,7 +119,7 @@ class CQL_QDM.ProcedurePerformed extends CQL_QDM.QDMDatatype
   ###
   anatomicalApproachSite: ->
     if @_anatomicalApproachSite?
-      new cql.Code(@_anatomicalApproachSite.code, @_anatomicalApproachSite.code_system)
+      new cql.Code(@_anatomicalApproachSite.code, @_anatomicalApproachSite.code_system, null, @_anatomicalApproachSite.title || null)
     else
       null
 
@@ -127,7 +128,7 @@ class CQL_QDM.ProcedurePerformed extends CQL_QDM.QDMDatatype
   ###
   anatomicalLocationSite: ->
     if @_anatomicalLocationSite?
-      new cql.Code(@_anatomicalLocationSite.code, @_anatomicalLocationSite.code_system)
+      new cql.Code(@_anatomicalLocationSite.code, @_anatomicalLocationSite.code_system, null, @_anatomicalLocationSite.title || null)
     else
       null
 
@@ -149,7 +150,7 @@ class CQL_QDM.ProcedurePerformed extends CQL_QDM.QDMDatatype
   ###
   method: ->
     if @_method?
-      new cql.Code(@_method.code, @_method.code_system)
+      new cql.Code(@_method.code, @_method.code_system, null, @_method.title || null)
     else
       null
 
@@ -158,7 +159,7 @@ class CQL_QDM.ProcedurePerformed extends CQL_QDM.QDMDatatype
   ###
   negationRationale: ->
     if @_negationRationale?
-      new cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+      new cql.Code(@_negationRationale.code, @_negationRationale.code_system, null, @_negationRationale.title || null)
     else
       null
 
@@ -167,7 +168,7 @@ class CQL_QDM.ProcedurePerformed extends CQL_QDM.QDMDatatype
   ###
   ordinality: ->
     if @_ordinality?
-      new cql.Code(@_ordinality.code, @_ordinality.code_system)
+      new cql.Code(@_ordinality.code, @_ordinality.code_system, null, @_ordinality.title || null)
     else
       null
 
@@ -176,7 +177,7 @@ class CQL_QDM.ProcedurePerformed extends CQL_QDM.QDMDatatype
   ###
   reason: ->
     if @_reason?
-      new cql.Code(@_reason.code, @_reason.code_system)
+      new cql.Code(@_reason.code, @_reason.code_system, null, @_reason.title || null)
     else
       null
 
@@ -205,7 +206,7 @@ class CQL_QDM.ProcedurePerformed extends CQL_QDM.QDMDatatype
   ###
   status: ->
     if @_status?
-      new cql.Code(@_status.code, @_status.code_system)
+      new cql.Code(@_status.code, @_status.code_system, null, @_status.title || null)
     else
       null
 
@@ -234,13 +235,14 @@ class CQL_QDM.ProcedureRecommended extends CQL_QDM.QDMDatatype
     @_ordinality = @entry.ordinality
     @_reason = @entry.reason
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
+    delete @entry.end_time
 
   ###
   @returns {Code}
   ###
   anatomicalApproachSite: ->
     if @_anatomicalApproachSite?
-      new cql.Code(@_anatomicalApproachSite.code, @_anatomicalApproachSite.code_system)
+      new cql.Code(@_anatomicalApproachSite.code, @_anatomicalApproachSite.code_system, null, @_anatomicalApproachSite.title || null)
     else
       null
 
@@ -249,7 +251,7 @@ class CQL_QDM.ProcedureRecommended extends CQL_QDM.QDMDatatype
   ###
   anatomicalLocationSite: ->
     if @_anatomicalLocationSite?
-      new cql.Code(@_anatomicalLocationSite.code, @_anatomicalLocationSite.code_system)
+      new cql.Code(@_anatomicalLocationSite.code, @_anatomicalLocationSite.code_system, null, @_anatomicalLocationSite.title || null)
     else
       null
 
@@ -264,7 +266,7 @@ class CQL_QDM.ProcedureRecommended extends CQL_QDM.QDMDatatype
   ###
   method: ->
     if @_method?
-      new cql.Code(@_method.code, @_method.code_system)
+      new cql.Code(@_method.code, @_method.code_system, null, @_method.title || null)
     else
       null
 
@@ -273,7 +275,7 @@ class CQL_QDM.ProcedureRecommended extends CQL_QDM.QDMDatatype
   ###
   negationRationale: ->
     if @_negationRationale?
-      new cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+      new cql.Code(@_negationRationale.code, @_negationRationale.code_system, null, @_negationRationale.title || null)
     else
       null
 
@@ -282,7 +284,7 @@ class CQL_QDM.ProcedureRecommended extends CQL_QDM.QDMDatatype
   ###
   ordinality: ->
     if @_ordinality?
-      new cql.Code(@_ordinality.code, @_ordinality.code_system)
+      new cql.Code(@_ordinality.code, @_ordinality.code_system, null, @_ordinality.title || null)
     else
       null
 
@@ -291,6 +293,6 @@ class CQL_QDM.ProcedureRecommended extends CQL_QDM.QDMDatatype
   ###
   reason: ->
     if @_reason?
-      new cql.Code(@_reason.code, @_reason.code_system)
+      new cql.Code(@_reason.code, @_reason.code_system, null, @_reason.title || null)
     else
       null

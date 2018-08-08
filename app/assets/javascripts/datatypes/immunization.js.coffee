@@ -22,6 +22,7 @@ class CQL_QDM.ImmunizationAdministered extends CQL_QDM.QDMDatatype
     @_reason = @entry.reason
     @_route = @entry.route
     @_supply = @entry.supply
+    delete @entry.end_time
 
   ###
   @returns {Date}
@@ -34,7 +35,10 @@ class CQL_QDM.ImmunizationAdministered extends CQL_QDM.QDMDatatype
   ###
   dosage: ->
     if @_dosage?
-      new cql.Quantity({unit: @_dosage['units'], value: @_dosage['scalar']})
+      if @_dosage['unit']? || @_dosage['value']?
+        new cql.Quantity({unit: @_dosage['unit'], value: @_dosage['value']})
+      else
+        new cql.Quantity({unit: @_dosage['units'], value: @_dosage['scalar']})
     else
       null
 
@@ -43,7 +47,7 @@ class CQL_QDM.ImmunizationAdministered extends CQL_QDM.QDMDatatype
   ###
   negationRationale: ->
     if @_negationRationale?
-      new cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+      new cql.Code(@_negationRationale.code, @_negationRationale.code_system, null, @_negationRationale.title || null)
     else
       null
 
@@ -52,7 +56,7 @@ class CQL_QDM.ImmunizationAdministered extends CQL_QDM.QDMDatatype
   ###
   reason: ->
     if @_reason?
-      new cql.Code(@_reason.code, @_reason.code_system)
+      new cql.Code(@_reason.code, @_reason.code_system, null, @_reason.title || null)
     else
       null
 
@@ -61,7 +65,7 @@ class CQL_QDM.ImmunizationAdministered extends CQL_QDM.QDMDatatype
   ###
   route: ->
     if @_route?
-      new cql.Code(@_route.code, @_route.code_system)
+      new cql.Code(@_route.code, @_route.code_system, null, @_route.title || null)
     else
       null
 
@@ -99,6 +103,7 @@ class CQL_QDM.ImmunizationOrder extends CQL_QDM.QDMDatatype
     @_reason = @entry.reason
     @_route = @entry.route
     @_supply = @entry.supply
+    delete @entry.end_time
 
   ###
   @returns {Date}
@@ -117,7 +122,10 @@ class CQL_QDM.ImmunizationOrder extends CQL_QDM.QDMDatatype
   ###
   dosage: ->
     if @_dosage?
-      new cql.Quantity({unit: @_dosage['units'], value: @_dosage['scalar']})
+      if @_dosage['unit']? || @_dosage['value']?
+        new cql.Quantity({unit: @_dosage['unit'], value: @_dosage['value']})
+      else
+        new cql.Quantity({unit: @_dosage['units'], value: @_dosage['scalar']})
     else
       null
 
@@ -126,7 +134,7 @@ class CQL_QDM.ImmunizationOrder extends CQL_QDM.QDMDatatype
   ###
   negationRationale: ->
     if @_negationRationale?
-      new cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+      new cql.Code(@_negationRationale.code, @_negationRationale.code_system, null, @_negationRationale.title || null)
     else
       null
 
@@ -135,7 +143,7 @@ class CQL_QDM.ImmunizationOrder extends CQL_QDM.QDMDatatype
   ###
   reason: ->
     if @_reason?
-      new cql.Code(@_reason.code, @_reason.code_system)
+      new cql.Code(@_reason.code, @_reason.code_system, null, @_reason.title || null)
     else
       null
 
@@ -144,7 +152,7 @@ class CQL_QDM.ImmunizationOrder extends CQL_QDM.QDMDatatype
   ###
   route: ->
     if @_route?
-      new cql.Code(@_route.code, @_route.code_system)
+      new cql.Code(@_route.code, @_route.code_system, null, @_route.title || null)
     else
       null
 

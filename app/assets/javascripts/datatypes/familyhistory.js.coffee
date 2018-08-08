@@ -20,6 +20,7 @@ class CQL_QDM.FamilyHistory extends CQL_QDM.QDMDatatype
     super @entry
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_relationship = @entry.relationshipToPatient
+    delete @entry.end_time
 
   ###
   @returns {Date}
@@ -32,6 +33,6 @@ class CQL_QDM.FamilyHistory extends CQL_QDM.QDMDatatype
   ###
   relationship: ->
     if @_relationship?
-      new cql.Code(@_relationship.code, @_relationship.code_system)
+      new cql.Code(@_relationship.code, @_relationship.code_system, null, @_relationship.title || null)
     else
       null

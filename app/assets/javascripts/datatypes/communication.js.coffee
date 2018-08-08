@@ -19,6 +19,7 @@ class CQL_QDM.CommunicationFromPatientToProvider extends CQL_QDM.QDMDatatype
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_negationRationale = @entry.negationReason
     @_relatedTo = @entry.references
+    delete @entry.end_time
 
   ###
   @returns {Date}
@@ -31,7 +32,7 @@ class CQL_QDM.CommunicationFromPatientToProvider extends CQL_QDM.QDMDatatype
   ###
   negationRationale: ->
     if @_negationRationale?
-      new cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+      new cql.Code(@_negationRationale.code, @_negationRationale.code_system, null, @_negationRationale.title || null)
     else
       null
 
@@ -56,13 +57,14 @@ class CQL_QDM.CommunicationFromProviderToPatient extends CQL_QDM.QDMDatatype
     @_negationRationale = @entry.negationReason
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_relatedTo = @entry.references
+    delete @entry.end_time
 
   ###
   @returns {Code}
   ###
   negationRationale: ->
     if @_negationRationale?
-      new cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+      new cql.Code(@_negationRationale.code, @_negationRationale.code_system, null, @_negationRationale.title || null)
     else
       null
 
@@ -93,13 +95,14 @@ class CQL_QDM.CommunicationFromProviderToProvider extends CQL_QDM.QDMDatatype
     @_negationRationale = @entry.negationReason
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_relatedTo = @entry.references
+    delete @entry.end_time
 
   ###
   @returns {Code}
   ###
   negationRationale: ->
     if @_negationRationale?
-      new cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+      new cql.Code(@_negationRationale.code, @_negationRationale.code_system, null, @_negationRationale.title || null)
     else
       null
 

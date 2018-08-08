@@ -19,6 +19,7 @@ class CQL_QDM.EncounterOrder extends CQL_QDM.QDMDatatype
     @_facilityLocation = @entry.facility
     @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
+    delete @entry.end_time
 
   ###
   @returns {Date}
@@ -40,7 +41,7 @@ class CQL_QDM.EncounterOrder extends CQL_QDM.QDMDatatype
   ###
   negationRationale: ->
     if @_negationRationale?
-      new cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+      new cql.Code(@_negationRationale.code, @_negationRationale.code_system, null, @_negationRationale.title || null)
     else
       null
 
@@ -49,7 +50,7 @@ class CQL_QDM.EncounterOrder extends CQL_QDM.QDMDatatype
   ###
   reason: ->
     if @_reason?
-      new cql.Code(@_reason.code, @_reason.code_system)
+      new cql.Code(@_reason.code, @_reason.code_system, null, @_reason.title || null)
     else
       null
 
@@ -84,7 +85,7 @@ class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
   ###
   admissionSource: ->
     if @_admissionSource?
-      new cql.Code(@_admissionSource.code, @_admissionSource.code_system)
+      new cql.Code(@_admissionSource.code, @_admissionSource.code_system, null, @_admissionSource.title || null)
     else
       null
 
@@ -106,7 +107,7 @@ class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
   ###
   dischargeDisposition: ->
     if @_dischargeDisposition?
-      new cql.Code(@_dischargeDisposition.code, @_dischargeDisposition.code_system)
+      new cql.Code(@_dischargeDisposition.code, @_dischargeDisposition.code_system, null, @_dischargeDisposition.title || null)
     else
       null
 
@@ -138,7 +139,7 @@ class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
   ###
   negationRationale: ->
     if @_negationRationale?
-      new cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+      new cql.Code(@_negationRationale.code, @_negationRationale.code_system, null, @_negationRationale.title || null)
     else
       null
 
@@ -158,7 +159,7 @@ class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
   ###
   principalDiagnosis: ->
     if @_principalDiagnosis?
-      new cql.Code(@_principalDiagnosis.code, @_principalDiagnosis.code_system)
+      new cql.Code(@_principalDiagnosis.code, @_principalDiagnosis.code_system, null, @_principalDiagnosis.title || null)
     else
       null
 
@@ -178,6 +179,7 @@ class CQL_QDM.EncounterRecommended extends CQL_QDM.QDMDatatype
     @_facilityLocation = @entry.facility
     @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
+    delete @entry.end_time
 
   ###
   @returns {Date}
@@ -199,7 +201,7 @@ class CQL_QDM.EncounterRecommended extends CQL_QDM.QDMDatatype
   ###
   negationRationale: ->
     if @_negationRationale?
-      new cql.Code(@_negationRationale.code, @_negationRationale.code_system)
+      new cql.Code(@_negationRationale.code, @_negationRationale.code_system, null, @_negationRationale.title || null)
     else
       null
 
@@ -208,6 +210,6 @@ class CQL_QDM.EncounterRecommended extends CQL_QDM.QDMDatatype
   ###
   reason: ->
     if @_reason?
-      new cql.Code(@_reason.code, @_reason.code_system)
+      new cql.Code(@_reason.code, @_reason.code_system, null, @_reason.title || null)
     else
       null
