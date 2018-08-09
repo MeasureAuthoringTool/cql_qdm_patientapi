@@ -34,7 +34,6 @@ describe "Immunization", ->
         "start_time":1337155200,
         "statusOfMedication":null,
         "status_code":{"HL7 ActStatus":["administered"]},
-        "supply":{"scalar":"14","units":"mg"},
         "time":null,
         "typeOfMedication":null,
         "vehicle":null
@@ -79,14 +78,6 @@ describe "Immunization", ->
     it "should return null if no route is specified", ->
       immunizationAdministered = new CQL_QDM.ImmunizationAdministered({})
       expect(immunizationAdministered.route()).toEqual null
-
-    it "should return a supply quantity", ->
-      immunizationAdministered = new CQL_QDM.ImmunizationAdministered(immunizationAdministeredEntry)
-      expect(immunizationAdministered.supply()).toEqual new cql.Quantity({unit: 'mg', value: '14'})
-
-    it "should return null if no supply is specified", ->
-      immunizationAdministered = new CQL_QDM.ImmunizationAdministered({})
-      expect(immunizationAdministered.supply()).toEqual null
 
   describe "Order", ->
     immunizationOrderedEntry = {

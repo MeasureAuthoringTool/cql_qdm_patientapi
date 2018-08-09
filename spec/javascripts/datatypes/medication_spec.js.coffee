@@ -233,7 +233,6 @@ describe "Medication", ->
       "start_time":1337846400,
       "statusOfMedication":null,
       "status_code":{"SNOMED-CT":["55561003"],"HL7 ActStatus":["active"]},
-      "supply":{"scalar":"1000","units":"g"},
       "time":null,
       "typeOfMedication":null,
       "vehicle":null
@@ -259,15 +258,10 @@ describe "Medication", ->
       medicationActive = new CQL_QDM.MedicationActive(medicationActiveEntry)
       expect(medicationActive.route()).toEqual new cql.Code('995218', 'RxNorm', null, 'Hydroxyzine')
 
-    it "should return a supply quantity", ->
-      medicationActive = new CQL_QDM.MedicationActive(medicationActiveEntry)
-      expect(medicationActive.supply()).toEqual new cql.Quantity({unit: 'g', value: '1000'})
-
     it "should return null when field is not on constructing entry", ->
       medicationActive = new CQL_QDM.MedicationActive({'start_time': '08/31/2017 1:00 AM', 'end_time': '08/31/2017 2:00 AM'})
       expect(medicationActive.frequency()).toEqual null
       expect(medicationActive.dosage()).toEqual null
-      expect(medicationActive.supply()).toEqual null
 
   describe "Administered", ->
     medicationAdministeredEntry ={
@@ -307,7 +301,6 @@ describe "Medication", ->
       "start_time":1337673600,
       "statusOfMedication":null,
       "status_code":{"HL7 ActStatus":["administered"]},
-      "supply":{"scalar":"44","units":"mg"},
       "time":null,
       "typeOfMedication":null,
       "vehicle":null
@@ -341,14 +334,9 @@ describe "Medication", ->
       medicationAdministered = new CQL_QDM.MedicationAdministered(medicationAdministeredEntry)
       expect(medicationAdministered.route()).toEqual new cql.Code('1002293', 'RxNorm', null, 'Common substances for allergy and intolerance documentation')
 
-    it "should return a supply quantity", ->
-      medicationAdministered = new CQL_QDM.MedicationAdministered(medicationAdministeredEntry)
-      expect(medicationAdministered.supply()).toEqual new cql.Quantity({unit: 'mg', value: '44'})
-
     it "should return null when field is not on constructing entry", ->
       medicationAdministered = new CQL_QDM.MedicationAdministered({'start_time': '08/31/2017 1:00 AM', 'end_time': '08/31/2017 2:00 AM'})
       expect(medicationAdministered.frequency()).toEqual null
-      expect(medicationAdministered.supply()).toEqual null
       expect(medicationAdministered.dosage()).toEqual null
       expect(medicationAdministered.route()).toEqual null
       expect(medicationAdministered.reason()).toEqual null
