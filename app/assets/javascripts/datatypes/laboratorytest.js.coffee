@@ -15,20 +15,10 @@ class CQL_QDM.LaboratoryTestOrder extends CQL_QDM.QDMDatatype
   ###
   constructor: (@entry) ->
     super @entry
-    @_method = @entry.method
     @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     delete @entry.end_time
-
-  ###
-  @returns {Code}
-  ###
-  method: ->
-    if @_method?
-      new cql.Code(@_method.code, @_method.code_system)
-    else
-      null
 
   ###
   @returns {Code}
@@ -205,7 +195,6 @@ class CQL_QDM.LaboratoryTestRecommended extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    @_method = @entry.method
     @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
     delete @entry.end_time
@@ -215,15 +204,6 @@ class CQL_QDM.LaboratoryTestRecommended extends CQL_QDM.QDMDatatype
   ###
   authorDatetime: ->
     @_authorDatetime
-
-  ###
-  @returns {Code}
-  ###
-  method: ->
-    if @_method?
-      new cql.Code(@_method.code, @_method.code_system, null, @_method.title || null)
-    else
-      null
 
   ###
   @returns {Code}

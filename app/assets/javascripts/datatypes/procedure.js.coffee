@@ -230,7 +230,6 @@ class CQL_QDM.ProcedureRecommended extends CQL_QDM.QDMDatatype
     super @entry
     @_anatomicalApproachSite = @entry.anatomical_approach
     @_anatomicalLocationSite = @entry.anatomical_location
-    @_method = @entry.method
     @_negationRationale = @entry.negationReason
     @_ordinality = @entry.ordinality
     @_reason = @entry.reason
@@ -260,15 +259,6 @@ class CQL_QDM.ProcedureRecommended extends CQL_QDM.QDMDatatype
   ###
   authorDatetime: ->
     @_authorDatetime
-
-  ###
-  @returns {Code}
-  ###
-  method: ->
-    if @_method?
-      new cql.Code(@_method.code, @_method.code_system, null, @_method.title || null)
-    else
-      null
 
   ###
   @returns {Code}
