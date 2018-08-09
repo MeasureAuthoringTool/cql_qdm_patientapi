@@ -130,6 +130,7 @@ describe "Medication", ->
       "refills":{"scalar":"33","units":""},
       "route":{"code_system":"LOINC","code":"29463-7","title":"Body Weight"},
       "signed_datetime":null,
+      "setting":{"code_system":"LOINC","code":"29463-7","title":"Body Weight"},
       "specifics":null,
       "start_time":1337846400,
       "statusOfMedication":null,
@@ -187,6 +188,9 @@ describe "Medication", ->
       medicationOrdered = new CQL_QDM.MedicationOrder(medicationOrderEntry)
       expect(medicationOrdered.supply()).toEqual new cql.Quantity({unit: 'mg', value: '10'})
 
+    it "hsould return a setting code", ->
+      medicationOrdered = new CQL_QDM.MedicationOrder(medicationOrderEntry)
+      expect(medicationOrdered.setting()).toEqual new cql.Code('29463-7', 'LOINC', null, 'Body Weight')
 
     it "should return null when field is not on constructing entry", ->
       medicationOrdered = new CQL_QDM.MedicationOrder({'start_time': '08/31/2017 1:00 AM', 'end_time': '08/31/2017 2:00 AM'})
@@ -196,6 +200,7 @@ describe "Medication", ->
       expect(medicationOrdered.dosage()).toEqual null
       expect(medicationOrdered.route()).toEqual null
       expect(medicationOrdered.negationRationale()).toEqual null
+      expect(medicationOrdered.setting()).toEqual null
 
   describe "Active", ->
     medicationActiveEntry = {

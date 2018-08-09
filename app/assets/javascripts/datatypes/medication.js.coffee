@@ -390,6 +390,7 @@ class CQL_QDM.MedicationOrder extends CQL_QDM.QDMDatatype
     @_reason = @entry.reason
     @_refills = @entry.refills
     @_route = @entry.route
+    @_setting = @entry.setting
     @_supply = @entry.supply
     @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     if @entry.end_time
@@ -478,6 +479,15 @@ class CQL_QDM.MedicationOrder extends CQL_QDM.QDMDatatype
   route: ->
     if @_route?
       new cql.Code(@_route.code, @_route.code_system, null, @_route.title || null)
+    else
+      null
+
+  ###
+  @returns {Code}
+  ###
+  setting: ->
+    if @_setting?
+      new cql.Code(@_setting.code, @_setting.code_system, null, @_setting.title || null)
     else
       null
 
