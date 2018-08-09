@@ -188,7 +188,7 @@ describe "Medication", ->
       medicationOrdered = new CQL_QDM.MedicationOrder(medicationOrderEntry)
       expect(medicationOrdered.supply()).toEqual new cql.Quantity({unit: 'mg', value: '10'})
 
-    it "hsould return a setting code", ->
+    it "should return a setting code", ->
       medicationOrdered = new CQL_QDM.MedicationOrder(medicationOrderEntry)
       expect(medicationOrdered.setting()).toEqual new cql.Code('29463-7', 'LOINC', null, 'Body Weight')
 
