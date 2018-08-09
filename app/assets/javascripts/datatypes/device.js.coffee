@@ -17,7 +17,6 @@ class CQL_QDM.DeviceApplied extends CQL_QDM.QDMDatatype
   ###
   constructor: (@entry) ->
     super @entry
-    @_anatomicalApproachSite = @entry.anatomical_approach
     @_anatomicalLocationSite = @entry.anatomical_location
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_negationRationale = @entry.negationReason
@@ -28,15 +27,6 @@ class CQL_QDM.DeviceApplied extends CQL_QDM.QDMDatatype
     else
       # No end time; high is set to infinity
       @_relevantPeriodHigh = CQL_QDM.Helpers.infinityDateTime()
-
-  ###
-  @returns {Code}
-  ###
-  anatomicalApproachSite: ->
-    if @_anatomicalApproachSite?
-      new cql.Code(@_anatomicalApproachSite.code, @_anatomicalApproachSite.code_system, null, @_anatomicalApproachSite.title || null)
-    else
-      null
 
   ###
   @returns {Code}
