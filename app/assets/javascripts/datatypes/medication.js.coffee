@@ -27,7 +27,6 @@ class CQL_QDM.MedicationActive extends CQL_QDM.QDMDatatype
     else
       # No end time; high is set to infinity
       @_relevantPeriodHigh = CQL_QDM.Helpers.infinityDateTime()
-    @_supply = @entry.supply
 
   ###
   @returns {Quantity}
@@ -70,15 +69,6 @@ class CQL_QDM.MedicationActive extends CQL_QDM.QDMDatatype
     else
       null
 
-  ###
-  @returns {Quantity}
-  ###
-  supply: ->
-    if @_supply?
-      new cql.Quantity({unit: @_supply['units'], value: @_supply['scalar']})
-    else
-      null
-
 
 ###
 Data elements that meet criteria using this datatype should document that the
@@ -103,7 +93,6 @@ class CQL_QDM.MedicationAdministered extends CQL_QDM.QDMDatatype
       # No end time; high is set to infinity
       @_relevantPeriodHigh = CQL_QDM.Helpers.infinityDateTime()
     @_route = @entry.route
-    @_supply = @entry.supply
 
   ###
   Author date time is only present when this data type has been negated.
@@ -168,15 +157,6 @@ class CQL_QDM.MedicationAdministered extends CQL_QDM.QDMDatatype
   route: ->
     if @_route?
       new cql.Code(@_route.code, @_route.code_system, null, @_route.title || null)
-    else
-      null
-
-  ###
-  @returns {Quantity}
-  ###
-  supply: ->
-    if @_supply?
-      new cql.Quantity({unit: @_supply['units'], value: @_supply['scalar']})
     else
       null
 

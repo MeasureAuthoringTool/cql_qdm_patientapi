@@ -21,7 +21,6 @@ class CQL_QDM.ImmunizationAdministered extends CQL_QDM.QDMDatatype
     @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
     @_route = @entry.route
-    @_supply = @entry.supply
     delete @entry.end_time
 
   ###
@@ -69,14 +68,6 @@ class CQL_QDM.ImmunizationAdministered extends CQL_QDM.QDMDatatype
     else
       null
 
-  ###
-  @returns {Quantity}
-  ###
-  supply: ->
-    if @_supply?
-      new cql.Quantity({unit: @_supply['units'], value: @_supply['scalar']})
-    else
-      null
 
 
 ###
