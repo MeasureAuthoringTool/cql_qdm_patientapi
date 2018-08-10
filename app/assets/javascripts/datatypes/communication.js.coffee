@@ -25,6 +25,12 @@ class CQL_QDM.CommunicationPerformed extends CQL_QDM.QDMDatatype
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_negationRationale = @entry.negationReason
     @_relatedTo = @entry.references
+    @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
+    if @entry.end_time
+      @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
+    else
+      # No end time; high is set to infinity
+      @_relevantPeriodHigh = CQL_QDM.Helpers.infinityDateTime()
     @_category = @entry.category
     @_sender = @entry.sender
     @_recipient = @entry.recipient
@@ -50,6 +56,17 @@ class CQL_QDM.CommunicationPerformed extends CQL_QDM.QDMDatatype
   ###
   relatedTo: ->
     CQL_QDM.Helpers.relatedTo(@_relatedTo)
+
+  ###
+  @returns {Interval<Date>}
+  ###
+  relevantPeriod: ->
+    low = @_relevantPeriodLow
+    high = @_relevantPeriodHigh
+    if low?
+      new cql.Interval(low, high)
+    else
+      null
 
   ###
   @returns {Code}
