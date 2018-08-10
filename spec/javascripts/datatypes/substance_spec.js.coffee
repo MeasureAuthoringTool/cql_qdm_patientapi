@@ -35,6 +35,7 @@ describe "Substance", ->
       "start_time":1337328000,
       "statusOfMedication":null,
       "status_code":{"HL7 ActStatus":["administered"]},
+      "supply":{"scalar":"60","units":"mg"},
       "time":null,
       "typeOfMedication":null,
       "vehicle":null
@@ -274,6 +275,7 @@ describe "Substance", ->
       "start_time":1337328000,
       "statusOfMedication":null,
       "status_code":{"HL7 ActStatus":["recommended"]},
+      "supply":{"scalar":"60","units":"mg"},
       "time":null,
       "typeOfMedication":null,
       "vehicle":null

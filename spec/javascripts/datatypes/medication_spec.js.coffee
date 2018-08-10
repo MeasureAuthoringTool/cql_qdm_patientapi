@@ -233,6 +233,7 @@ describe "Medication", ->
       "start_time":1337846400,
       "statusOfMedication":null,
       "status_code":{"SNOMED-CT":["55561003"],"HL7 ActStatus":["active"]},
+      "supply":{"scalar":"1000","units":"g"},
       "time":null,
       "typeOfMedication":null,
       "vehicle":null
@@ -301,6 +302,7 @@ describe "Medication", ->
       "start_time":1337673600,
       "statusOfMedication":null,
       "status_code":{"HL7 ActStatus":["administered"]},
+      "supply":{"scalar":"44","units":"mg"},
       "time":null,
       "typeOfMedication":null,
       "vehicle":null

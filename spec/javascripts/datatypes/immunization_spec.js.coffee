@@ -34,6 +34,7 @@ describe "Immunization", ->
         "start_time":1337155200,
         "statusOfMedication":null,
         "status_code":{"HL7 ActStatus":["administered"]},
+        "supply":{"scalar":"14","units":"mg"},
         "time":null,
         "typeOfMedication":null,
         "vehicle":null
