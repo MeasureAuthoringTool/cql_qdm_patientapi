@@ -17,7 +17,6 @@ class CQL_QDM.ProcedureOrder extends CQL_QDM.QDMDatatype
     @_anatomicalApproachSite = @entry.anatomical_approach
     @_anatomicalLocationSite = @entry.anatomical_location
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    @_method = @entry.method
     @_negationRationale = @entry.negationReason
     @_ordinality = @entry.ordinality
     @_reason = @entry.reason
@@ -46,15 +45,6 @@ class CQL_QDM.ProcedureOrder extends CQL_QDM.QDMDatatype
   ###
   authorDatetime: ->
     @_authorDatetime
-
-  ###
-  @returns {Code}
-  ###
-  method: ->
-    if @_method?
-      new cql.Code(@_method.code, @_method.code_system, null, @_method.title || null)
-    else
-      null
 
   ###
   @returns {Code}
