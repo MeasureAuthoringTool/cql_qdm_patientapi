@@ -202,15 +202,6 @@ describe "Laboratory Test", ->
        laboratoryTestOrdered = new CQL_QDM.LaboratoryTestOrder({})
        expect(laboratoryTestOrdered.authorDatetime()).toEqual null
 
-    it "should not return a method code", ->
-       # method removed from Laboratory Test, Order in QDM 5.4
-       # because 'method' remains on the HDS model and because of how Bonnie shows field values
-       # (based on "Laboratory Test" rather than "Laboratory Test, Order"), it's still possible
-       # to have it on the model even when it shouldn't be. Confirm that this is not accessible through
-       # the generated QDM model.
-       laboratoryTestOrdered = new CQL_QDM.LaboratoryTestOrder(laboratoryTestOrderEntry)
-       expect(typeof laboratoryTestOrdered.method).toEqual 'undefined'
-
     it "should return null if no negation rationale is specified", ->
       laboratoryTestOrdered = new CQL_QDM.LaboratoryTestOrder({})
       expect(laboratoryTestOrdered.negationRationale()).toEqual null
@@ -260,15 +251,6 @@ describe "Laboratory Test", ->
     it "should return null authorDateTime when no is start_time is specified", ->
        laboratoryTestRecommended = new CQL_QDM.LaboratoryTestRecommended({})
        expect(laboratoryTestRecommended.authorDatetime()).toEqual null
-
-    it "should not return a method code", ->
-       # method removed from Laboratory Test, Recommended in QDM 5.4
-       # because 'method' remains on the HDS model and because of how Bonnie shows field values
-       # (based on "Laboratory Test" rather than "Laboratory Test, Recommended"), it's still possible
-       # to have it on the model even when it shouldn't be. Confirm that this is not accessible through
-       # the generated QDM model.
-       laboratoryTestRecommended = new CQL_QDM.LaboratoryTestRecommended(laboratoryTestRecommendedEntry)
-       expect(typeof laboratoryTestRecommended.method).toEqual 'undefined'
 
     it "should return a reason code", ->
       laboratoryTestRecommended = new CQL_QDM.LaboratoryTestRecommended(laboratoryTestRecommendedEntry)

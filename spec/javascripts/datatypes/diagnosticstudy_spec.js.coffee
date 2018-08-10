@@ -1,15 +1,4 @@
 describe "Diagnostic Study", ->
-  describe "Order", ->
-
-    it "should not contain a method code", ->
-      # method removed from Diagnostic Study, Order in QDM 5.4
-      # because 'method' remains on the HDS model and because of how Bonnie shows field values
-      # (based on "Diagnostic Study" rather than "Diagnostic Study, Order"), it's still possible to have it on
-      # the model even when it shouldn't be. Confirm that this is not accessible through the
-      # generated QDM model.
-      diagnosticStudyOrder = new CQL_QDM.DiagnosticStudyOrder({})
-      expect(typeof diagnosticStudyOrder.method).toEqual 'undefined'
-
   describe "Performed", ->
     it "should show null relevantPeriod", ->
       diagnosticStudyPerformed = new CQL_QDM.DiagnosticStudyPerformed({})
@@ -39,14 +28,3 @@ describe "Diagnostic Study", ->
     it "should contain a method code", ->
       procedurePerformed = new CQL_QDM.ProcedurePerformed({})
       expect(typeof procedurePerformed.method).toEqual 'function'
-
-  describe "Recommended", ->
-
-    it "should not contain a method code", ->
-      # method removed from Diagnostic Study, Recommended in QDM 5.4
-      # because 'method' remains on the HDS model and because of how Bonnie shows field values
-      # (based on "Diagnostic Study" rather than "Diagnostic Study, Recommended"), it's still possible to have it on
-      # the model even when it shouldn't be. Confirm that this is not accessible through the
-      # generated QDM model.
-      diagnosticStudyRecommended = new CQL_QDM.DiagnosticStudyRecommended({})
-      expect(typeof diagnosticStudyRecommended.method).toEqual 'undefined'

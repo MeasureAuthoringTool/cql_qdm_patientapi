@@ -4,15 +4,6 @@ describe "Procedure", ->
       procedureOrder = new CQL_QDM.ProcedureOrder({anatomical_location: {code_system: "SNOMED-CT", code: "24028007", title: "Right"}})
       expect(procedureOrder.anatomicalLocationSite()).toEqual(new cql.Code("24028007", "SNOMED-CT", null, "Right"))
 
-    it "should not contain a method code", ->
-      # method removed from Procedure, Order in QDM 5.4
-      # because 'method' remains on the HDS model and because of how Bonnie shows field values
-      # (based on "Procedure" rather than "Procedure, Order"), it's still possible to have it on
-      # the model even when it shouldn't be. Confirm that this is not accessible through the
-      # generated QDM model.
-      procedureOrder = new CQL_QDM.ProcedureOrder({})
-      expect(typeof procedureOrder.method).toEqual 'undefined'
-
   describe "Performed", ->
     it "should show null relevantPeriod", ->
       procedurePerformed = new CQL_QDM.ProcedurePerformed({})
@@ -43,12 +34,3 @@ describe "Procedure", ->
     it "should return anatomicalLocationSite", ->
       procedureRecommended = new CQL_QDM.ProcedureRecommended({anatomical_location: {code_system: "SNOMED-CT", code: "24028007", title: "Right"}})
       expect(procedureRecommended.anatomicalLocationSite()).toEqual(new cql.Code("24028007", "SNOMED-CT", null, "Right"))
-
-    it "should not contain a method code", ->
-      # method removed from Procedure, Recommended in QDM 5.4
-      # because 'method' remains on the HDS model and because of how Bonnie shows field values
-      # (based on "Procedure" rather than "Procedure, Recommended"), it's still possible to have it on
-      # the model even when it shouldn't be. Confirm that this is not accessible through the
-      # generated QDM model.
-      procedureRecommended = new CQL_QDM.ProcedureRecommended({})
-      expect(typeof procedureRecommended.method).toEqual 'undefined'
