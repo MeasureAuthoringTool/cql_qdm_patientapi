@@ -181,13 +181,14 @@ describe "Substance", ->
       substanceOrder = new CQL_QDM.SubstanceOrder({})
       expect(substanceOrder.frequency()).toEqual null
 
-    it "should return a method Code", ->
+    it "should not return a method code", ->
+      # method removed from Substance, Order in QDM 5.4
+      # because 'method' remains on the HDS model and because of how Bonnie shows field values
+      # (based on "Substance" rather than "Substance, Order"), it's still possible to have it on
+      # the model even when it shouldn't be. Confirm that this is not accessible through the
+      # generated QDM model.
       substanceOrder = new CQL_QDM.SubstanceOrder(substanceOrderEntry)
-      expect(substanceOrder.method()).toEqual new cql.Code('29463-7', 'LOINC', null, 'Body Weight')
-
-    it "should return null if no method is specified", ->
-       substanceOrder = new CQL_QDM.SubstanceOrder({})
-       expect(substanceOrder.method()).toEqual null
+      expect(typeof substanceOrder.method).toEqual 'undefined'
 
     it "should return a negationRationale code", ->
       substanceOrder = new CQL_QDM.SubstanceOrder(substanceOrderEntry)
@@ -314,13 +315,14 @@ describe "Substance", ->
       substanceRecommended = new CQL_QDM.SubstanceRecommended({})
       expect(substanceRecommended.frequency()).toEqual null
 
-    it "should return a method Code", ->
-       substanceRecommended = new CQL_QDM.SubstanceRecommended(substanceRecommendedEntry)
-       expect(substanceRecommended.method()).toEqual new cql.Code('29463-7', 'LOINC', null, 'Body Weight')
-
-    it "should return null if no method is specified", ->
-       substanceRecommended = new CQL_QDM.SubstanceRecommended({})
-       expect(substanceRecommended.method()).toEqual null
+    it "should not return a method code", ->
+      # method removed from Substance, Recommended in QDM 5.4
+      # because 'method' remains on the HDS model and because of how Bonnie shows field values
+      # (based on "Substance" rather than "Substance, Recommended"), it's still possible to have it on
+      # the model even when it shouldn't be. Confirm that this is not accessible through the
+      # generated QDM model.
+      substanceRecommended = new CQL_QDM.SubstanceRecommended(substanceRecommendedEntry)
+      expect(typeof substanceRecommended.method).toEqual 'undefined'
 
     it "should return a negationRationale code", ->
       substanceRecommended = new CQL_QDM.SubstanceRecommended(substanceRecommendedEntry)
