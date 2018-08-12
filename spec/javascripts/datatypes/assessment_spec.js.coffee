@@ -16,7 +16,10 @@ describe "Assessment", ->
           {_id: "5aabbc4692d04e71f32f7619", codes: { 'SNOMED-CT': ["164059009"]}, description: "Pass Or Refer"}]})
       expect(JSON.stringify(assessmentPerformed.result())).toEqual('{"code":"164059009","system":"SNOMED-CT","version":null,"display":"Pass Or Refer"}')
 
-describe "Assessment", ->
+    it "should contain a method code", ->
+      assessmentPerformed = new CQL_QDM.AssessmentPerformed({})
+      expect(typeof assessmentPerformed.method).toEqual 'function'
+
   describe "Recommended", ->
     it "should not return a negationRationale", ->
       assessmentRecommended = new CQL_QDM.AssessmentRecommended({})
