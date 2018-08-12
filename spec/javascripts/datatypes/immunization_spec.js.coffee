@@ -80,14 +80,6 @@ describe "Immunization", ->
       immunizationAdministered = new CQL_QDM.ImmunizationAdministered({})
       expect(immunizationAdministered.route()).toEqual null
 
-    it "should return a supply quantity", ->
-      immunizationAdministered = new CQL_QDM.ImmunizationAdministered(immunizationAdministeredEntry)
-      expect(immunizationAdministered.supply()).toEqual new cql.Quantity({unit: 'mg', value: '14'})
-
-    it "should return null if no supply is specified", ->
-      immunizationAdministered = new CQL_QDM.ImmunizationAdministered({})
-      expect(immunizationAdministered.supply()).toEqual null
-
   describe "Order", ->
     immunizationOrderedEntry = {
         "_id":"5afc6ef608fa1813ddc09ffe",

@@ -89,14 +89,6 @@ describe "Substance", ->
       substanceAdministered = new CQL_QDM.SubstanceAdministered({})
       expect(substanceAdministered.route()).toEqual null
 
-    it "should return a supply quantity", ->
-      substanceAdministered = new CQL_QDM.SubstanceAdministered(substanceAdministeredEntry)
-      expect(substanceAdministered.supply()).toEqual new cql.Quantity(unit: 'mg', value: '60')
-
-    it "should return null if no supply is specified", ->
-      substanceAdministered = new CQL_QDM.SubstanceAdministered({})
-      expect(substanceAdministered.supply()).toEqual null
-
     it "should show null relevantPeriod", ->
       substanceAdministered = new CQL_QDM.SubstanceAdministered({})
       expect(substanceAdministered.relevantPeriod()).toBeNull()
@@ -112,7 +104,6 @@ describe "Substance", ->
     it "should return null when field is not on constructing entry", ->
       substanceAdministered = new CQL_QDM.SubstanceAdministered({'start_time': '08/31/2017 1:00 AM', 'end_time': '08/31/2017 2:00 AM'})
       expect(substanceAdministered.frequency()).toEqual null
-      expect(substanceAdministered.supply()).toEqual null
       expect(substanceAdministered.dosage()).toEqual null
 
   describe "Order", ->
@@ -354,14 +345,6 @@ describe "Substance", ->
       substanceRecommended = new CQL_QDM.SubstanceRecommended({})
       expect(substanceRecommended.route()).toEqual null
 
-    it "should return a supply quantity", ->
-      substanceRecommended = new CQL_QDM.SubstanceRecommended(substanceRecommendedEntry)
-      expect(substanceRecommended.supply()).toEqual new cql.Quantity(unit: 'mg', value: '60')
-
-    it "should return null if no supply is specified", ->
-      substanceRecommended = new CQL_QDM.SubstanceRecommended({})
-      expect(substanceRecommended.supply()).toEqual null
-
     it "should return an integer of the number of refills", ->
       substanceRecommended = new CQL_QDM.SubstanceRecommended({'start_time': '08/31/2017 1:00 AM', 'end_time': '08/31/2017 2:00 AM', 'refills': {unit: '', scalar: 5}})
       expect(substanceRecommended.refills()).toEqual 5
@@ -378,6 +361,5 @@ describe "Substance", ->
       substanceRecommended = new CQL_QDM.SubstanceRecommended({'start_time': '08/31/2017 1:00 AM', 'end_time': '08/31/2017 2:00 AM'})
       expect(substanceRecommended.frequency()).toEqual null
       expect(substanceRecommended.refills()).toEqual null
-      expect(substanceRecommended.supply()).toEqual null
       expect(substanceRecommended.dosage()).toEqual null
       expect(substanceRecommended.entry.end_time).toEqual undefined
