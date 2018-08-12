@@ -100,7 +100,6 @@ class CQL_QDM.SubstanceOrder extends CQL_QDM.QDMDatatype
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_dosage = @entry.dose
     @_frequency = @entry.administrationTiming
-    @_method = @entry.method
     @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
     @_refills = @entry.refills
@@ -132,15 +131,6 @@ class CQL_QDM.SubstanceOrder extends CQL_QDM.QDMDatatype
   frequency: ->
     if @_frequency?
       new cql.Code(@_frequency.code, @_frequency.code_system, null, @_frequency.title || null)
-    else
-      null
-
-  ###
-  @returns {Code}
-  ###
-  method: ->
-    if @_method?
-      new cql.Code(@_method.code, @_method.code_system, null, @_method.title || null)
     else
       null
 
@@ -204,7 +194,6 @@ class CQL_QDM.SubstanceRecommended extends CQL_QDM.QDMDatatype
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_dosage = @entry.dose
     @_frequency = @entry.administrationTiming
-    @_method = @entry.method
     @_negationRationale = @entry.negationReason
     @_reason = @entry.reason
     @_refills = @entry.refills
@@ -235,15 +224,6 @@ class CQL_QDM.SubstanceRecommended extends CQL_QDM.QDMDatatype
   frequency: ->
     if @_frequency?
       new cql.Code(@_frequency.code, @_frequency.code_system, null, @_frequency.title || null)
-    else
-      null
-
-  ###
-  @returns {Code}
-  ###
-  method: ->
-    if @_method?
-      new cql.Code(@_method.code, @_method.code_system, null, @_method.title || null)
     else
       null
 

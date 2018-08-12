@@ -172,14 +172,6 @@ describe "Substance", ->
       substanceOrder = new CQL_QDM.SubstanceOrder({})
       expect(substanceOrder.frequency()).toEqual null
 
-    it "should return a method Code", ->
-      substanceOrder = new CQL_QDM.SubstanceOrder(substanceOrderEntry)
-      expect(substanceOrder.method()).toEqual new cql.Code('29463-7', 'LOINC', null, 'Body Weight')
-
-    it "should return null if no method is specified", ->
-       substanceOrder = new CQL_QDM.SubstanceOrder({})
-       expect(substanceOrder.method()).toEqual null
-
     it "should return a negationRationale code", ->
       substanceOrder = new CQL_QDM.SubstanceOrder(substanceOrderEntry)
       expect(substanceOrder.negationRationale()).toEqual new cql.Code('29463-7','LOINC', null, null)
@@ -304,14 +296,6 @@ describe "Substance", ->
     it "should return a frequency code", ->
       substanceRecommended = new CQL_QDM.SubstanceRecommended({})
       expect(substanceRecommended.frequency()).toEqual null
-
-    it "should return a method Code", ->
-       substanceRecommended = new CQL_QDM.SubstanceRecommended(substanceRecommendedEntry)
-       expect(substanceRecommended.method()).toEqual new cql.Code('29463-7', 'LOINC', null, 'Body Weight')
-
-    it "should return null if no method is specified", ->
-       substanceRecommended = new CQL_QDM.SubstanceRecommended({})
-       expect(substanceRecommended.method()).toEqual null
 
     it "should return a negationRationale code", ->
       substanceRecommended = new CQL_QDM.SubstanceRecommended(substanceRecommendedEntry)

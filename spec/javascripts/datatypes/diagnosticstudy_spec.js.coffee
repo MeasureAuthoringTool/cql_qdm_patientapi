@@ -24,3 +24,7 @@ describe "Diagnostic Study", ->
       diagnosticStudyPerformed = new CQL_QDM.DiagnosticStudyPerformed({'values': [
           {_id: "5aabbc4692d04e71f32f7619", codes: { 'SNOMED-CT': ["164059009"]}, description: "Pass Or Refer"}]})
       expect(JSON.stringify(diagnosticStudyPerformed.result())).toEqual('{"code":"164059009","system":"SNOMED-CT","version":null,"display":"Pass Or Refer"}')
+
+    it "should contain a method code", ->
+      procedurePerformed = new CQL_QDM.ProcedurePerformed({})
+      expect(typeof procedurePerformed.method).toEqual 'function'

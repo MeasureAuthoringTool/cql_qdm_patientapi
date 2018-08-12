@@ -202,14 +202,6 @@ describe "Laboratory Test", ->
        laboratoryTestOrdered = new CQL_QDM.LaboratoryTestOrder({})
        expect(laboratoryTestOrdered.authorDatetime()).toEqual null
 
-    it "should return a method Code", ->
-       laboratoryTestOrdered = new CQL_QDM.LaboratoryTestOrder(laboratoryTestOrderEntry)
-       expect(laboratoryTestOrdered.method()).toEqual new cql.Code('8462-4', 'LOINC')
-
-    it "should return null if no method is specified", ->
-       laboratoryTestOrdered = new CQL_QDM.LaboratoryTestOrder({})
-       expect(laboratoryTestOrdered.method()).toEqual null
-
     it "should return null if no negation rationale is specified", ->
       laboratoryTestOrdered = new CQL_QDM.LaboratoryTestOrder({})
       expect(laboratoryTestOrdered.negationRationale()).toEqual null
@@ -259,14 +251,6 @@ describe "Laboratory Test", ->
     it "should return null authorDateTime when no is start_time is specified", ->
        laboratoryTestRecommended = new CQL_QDM.LaboratoryTestRecommended({})
        expect(laboratoryTestRecommended.authorDatetime()).toEqual null
-
-    it "should return a method Code", ->
-       laboratoryTestRecommended = new CQL_QDM.LaboratoryTestRecommended(laboratoryTestRecommendedEntry)
-       expect(laboratoryTestRecommended.method()).toEqual new cql.Code('200031', 'RxNorm', null, 'Beta Blocker Therapy for LVSD')
-
-    it "should return null if no method is specified", ->
-       laboratoryTestRecommended = new CQL_QDM.LaboratoryTestRecommended({})
-       expect(laboratoryTestRecommended.method()).toEqual null
 
     it "should return a reason code", ->
       laboratoryTestRecommended = new CQL_QDM.LaboratoryTestRecommended(laboratoryTestRecommendedEntry)
