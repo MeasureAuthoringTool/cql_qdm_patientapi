@@ -4,6 +4,54 @@ their methods will be accessable through the CQL_QDM namespace)
 ###
 @CQL_QDM ||= {}
 
+###
+Data elements that meet these criteria using this datatype should document an
+order by a clinician or appropriately licensed care provider to a patient or
+an appropriate provider or organization to perform an assessment indicated by
+the QDM category and its corresponding value set.
+
+Timing: The time the order is authored (i.e., provided to the patient).
+
+NOTE: Orders address the time that the order is authored, a single point in time.
+Some assessment orders will be addressed as components of a care plan which
+incorporates the period (or timing) when the order is to be carried out. Measure
+developers should address feasibility of clinical workflow to capture Assessment,
+Order when evaluating measures.
+###
+class CQL_QDM.AssessmentOrder extends CQL_QDM.QDMDatatype
+  ###
+  @param {Object} entry - the HDS data criteria object to convert
+  ###
+  constructor: (@entry) ->
+    super @entry
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
+    @_negationRationale = @entry.negationReason
+    @_reason = @entry.reason
+    delete @entry.end_time
+
+  ###
+  @returns {Date}
+  ###
+  authorDatetime: ->
+    @_authorDatetime
+
+  ###
+  @returns {Code}
+  ###
+  negationRationale: ->
+    if @_negationRationale?
+      new cql.Code(@_negationRationale.code, @_negationRationale.code_system, null, @_negationRationale.title || null)
+    else
+      null
+
+  ###
+  @returns {Code}
+  ###
+  reason: ->
+    if @_reason?
+      new cql.Code(@_reason.code, @_reason.code_system, null, @_reason.title || null)
+    else
+      null
 
 ###
 Data elements that meet criteria using this datatype should document completion
