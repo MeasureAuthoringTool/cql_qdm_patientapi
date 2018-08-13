@@ -1,4 +1,7 @@
 describe "Assessment", ->
+  # TODO: test for Assessment, Order need to be written once we have example CQL to use.
+  # describe "Order", ->
+
   describe "Performed", ->
     it "should return a list of ids when relatedTo is called", ->
       assessmentPerformed = new CQL_QDM.AssessmentPerformed({'references': [{'referenced_id':'1234567890', 'type':'Example'},{'referenced_id':'0987654321', 'type':'Example'}]})
