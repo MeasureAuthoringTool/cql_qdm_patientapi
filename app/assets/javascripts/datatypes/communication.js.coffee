@@ -6,11 +6,17 @@ their methods will be accessable through the CQL_QDM namespace)
 
 
 ###
-To meet criteria using this datatype, the communication indicated by the
-Communication QDM category and its corresponding value set must be
-communicated from a patient to a provider.
+To meet criteria using this datatype, the communication indicated by the Communication
+QDM category is a conveyance of information from one entity (e.g., person, organization,
+or device) to another.
+
+Timing:
+Relevant Period: The time the communication is sent (start time) to the time the
+communication is received (end time)
+Author dateTime the time the communication is documented (specifically significant for
+negation rationale, i.e., Communication Not Performed)
 ###
-class CQL_QDM.CommunicationFromPatientToProvider extends CQL_QDM.QDMDatatype
+class CQL_QDM.CommunicationPerformed extends CQL_QDM.QDMDatatype
   ###
   @param {Object} entry - the HDS data criteria object to convert
   ###
@@ -19,7 +25,16 @@ class CQL_QDM.CommunicationFromPatientToProvider extends CQL_QDM.QDMDatatype
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_negationRationale = @entry.negationReason
     @_relatedTo = @entry.references
-    delete @entry.end_time
+    @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
+    if @entry.end_time
+      @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
+    else
+      # No end time; high is set to infinity
+      @_relevantPeriodHigh = CQL_QDM.Helpers.infinityDateTime()
+    @_category = @entry.category
+    @_sender = @entry.sender
+    @_recipient = @entry.recipient
+    @_medium = @entry.medium
 
   ###
   @returns {Date}
@@ -42,78 +57,49 @@ class CQL_QDM.CommunicationFromPatientToProvider extends CQL_QDM.QDMDatatype
   relatedTo: ->
     CQL_QDM.Helpers.relatedTo(@_relatedTo)
 
-
-###
-To meet criteria using this datatype, the communication indicated by the
-Communication QDM category and its corresponding value set must be
-communicated from a provider to a patient.
-###
-class CQL_QDM.CommunicationFromProviderToPatient extends CQL_QDM.QDMDatatype
   ###
-  @param {Object} entry - the HDS data criteria object to convert
+  @returns {Interval<Date>}
   ###
-  constructor: (@entry) ->
-    super @entry
-    @_negationRationale = @entry.negationReason
-    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    @_relatedTo = @entry.references
-    delete @entry.end_time
-
-  ###
-  @returns {Code}
-  ###
-  negationRationale: ->
-    if @_negationRationale?
-      new cql.Code(@_negationRationale.code, @_negationRationale.code_system, null, @_negationRationale.title || null)
+  relevantPeriod: ->
+    low = @_relevantPeriodLow
+    high = @_relevantPeriodHigh
+    if low?
+      new cql.Interval(low, high)
     else
       null
 
   ###
-  @returns {Date}
-  ###
-  authorDatetime: ->
-    @_authorDatetime
-
-  ###
-  @returns {Array}
-  ###
-  relatedTo: ->
-    CQL_QDM.Helpers.relatedTo(@_relatedTo)
-
-
-###
-To meet criteria using this datatype, the communication indicated by the
-Communication QDM category and its corresponding value set must be
-communicated from one provider to another.
-###
-class CQL_QDM.CommunicationFromProviderToProvider extends CQL_QDM.QDMDatatype
-  ###
-  @param {Object} entry - the HDS data criteria object to convert
-  ###
-  constructor: (@entry) ->
-    super @entry
-    @_negationRationale = @entry.negationReason
-    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    @_relatedTo = @entry.references
-    delete @entry.end_time
-
-  ###
   @returns {Code}
   ###
-  negationRationale: ->
-    if @_negationRationale?
-      new cql.Code(@_negationRationale.code, @_negationRationale.code_system, null, @_negationRationale.title || null)
+  category: ->
+    if @_category?
+      new cql.Code(@_category.code, @_category.code_system, null, @_category.title || null)
     else
       null
 
   ###
-  @returns {Date}
+  @returns {Code}
   ###
-  authorDatetime: ->
-    @_authorDatetime
+  sender: ->
+    if @_sender?
+      new cql.Code(@_sender.code, @_sender.code_system, null, @_sender.title || null)
+    else
+      null
 
   ###
-  @returns {Array}
+  @returns {Code}
   ###
-  relatedTo: ->
-    CQL_QDM.Helpers.relatedTo(@_relatedTo)
+  recipient: ->
+    if @_recipient?
+      new cql.Code(@_recipient.code, @_recipient.code_system, null, @_recipient.title || null)
+    else
+      null
+
+  ###
+  @returns {Code}
+  ###
+  medium: ->
+    if @_medium?
+      new cql.Code(@_medium.code, @_medium.code_system, null, @_medium.title || null)
+    else
+      null
