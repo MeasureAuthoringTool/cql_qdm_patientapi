@@ -27,5 +27,5 @@ patientCharacteristicMaleEntry = {
 
 describe "Patient Characteristic Male", ->
   it 'should have CODE in toString', ->
-    patientCharacteristicRace = new CQL_QDM.PatientCharacteristic(patientCharacteristicMaleEntry)
-    expect(patientCharacteristicRace.toString()).toEqual 'Patient Characteristic: Male\nSTART: 08/21/1948 8:00 AM\nCODE: AdministrativeGender M'
+    patientCharacteristicMale = new CQL_QDM.PatientCharacteristic(patientCharacteristicMaleEntry)
+    expect(patientCharacteristicMale.toString()).toEqual 'Patient Characteristic: Male\nSTART: 08/21/1948 8:00 AM\nCODE: AdministrativeGender M'
