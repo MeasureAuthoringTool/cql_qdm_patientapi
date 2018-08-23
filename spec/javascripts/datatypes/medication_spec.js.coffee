@@ -8,6 +8,7 @@ describe "Medication", ->
       "anatomical_approach":null,
       "codes":{"RxNorm":["1010600"]},
       "cumulativeMedicationDuration":null,
+      "daysSupplied":{"scalar":"5","units":""}
       "deliveryMethod":null,
       "description":"Medication, Dispensed: Opioid Pain Medications",
       "dispenserIdentifier":{"value":"Dr. Alice","namingSystem":"testSystem"},
@@ -67,6 +68,10 @@ describe "Medication", ->
       medicationDispensed = new CQL_QDM.MedicationDispensed({})
       expect(medicationDispensed.relevantPeriod()).toBeNull()
 
+    it "should return days supplied", ->
+      medicationDispensed = new CQL_QDM.MedicationDispensed(medicationDispensedEntry)
+      expect(medicationDispensed.daysSupplied()).toEqual '5'
+
     it "should show valid relevantPeriod", ->
       medicationDispensed = new CQL_QDM.MedicationDispensed(medicationDispensedEntry)
       expect(JSON.stringify(medicationDispensed.relevantPeriod())).toEqual '{"low":"2012-05-22T08:00:00.000+00:00","high":"2012-05-22T10:46:40.000+00:00","lowClosed":true,"highClosed":true}'
@@ -109,6 +114,7 @@ describe "Medication", ->
       expect(medicationDispensed.negationRationale()).toEqual null
       expect(medicationDispensed.prescriberId()).toEqual null
       expect(medicationDispensed.dispenserId()).toEqual null
+      expect(medicationDispensed.daysSupplied()).toEqual null
 
   describe "Order", ->
     medicationOrderEntry = {
@@ -119,6 +125,7 @@ describe "Medication", ->
       "anatomical_approach":null,
       "codes":{"RxNorm":["1010600"]},
       "cumulativeMedicationDuration":null,
+      "daysSupplied":{"scalar":"5","units":""}
       "deliveryMethod":null,
       "description":"Medication, Order: Opioid Pain Medications",
       "dose":{"scalar":"100","units":"mg"},
@@ -173,6 +180,10 @@ describe "Medication", ->
       medicationOrdered = new CQL_QDM.MedicationOrder({})
       expect(medicationOrdered.relevantPeriod()).toBeNull()
 
+    it "should return days supplied", ->
+      medicationDispensed = new CQL_QDM.MedicationOrder(medicationOrderEntry)
+      expect(medicationDispensed.daysSupplied()).toEqual '5'
+
     it "should show valid relevantPeriod", ->
       medicationOrdered = new CQL_QDM.MedicationOrder(medicationOrderEntry)
       expect(JSON.stringify(medicationOrdered.relevantPeriod())).toEqual '{"low":"2012-05-24T08:00:00.000+00:00","high":"2012-05-24T08:00:00.000+00:00","lowClosed":true,"highClosed":true}'
@@ -219,6 +230,7 @@ describe "Medication", ->
       expect(medicationOrdered.negationRationale()).toEqual null
       expect(medicationOrdered.setting()).toEqual null
       expect(medicationOrdered.prescriberId()).toEqual null
+      expect(medicationOrdered.daysSupplied()).toEqual null
 
   describe "Active", ->
     medicationActiveEntry = {
@@ -376,6 +388,7 @@ describe "Medication", ->
       "anatomical_approach":null,
       "codes":{"RxNorm":["1010600"]},
       "cumulativeMedicationDuration":null,
+      "daysSupplied":{"scalar":"5","units":""}
       "deliveryMethod":null,
       "description":"Medication, Discharge: Opioid Pain Medications",
       "dose":{"scalar":"100","units":"mg"},
@@ -416,6 +429,10 @@ describe "Medication", ->
     it "should return an integer of the number of refills", ->
       medicationDischarge = new CQL_QDM.MedicationDischarge(medicationDischargeEntry)
       expect(medicationDischarge.refills()).toEqual '100'
+
+    it "should return days supplied", ->
+      medicationDispensed = new CQL_QDM.MedicationDischarge(medicationDischargeEntry)
+      expect(medicationDispensed.daysSupplied()).toEqual '5'
       
     it "should return a dosage quantity", ->
       medicationDischarge = new CQL_QDM.MedicationDischarge(medicationDischargeEntry)
@@ -449,4 +466,8 @@ describe "Medication", ->
       expect(medicationDischarge.refills()).toEqual null
       expect(medicationDischarge.route()).toEqual null
       expect(medicationDischarge.negationRationale()).toEqual null
+<<<<<<< HEAD
       expect(medicationDischarge.prescriberId()).toEqual null
+=======
+      expect(medicationDischarge.daysSupplied()).toEqual null
+>>>>>>> added days supplied to medication
