@@ -8,7 +8,7 @@ describe "Medication", ->
       "anatomical_approach":null,
       "codes":{"RxNorm":["1010600"]},
       "cumulativeMedicationDuration":null,
-      "daysSupplied":{"scalar":"5","units":""}
+      "daysSupplied":{"scalar":"5","units":""},
       "deliveryMethod":null,
       "description":"Medication, Dispensed: Opioid Pain Medications",
       "dispenserIdentifier":{"value":"Dr. Alice","namingSystem":"testSystem"},
@@ -70,7 +70,7 @@ describe "Medication", ->
 
     it "should return days supplied", ->
       medicationDispensed = new CQL_QDM.MedicationDispensed(medicationDispensedEntry)
-      expect(medicationDispensed.daysSupplied()).toEqual '5'
+      expect(medicationDispensed.daysSupplied()).toEqual 5
 
     it "should show valid relevantPeriod", ->
       medicationDispensed = new CQL_QDM.MedicationDispensed(medicationDispensedEntry)
@@ -78,7 +78,7 @@ describe "Medication", ->
 
     it "should return an integer of the number of refills", ->
       medicationDispensed = new CQL_QDM.MedicationDispensed(medicationDispensedEntry)
-      expect(medicationDispensed.refills()).toEqual '3'
+      expect(medicationDispensed.refills()).toEqual 3
 
     it "should return a coded frequency", ->
       medicationDispensed = new CQL_QDM.MedicationDispensed(medicationDispensedEntry)
@@ -125,7 +125,7 @@ describe "Medication", ->
       "anatomical_approach":null,
       "codes":{"RxNorm":["1010600"]},
       "cumulativeMedicationDuration":null,
-      "daysSupplied":{"scalar":"5","units":""}
+      "daysSupplied":{"scalar":"5","units":""},
       "deliveryMethod":null,
       "description":"Medication, Order: Opioid Pain Medications",
       "dose":{"scalar":"100","units":"mg"},
@@ -182,7 +182,7 @@ describe "Medication", ->
 
     it "should return days supplied", ->
       medicationDispensed = new CQL_QDM.MedicationOrder(medicationOrderEntry)
-      expect(medicationDispensed.daysSupplied()).toEqual '5'
+      expect(medicationDispensed.daysSupplied()).toEqual 5
 
     it "should show valid relevantPeriod", ->
       medicationOrdered = new CQL_QDM.MedicationOrder(medicationOrderEntry)
@@ -190,7 +190,7 @@ describe "Medication", ->
 
     it "should return an integer of the number of refills", ->
       medicationOrdered = new CQL_QDM.MedicationOrder(medicationOrderEntry)
-      expect(medicationOrdered.refills()).toEqual '33'
+      expect(medicationOrdered.refills()).toEqual 33
 
     it "should return a coded frequency", ->
       medicationOrdered = new CQL_QDM.MedicationOrder(medicationOrderEntry)
@@ -388,7 +388,7 @@ describe "Medication", ->
       "anatomical_approach":null,
       "codes":{"RxNorm":["1010600"]},
       "cumulativeMedicationDuration":null,
-      "daysSupplied":{"scalar":"5","units":""}
+      "daysSupplied":{"scalar":"5","units":""},
       "deliveryMethod":null,
       "description":"Medication, Discharge: Opioid Pain Medications",
       "dose":{"scalar":"100","units":"mg"},
@@ -428,11 +428,11 @@ describe "Medication", ->
 
     it "should return an integer of the number of refills", ->
       medicationDischarge = new CQL_QDM.MedicationDischarge(medicationDischargeEntry)
-      expect(medicationDischarge.refills()).toEqual '100'
+      expect(medicationDischarge.refills()).toEqual 100
 
     it "should return days supplied", ->
       medicationDispensed = new CQL_QDM.MedicationDischarge(medicationDischargeEntry)
-      expect(medicationDispensed.daysSupplied()).toEqual '5'
+      expect(medicationDispensed.daysSupplied()).toEqual 5
       
     it "should return a dosage quantity", ->
       medicationDischarge = new CQL_QDM.MedicationDischarge(medicationDischargeEntry)
@@ -452,7 +452,7 @@ describe "Medication", ->
 
     it "should return an integer of the number of refills", ->
       medicationDispensed = new CQL_QDM.MedicationDischarge(medicationDischargeEntry)
-      expect(medicationDispensed.refills()).toEqual '100'
+      expect(medicationDispensed.refills()).toEqual 100
 
     it "should return a supply quantity", ->
       medicationDispensed = new CQL_QDM.MedicationDischarge(medicationDischargeEntry)
