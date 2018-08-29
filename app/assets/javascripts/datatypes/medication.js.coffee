@@ -298,7 +298,7 @@ class CQL_QDM.MedicationDispensed extends CQL_QDM.QDMDatatype
   @returns {Id}
   ###
   dispenserId: ->
-   if @_prescriberIdentifier?
+   if @_dispenserIdentifier?
     new CQL_QDM.Id(@_dispenserIdentifier.value, @_dispenserIdentifier.namingSystem)
    else
     null
