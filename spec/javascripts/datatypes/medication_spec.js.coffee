@@ -51,7 +51,7 @@ describe "Medication", ->
   
     it "should return a dispenserIdentifier Id", ->
       medicationDispensed = new CQL_QDM.MedicationDispensed(medicationDispensedEntry)
-      expect(medicationDispensed.dispenserIdentifier()).toEqual new CQL_QDM.Id("Dr. Alice", "testSystem")
+      expect(medicationDispensed.dispenserId()).toEqual new CQL_QDM.Id("Dr. Alice", "testSystem")
   
     it "has infinite DateTime when no end_time specified", ->
       previous_end_time = medicationDispensedEntry['end_time']
@@ -89,7 +89,7 @@ describe "Medication", ->
 
     it "should return a prescriberIdentifier Id", ->
       medicationDispensed = new CQL_QDM.MedicationDispensed(medicationDispensedEntry)
-      expect(medicationDispensed.prescriberIdentifier()).toEqual new CQL_QDM.Id("Dr. Bob", "doctorSystem")
+      expect(medicationDispensed.prescriberId()).toEqual new CQL_QDM.Id("Dr. Bob", "doctorSystem")
 
     it "should return a route code", ->
       medicationDispensed = new CQL_QDM.MedicationDispensed(medicationDispensedEntry)
@@ -107,7 +107,7 @@ describe "Medication", ->
       expect(medicationDispensed.dosage()).toEqual null
       expect(medicationDispensed.route()).toEqual null
       expect(medicationDispensed.negationRationale()).toEqual null
-      expect(medicationDispensed.prescriberIdentifier()).toEqual null
+      expect(medicationDispensed.prescriberId()).toEqual null
 
   describe "Order", ->
     medicationOrderEntry = {
@@ -206,7 +206,7 @@ describe "Medication", ->
 
     it "should return a prescriberIdentifier Id", ->
       medicationOrdered = new CQL_QDM.MedicationOrder(medicationOrderEntry)
-      expect(medicationOrdered.prescriberIdentifier()).toEqual new CQL_QDM.Id("Dr. Bob", "doctorSystem")
+      expect(medicationOrdered.prescriberId()).toEqual new CQL_QDM.Id("Dr. Bob", "doctorSystem")
 
     it "should return null when field is not on constructing entry", ->
       medicationOrdered = new CQL_QDM.MedicationOrder({'start_time': '08/31/2017 1:00 AM', 'end_time': '08/31/2017 2:00 AM'})
@@ -217,7 +217,7 @@ describe "Medication", ->
       expect(medicationOrdered.route()).toEqual null
       expect(medicationOrdered.negationRationale()).toEqual null
       expect(medicationOrdered.setting()).toEqual null
-      expect(medicationOrdered.prescriberIdentifier()).toEqual null
+      expect(medicationOrdered.prescriberId()).toEqual null
 
   describe "Active", ->
     medicationActiveEntry = {
@@ -392,6 +392,7 @@ describe "Medication", ->
       "negationReason":{"code_system":"LOINC","code":"29463-7"},
       "oid":"2.16.840.1.113883.3.560.1.200",
       "patientInstructions":null,
+      "prescriberIdentifier":{"value":"Dr. Bob","namingSystem":"doctorSystem"},
       "productForm":null,
       "reaction":null,
       "reason":null,
@@ -423,6 +424,10 @@ describe "Medication", ->
       medicationDischarge = new CQL_QDM.MedicationDischarge(medicationDischargeEntry)
       expect(medicationDischarge.negationRationale()).toEqual new cql.Code('29463-7', 'LOINC', null, null)
 
+    it "should return a prescriberIdentifier Id", ->
+      medicationDischarge = new CQL_QDM.MedicationDischarge(medicationDischargeEntry)
+      expect(medicationDischarge.prescriberId()).toEqual new CQL_QDM.Id("Dr. Bob", "doctorSystem")
+
     it "should return a route code", ->
       medicationDischarge = new CQL_QDM.MedicationDischarge(medicationDischargeEntry)
       expect(medicationDischarge.route()).toEqual new cql.Code('995218', 'RxNorm', null, 'Hydroxyzine')
@@ -443,3 +448,4 @@ describe "Medication", ->
       expect(medicationDischarge.refills()).toEqual null
       expect(medicationDischarge.route()).toEqual null
       expect(medicationDischarge.negationRationale()).toEqual null
+      expect(medicationDischarge.prescriberId()).toEqual null
