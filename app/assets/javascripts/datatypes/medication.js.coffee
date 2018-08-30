@@ -177,6 +177,7 @@ class CQL_QDM.MedicationDischarge extends CQL_QDM.QDMDatatype
     @_dosage = @entry.dose
     @_frequency = @entry.administrationTiming
     @_negationRationale = @entry.negationReason
+    @_prescriberIdentifier = @entry.prescriberIdentifier
     @_refills = @entry.refills
     @_route = @entry.route
     @_supply = @entry.supply
@@ -217,6 +218,15 @@ class CQL_QDM.MedicationDischarge extends CQL_QDM.QDMDatatype
       new cql.Code(@_negationRationale.code, @_negationRationale.code_system, null, @_negationRationale.title || null)
     else
       null
+
+  ###
+  @returns {Id}
+  ###
+  prescriberId: ->
+   if @_prescriberIdentifier?
+    new CQL_QDM.Id(@_prescriberIdentifier.value, @_prescriberIdentifier.namingSystem)
+   else
+    null
 
   ###
   @returns {Integer}
@@ -263,9 +273,11 @@ class CQL_QDM.MedicationDispensed extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
+    @_dispenserIdentifier = @entry.dispenserIdentifier
     @_dosage = @entry.dose
     @_frequency = @entry.administrationTiming
     @_negationRationale = @entry.negationReason
+    @_prescriberIdentifier = @entry.prescriberIdentifier
     @_refills = @entry.refills
     @_route = @entry.route
     @_supply = @entry.supply
@@ -281,6 +293,15 @@ class CQL_QDM.MedicationDispensed extends CQL_QDM.QDMDatatype
   ###
   authorDatetime: ->
     @_authorDatetime
+
+  ###
+  @returns {Id}
+  ###
+  dispenserId: ->
+   if @_dispenserIdentifier?
+    new CQL_QDM.Id(@_dispenserIdentifier.value, @_dispenserIdentifier.namingSystem)
+   else
+    null
 
   ###
   @returns {Quantity}
@@ -311,6 +332,15 @@ class CQL_QDM.MedicationDispensed extends CQL_QDM.QDMDatatype
       new cql.Code(@_negationRationale.code, @_negationRationale.code_system, null, @_negationRationale.title || null)
     else
       null
+
+  ###
+  @returns {Id}
+  ###
+  prescriberId: ->
+   if @_prescriberIdentifier?
+    new CQL_QDM.Id(@_prescriberIdentifier.value, @_prescriberIdentifier.namingSystem)
+   else
+    null
 
   ###
   @returns {Interval<Date>}
@@ -367,6 +397,7 @@ class CQL_QDM.MedicationOrder extends CQL_QDM.QDMDatatype
     @_frequency = @entry.administrationTiming
     @_method = @entry.method
     @_negationRationale = @entry.negationReason
+    @_prescriberIdentifier = @entry.prescriberIdentifier
     @_reason = @entry.reason
     @_refills = @entry.refills
     @_route = @entry.route
@@ -423,6 +454,15 @@ class CQL_QDM.MedicationOrder extends CQL_QDM.QDMDatatype
       new cql.Code(@_negationRationale.code, @_negationRationale.code_system, null, @_negationRationale.title || null)
     else
       null
+
+  ###
+  @returns {Id}
+  ###
+  prescriberId: ->
+   if @_prescriberIdentifier?
+    new CQL_QDM.Id(@_prescriberIdentifier.value, @_prescriberIdentifier.namingSystem)
+   else
+    null
 
   ###
   @returns {Code}
