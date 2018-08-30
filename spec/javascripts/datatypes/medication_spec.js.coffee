@@ -108,6 +108,7 @@ describe "Medication", ->
       expect(medicationDispensed.route()).toEqual null
       expect(medicationDispensed.negationRationale()).toEqual null
       expect(medicationDispensed.prescriberId()).toEqual null
+      expect(medicationDispensed.dispenserId()).toEqual null
 
   describe "Order", ->
     medicationOrderEntry = {
