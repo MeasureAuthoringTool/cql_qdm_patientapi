@@ -194,7 +194,7 @@ class CQL_QDM.MedicationDischarge extends CQL_QDM.QDMDatatype
   @returns {Integer}
   ###
   daysSupplied: ->
-    if @_daysSupplied?
+    if @_daysSupplied? and @_daysSupplied['scalar']?
       parseInt(@_daysSupplied['scalar'],10)
     else
       null
@@ -242,7 +242,7 @@ class CQL_QDM.MedicationDischarge extends CQL_QDM.QDMDatatype
   @returns {Integer}
   ###
   refills: ->
-    if @_refills?
+    if @_refills? and @_refills['scalar']?
       parseInt(@_refills['scalar'],10)
     else
       null
@@ -318,7 +318,7 @@ class CQL_QDM.MedicationDispensed extends CQL_QDM.QDMDatatype
   @returns {Integer}
   ###
   daysSupplied: ->
-    if @_daysSupplied?
+    if @_daysSupplied? and @_daysSupplied['scalar']?
       parseInt(@_daysSupplied['scalar'],10)
     else
       null
@@ -377,7 +377,7 @@ class CQL_QDM.MedicationDispensed extends CQL_QDM.QDMDatatype
   @returns {Integer}
   ###
   refills: ->
-    if @_refills?
+    if @_refills? and @_refills['scalar']?
       parseInt(@_refills['scalar'],10)
     else
       null
@@ -441,7 +441,7 @@ class CQL_QDM.MedicationOrder extends CQL_QDM.QDMDatatype
   @returns {Integer}
   ###
   daysSupplied: ->
-    if @_daysSupplied?
+    if @_daysSupplied? and @_daysSupplied['scalar']?
       parseInt(@_daysSupplied['scalar'],10)
     else
       null
@@ -507,7 +507,7 @@ class CQL_QDM.MedicationOrder extends CQL_QDM.QDMDatatype
   @returns {Integer}
   ###
   refills: ->
-    if @_refills?
+    if @_refills? and @_refills['scalar']?
       parseInt(@_refills['scalar'],10)
     else
       null
