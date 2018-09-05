@@ -174,6 +174,7 @@ class CQL_QDM.MedicationDischarge extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
+    @_daysSupplied = @entry.daysSupplied
     @_dosage = @entry.dose
     @_frequency = @entry.administrationTiming
     @_negationRationale = @entry.negationReason
@@ -188,6 +189,15 @@ class CQL_QDM.MedicationDischarge extends CQL_QDM.QDMDatatype
   ###
   authorDatetime: ->
     @_authorDatetime
+
+  ###
+  @returns {Integer}
+  ###
+  daysSupplied: ->
+    if @_daysSupplied? and @_daysSupplied['scalar']?
+      parseInt(@_daysSupplied['scalar'], 10)
+    else
+      null
 
   ###
   @returns {Quantity}
@@ -232,8 +242,8 @@ class CQL_QDM.MedicationDischarge extends CQL_QDM.QDMDatatype
   @returns {Integer}
   ###
   refills: ->
-    if @_refills?
-      @_refills['scalar']
+    if @_refills? and @_refills['scalar']?
+      parseInt(@_refills['scalar'], 10)
     else
       null
 
@@ -274,6 +284,7 @@ class CQL_QDM.MedicationDispensed extends CQL_QDM.QDMDatatype
     super @entry
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
     @_dispenserIdentifier = @entry.dispenserIdentifier
+    @_daysSupplied = @entry.daysSupplied
     @_dosage = @entry.dose
     @_frequency = @entry.administrationTiming
     @_negationRationale = @entry.negationReason
@@ -302,6 +313,15 @@ class CQL_QDM.MedicationDispensed extends CQL_QDM.QDMDatatype
     new CQL_QDM.Id(@_dispenserIdentifier.value, @_dispenserIdentifier.namingSystem)
    else
     null
+
+  ###
+  @returns {Integer}
+  ###
+  daysSupplied: ->
+    if @_daysSupplied? and @_daysSupplied['scalar']?
+      parseInt(@_daysSupplied['scalar'], 10)
+    else
+      null
 
   ###
   @returns {Quantity}
@@ -357,8 +377,8 @@ class CQL_QDM.MedicationDispensed extends CQL_QDM.QDMDatatype
   @returns {Integer}
   ###
   refills: ->
-    if @_refills?
-      @_refills['scalar']
+    if @_refills? and @_refills['scalar']?
+      parseInt(@_refills['scalar'], 10)
     else
       null
 
@@ -393,6 +413,7 @@ class CQL_QDM.MedicationOrder extends CQL_QDM.QDMDatatype
   constructor: (@entry) ->
     super @entry
     @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
+    @_daysSupplied = @entry.daysSupplied
     @_dosage = @entry.dose
     @_frequency = @entry.administrationTiming
     @_method = @entry.method
@@ -415,6 +436,15 @@ class CQL_QDM.MedicationOrder extends CQL_QDM.QDMDatatype
   ###
   authorDatetime: ->
     @_authorDatetime
+
+  ###
+  @returns {Integer}
+  ###
+  daysSupplied: ->
+    if @_daysSupplied? and @_daysSupplied['scalar']?
+      parseInt(@_daysSupplied['scalar'], 10)
+    else
+      null
 
   ###
   @returns {Quantity}
@@ -477,8 +507,8 @@ class CQL_QDM.MedicationOrder extends CQL_QDM.QDMDatatype
   @returns {Integer}
   ###
   refills: ->
-    if @_refills?
-      @_refills['scalar']
+    if @_refills? and @_refills['scalar']?
+      parseInt(@_refills['scalar'], 10)
     else
       null
 
