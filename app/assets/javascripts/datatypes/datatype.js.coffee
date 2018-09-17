@@ -75,7 +75,7 @@ class CQL_QDM.QDMDatatype
     endTime = if @entry?.end_time then "STOP: #{moment.utc(@entry.end_time, 'X').format('MM/DD/YYYY h:mm A')}\n" else ""
     # TODO: Refactor getCode()/code() so that this special logic is not necessary.
     # These PatientCharacteristics use getCode instead of code.  Others still use code.
-    if /PatientCharacteristic(?:Ethnicity|Expired|Race|Sex)/.test(this.constructor.name)
+    if /PatientCharacteristic(?:Ethnicity|Expired|Race|Sex|Birthdate)/.test(this.constructor.name)
       code = @getCode()
     else if @_codes
       # Get code if this datatype has any
