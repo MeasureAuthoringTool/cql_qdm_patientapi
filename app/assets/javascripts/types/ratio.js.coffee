@@ -1,13 +1,11 @@
 ###
-Represents a CQL 'Ratio' for use in the CQL execution engine.
+@namespace scoping into the CQL_QDM namespace (all classes and
+their methods will be accessable through the CQL_QDM namespace)
 ###
-class Ratio
-  constructor: (ratio) ->
-    @numerator = ratio.numerator
-    @denominator = ratio.denominator
+@CQL_QDM ||= {}
 
-  exec: (ctx) ->
-    @
-  
-  toString: () ->
-    "#{@numerator.toString()} '#{@denominator.toString()}'"
+###
+Represents a QDM.Ratio for use in the CQL execution engine.
+###
+class CQL_QDM.Ratio
+  constructor: (@numerator, @denominator) ->
