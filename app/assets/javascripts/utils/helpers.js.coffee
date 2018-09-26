@@ -58,6 +58,12 @@ class CQL_QDM.Helpers
         code = input.code.code
         display = input.description
         new cql.Code(code, code_system, null, display || null)
+      else if input.numerator_scalar? and input.denominator_scalar?
+        input.numerator_units =  "1" if !input.numerator_units? or input.numerator_units == ""
+        input.denominator_units =  "1" if !input.denominator_units? or input.denominator_units == ""
+        numerator = new cql.Quantity({value: input.numerator_scalar, unit: input.numerator_units})
+        denominator = new cql.Quantity({value: input.denominator_scalar, unit: input.denominator_units})
+        new cql.Ratio({numerator: numerator, denominator: denominator})
       # Check that the scalar portion is a number and the units are a non-zero length string.
       else if (input.scalar?.match(/^[-+]?[0-9]*\.?[0-9]+$/) != null)
         if input.units.length > 0
