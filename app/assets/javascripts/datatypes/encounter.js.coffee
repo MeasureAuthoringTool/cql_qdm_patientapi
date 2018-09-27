@@ -13,13 +13,13 @@ class CQL_QDM.EncounterOrder extends CQL_QDM.QDMDatatype
   ###
   @param {Object} entry - the HDS data criteria object to convert
   ###
-  constructor: (@entry) ->
-    super @entry
-    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    @_facilityLocation = @entry.facility
-    @_negationRationale = @entry.negationReason
-    @_reason = @entry.reason
-    delete @entry.end_time
+  constructor: (entry) ->
+    super entry
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(entry.start_time)
+    @_facilityLocation = entry.facility
+    @_negationRationale = entry.negationReason
+    @_reason = entry.reason
+    delete entry.end_time
 
   ###
   @returns {Date}
@@ -64,21 +64,21 @@ class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
   ###
   @param {Object} entry - the HDS data criteria object to convert
   ###
-  constructor: (@entry) ->
-    super @entry
-    @_admissionSource = @entry.admission_source
-    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    @_diagnoses = @entry.diagnosis
-    @_dischargeDisposition = @entry.dischargeDisposition
-    @_facilityLocations = @entry.facility
-    @_negationRationale = @entry.negationReason
-    @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    if @entry.end_time
-      @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
+  constructor: (entry) ->
+    super entry
+    @_admissionSource = entry.admission_source
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(entry.start_time)
+    @_diagnoses = entry.diagnosis
+    @_dischargeDisposition = entry.dischargeDisposition
+    @_facilityLocations = entry.facility
+    @_negationRationale = entry.negationReason
+    @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(entry.start_time)
+    if entry.end_time
+      @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(entry.end_time)
     else
       # No end time; high is set to infinity
       @_relevantPeriodHigh = CQL_QDM.Helpers.infinityDateTime()
-    @_principalDiagnosis = @entry.principalDiagnosis
+    @_principalDiagnosis = entry.principalDiagnosis
 
   ###
   @returns {Code}
@@ -173,13 +173,13 @@ class CQL_QDM.EncounterRecommended extends CQL_QDM.QDMDatatype
   ###
   @param {Object} entry - the HDS data criteria object to convert
   ###
-  constructor: (@entry) ->
-    super @entry
-    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    @_facilityLocation = @entry.facility
-    @_negationRationale = @entry.negationReason
-    @_reason = @entry.reason
-    delete @entry.end_time
+  constructor: (entry) ->
+    super entry
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(entry.start_time)
+    @_facilityLocation = entry.facility
+    @_negationRationale = entry.negationReason
+    @_reason = entry.reason
+    delete entry.end_time
 
   ###
   @returns {Date}

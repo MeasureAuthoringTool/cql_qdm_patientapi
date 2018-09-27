@@ -16,13 +16,13 @@ class CQL_QDM.PhysicalExamOrder extends CQL_QDM.QDMDatatype
   ###
   @param {Object} entry - the HDS data criteria object to convert
   ###
-  constructor: (@entry) ->
-    super @entry
-    @_anatomicalLocationSite = @entry.anatomicalLocation
-    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    @_negationRationale = @entry.negationReason
-    @_reason = @entry.reason
-    delete @entry.end_time
+  constructor: (entry) ->
+    super entry
+    @_anatomicalLocationSite = entry.anatomicalLocation
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(entry.start_time)
+    @_negationRationale = entry.negationReason
+    @_reason = entry.reason
+    delete entry.end_time
 
   ###
   @returns {Code}
@@ -67,22 +67,22 @@ class CQL_QDM.PhysicalExamPerformed extends CQL_QDM.QDMDatatype
   ###
   @param {Object} entry - the HDS data criteria object to convert
   ###
-  constructor: (@entry) ->
-    super @entry
-    @_anatomicalLocationSite = @entry.anatomicalLocation
-    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    @_method = @entry.method
-    @_negationRationale = @entry.negationReason
-    @_reason = @entry.reason
-    @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    if @entry.end_time
-      @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
+  constructor: (entry) ->
+    super entry
+    @_anatomicalLocationSite = entry.anatomicalLocation
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(entry.start_time)
+    @_method = entry.method
+    @_negationRationale = entry.negationReason
+    @_reason = entry.reason
+    @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(entry.start_time)
+    if entry.end_time
+      @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(entry.end_time)
     else
       # No end time; high is set to infinity
       @_relevantPeriodHigh = CQL_QDM.Helpers.infinityDateTime()
-    if @entry.values? && @entry.values.length > 0
-      @_result = @entry.values?[0]
-    @_components = @entry.components
+    if entry.values? && entry.values.length > 0
+      @_result = entry.values?[0]
+    @_components = entry.components
 
   ###
   @returns {Code}
@@ -163,13 +163,13 @@ class CQL_QDM.PhysicalExamRecommended extends CQL_QDM.QDMDatatype
   ###
   @param {Object} entry - the HDS data criteria object to convert
   ###
-  constructor: (@entry) ->
-    super @entry
-    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    @_anatomicalLocationSite = @entry.anatomicalLocation
-    @_negationRationale = @entry.negationReason
-    @_reason = @entry.reason
-    delete @entry.end_time
+  constructor: (entry) ->
+    super entry
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(entry.start_time)
+    @_anatomicalLocationSite = entry.anatomicalLocation
+    @_negationRationale = entry.negationReason
+    @_reason = entry.reason
+    delete entry.end_time
 
   ###
   @returns {Code}
