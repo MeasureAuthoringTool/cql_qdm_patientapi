@@ -346,4 +346,4 @@ describe "Substance", ->
       expect(substanceRecommended.frequency()).toEqual null
       expect(substanceRecommended.refills()).toEqual null
       expect(substanceRecommended.dosage()).toEqual null
-      expect(substanceRecommended.entry.end_time).toEqual undefined
+      expect(substanceRecommended.end_time).toEqual undefined
