@@ -12,6 +12,7 @@ QDM datatypes must support.
 class CQL_QDM.QDMDatatype
   constructor: (entry) ->
     @_id = entry?._id
+    @_oid = entry?.oid
     @_codes = entry?.codes
     @_description = entry?.description
     @_end_time = entry?.end_time
