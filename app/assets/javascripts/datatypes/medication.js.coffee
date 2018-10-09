@@ -16,14 +16,14 @@ class CQL_QDM.MedicationActive extends CQL_QDM.QDMDatatype
   ###
   @param {Object} entry - the HDS data criteria object to convert
   ###
-  constructor: (@entry) ->
-    super @entry
-    @_dosage = @entry.dose
-    @_frequency = @entry.administrationTiming
-    @_route = @entry.route
-    @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    if @entry.end_time
-      @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
+  constructor: (entry) ->
+    super entry
+    @_dosage = entry.dose
+    @_frequency = entry.administrationTiming
+    @_route = entry.route
+    @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(entry.start_time)
+    if entry.end_time
+      @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(entry.end_time)
     else
       # No end time; high is set to infinity
       @_relevantPeriodHigh = CQL_QDM.Helpers.infinityDateTime()
@@ -79,20 +79,20 @@ class CQL_QDM.MedicationAdministered extends CQL_QDM.QDMDatatype
   ###
   @param {Object} entry - the HDS data criteria object to convert
   ###
-  constructor: (@entry) ->
-    super @entry
-    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    @_dosage = @entry.dose
-    @_frequency = @entry.administrationTiming
-    @_negationRationale = @entry.negationReason
-    @_reason = @entry.reason
-    @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    if @entry.end_time
-      @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
+  constructor: (entry) ->
+    super entry
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(entry.start_time)
+    @_dosage = entry.dose
+    @_frequency = entry.administrationTiming
+    @_negationRationale = entry.negationReason
+    @_reason = entry.reason
+    @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(entry.start_time)
+    if entry.end_time
+      @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(entry.end_time)
     else
       # No end time; high is set to infinity
       @_relevantPeriodHigh = CQL_QDM.Helpers.infinityDateTime()
-    @_route = @entry.route
+    @_route = entry.route
 
   ###
   Author date time is only present when this data type has been negated.
@@ -171,18 +171,18 @@ class CQL_QDM.MedicationDischarge extends CQL_QDM.QDMDatatype
   ###
   @param {Object} entry - the HDS data criteria object to convert
   ###
-  constructor: (@entry) ->
-    super @entry
-    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    @_daysSupplied = @entry.daysSupplied
-    @_dosage = @entry.dose
-    @_frequency = @entry.administrationTiming
-    @_negationRationale = @entry.negationReason
-    @_prescriberIdentifier = @entry.prescriberIdentifier
-    @_refills = @entry.refills
-    @_route = @entry.route
-    @_supply = @entry.supply
-    delete @entry.end_time
+  constructor: (entry) ->
+    super entry
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(entry.start_time)
+    @_daysSupplied = entry.daysSupplied
+    @_dosage = entry.dose
+    @_frequency = entry.administrationTiming
+    @_negationRationale = entry.negationReason
+    @_prescriberIdentifier = entry.prescriberIdentifier
+    @_refills = entry.refills
+    @_route = entry.route
+    @_supply = entry.supply
+    delete entry.end_time
 
   ###
   @returns {Date}
@@ -280,21 +280,21 @@ class CQL_QDM.MedicationDispensed extends CQL_QDM.QDMDatatype
   ###
   @param {Object} entry - the HDS data criteria object to convert
   ###
-  constructor: (@entry) ->
-    super @entry
-    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    @_dispenserIdentifier = @entry.dispenserIdentifier
-    @_daysSupplied = @entry.daysSupplied
-    @_dosage = @entry.dose
-    @_frequency = @entry.administrationTiming
-    @_negationRationale = @entry.negationReason
-    @_prescriberIdentifier = @entry.prescriberIdentifier
-    @_refills = @entry.refills
-    @_route = @entry.route
-    @_supply = @entry.supply
-    @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    if @entry.end_time
-      @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
+  constructor: (entry) ->
+    super entry
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(entry.start_time)
+    @_dispenserIdentifier = entry.dispenserIdentifier
+    @_daysSupplied = entry.daysSupplied
+    @_dosage = entry.dose
+    @_frequency = entry.administrationTiming
+    @_negationRationale = entry.negationReason
+    @_prescriberIdentifier = entry.prescriberIdentifier
+    @_refills = entry.refills
+    @_route = entry.route
+    @_supply = entry.supply
+    @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(entry.start_time)
+    if entry.end_time
+      @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(entry.end_time)
     else
       # No end time; high is set to infinity
       @_relevantPeriodHigh = CQL_QDM.Helpers.infinityDateTime()
@@ -410,23 +410,23 @@ class CQL_QDM.MedicationOrder extends CQL_QDM.QDMDatatype
   ###
   @param {Object} entry - the HDS data criteria object to convert
   ###
-  constructor: (@entry) ->
-    super @entry
-    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    @_daysSupplied = @entry.daysSupplied
-    @_dosage = @entry.dose
-    @_frequency = @entry.administrationTiming
-    @_method = @entry.method
-    @_negationRationale = @entry.negationReason
-    @_prescriberIdentifier = @entry.prescriberIdentifier
-    @_reason = @entry.reason
-    @_refills = @entry.refills
-    @_route = @entry.route
-    @_setting = @entry.setting
-    @_supply = @entry.supply
-    @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    if @entry.end_time
-      @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
+  constructor: (entry) ->
+    super entry
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(entry.start_time)
+    @_daysSupplied = entry.daysSupplied
+    @_dosage = entry.dose
+    @_frequency = entry.administrationTiming
+    @_method = entry.method
+    @_negationRationale = entry.negationReason
+    @_prescriberIdentifier = entry.prescriberIdentifier
+    @_reason = entry.reason
+    @_refills = entry.refills
+    @_route = entry.route
+    @_setting = entry.setting
+    @_supply = entry.supply
+    @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(entry.start_time)
+    if entry.end_time
+      @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(entry.end_time)
     else
       # No end time; high is set to infinity
       @_relevantPeriodHigh = CQL_QDM.Helpers.infinityDateTime()

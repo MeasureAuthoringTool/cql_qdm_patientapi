@@ -19,12 +19,12 @@ class CQL_QDM.DiagnosticStudyOrder extends CQL_QDM.QDMDatatype
   ###
   @param {Object} entry - the HDS data criteria object to convert
   ###
-  constructor: (@entry) ->
-    super @entry
-    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    @_negationRationale = @entry.negationReason
-    @_reason = @entry.reason
-    delete @entry.end_time
+  constructor: (entry) ->
+    super entry
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(entry.start_time)
+    @_negationRationale = entry.negationReason
+    @_reason = entry.reason
+    delete entry.end_time
 
   ###
   @returns {Date}
@@ -60,24 +60,24 @@ class CQL_QDM.DiagnosticStudyPerformed extends CQL_QDM.QDMDatatype
   ###
   @param {Object} entry - the HDS data criteria object to convert
   ###
-  constructor: (@entry) ->
-    super @entry
-    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    @_facilityLocation = @entry.facility
-    @_method = @entry.method
-    @_negationRationale = @entry.negationReason
-    @_reason = @entry.reason
-    if @entry.values? && @entry.values.length > 0
-      @_result = @entry.values?[0]
-    @_resultDatetime = CQL_QDM.Helpers.convertDateTime(@entry.result_date_time)
-    @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    if @entry.end_time
-      @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
+  constructor: (entry) ->
+    super entry
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(entry.start_time)
+    @_facilityLocation = entry.facility
+    @_method = entry.method
+    @_negationRationale = entry.negationReason
+    @_reason = entry.reason
+    if entry.values? && entry.values.length > 0
+      @_result = entry.values?[0]
+    @_resultDatetime = CQL_QDM.Helpers.convertDateTime(entry.result_date_time)
+    @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(entry.start_time)
+    if entry.end_time
+      @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(entry.end_time)
     else
       # No end time; high is set to infinity
       @_relevantPeriodHigh = CQL_QDM.Helpers.infinityDateTime()
-    @_status = @entry.qdm_status
-    @_components = @entry.components
+    @_status = entry.qdm_status
+    @_components = entry.components
 
 
   ###
@@ -175,11 +175,11 @@ class CQL_QDM.DiagnosticStudyRecommended extends CQL_QDM.QDMDatatype
   ###
   @param {Object} entry - the HDS data criteria object to convert
   ###
-  constructor: (@entry) ->
-    super @entry
-    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    @_negationRationale = @entry.negationReason
-    delete @entry.end_time
+  constructor: (entry) ->
+    super entry
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(entry.start_time)
+    @_negationRationale = entry.negationReason
+    delete entry.end_time
 
   ###
   @returns {Date}

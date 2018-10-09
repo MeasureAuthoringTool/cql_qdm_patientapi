@@ -18,15 +18,15 @@ class CQL_QDM.Symptom extends CQL_QDM.QDMDatatype
   ###
   @param {Object} entry - the HDS data criteria object to convert
   ###
-  constructor: (@entry) ->
-    super @entry
-    @_prevalencePeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    if @entry.end_time
-      @_prevalencePeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
+  constructor: (entry) ->
+    super entry
+    @_prevalencePeriodLow = CQL_QDM.Helpers.convertDateTime(entry.start_time)
+    if entry.end_time
+      @_prevalencePeriodHigh = CQL_QDM.Helpers.convertDateTime(entry.end_time)
     else
       # No end time; high is set to infinity
       @_prevalencePeriodHigh = CQL_QDM.Helpers.infinityDateTime()
-    @_severity = @entry.severity
+    @_severity = entry.severity
 
   ###
   @returns {Interval<Date>}

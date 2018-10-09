@@ -10,8 +10,13 @@ Base QDM datatype class; implements various functions that all implemented
 QDM datatypes must support.
 ###
 class CQL_QDM.QDMDatatype
-  constructor: (@entry) ->
-    @_codes = @entry?.codes
+  constructor: (entry) ->
+    @_id = entry?._id
+    @_oid = entry?.oid
+    @_codes = entry?.codes
+    @_description = entry?.description
+    @_end_time = entry?.end_time
+    @_start_time = entry?.start_time
 
   ###
   Returns any instances of this attribute currently within this namespace.
@@ -39,8 +44,8 @@ class CQL_QDM.QDMDatatype
   @returns {Id}
   ###
   id: ->
-    if @entry?._id?
-      return new CQL_QDM.Id(@entry._id)
+    if @_id?
+      return new CQL_QDM.Id(@_id)
     else
       null
 
@@ -69,10 +74,10 @@ class CQL_QDM.QDMDatatype
   ###
   toString: ->
     # Grab description from entry; if blank use classname
-    description = if @entry?.description then "#{@entry.description}\n" else "#{@constructor.name}\n"
+    description = if @_description? then "#{@_description}\n" else "#{@constructor.name}\n"
     # Grab start and end time, format for proper display
-    startTime = if @entry?.start_time then "START: #{moment.utc(@entry.start_time, 'X').format('MM/DD/YYYY h:mm A')}\n" else ""
-    endTime = if @entry?.end_time then "STOP: #{moment.utc(@entry.end_time, 'X').format('MM/DD/YYYY h:mm A')}\n" else ""
+    startTime = if @_start_time? then "START: #{moment.utc(@_start_time, 'X').format('MM/DD/YYYY h:mm A')}\n" else ""
+    endTime = if @_end_time? then "STOP: #{moment.utc(@_end_time, 'X').format('MM/DD/YYYY h:mm A')}\n" else ""
     # TODO: Refactor getCode()/code() so that this special logic is not necessary.
     # These PatientCharacteristics use getCode instead of code.  Others still use code.
     if /PatientCharacteristic(?:Ethnicity|Expired|Race|Sex|Birthdate)/.test(this.constructor.name)

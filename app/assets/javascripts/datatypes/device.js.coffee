@@ -15,15 +15,15 @@ class CQL_QDM.DeviceApplied extends CQL_QDM.QDMDatatype
   ###
   @param {Object} entry - the HDS data criteria object to convert
   ###
-  constructor: (@entry) ->
-    super @entry
-    @_anatomicalLocationSite = @entry.anatomical_location
-    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    @_negationRationale = @entry.negationReason
-    @_reason = @entry.reason
-    @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    if @entry.end_time
-      @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
+  constructor: (entry) ->
+    super entry
+    @_anatomicalLocationSite = entry.anatomical_location
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(entry.start_time)
+    @_negationRationale = entry.negationReason
+    @_reason = entry.reason
+    @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(entry.start_time)
+    if entry.end_time
+      @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(entry.end_time)
     else
       # No end time; high is set to infinity
       @_relevantPeriodHigh = CQL_QDM.Helpers.infinityDateTime()
@@ -82,12 +82,12 @@ class CQL_QDM.DeviceOrder extends CQL_QDM.QDMDatatype
   ###
   @param {Object} entry - the HDS data criteria object to convert
   ###
-  constructor: (@entry) ->
-    super @entry
-    @_negationRationale = @entry.negationReason
-    @_reason = @entry.reason
-    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    delete @entry.end_time
+  constructor: (entry) ->
+    super entry
+    @_negationRationale = entry.negationReason
+    @_reason = entry.reason
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(entry.start_time)
+    delete entry.end_time
 
   ###
   @returns {Code}
@@ -123,12 +123,12 @@ class CQL_QDM.DeviceRecommended extends CQL_QDM.QDMDatatype
   ###
   @param {Object} entry - the HDS data criteria object to convert
   ###
-  constructor: (@entry) ->
-    super @entry
-    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    @_negationRationale = @entry.negationReason
-    @_reason = @entry.reason
-    delete @entry.end_time
+  constructor: (entry) ->
+    super entry
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(entry.start_time)
+    @_negationRationale = entry.negationReason
+    @_reason = entry.reason
+    delete entry.end_time
 
   ###
   @returns {Date}

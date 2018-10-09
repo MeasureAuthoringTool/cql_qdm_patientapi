@@ -11,10 +11,10 @@ class CQL_QDM.PatientCharacteristic extends CQL_QDM.QDMDatatype
   ###
   @param {Object} patient - the HDS patient object to use
   ###
-  constructor: (@entry) ->
-    super @entry
-    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    @_codes = @entry.codes
+  constructor: (entry) ->
+    super entry
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(entry.start_time)
+    @_codes = entry.codes
 
   ###
   @returns {Date}

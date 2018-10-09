@@ -72,6 +72,6 @@ describe "QDMDatatype", ->
     dataEntry = new CQL_QDM.QDMDatatype(diagnosisEntry)
     expect(dataEntry.toString()).toContain('SNOMED-CT 442311008')
 
-  it "toString handles a null @entry", ->
+  it "toString handles a null entry", ->
     dataEntry = new CQL_QDM.QDMDatatype(null)
     expect(dataEntry.toString()).toContain('QDMDatatype')

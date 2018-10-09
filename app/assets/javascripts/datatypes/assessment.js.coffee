@@ -22,12 +22,12 @@ class CQL_QDM.AssessmentOrder extends CQL_QDM.QDMDatatype
   ###
   @param {Object} entry - the HDS data criteria object to convert
   ###
-  constructor: (@entry) ->
-    super @entry
-    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    @_negationRationale = @entry.negationReason
-    @_reason = @entry.reason
-    delete @entry.end_time
+  constructor: (entry) ->
+    super entry
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(entry.start_time)
+    @_negationRationale = entry.negationReason
+    @_reason = entry.reason
+    delete entry.end_time
 
   ###
   @returns {Date}
@@ -63,17 +63,17 @@ class CQL_QDM.AssessmentPerformed extends CQL_QDM.QDMDatatype
   ###
   @param {Object} entry - the HDS data criteria object to convert
   ###
-  constructor: (@entry) ->
-    super @entry
-    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    @_method = @entry.method
-    @_negationRationale = @entry.negationReason
-    @_reason = @entry.reason
-    if @entry.values? && @entry.values.length > 0
-      @_result = @entry.values?[0]
-    @_relatedTo = @entry.references
-    @_components = @entry.components
-    delete @entry.end_time
+  constructor: (entry) ->
+    super entry
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(entry.start_time)
+    @_method = entry.method
+    @_negationRationale = entry.negationReason
+    @_reason = entry.reason
+    if entry.values? && entry.values.length > 0
+      @_result = entry.values?[0]
+    @_relatedTo = entry.references
+    @_components = entry.components
+    delete entry.end_time
 
   ###
   @returns {Date}
@@ -156,14 +156,14 @@ class CQL_QDM.AssessmentRecommended extends CQL_QDM.QDMDatatype
   ###
   @param {Object} entry - the HDS data criteria object to convert
   ###
-  constructor: (@entry) ->
-    super @entry
-    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    @_negationRationale = @entry.negationReason
-    @_reason = @entry.reason
-    if @entry.values? && @entry.values.length > 0
-      @_result = @entry.values?[0]
-    delete @entry.end_time
+  constructor: (entry) ->
+    super entry
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(entry.start_time)
+    @_negationRationale = entry.negationReason
+    @_reason = entry.reason
+    if entry.values? && entry.values.length > 0
+      @_result = entry.values?[0]
+    delete entry.end_time
 
   ###
   @returns {Date}

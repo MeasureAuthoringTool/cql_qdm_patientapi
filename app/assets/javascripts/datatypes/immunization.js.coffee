@@ -14,14 +14,14 @@ class CQL_QDM.ImmunizationAdministered extends CQL_QDM.QDMDatatype
   ###
   @param {Object} entry - the HDS data criteria object to convert
   ###
-  constructor: (@entry) ->
-    super @entry
-    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    @_dosage = @entry.dose
-    @_negationRationale = @entry.negationReason
-    @_reason = @entry.reason
-    @_route = @entry.route
-    delete @entry.end_time
+  constructor: (entry) ->
+    super entry
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(entry.start_time)
+    @_dosage = entry.dose
+    @_negationRationale = entry.negationReason
+    @_reason = entry.reason
+    @_route = entry.route
+    delete entry.end_time
 
   ###
   @returns {Date}
@@ -79,22 +79,22 @@ class CQL_QDM.ImmunizationOrder extends CQL_QDM.QDMDatatype
   ###
   @param {Object} entry - the HDS data criteria object to convert
   ###
-  constructor: (@entry) ->
-    super @entry
-    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
+  constructor: (entry) ->
+    super entry
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(entry.start_time)
 
     # if activeDatetime is provided, use it, otherwise default to authorDatetime per QDM spec
-    if @entry.active_datetime?
-      @_activeDatetime = CQL_QDM.Helpers.convertDateTime(@entry.active_datetime)
+    if entry.active_datetime?
+      @_activeDatetime = CQL_QDM.Helpers.convertDateTime(entry.active_datetime)
     else
       @_activeDatetime = @_authorDatetime
 
-    @_dosage = @entry.dose
-    @_negationRationale = @entry.negationReason
-    @_reason = @entry.reason
-    @_route = @entry.route
-    @_supply = @entry.supply
-    delete @entry.end_time
+    @_dosage = entry.dose
+    @_negationRationale = entry.negationReason
+    @_reason = entry.reason
+    @_route = entry.route
+    @_supply = entry.supply
+    delete entry.end_time
 
   ###
   @returns {Date}
