@@ -12,25 +12,14 @@ class CQL_QDM.ProcedureOrder extends CQL_QDM.QDMDatatype
   ###
   @param {Object} entry - the HDS data criteria object to convert
   ###
-  constructor: (@entry) ->
-    super @entry
-    @_anatomicalApproachSite = @entry.anatomical_approach
-    @_anatomicalLocationSite = @entry.anatomical_location
-    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    @_method = @entry.method
-    @_negationRationale = @entry.negationReason
-    @_ordinality = @entry.ordinality
-    @_reason = @entry.reason
-    delete @entry.end_time
-
-  ###
-  @returns {Code}
-  ###
-  anatomicalApproachSite: ->
-    if @_anatomicalApproachSite?
-      new cql.Code(@_anatomicalApproachSite.code, @_anatomicalApproachSite.code_system, null, @_anatomicalApproachSite.title || null)
-    else
-      null
+  constructor: (entry) ->
+    super entry
+    @_anatomicalLocationSite = entry.anatomical_location
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(entry.start_time)
+    @_negationRationale = entry.negationReason
+    @_ordinality = entry.ordinality
+    @_reason = entry.reason
+    delete entry.end_time
 
   ###
   @returns {Code}
@@ -46,15 +35,6 @@ class CQL_QDM.ProcedureOrder extends CQL_QDM.QDMDatatype
   ###
   authorDatetime: ->
     @_authorDatetime
-
-  ###
-  @returns {Code}
-  ###
-  method: ->
-    if @_method?
-      new cql.Code(@_method.code, @_method.code_system, null, @_method.title || null)
-    else
-      null
 
   ###
   @returns {Code}
@@ -93,35 +73,25 @@ class CQL_QDM.ProcedurePerformed extends CQL_QDM.QDMDatatype
   ###
   @param {Object} entry - the HDS data criteria object to convert
   ###
-  constructor: (@entry) ->
-    super @entry
-    @_anatomicalApproachSite = @entry.anatomical_approach
-    @_anatomicalLocationSite = @entry.anatomical_location
-    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    @_incisionDatetime = CQL_QDM.Helpers.convertDateTime(@entry.incisionTime)
-    @_method = @entry.method
-    @_negationRationale = @entry.negationReason
-    @_ordinality = @entry.ordinality
-    @_reason = @entry.reason
-    @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    if @entry.end_time
-      @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
+  constructor: (entry) ->
+    super entry
+    @_anatomicalLocationSite = entry.anatomical_location
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(entry.start_time)
+    @_incisionDatetime = CQL_QDM.Helpers.convertDateTime(entry.incisionTime)
+    @_method = entry.method
+    @_negationRationale = entry.negationReason
+    @_ordinality = entry.ordinality
+    @_reason = entry.reason
+    @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(entry.start_time)
+    if entry.end_time
+      @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(entry.end_time)
     else
       # No end time; high is set to infinity
       @_relevantPeriodHigh = CQL_QDM.Helpers.infinityDateTime()
-    if @entry.values? && @entry.values.length > 0
-      @_result = @entry.values?[0]
-    @_status = @entry.qdm_status
-    @_components = @entry.components
-
-  ###
-  @returns {Code}
-  ###
-  anatomicalApproachSite: ->
-    if @_anatomicalApproachSite?
-      new cql.Code(@_anatomicalApproachSite.code, @_anatomicalApproachSite.code_system, null, @_anatomicalApproachSite.title || null)
-    else
-      null
+    if entry.values? && entry.values.length > 0
+      @_result = entry.values?[0]
+    @_status = entry.qdm_status
+    @_components = entry.components
 
   ###
   @returns {Code}
@@ -226,25 +196,14 @@ class CQL_QDM.ProcedureRecommended extends CQL_QDM.QDMDatatype
   ###
   @param {Object} entry - the HDS data criteria object to convert
   ###
-  constructor: (@entry) ->
-    super @entry
-    @_anatomicalApproachSite = @entry.anatomical_approach
-    @_anatomicalLocationSite = @entry.anatomical_location
-    @_method = @entry.method
-    @_negationRationale = @entry.negationReason
-    @_ordinality = @entry.ordinality
-    @_reason = @entry.reason
-    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    delete @entry.end_time
-
-  ###
-  @returns {Code}
-  ###
-  anatomicalApproachSite: ->
-    if @_anatomicalApproachSite?
-      new cql.Code(@_anatomicalApproachSite.code, @_anatomicalApproachSite.code_system, null, @_anatomicalApproachSite.title || null)
-    else
-      null
+  constructor: (entry) ->
+    super entry
+    @_anatomicalLocationSite = entry.anatomical_location
+    @_negationRationale = entry.negationReason
+    @_ordinality = entry.ordinality
+    @_reason = entry.reason
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(entry.start_time)
+    delete entry.end_time
 
   ###
   @returns {Code}
@@ -260,15 +219,6 @@ class CQL_QDM.ProcedureRecommended extends CQL_QDM.QDMDatatype
   ###
   authorDatetime: ->
     @_authorDatetime
-
-  ###
-  @returns {Code}
-  ###
-  method: ->
-    if @_method?
-      new cql.Code(@_method.code, @_method.code_system, null, @_method.title || null)
-    else
-      null
 
   ###
   @returns {Code}

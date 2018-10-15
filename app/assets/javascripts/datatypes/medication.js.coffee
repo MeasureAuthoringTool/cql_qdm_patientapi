@@ -16,18 +16,17 @@ class CQL_QDM.MedicationActive extends CQL_QDM.QDMDatatype
   ###
   @param {Object} entry - the HDS data criteria object to convert
   ###
-  constructor: (@entry) ->
-    super @entry
-    @_dosage = @entry.dose
-    @_frequency = @entry.administrationTiming
-    @_route = @entry.route
-    @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    if @entry.end_time
-      @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
+  constructor: (entry) ->
+    super entry
+    @_dosage = entry.dose
+    @_frequency = entry.administrationTiming
+    @_route = entry.route
+    @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(entry.start_time)
+    if entry.end_time
+      @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(entry.end_time)
     else
       # No end time; high is set to infinity
       @_relevantPeriodHigh = CQL_QDM.Helpers.infinityDateTime()
-    @_supply = @entry.supply
 
   ###
   @returns {Quantity}
@@ -70,15 +69,6 @@ class CQL_QDM.MedicationActive extends CQL_QDM.QDMDatatype
     else
       null
 
-  ###
-  @returns {Quantity}
-  ###
-  supply: ->
-    if @_supply?
-      new cql.Quantity({unit: @_supply['units'], value: @_supply['scalar']})
-    else
-      null
-
 
 ###
 Data elements that meet criteria using this datatype should document that the
@@ -89,21 +79,20 @@ class CQL_QDM.MedicationAdministered extends CQL_QDM.QDMDatatype
   ###
   @param {Object} entry - the HDS data criteria object to convert
   ###
-  constructor: (@entry) ->
-    super @entry
-    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    @_dosage = @entry.dose
-    @_frequency = @entry.administrationTiming
-    @_negationRationale = @entry.negationReason
-    @_reason = @entry.reason
-    @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    if @entry.end_time
-      @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
+  constructor: (entry) ->
+    super entry
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(entry.start_time)
+    @_dosage = entry.dose
+    @_frequency = entry.administrationTiming
+    @_negationRationale = entry.negationReason
+    @_reason = entry.reason
+    @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(entry.start_time)
+    if entry.end_time
+      @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(entry.end_time)
     else
       # No end time; high is set to infinity
       @_relevantPeriodHigh = CQL_QDM.Helpers.infinityDateTime()
-    @_route = @entry.route
-    @_supply = @entry.supply
+    @_route = entry.route
 
   ###
   Author date time is only present when this data type has been negated.
@@ -171,15 +160,6 @@ class CQL_QDM.MedicationAdministered extends CQL_QDM.QDMDatatype
     else
       null
 
-  ###
-  @returns {Quantity}
-  ###
-  supply: ->
-    if @_supply?
-      new cql.Quantity({unit: @_supply['units'], value: @_supply['scalar']})
-    else
-      null
-
 
 ###
 Data elements that meet criteria using this datatype should document that the
@@ -191,22 +171,33 @@ class CQL_QDM.MedicationDischarge extends CQL_QDM.QDMDatatype
   ###
   @param {Object} entry - the HDS data criteria object to convert
   ###
-  constructor: (@entry) ->
-    super @entry
-    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    @_dosage = @entry.dose
-    @_frequency = @entry.administrationTiming
-    @_negationRationale = @entry.negationReason
-    @_refills = @entry.refills
-    @_route = @entry.route
-    @_supply = @entry.supply
-    delete @entry.end_time
+  constructor: (entry) ->
+    super entry
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(entry.start_time)
+    @_daysSupplied = entry.daysSupplied
+    @_dosage = entry.dose
+    @_frequency = entry.administrationTiming
+    @_negationRationale = entry.negationReason
+    @_prescriberIdentifier = entry.prescriberIdentifier
+    @_refills = entry.refills
+    @_route = entry.route
+    @_supply = entry.supply
+    delete entry.end_time
 
   ###
   @returns {Date}
   ###
   authorDatetime: ->
     @_authorDatetime
+
+  ###
+  @returns {Integer}
+  ###
+  daysSupplied: ->
+    if @_daysSupplied? and @_daysSupplied['scalar']?
+      parseInt(@_daysSupplied['scalar'], 10)
+    else
+      null
 
   ###
   @returns {Quantity}
@@ -239,11 +230,20 @@ class CQL_QDM.MedicationDischarge extends CQL_QDM.QDMDatatype
       null
 
   ###
+  @returns {Id}
+  ###
+  prescriberId: ->
+   if @_prescriberIdentifier?
+    new CQL_QDM.Id(@_prescriberIdentifier.value, @_prescriberIdentifier.namingSystem)
+   else
+    null
+
+  ###
   @returns {Integer}
   ###
   refills: ->
-    if @_refills?
-      @_refills['scalar']
+    if @_refills? and @_refills['scalar']?
+      parseInt(@_refills['scalar'], 10)
     else
       null
 
@@ -280,18 +280,21 @@ class CQL_QDM.MedicationDispensed extends CQL_QDM.QDMDatatype
   ###
   @param {Object} entry - the HDS data criteria object to convert
   ###
-  constructor: (@entry) ->
-    super @entry
-    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    @_dosage = @entry.dose
-    @_frequency = @entry.administrationTiming
-    @_negationRationale = @entry.negationReason
-    @_refills = @entry.refills
-    @_route = @entry.route
-    @_supply = @entry.supply
-    @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    if @entry.end_time
-      @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
+  constructor: (entry) ->
+    super entry
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(entry.start_time)
+    @_dispenserIdentifier = entry.dispenserIdentifier
+    @_daysSupplied = entry.daysSupplied
+    @_dosage = entry.dose
+    @_frequency = entry.administrationTiming
+    @_negationRationale = entry.negationReason
+    @_prescriberIdentifier = entry.prescriberIdentifier
+    @_refills = entry.refills
+    @_route = entry.route
+    @_supply = entry.supply
+    @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(entry.start_time)
+    if entry.end_time
+      @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(entry.end_time)
     else
       # No end time; high is set to infinity
       @_relevantPeriodHigh = CQL_QDM.Helpers.infinityDateTime()
@@ -301,6 +304,24 @@ class CQL_QDM.MedicationDispensed extends CQL_QDM.QDMDatatype
   ###
   authorDatetime: ->
     @_authorDatetime
+
+  ###
+  @returns {Id}
+  ###
+  dispenserId: ->
+   if @_dispenserIdentifier?
+    new CQL_QDM.Id(@_dispenserIdentifier.value, @_dispenserIdentifier.namingSystem)
+   else
+    null
+
+  ###
+  @returns {Integer}
+  ###
+  daysSupplied: ->
+    if @_daysSupplied? and @_daysSupplied['scalar']?
+      parseInt(@_daysSupplied['scalar'], 10)
+    else
+      null
 
   ###
   @returns {Quantity}
@@ -333,6 +354,15 @@ class CQL_QDM.MedicationDispensed extends CQL_QDM.QDMDatatype
       null
 
   ###
+  @returns {Id}
+  ###
+  prescriberId: ->
+   if @_prescriberIdentifier?
+    new CQL_QDM.Id(@_prescriberIdentifier.value, @_prescriberIdentifier.namingSystem)
+   else
+    null
+
+  ###
   @returns {Interval<Date>}
   ###
   relevantPeriod: ->
@@ -347,8 +377,8 @@ class CQL_QDM.MedicationDispensed extends CQL_QDM.QDMDatatype
   @returns {Integer}
   ###
   refills: ->
-    if @_refills?
-      @_refills['scalar']
+    if @_refills? and @_refills['scalar']?
+      parseInt(@_refills['scalar'], 10)
     else
       null
 
@@ -380,20 +410,23 @@ class CQL_QDM.MedicationOrder extends CQL_QDM.QDMDatatype
   ###
   @param {Object} entry - the HDS data criteria object to convert
   ###
-  constructor: (@entry) ->
-    super @entry
-    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    @_dosage = @entry.dose
-    @_frequency = @entry.administrationTiming
-    @_method = @entry.method
-    @_negationRationale = @entry.negationReason
-    @_reason = @entry.reason
-    @_refills = @entry.refills
-    @_route = @entry.route
-    @_supply = @entry.supply
-    @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    if @entry.end_time
-      @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
+  constructor: (entry) ->
+    super entry
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(entry.start_time)
+    @_daysSupplied = entry.daysSupplied
+    @_dosage = entry.dose
+    @_frequency = entry.administrationTiming
+    @_method = entry.method
+    @_negationRationale = entry.negationReason
+    @_prescriberIdentifier = entry.prescriberIdentifier
+    @_reason = entry.reason
+    @_refills = entry.refills
+    @_route = entry.route
+    @_setting = entry.setting
+    @_supply = entry.supply
+    @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(entry.start_time)
+    if entry.end_time
+      @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(entry.end_time)
     else
       # No end time; high is set to infinity
       @_relevantPeriodHigh = CQL_QDM.Helpers.infinityDateTime()
@@ -403,6 +436,15 @@ class CQL_QDM.MedicationOrder extends CQL_QDM.QDMDatatype
   ###
   authorDatetime: ->
     @_authorDatetime
+
+  ###
+  @returns {Integer}
+  ###
+  daysSupplied: ->
+    if @_daysSupplied? and @_daysSupplied['scalar']?
+      parseInt(@_daysSupplied['scalar'], 10)
+    else
+      null
 
   ###
   @returns {Quantity}
@@ -444,6 +486,15 @@ class CQL_QDM.MedicationOrder extends CQL_QDM.QDMDatatype
       null
 
   ###
+  @returns {Id}
+  ###
+  prescriberId: ->
+   if @_prescriberIdentifier?
+    new CQL_QDM.Id(@_prescriberIdentifier.value, @_prescriberIdentifier.namingSystem)
+   else
+    null
+
+  ###
   @returns {Code}
   ###
   reason: ->
@@ -456,8 +507,8 @@ class CQL_QDM.MedicationOrder extends CQL_QDM.QDMDatatype
   @returns {Integer}
   ###
   refills: ->
-    if @_refills?
-      @_refills['scalar']
+    if @_refills? and @_refills['scalar']?
+      parseInt(@_refills['scalar'], 10)
     else
       null
 
@@ -478,6 +529,15 @@ class CQL_QDM.MedicationOrder extends CQL_QDM.QDMDatatype
   route: ->
     if @_route?
       new cql.Code(@_route.code, @_route.code_system, null, @_route.title || null)
+    else
+      null
+
+  ###
+  @returns {Code}
+  ###
+  setting: ->
+    if @_setting?
+      new cql.Code(@_setting.code, @_setting.code_system, null, @_setting.title || null)
     else
       null
 

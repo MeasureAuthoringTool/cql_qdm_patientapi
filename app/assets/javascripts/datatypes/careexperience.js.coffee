@@ -14,10 +14,10 @@ class CQL_QDM.PatientCareExperience extends CQL_QDM.QDMDatatype
   ###
   @param {Object} entry - the HDS data criteria object to convert
   ###
-  constructor: (@entry) ->
-    super @entry
-    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    delete @entry.end_time
+  constructor: (entry) ->
+    super entry
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(entry.start_time)
+    delete entry.end_time
 
   ###
   @returns {Date}
@@ -37,9 +37,9 @@ class CQL_QDM.ProviderCareExperience extends CQL_QDM.QDMDatatype
   ###
   @param {Object} entry - the HDS data criteria object to convert
   ###
-  constructor: (@entry) ->
-    super @entry
-    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
+  constructor: (entry) ->
+    super entry
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(entry.start_time)
 
   ###
   @returns {Date}

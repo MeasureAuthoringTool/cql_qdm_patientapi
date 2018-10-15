@@ -1,4 +1,7 @@
 describe "Assessment", ->
+  # TODO: test for Assessment, Order need to be written once we have example CQL to use.
+  # describe "Order", ->
+
   describe "Performed", ->
     it "should return a list of ids when relatedTo is called", ->
       assessmentPerformed = new CQL_QDM.AssessmentPerformed({'references': [{'referenced_id':'1234567890', 'type':'Example'},{'referenced_id':'0987654321', 'type':'Example'}]})
@@ -16,7 +19,10 @@ describe "Assessment", ->
           {_id: "5aabbc4692d04e71f32f7619", codes: { 'SNOMED-CT': ["164059009"]}, description: "Pass Or Refer"}]})
       expect(JSON.stringify(assessmentPerformed.result())).toEqual('{"code":"164059009","system":"SNOMED-CT","version":null,"display":"Pass Or Refer"}')
 
-describe "Assessment", ->
+    it "should contain a method code", ->
+      assessmentPerformed = new CQL_QDM.AssessmentPerformed({})
+      expect(typeof assessmentPerformed.method).toEqual 'function'
+
   describe "Recommended", ->
     it "should not return a negationRationale", ->
       assessmentRecommended = new CQL_QDM.AssessmentRecommended({})

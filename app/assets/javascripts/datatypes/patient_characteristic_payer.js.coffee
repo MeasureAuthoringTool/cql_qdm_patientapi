@@ -11,15 +11,15 @@ class CQL_QDM.PatientCharacteristicPayer extends CQL_QDM.QDMDatatype
   ###
   @param {Object} patient - the HDS patient object to use
   ###
-  constructor: (@entry) ->
-    super @entry
-    @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    if @entry.end_time
-      @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
+  constructor: (entry) ->
+    super entry
+    @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(entry.start_time)
+    if entry.end_time
+      @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(entry.end_time)
     else
       # No end time; high is set to infinity
       @_relevantPeriodHigh = CQL_QDM.Helpers.infinityDateTime()
-    @_codes = @entry.codes
+    @_codes = entry.codes
 
   ###
   @returns {Interval<Date>}

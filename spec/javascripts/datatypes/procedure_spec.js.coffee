@@ -17,11 +17,6 @@ describe "Procedure", ->
       procedurePerformed = new CQL_QDM.ProcedurePerformed({anatomical_location: {code_system: "SNOMED-CT", code: "24028007", title: "Right"}})
       expect(procedurePerformed.anatomicalLocationSite()).toEqual(new cql.Code("24028007", "SNOMED-CT", null, "Right"))
 
-  describe "Recommended", ->
-    it "should return anatomicalLocationSite", ->
-      procedureRecommended = new CQL_QDM.ProcedureRecommended({anatomical_location: {code_system: "SNOMED-CT", code: "24028007", title: "Right"}})
-      expect(procedureRecommended.anatomicalLocationSite()).toEqual(new cql.Code("24028007", "SNOMED-CT", null, "Right"))
-
     it "should not return a result", ->
       procedurePerformed = new CQL_QDM.ProcedurePerformed({})
       expect(JSON.stringify(procedurePerformed.result())).toEqual('null')
@@ -30,3 +25,12 @@ describe "Procedure", ->
       procedurePerformed = new CQL_QDM.ProcedurePerformed({'values': [
           {_id: "5aabbc4692d04e71f32f7619", codes: { 'SNOMED-CT': ["164059009"]}, description: "Pass Or Refer"}]})
       expect(JSON.stringify(procedurePerformed.result())).toEqual('{"code":"164059009","system":"SNOMED-CT","version":null,"display":"Pass Or Refer"}')
+
+    it "should contain a method code", ->
+      procedurePerformed = new CQL_QDM.ProcedurePerformed({})
+      expect(typeof procedurePerformed.method).toEqual 'function'
+
+  describe "Recommended", ->
+    it "should return anatomicalLocationSite", ->
+      procedureRecommended = new CQL_QDM.ProcedureRecommended({anatomical_location: {code_system: "SNOMED-CT", code: "24028007", title: "Right"}})
+      expect(procedureRecommended.anatomicalLocationSite()).toEqual(new cql.Code("24028007", "SNOMED-CT", null, "Right"))

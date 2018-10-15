@@ -27,6 +27,33 @@ describe "Laboratory Test", ->
       "values":[{"_id":"5afc788b08fa1813ddc0a04e","codes":{"CDC Race":["2135-2"]},"description":"Ethnicity"}]
     }
 
+    laboratoryTestPerformedWithRatioResultEntry = {
+      "_id":"5bab76a8ef33a57230278326",
+      "codes":{"LOINC":["41763-4"]},
+      "components":null,
+      "description":"Laboratory Test, Performed: Rubella Antibody Test (IgG Antibody Titer)",
+      "end_time":1348647300,
+      "health_record_field":null,
+      "interpretation":null,
+      "method":null,
+      "mood_code":"EVN",
+      "negationInd":null,
+      "negationReason":null,
+      "oid":"2.16.840.1.113883.3.560.1.5",
+      "qdm_status":null,
+      "reaction":null,
+      "reason":null,
+      "referenceRange":null,
+      "referenceRangeHigh":null,
+      "referenceRangeLow":null,
+      "result_date_time":null,
+      "specifics":null,
+      "start_time":1348646400,
+      "status_code":{"HL7 ActStatus":["performed"]},
+      "time":null,
+      "values":[{"_id":"5bab76a8ef33a57230278327","denominator_scalar":"8","denominator_units":"g","numerator_scalar":"1000","numerator_units":"mg","type":"RT"}]
+      }
+
     laboratoryTestPerformedEntryTwoComponents = { 
       "_id":"5b0d4cec92d04eda90d60f10",
       "codes":{"LOINC":["34714-6"]},
@@ -52,6 +79,12 @@ describe "Laboratory Test", ->
       "status_code":{"HL7 ActStatus":["performed"]},
       "time":null
     }
+
+    it "should return a result Ratio", ->
+      laboratoryTestPerformed = new CQL_QDM.LaboratoryTestPerformed(laboratoryTestPerformedWithRatioResultEntry)
+      expectedDenom = new cql.Quantity({value:"8", unit:"g"})
+      expectedNumer = new cql.Quantity({value:"1000", unit:"mg"})
+      expect(laboratoryTestPerformed.result()).toEqual new cql.Ratio({numerator: expectedNumer, denominator: expectedDenom})
 
     it "should return an author DateTime", ->
       laboratoryTestPerformed = new CQL_QDM.LaboratoryTestPerformed(laboratoryTestPerformedEntry)
@@ -202,14 +235,6 @@ describe "Laboratory Test", ->
        laboratoryTestOrdered = new CQL_QDM.LaboratoryTestOrder({})
        expect(laboratoryTestOrdered.authorDatetime()).toEqual null
 
-    it "should return a method Code", ->
-       laboratoryTestOrdered = new CQL_QDM.LaboratoryTestOrder(laboratoryTestOrderEntry)
-       expect(laboratoryTestOrdered.method()).toEqual new cql.Code('8462-4', 'LOINC')
-
-    it "should return null if no method is specified", ->
-       laboratoryTestOrdered = new CQL_QDM.LaboratoryTestOrder({})
-       expect(laboratoryTestOrdered.method()).toEqual null
-
     it "should return null if no negation rationale is specified", ->
       laboratoryTestOrdered = new CQL_QDM.LaboratoryTestOrder({})
       expect(laboratoryTestOrdered.negationRationale()).toEqual null
@@ -259,14 +284,6 @@ describe "Laboratory Test", ->
     it "should return null authorDateTime when no is start_time is specified", ->
        laboratoryTestRecommended = new CQL_QDM.LaboratoryTestRecommended({})
        expect(laboratoryTestRecommended.authorDatetime()).toEqual null
-
-    it "should return a method Code", ->
-       laboratoryTestRecommended = new CQL_QDM.LaboratoryTestRecommended(laboratoryTestRecommendedEntry)
-       expect(laboratoryTestRecommended.method()).toEqual new cql.Code('200031', 'RxNorm', null, 'Beta Blocker Therapy for LVSD')
-
-    it "should return null if no method is specified", ->
-       laboratoryTestRecommended = new CQL_QDM.LaboratoryTestRecommended({})
-       expect(laboratoryTestRecommended.method()).toEqual null
 
     it "should return a reason code", ->
       laboratoryTestRecommended = new CQL_QDM.LaboratoryTestRecommended(laboratoryTestRecommendedEntry)

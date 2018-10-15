@@ -14,20 +14,19 @@ class CQL_QDM.SubstanceAdministered extends CQL_QDM.QDMDatatype
   ###
   @param {Object} entry - the HDS data criteria object to convert
   ###
-  constructor: (@entry) ->
-    super @entry
-    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    @_dosage = @entry.dose
-    @_frequency = @entry.administrationTiming
-    @_negationRationale = @entry.negationReason
-    @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    if @entry.end_time
-      @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(@entry.end_time)
+  constructor: (entry) ->
+    super entry
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(entry.start_time)
+    @_dosage = entry.dose
+    @_frequency = entry.administrationTiming
+    @_negationRationale = entry.negationReason
+    @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(entry.start_time)
+    if entry.end_time
+      @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(entry.end_time)
     else
       # No end time; high is set to infinity
       @_relevantPeriodHigh = CQL_QDM.Helpers.infinityDateTime()
-    @_route = @entry.route
-    @_supply = @entry.supply
+    @_route = entry.route
 
   ###
   Author date time is only present when this data type has been negated.
@@ -86,14 +85,6 @@ class CQL_QDM.SubstanceAdministered extends CQL_QDM.QDMDatatype
     else
       null
 
-  ###
-  @returns {Quantity}
-  ###
-  supply: ->
-    if @_supply?
-      new cql.Quantity({unit: @_supply['units'], value: @_supply['scalar']})
-    else
-      null
 
 
 ###
@@ -104,18 +95,17 @@ class CQL_QDM.SubstanceOrder extends CQL_QDM.QDMDatatype
   ###
   @param {Object} entry - the HDS data criteria object to convert
   ###
-  constructor: (@entry) ->
-    super @entry
-    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    @_dosage = @entry.dose
-    @_frequency = @entry.administrationTiming
-    @_method = @entry.method
-    @_negationRationale = @entry.negationReason
-    @_reason = @entry.reason
-    @_refills = @entry.refills
-    @_route = @entry.route
-    @_supply = @entry.supply
-    delete @entry.end_time
+  constructor: (entry) ->
+    super entry
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(entry.start_time)
+    @_dosage = entry.dose
+    @_frequency = entry.administrationTiming
+    @_negationRationale = entry.negationReason
+    @_reason = entry.reason
+    @_refills = entry.refills
+    @_route = entry.route
+    @_supply = entry.supply
+    delete entry.end_time
 
   ###
   @returns {Date}
@@ -141,15 +131,6 @@ class CQL_QDM.SubstanceOrder extends CQL_QDM.QDMDatatype
   frequency: ->
     if @_frequency?
       new cql.Code(@_frequency.code, @_frequency.code_system, null, @_frequency.title || null)
-    else
-      null
-
-  ###
-  @returns {Code}
-  ###
-  method: ->
-    if @_method?
-      new cql.Code(@_method.code, @_method.code_system, null, @_method.title || null)
     else
       null
 
@@ -208,18 +189,16 @@ class CQL_QDM.SubstanceRecommended extends CQL_QDM.QDMDatatype
   ###
   @param {Object} entry - the HDS data criteria object to convert
   ###
-  constructor: (@entry) ->
-    super @entry
-    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(@entry.start_time)
-    @_dosage = @entry.dose
-    @_frequency = @entry.administrationTiming
-    @_method = @entry.method
-    @_negationRationale = @entry.negationReason
-    @_reason = @entry.reason
-    @_refills = @entry.refills
-    @_route = @entry.route
-    @_supply = @entry.supply
-    delete @entry.end_time
+  constructor: (entry) ->
+    super entry
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(entry.start_time)
+    @_dosage = entry.dose
+    @_frequency = entry.administrationTiming
+    @_negationRationale = entry.negationReason
+    @_reason = entry.reason
+    @_refills = entry.refills
+    @_route = entry.route
+    delete entry.end_time
 
   ###
   @returns {Date}
@@ -245,15 +224,6 @@ class CQL_QDM.SubstanceRecommended extends CQL_QDM.QDMDatatype
   frequency: ->
     if @_frequency?
       new cql.Code(@_frequency.code, @_frequency.code_system, null, @_frequency.title || null)
-    else
-      null
-
-  ###
-  @returns {Code}
-  ###
-  method: ->
-    if @_method?
-      new cql.Code(@_method.code, @_method.code_system, null, @_method.title || null)
     else
       null
 
@@ -290,14 +260,5 @@ class CQL_QDM.SubstanceRecommended extends CQL_QDM.QDMDatatype
   route: ->
     if @_route?
       new cql.Code(@_route.code, @_route.code_system, null, @_route.title || null)
-    else
-      null
-
-  ###
-  @returns {Quantity}
-  ###
-  supply: ->
-    if @_supply?
-      new cql.Quantity({unit: @_supply['units'], value: @_supply['scalar']})
     else
       null

@@ -8,8 +8,10 @@ describe "Medication", ->
       "anatomical_approach":null,
       "codes":{"RxNorm":["1010600"]},
       "cumulativeMedicationDuration":null,
+      "daysSupplied":{"scalar":"5","units":""},
       "deliveryMethod":null,
       "description":"Medication, Dispensed: Opioid Pain Medications",
+      "dispenserIdentifier":{"value":"Dr. Alice","namingSystem":"testSystem"},
       "dose":{"scalar":"100","units":"g"},
       "doseIndicator":null,
       "doseRestriction":null,
@@ -25,6 +27,7 @@ describe "Medication", ->
       "negationReason":{"code_system":"SNOMED-CT","code":"10725009"},
       "oid":"2.16.840.1.113883.3.560.1.108",
       "patientInstructions":null,
+      "prescriberIdentifier":{"value":"Dr. Bob","namingSystem":"doctorSystem"},
       "productForm":null,
       "reaction":{"code_system":"LOINC","code":"29463-7","title":"Body Weight"},
       "reason":{"code_system":"RxNorm","code":"995218","title":"Hydroxyzine"},
@@ -46,7 +49,11 @@ describe "Medication", ->
       medicationDispensed = new CQL_QDM.MedicationDispensed(medicationDispensedEntry)
       expect(medicationDispensed.relevantPeriod().low).toEqual new cql.DateTime(2012, 5, 22, 8, 0, 0, 0, 0)
       expect(medicationDispensed.relevantPeriod().high).toEqual new cql.DateTime(2012, 5, 22, 10, 46, 40, 0, 0)
-
+  
+    it "should return a dispenserIdentifier Id", ->
+      medicationDispensed = new CQL_QDM.MedicationDispensed(medicationDispensedEntry)
+      expect(medicationDispensed.dispenserId()).toEqual new CQL_QDM.Id("Dr. Alice", "testSystem")
+  
     it "has infinite DateTime when no end_time specified", ->
       previous_end_time = medicationDispensedEntry['end_time']
       # Set end_time to null so that end_time is not specified in this test
@@ -61,13 +68,17 @@ describe "Medication", ->
       medicationDispensed = new CQL_QDM.MedicationDispensed({})
       expect(medicationDispensed.relevantPeriod()).toBeNull()
 
+    it "should return days supplied", ->
+      medicationDispensed = new CQL_QDM.MedicationDispensed(medicationDispensedEntry)
+      expect(medicationDispensed.daysSupplied()).toEqual 5
+
     it "should show valid relevantPeriod", ->
       medicationDispensed = new CQL_QDM.MedicationDispensed(medicationDispensedEntry)
       expect(JSON.stringify(medicationDispensed.relevantPeriod())).toEqual '{"low":"2012-05-22T08:00:00.000+00:00","high":"2012-05-22T10:46:40.000+00:00","lowClosed":true,"highClosed":true}'
 
     it "should return an integer of the number of refills", ->
       medicationDispensed = new CQL_QDM.MedicationDispensed(medicationDispensedEntry)
-      expect(medicationDispensed.refills()).toEqual '3'
+      expect(medicationDispensed.refills()).toEqual 3
 
     it "should return a coded frequency", ->
       medicationDispensed = new CQL_QDM.MedicationDispensed(medicationDispensedEntry)
@@ -81,6 +92,10 @@ describe "Medication", ->
       medicationDispensed = new CQL_QDM.MedicationDispensed(medicationDispensedEntry)
       expect(medicationDispensed.negationRationale()).toEqual new cql.Code('10725009', 'SNOMED-CT', null, null)
 
+    it "should return a prescriberIdentifier Id", ->
+      medicationDispensed = new CQL_QDM.MedicationDispensed(medicationDispensedEntry)
+      expect(medicationDispensed.prescriberId()).toEqual new CQL_QDM.Id("Dr. Bob", "doctorSystem")
+
     it "should return a route code", ->
       medicationDispensed = new CQL_QDM.MedicationDispensed(medicationDispensedEntry)
       expect(medicationDispensed.route()).toEqual new cql.Code('29463-7', 'LOINC', null, 'Body Weight')
@@ -88,6 +103,30 @@ describe "Medication", ->
     it "should return a supply quantity", ->
       medicationDispensed = new CQL_QDM.MedicationDispensed(medicationDispensedEntry)
       expect(medicationDispensed.supply()).toEqual new cql.Quantity({unit: 'g', value: '10'})
+
+    it "should return null for incorrectly input values of days supplied", ->
+      medicationDispensed = new CQL_QDM.MedicationDispensed({ daysSupplied:{"code_system":"LOINC","code":"29463-7"} })
+      expect(medicationDispensed.daysSupplied()).toEqual null
+      medicationDispensed = new CQL_QDM.MedicationDispensed({ daysSupplied:1337846400 })
+      expect(medicationDispensed.daysSupplied()).toEqual null
+      medicationDispensed = new CQL_QDM.MedicationDispensed({ daysSupplied:"Medication, Discharge: Opioid Pain Medications" })
+      expect(medicationDispensed.daysSupplied()).toEqual null
+      medicationDispensed = new CQL_QDM.MedicationDispensed({ daysSupplied:[] })
+      expect(medicationDispensed.daysSupplied()).toEqual null
+      medicationDispensed = new CQL_QDM.MedicationDispensed({ daysSupplied:{"HL7 ActStatus":["discharge"]} })
+      expect(medicationDispensed.daysSupplied()).toEqual null
+
+    it "should return null for incorrectly input values of refills", ->
+      medicationDispensed = new CQL_QDM.MedicationDispensed({ refills:{"code_system":"LOINC","code":"29463-7"} })
+      expect(medicationDispensed.refills()).toEqual null
+      medicationDispensed = new CQL_QDM.MedicationDispensed({ refills:1337846400 })
+      expect(medicationDispensed.refills()).toEqual null
+      medicationDispensed = new CQL_QDM.MedicationDispensed({ refills:"Medication, Discharge: Opioid Pain Medications" })
+      expect(medicationDispensed.refills()).toEqual null
+      medicationDispensed = new CQL_QDM.MedicationDispensed({ refills:[] })
+      expect(medicationDispensed.refills()).toEqual null
+      medicationDispensed = new CQL_QDM.MedicationDispensed({ refills:{"HL7 ActStatus":["discharge"]} })
+      expect(medicationDispensed.refills()).toEqual null
 
     it "should return null when field is not on constructing entry", ->
       medicationDispensed = new CQL_QDM.MedicationDispensed({'start_time': '08/31/2017 1:00 AM', 'end_time': '08/31/2017 2:00 AM'})
@@ -97,6 +136,9 @@ describe "Medication", ->
       expect(medicationDispensed.dosage()).toEqual null
       expect(medicationDispensed.route()).toEqual null
       expect(medicationDispensed.negationRationale()).toEqual null
+      expect(medicationDispensed.prescriberId()).toEqual null
+      expect(medicationDispensed.dispenserId()).toEqual null
+      expect(medicationDispensed.daysSupplied()).toEqual null
 
   describe "Order", ->
     medicationOrderEntry = {
@@ -107,6 +149,7 @@ describe "Medication", ->
       "anatomical_approach":null,
       "codes":{"RxNorm":["1010600"]},
       "cumulativeMedicationDuration":null,
+      "daysSupplied":{"scalar":"5","units":""},
       "deliveryMethod":null,
       "description":"Medication, Order: Opioid Pain Medications",
       "dose":{"scalar":"100","units":"mg"},
@@ -124,12 +167,14 @@ describe "Medication", ->
       "negationReason":{"code_system":"RxNorm","code":"1002293"},
       "oid":"2.16.840.1.113883.3.560.1.78",
       "patientInstructions":null,
+      "prescriberIdentifier":{"value":"Dr. Bob","namingSystem":"doctorSystem"},
       "productForm":null,
       "reaction":{"code_system":"LOINC","code":"29463-7","title":"Body Weight"},
       "reason":{"code_system":"RxNorm","code":"995218","title":"Hydroxyzine"},
       "refills":{"scalar":"33","units":""},
       "route":{"code_system":"LOINC","code":"29463-7","title":"Body Weight"},
       "signed_datetime":null,
+      "setting":{"code_system":"LOINC","code":"29463-7","title":"Body Weight"},
       "specifics":null,
       "start_time":1337846400,
       "statusOfMedication":null,
@@ -159,13 +204,17 @@ describe "Medication", ->
       medicationOrdered = new CQL_QDM.MedicationOrder({})
       expect(medicationOrdered.relevantPeriod()).toBeNull()
 
+    it "should return days supplied", ->
+      medicationOrdered = new CQL_QDM.MedicationOrder(medicationOrderEntry)
+      expect(medicationOrdered.daysSupplied()).toEqual 5
+
     it "should show valid relevantPeriod", ->
       medicationOrdered = new CQL_QDM.MedicationOrder(medicationOrderEntry)
       expect(JSON.stringify(medicationOrdered.relevantPeriod())).toEqual '{"low":"2012-05-24T08:00:00.000+00:00","high":"2012-05-24T08:00:00.000+00:00","lowClosed":true,"highClosed":true}'
 
     it "should return an integer of the number of refills", ->
       medicationOrdered = new CQL_QDM.MedicationOrder(medicationOrderEntry)
-      expect(medicationOrdered.refills()).toEqual '33'
+      expect(medicationOrdered.refills()).toEqual 33
 
     it "should return a coded frequency", ->
       medicationOrdered = new CQL_QDM.MedicationOrder(medicationOrderEntry)
@@ -187,6 +236,37 @@ describe "Medication", ->
       medicationOrdered = new CQL_QDM.MedicationOrder(medicationOrderEntry)
       expect(medicationOrdered.supply()).toEqual new cql.Quantity({unit: 'mg', value: '10'})
 
+    it "should return a setting code", ->
+      medicationOrdered = new CQL_QDM.MedicationOrder(medicationOrderEntry)
+      expect(medicationOrdered.setting()).toEqual new cql.Code('29463-7', 'LOINC', null, 'Body Weight')
+
+    it "should return a prescriberIdentifier Id", ->
+      medicationOrdered = new CQL_QDM.MedicationOrder(medicationOrderEntry)
+      expect(medicationOrdered.prescriberId()).toEqual new CQL_QDM.Id("Dr. Bob", "doctorSystem")
+      
+    it "should return null for incorrectly input values of days supplied", ->
+      medicationOrdered = new CQL_QDM.MedicationOrder({ daysSupplied:{"code_system":"LOINC","code":"29463-7"} })
+      expect(medicationOrdered.daysSupplied()).toEqual null
+      medicationOrdered = new CQL_QDM.MedicationOrder({ daysSupplied:1337846400 })
+      expect(medicationOrdered.daysSupplied()).toEqual null
+      medicationOrdered = new CQL_QDM.MedicationOrder({ daysSupplied:"Medication, Discharge: Opioid Pain Medications" })
+      expect(medicationOrdered.daysSupplied()).toEqual null
+      medicationOrdered = new CQL_QDM.MedicationOrder({ daysSupplied:[] })
+      expect(medicationOrdered.daysSupplied()).toEqual null
+      medicationOrdered = new CQL_QDM.MedicationOrder({ daysSupplied:{"HL7 ActStatus":["discharge"]} })
+      expect(medicationOrdered.daysSupplied()).toEqual null
+
+    it "should return null for incorrectly input values of refills", ->
+      medicationOrdered = new CQL_QDM.MedicationOrder({ refills:{"code_system":"LOINC","code":"29463-7"} })
+      expect(medicationOrdered.refills()).toEqual null
+      medicationOrdered = new CQL_QDM.MedicationOrder({ refills:1337846400 })
+      expect(medicationOrdered.refills()).toEqual null
+      medicationOrdered = new CQL_QDM.MedicationOrder({ refills:"Medication, Discharge: Opioid Pain Medications" })
+      expect(medicationOrdered.refills()).toEqual null
+      medicationOrdered = new CQL_QDM.MedicationOrder({ refills:[] })
+      expect(medicationOrdered.refills()).toEqual null
+      medicationOrdered = new CQL_QDM.MedicationOrder({ refills:{"HL7 ActStatus":["discharge"]} })
+      expect(medicationOrdered.refills()).toEqual null
 
     it "should return null when field is not on constructing entry", ->
       medicationOrdered = new CQL_QDM.MedicationOrder({'start_time': '08/31/2017 1:00 AM', 'end_time': '08/31/2017 2:00 AM'})
@@ -196,6 +276,9 @@ describe "Medication", ->
       expect(medicationOrdered.dosage()).toEqual null
       expect(medicationOrdered.route()).toEqual null
       expect(medicationOrdered.negationRationale()).toEqual null
+      expect(medicationOrdered.setting()).toEqual null
+      expect(medicationOrdered.prescriberId()).toEqual null
+      expect(medicationOrdered.daysSupplied()).toEqual null
 
   describe "Active", ->
     medicationActiveEntry = {
@@ -259,15 +342,10 @@ describe "Medication", ->
       medicationActive = new CQL_QDM.MedicationActive(medicationActiveEntry)
       expect(medicationActive.route()).toEqual new cql.Code('995218', 'RxNorm', null, 'Hydroxyzine')
 
-    it "should return a supply quantity", ->
-      medicationActive = new CQL_QDM.MedicationActive(medicationActiveEntry)
-      expect(medicationActive.supply()).toEqual new cql.Quantity({unit: 'g', value: '1000'})
-
     it "should return null when field is not on constructing entry", ->
       medicationActive = new CQL_QDM.MedicationActive({'start_time': '08/31/2017 1:00 AM', 'end_time': '08/31/2017 2:00 AM'})
       expect(medicationActive.frequency()).toEqual null
       expect(medicationActive.dosage()).toEqual null
-      expect(medicationActive.supply()).toEqual null
 
   describe "Administered", ->
     medicationAdministeredEntry ={
@@ -341,14 +419,9 @@ describe "Medication", ->
       medicationAdministered = new CQL_QDM.MedicationAdministered(medicationAdministeredEntry)
       expect(medicationAdministered.route()).toEqual new cql.Code('1002293', 'RxNorm', null, 'Common substances for allergy and intolerance documentation')
 
-    it "should return a supply quantity", ->
-      medicationAdministered = new CQL_QDM.MedicationAdministered(medicationAdministeredEntry)
-      expect(medicationAdministered.supply()).toEqual new cql.Quantity({unit: 'mg', value: '44'})
-
     it "should return null when field is not on constructing entry", ->
       medicationAdministered = new CQL_QDM.MedicationAdministered({'start_time': '08/31/2017 1:00 AM', 'end_time': '08/31/2017 2:00 AM'})
       expect(medicationAdministered.frequency()).toEqual null
-      expect(medicationAdministered.supply()).toEqual null
       expect(medicationAdministered.dosage()).toEqual null
       expect(medicationAdministered.route()).toEqual null
       expect(medicationAdministered.reason()).toEqual null
@@ -363,6 +436,7 @@ describe "Medication", ->
       "anatomical_approach":null,
       "codes":{"RxNorm":["1010600"]},
       "cumulativeMedicationDuration":null,
+      "daysSupplied":{"scalar":"5","units":""},
       "deliveryMethod":null,
       "description":"Medication, Discharge: Opioid Pain Medications",
       "dose":{"scalar":"100","units":"mg"},
@@ -380,6 +454,7 @@ describe "Medication", ->
       "negationReason":{"code_system":"LOINC","code":"29463-7"},
       "oid":"2.16.840.1.113883.3.560.1.200",
       "patientInstructions":null,
+      "prescriberIdentifier":{"value":"Dr. Bob","namingSystem":"doctorSystem"},
       "productForm":null,
       "reaction":null,
       "reason":null,
@@ -401,7 +476,11 @@ describe "Medication", ->
 
     it "should return an integer of the number of refills", ->
       medicationDischarge = new CQL_QDM.MedicationDischarge(medicationDischargeEntry)
-      expect(medicationDischarge.refills()).toEqual '100'
+      expect(medicationDischarge.refills()).toEqual 100
+
+    it "should return days supplied", ->
+      medicationDischarge = new CQL_QDM.MedicationDischarge(medicationDischargeEntry)
+      expect(medicationDischarge.daysSupplied()).toEqual 5
       
     it "should return a dosage quantity", ->
       medicationDischarge = new CQL_QDM.MedicationDischarge(medicationDischargeEntry)
@@ -411,17 +490,45 @@ describe "Medication", ->
       medicationDischarge = new CQL_QDM.MedicationDischarge(medicationDischargeEntry)
       expect(medicationDischarge.negationRationale()).toEqual new cql.Code('29463-7', 'LOINC', null, null)
 
+    it "should return a prescriberIdentifier Id", ->
+      medicationDischarge = new CQL_QDM.MedicationDischarge(medicationDischargeEntry)
+      expect(medicationDischarge.prescriberId()).toEqual new CQL_QDM.Id("Dr. Bob", "doctorSystem")
+
     it "should return a route code", ->
       medicationDischarge = new CQL_QDM.MedicationDischarge(medicationDischargeEntry)
       expect(medicationDischarge.route()).toEqual new cql.Code('995218', 'RxNorm', null, 'Hydroxyzine')
 
     it "should return an integer of the number of refills", ->
-      medicationDispensed = new CQL_QDM.MedicationDischarge(medicationDischargeEntry)
-      expect(medicationDispensed.refills()).toEqual '100'
+      medicationDischarge = new CQL_QDM.MedicationDischarge(medicationDischargeEntry)
+      expect(medicationDischarge.refills()).toEqual 100
 
     it "should return a supply quantity", ->
-      medicationDispensed = new CQL_QDM.MedicationDischarge(medicationDischargeEntry)
-      expect(medicationDispensed.supply()).toEqual new cql.Quantity({unit: 'mg', value: '100'})
+      medicationDischarge = new CQL_QDM.MedicationDischarge(medicationDischargeEntry)
+      expect(medicationDischarge.supply()).toEqual new cql.Quantity({unit: 'mg', value: '100'})
+
+    it "should return null for incorrectly input values of days supplied", ->
+      medicationDischarge = new CQL_QDM.MedicationDischarge({ daysSupplied:{"code_system":"LOINC","code":"29463-7"} })
+      expect(medicationDischarge.daysSupplied()).toEqual null
+      medicationDischarge = new CQL_QDM.MedicationDischarge({ daysSupplied:1337846400 })
+      expect(medicationDischarge.daysSupplied()).toEqual null
+      medicationDischarge = new CQL_QDM.MedicationDischarge({ daysSupplied:"Medication, Discharge: Opioid Pain Medications" })
+      expect(medicationDischarge.daysSupplied()).toEqual null
+      medicationDischarge = new CQL_QDM.MedicationDischarge({ daysSupplied:[] })
+      expect(medicationDischarge.daysSupplied()).toEqual null
+      medicationDischarge = new CQL_QDM.MedicationDischarge({ daysSupplied:{"HL7 ActStatus":["discharge"]} })
+      expect(medicationDischarge.daysSupplied()).toEqual null
+
+    it "should return null for incorrectly input values of refills", ->
+      medicationDischarge = new CQL_QDM.MedicationDischarge({ refills:{"code_system":"LOINC","code":"29463-7"} })
+      expect(medicationDischarge.refills()).toEqual null
+      medicationDischarge = new CQL_QDM.MedicationDischarge({ refills:1337846400 })
+      expect(medicationDischarge.refills()).toEqual null
+      medicationDischarge = new CQL_QDM.MedicationDischarge({ refills:"Medication, Discharge: Opioid Pain Medications" })
+      expect(medicationDischarge.refills()).toEqual null
+      medicationDischarge = new CQL_QDM.MedicationDischarge({ refills:[] })
+      expect(medicationDischarge.refills()).toEqual null
+      medicationDischarge = new CQL_QDM.MedicationDischarge({ refills:{"HL7 ActStatus":["discharge"]} })
+      expect(medicationDischarge.refills()).toEqual null
 
     it "should return null when field is not on constructing entry", ->
       medicationDischarge = new CQL_QDM.MedicationDischarge({'start_time': '08/31/2017 1:00 AM', 'end_time': '08/31/2017 2:00 AM'})
@@ -431,3 +538,5 @@ describe "Medication", ->
       expect(medicationDischarge.refills()).toEqual null
       expect(medicationDischarge.route()).toEqual null
       expect(medicationDischarge.negationRationale()).toEqual null
+      expect(medicationDischarge.prescriberId()).toEqual null
+      expect(medicationDischarge.daysSupplied()).toEqual null
