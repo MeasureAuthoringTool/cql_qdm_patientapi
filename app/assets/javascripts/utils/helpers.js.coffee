@@ -26,15 +26,6 @@ class CQL_QDM.Helpers
       null
 
   ###
-  Returns an 'end of range' cql.DateTime.
-  See Section 3.4.1 "System-Defined Types" in the CQL specification.
-
-  @returns cql.DateTime
-  ###
-  @infinityDateTime: ->
-    cql.DateTime.parse('9999-12-31T23:59:59.999+00:00')
-
-  ###
   For DateTime values makes sure value meets the CQL standard.
   For scalar values:
     - First checks that the value component is numeric

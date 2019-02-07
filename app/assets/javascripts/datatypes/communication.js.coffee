@@ -30,7 +30,7 @@ class CQL_QDM.CommunicationPerformed extends CQL_QDM.QDMDatatype
       @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(entry.end_time)
     else
       # No end time; high is set to infinity
-      @_relevantPeriodHigh = CQL_QDM.Helpers.infinityDateTime()
+      @_relevantPeriodHigh = null
     @_category = entry.category
     @_sender = entry.sender
     @_recipient = entry.recipient

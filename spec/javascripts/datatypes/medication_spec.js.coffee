@@ -60,7 +60,7 @@ describe "Medication", ->
       medicationDispensedEntry['end_time'] = null
       medicationDispensed = new CQL_QDM.MedicationDispensed(medicationDispensedEntry)
       expect(medicationDispensed.relevantPeriod().low).toEqual new cql.DateTime(2012, 5, 22, 8, 0, 0, 0, 0)
-      expect(medicationDispensed.relevantPeriod().high).toEqual CQL_QDM.Helpers.infinityDateTime()
+      expect(medicationDispensed.relevantPeriod().high).toEqual null
       # Reset end_time in fixture so that other tests arent effected
       medicationDispensedEntry['end_time'] = previous_end_time
 
@@ -196,7 +196,7 @@ describe "Medication", ->
       medicationOrderEntry['end_time'] = null
       medicationOrdered = new CQL_QDM.MedicationOrder(medicationOrderEntry)
       expect(medicationOrdered.relevantPeriod().low).toEqual new cql.DateTime(2012, 5, 24, 8, 0, 0, 0, 0)
-      expect(medicationOrdered.relevantPeriod().high).toEqual CQL_QDM.Helpers.infinityDateTime()
+      expect(medicationOrdered.relevantPeriod().high).toEqual null
       # Reset end_time in fixture so that other tests arent effected
       medicationOrderEntry['end_time'] = previous_end_time
 

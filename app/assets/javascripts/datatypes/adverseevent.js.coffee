@@ -21,7 +21,7 @@ class CQL_QDM.AdverseEvent extends CQL_QDM.QDMDatatype
       @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(entry.end_time)
     else
       # No end time; high is set to infinity
-      @_relevantPeriodHigh = CQL_QDM.Helpers.infinityDateTime()
+      @_relevantPeriodHigh = null
     @_severity = entry.severity
     @_type = entry.type
 

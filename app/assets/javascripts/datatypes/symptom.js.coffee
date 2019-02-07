@@ -25,7 +25,7 @@ class CQL_QDM.Symptom extends CQL_QDM.QDMDatatype
       @_prevalencePeriodHigh = CQL_QDM.Helpers.convertDateTime(entry.end_time)
     else
       # No end time; high is set to infinity
-      @_prevalencePeriodHigh = CQL_QDM.Helpers.infinityDateTime()
+      @_prevalencePeriodHigh = null
     @_severity = entry.severity
 
   ###

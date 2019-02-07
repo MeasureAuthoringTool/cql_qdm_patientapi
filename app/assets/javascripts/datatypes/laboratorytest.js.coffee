@@ -66,7 +66,7 @@ class CQL_QDM.LaboratoryTestPerformed extends CQL_QDM.QDMDatatype
       @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(entry.end_time)
     else
       # No end time; high is set to infinity
-      @_relevantPeriodHigh = CQL_QDM.Helpers.infinityDateTime()
+      @_relevantPeriodHigh = null
     if entry.values? && entry.values.length > 0
       @_result = entry.values?[0]
     @_resultDatetime = CQL_QDM.Helpers.convertDateTime(entry.result_date_time)
