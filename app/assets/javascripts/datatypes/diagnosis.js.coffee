@@ -26,7 +26,6 @@ class CQL_QDM.Diagnosis extends CQL_QDM.QDMDatatype
     if entry.end_time
       @_prevalencePeriodHigh = CQL_QDM.Helpers.convertDateTime(entry.end_time)
     else
-      # No end time; high is set to infinity
       @_prevalencePeriodHigh = null
     @_anatomicalLocationSite = entry.anatomical_location
     @_severity = entry.severity

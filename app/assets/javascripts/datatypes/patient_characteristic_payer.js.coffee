@@ -17,7 +17,6 @@ class CQL_QDM.PatientCharacteristicPayer extends CQL_QDM.QDMDatatype
     if entry.end_time
       @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(entry.end_time)
     else
-      # No end time; high is set to infinity
       @_relevantPeriodHigh = null
     @_codes = entry.codes
 

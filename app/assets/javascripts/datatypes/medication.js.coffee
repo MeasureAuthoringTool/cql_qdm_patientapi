@@ -25,7 +25,6 @@ class CQL_QDM.MedicationActive extends CQL_QDM.QDMDatatype
     if entry.end_time
       @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(entry.end_time)
     else
-      # No end time; high is set to infinity
       @_relevantPeriodHigh = null
 
   ###
@@ -90,7 +89,6 @@ class CQL_QDM.MedicationAdministered extends CQL_QDM.QDMDatatype
     if entry.end_time
       @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(entry.end_time)
     else
-      # No end time; high is set to infinity
       @_relevantPeriodHigh = null
     @_route = entry.route
 
@@ -296,7 +294,6 @@ class CQL_QDM.MedicationDispensed extends CQL_QDM.QDMDatatype
     if entry.end_time
       @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(entry.end_time)
     else
-      # No end time; high is set to infinity
       @_relevantPeriodHigh = null
 
   ###
@@ -428,7 +425,6 @@ class CQL_QDM.MedicationOrder extends CQL_QDM.QDMDatatype
     if entry.end_time
       @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(entry.end_time)
     else
-      # No end time; high is set to infinity
       @_relevantPeriodHigh = null
 
   ###

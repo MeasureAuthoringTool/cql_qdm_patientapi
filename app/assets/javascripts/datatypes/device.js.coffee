@@ -25,7 +25,6 @@ class CQL_QDM.DeviceApplied extends CQL_QDM.QDMDatatype
     if entry.end_time
       @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(entry.end_time)
     else
-      # No end time; high is set to infinity
       @_relevantPeriodHigh = null
 
   ###
