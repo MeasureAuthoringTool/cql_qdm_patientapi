@@ -54,7 +54,7 @@ describe "Medication", ->
       medicationDispensed = new CQL_QDM.MedicationDispensed(medicationDispensedEntry)
       expect(medicationDispensed.dispenserId()).toEqual new CQL_QDM.Id("Dr. Alice", "testSystem")
   
-    it "has infinite DateTime when no end_time specified", ->
+    it "has null high value when no end_time specified", ->
       previous_end_time = medicationDispensedEntry['end_time']
       # Set end_time to null so that end_time is not specified in this test
       medicationDispensedEntry['end_time'] = null
@@ -190,7 +190,7 @@ describe "Medication", ->
       expect(medicationOrdered.relevantPeriod().low).toEqual new cql.DateTime(2012, 5, 24, 8, 0, 0, 0, 0)
       expect(medicationOrdered.relevantPeriod().high).toEqual new cql.DateTime(2012, 5, 24, 8, 0, 0, 0, 0)
 
-    it "has infinite DateTime when no end_time specified", ->
+    it "has null high value when no end_time specified", ->
       previous_end_time = medicationOrderEntry['end_time']
       # Set end_time to null so that end_time is not specified in this test
       medicationOrderEntry['end_time'] = null
