@@ -2234,7 +2234,7 @@
     };
 
     function Uncertainty(low, high) {
-      var gt, ref;
+      var gt, isCode, ref;
       this.low = low != null ? low : null;
       this.high = high;
       gt = function(a, b) {
@@ -2247,6 +2247,15 @@
           return a > b;
         }
       };
+      isCode = function(val) {
+        return (val != null) && val.hasMatch && typeof val.hasMatch === 'function';
+      };
+      if (isCode(this.low)) {
+        this.low = null;
+      }
+      if (isCode(this.high)) {
+        this.high = null;
+      }
       if (typeof this.high === 'undefined') {
         this.high = this.low;
       }
