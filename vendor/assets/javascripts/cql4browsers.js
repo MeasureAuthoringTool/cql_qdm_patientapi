@@ -425,6 +425,14 @@
       this.display = display;
     }
 
+    Object.defineProperties(Code.prototype, {
+      isCode: {
+        get: function() {
+          return true;
+        }
+      }
+    });
+
     Code.prototype.hasMatch = function(code) {
       if (typeof code === 'string') {
         return code === this.code;
@@ -2234,7 +2242,7 @@
     };
 
     function Uncertainty(low, high) {
-      var gt, isCode, ref;
+      var gt, isNonEnumerable, ref;
       this.low = low != null ? low : null;
       this.high = high;
       gt = function(a, b) {
@@ -2247,17 +2255,17 @@
           return a > b;
         }
       };
-      isCode = function(val) {
-        return (val != null) && val.hasMatch && typeof val.hasMatch === 'function';
+      isNonEnumerable = function(val) {
+        return (val != null) && (val.isCode || val.isConcept || val.isValueSet);
       };
-      if (isCode(this.low)) {
-        this.low = null;
-      }
-      if (isCode(this.high)) {
-        this.high = null;
-      }
       if (typeof this.high === 'undefined') {
         this.high = this.low;
+      }
+      if (isNonEnumerable(this.low)) {
+        this.low = null;
+      }
+      if (isNonEnumerable(this.high)) {
+        this.high = null;
       }
       if ((this.low != null) && (this.high != null) && gt(this.low, this.high)) {
         ref = [this.high, this.low], this.low = ref[0], this.high = ref[1];
