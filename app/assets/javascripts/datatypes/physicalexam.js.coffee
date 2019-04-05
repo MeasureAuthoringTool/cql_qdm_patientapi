@@ -70,7 +70,7 @@ class CQL_QDM.PhysicalExamPerformed extends CQL_QDM.QDMDatatype
   constructor: (entry) ->
     super entry
     @_anatomicalLocationSite = entry.anatomicalLocation
-    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(entry.start_time)
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(entry.author_datetime)
     @_method = entry.method
     @_negationRationale = entry.negationReason
     @_reason = entry.reason

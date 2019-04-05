@@ -67,7 +67,7 @@ class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
   constructor: (entry) ->
     super entry
     @_admissionSource = entry.admission_source
-    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(entry.start_time)
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(entry.author_datetime)
     @_diagnoses = entry.diagnosis
     @_dischargeDisposition = entry.dischargeDisposition
     @_facilityLocations = entry.facility
