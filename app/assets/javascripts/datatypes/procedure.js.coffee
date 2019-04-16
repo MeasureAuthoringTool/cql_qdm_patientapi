@@ -76,7 +76,7 @@ class CQL_QDM.ProcedurePerformed extends CQL_QDM.QDMDatatype
   constructor: (entry) ->
     super entry
     @_anatomicalLocationSite = entry.anatomical_location
-    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(entry.author_datetime)
+    @_authorDatetime = if entry.negationReason? then CQL_QDM.Helpers.convertDateTime(entry.start_time) else CQL_QDM.Helpers.convertDateTime(entry.author_datetime)
     @_incisionDatetime = CQL_QDM.Helpers.convertDateTime(entry.incisionTime)
     @_method = entry.method
     @_negationRationale = entry.negationReason

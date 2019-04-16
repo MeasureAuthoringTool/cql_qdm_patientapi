@@ -16,7 +16,7 @@ class CQL_QDM.SubstanceAdministered extends CQL_QDM.QDMDatatype
   ###
   constructor: (entry) ->
     super entry
-    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(entry.author_datetime)
+    @_authorDatetime = if entry.negationReason? then CQL_QDM.Helpers.convertDateTime(entry.start_time) else CQL_QDM.Helpers.convertDateTime(entry.author_datetime)
     @_dosage = entry.dose
     @_frequency = entry.administrationTiming
     @_negationRationale = entry.negationReason
