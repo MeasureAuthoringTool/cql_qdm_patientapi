@@ -62,7 +62,7 @@ class CQL_QDM.DiagnosticStudyPerformed extends CQL_QDM.QDMDatatype
   ###
   constructor: (entry) ->
     super entry
-    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(entry.start_time)
+    @_authorDatetime = if entry.negationReason? then CQL_QDM.Helpers.convertDateTime(entry.start_time) else CQL_QDM.Helpers.convertDateTime(entry.author_datetime)
     @_facilityLocation = entry.facility
     @_method = entry.method
     @_negationRationale = entry.negationReason

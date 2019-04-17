@@ -22,7 +22,7 @@ class CQL_QDM.CommunicationPerformed extends CQL_QDM.QDMDatatype
   ###
   constructor: (entry) ->
     super entry
-    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(entry.start_time)
+    @_authorDatetime = if entry.negationReason? then CQL_QDM.Helpers.convertDateTime(entry.start_time) else CQL_QDM.Helpers.convertDateTime(entry.author_datetime)
     @_negationRationale = entry.negationReason
     @_relatedTo = entry.references
     @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(entry.start_time)

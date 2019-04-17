@@ -81,7 +81,7 @@ class CQL_QDM.MedicationAdministered extends CQL_QDM.QDMDatatype
   ###
   constructor: (entry) ->
     super entry
-    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(entry.start_time)
+    @_authorDatetime = if entry.negationReason? then CQL_QDM.Helpers.convertDateTime(entry.start_time) else CQL_QDM.Helpers.convertDateTime(entry.author_datetime)
     @_dosage = entry.dose
     @_frequency = entry.administrationTiming
     @_negationRationale = entry.negationReason
@@ -282,7 +282,7 @@ class CQL_QDM.MedicationDispensed extends CQL_QDM.QDMDatatype
   ###
   constructor: (entry) ->
     super entry
-    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(entry.start_time)
+    @_authorDatetime = if entry.negationReason? then CQL_QDM.Helpers.convertDateTime(entry.start_time) else CQL_QDM.Helpers.convertDateTime(entry.author_datetime)
     @_dispenserIdentifier = entry.dispenserIdentifier
     @_daysSupplied = entry.daysSupplied
     @_dosage = entry.dose
@@ -412,7 +412,7 @@ class CQL_QDM.MedicationOrder extends CQL_QDM.QDMDatatype
   ###
   constructor: (entry) ->
     super entry
-    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(entry.start_time)
+    @_authorDatetime = if entry.negationReason? then CQL_QDM.Helpers.convertDateTime(entry.start_time) else CQL_QDM.Helpers.convertDateTime(entry.author_datetime)
     @_daysSupplied = entry.daysSupplied
     @_dosage = entry.dose
     @_frequency = entry.administrationTiming

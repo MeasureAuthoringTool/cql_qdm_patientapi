@@ -18,7 +18,7 @@ class CQL_QDM.DeviceApplied extends CQL_QDM.QDMDatatype
   constructor: (entry) ->
     super entry
     @_anatomicalLocationSite = entry.anatomical_location
-    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(entry.start_time)
+    @_authorDatetime = if entry.negationReason? then CQL_QDM.Helpers.convertDateTime(entry.start_time) else CQL_QDM.Helpers.convertDateTime(entry.author_datetime)
     @_negationRationale = entry.negationReason
     @_reason = entry.reason
     @_relevantPeriodLow = CQL_QDM.Helpers.convertDateTime(entry.start_time)

@@ -1,10 +1,11 @@
 describe "Laboratory Test", ->
   describe "Performed", ->
     laboratoryTestPerformedEntry = {
-      "_id":"5afc788b08fa1813ddc0a04d",
+      "_id":"5cb7450108fa187cd96ff0d1",
+      "author_datetime":1334649720,
       "codes":{"LOINC":["34714-6"]},
       "components":{"type":"COL","values":[{"code":{"code_system":"ICD-10-PCS","code":"0SQ90ZZ"},"result":{"code":{"code_system":"SNOMED-CT","code":"309904001"},"title":"Intensive Care Unit"},"referenceRangeLow":{"scalar":"23","units":"mg"},"referenceRangeHigh":{"scalar":"35","units":"mg"}}]},
-      "description":"Laboratory Test, Performed: INR",
+      "description":"Laboratory Test, Performed: Urine Protein Tests",
       "end_time":1337156100,
       "health_record_field":null,
       "interpretation":null,
@@ -33,6 +34,7 @@ describe "Laboratory Test", ->
       "components":null,
       "description":"Laboratory Test, Performed: Rubella Antibody Test (IgG Antibody Titer)",
       "end_time":1348647300,
+      "author_datetime":1334649720,
       "health_record_field":null,
       "interpretation":null,
       "method":null,
@@ -59,6 +61,7 @@ describe "Laboratory Test", ->
       "codes":{"LOINC":["34714-6"]},
       "components":{"type":"COL","values":[{"code":{"code_system":"SNOMED-CT","code":"195080001"},"result":{"code":{"code_system":"SNOMED-CT","code":"419099009"},"title":"Dead"},"referenceRangeLow":{"scalar":"12","units":"mg"},"referenceRangeHigh":{"scalar":"14","units":"mg"}},{"code":{"code_system":"SNOMED-CT","code":"195080001"},"result":{"scalar":"15","units":"mg"},"referenceRangeLow":{"scalar":"12","units":"mg"},"referenceRangeHigh":{"scalar":"14","units":"mg"}}]},
       "description":"Laboratory Test, Performed: INR",
+      "author_datetime":1334649720,
       "end_time":1338279300,
       "health_record_field":null,
       "interpretation":null,
@@ -88,7 +91,7 @@ describe "Laboratory Test", ->
 
     it "should return an author DateTime", ->
       laboratoryTestPerformed = new CQL_QDM.LaboratoryTestPerformed(laboratoryTestPerformedEntry)
-      expect(laboratoryTestPerformed.authorDatetime()).toEqual new cql.DateTime(2012, 5, 16, 8, 0, 0, 0, 0)
+      expect(laboratoryTestPerformed.authorDatetime()).toEqual new cql.DateTime(2012, 4, 17, 8, 2, 0, 0, 0)
 
     it "should return null authorDateTime when no is start_time is specified", ->
        laboratoryTestPerformed = new CQL_QDM.LaboratoryTestPerformed({})

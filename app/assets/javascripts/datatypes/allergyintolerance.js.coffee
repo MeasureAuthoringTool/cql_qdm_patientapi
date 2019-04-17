@@ -17,7 +17,7 @@ class CQL_QDM.AllergyIntolerance extends CQL_QDM.QDMDatatype
   ###
   constructor: (entry) ->
     super entry
-    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(entry.start_time)
+    @_authorDatetime = CQL_QDM.Helpers.convertDateTime(entry.author_datetime)
     @_prevalencePeriodLow = CQL_QDM.Helpers.convertDateTime(entry.start_time)
     if entry.end_time
       @_prevalencePeriodHigh = CQL_QDM.Helpers.convertDateTime(entry.end_time)

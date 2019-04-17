@@ -194,7 +194,7 @@ class CQL_QDM.CQLPatient
           # e.g. "Encounter, Performed: Face-to-Face Interaction" becomes
           # EncounterPerformed
           # TODO: this needs to be modified to look at the HQMF template OID instead of the description
-          classname = dc.description.substr(0, dc.description.lastIndexOf(':'))
+          classname = dc.description.substr(0, dc.description.indexOf(':'))
           # remove commas, slashes, and colons
           classname = classname.replace(/,/g, '').replace(/\//g, '').replace(/:/g, '')
           # make all words start upper case
