@@ -348,7 +348,7 @@ describe "Medication", ->
       expect(medicationActive.dosage()).toEqual null
 
   describe "Administered", ->
-    medicationAdministeredEntry ={
+    medicationAdministeredEntryFoo ={
       "_id":"5b046c2a92d04e9509d6c303",
       "active_datetime":null,
       "administrationTiming":{"code_system":"RxNorm","code":"1002293", "title":"Common substances for allergy and intolerance documentation"},
@@ -386,6 +386,51 @@ describe "Medication", ->
       "statusOfMedication":null,
       "status_code":{"HL7 ActStatus":["administered"]},
       "supply":{"scalar":"44","units":"mg"},
+      "time":null,
+      "typeOfMedication":null,
+      "vehicle":null
+    }
+
+    medicationAdministeredEntry = {
+      "_id":"5cb4a08e08fa182ce183b987",
+      "active_datetime":null,
+      "administrationTiming":{"code_system":"RxNorm","code":"1002293", "title":"Common substances for allergy and intolerance documentation"},
+      "allowedAdministrations":null,
+      "anatomical_approach":null,
+      "author_datetime":1351756920,
+      "codes":{"RxNorm":["861356"]},
+      "cumulativeMedicationDuration":null,
+      "daysSupplied":null,
+      "deliveryMethod":null,
+      "description":"Medication, Administered: Opioid Pain Medications",
+      "dispenserIdentifier":null,
+      "dose":{"scalar":"10","units":"g"},
+      "doseIndicator":null,
+      "doseRestriction":null,
+      "end_time":1337674500,
+      "freeTextSig":null,
+      "fulfillmentInstructions":null,
+      "health_record_field":{"code_system":"RxNorm","code":"1010600","title":"Opioid Pain Medications"},
+      "indication":null,
+      "method":null,
+      "mood_code":"EVN",
+      "negationInd":true,
+      "negationReason":{"code_system":"SNOMED-CT","code":"10725009"},
+      "oid":"2.16.840.1.113883.3.560.1.114",
+      "patientInstructions":null,
+      "prescriberIdentifier":null,
+      "productForm":null,
+      "reaction":{"code_system":"LOINC","code":"29463-7","title":"Body Weight"},
+      "reason":{"code_system":"SNOMED-CT","code":"10725009","title":"Essential Hypertension"},
+      "refills":{"scalar":"3","units":""},
+      "route":{"code_system":"RxNorm","code":"1002293","title":"Common substances for allergy and intolerance documentation"},
+      "setting":null,
+      "signed_datetime":null,
+      "specifics":null,
+      "start_time":1337673600,
+      "statusOfMedication":null,
+      "status_code":{"HL7 ActStatus":["administered"]},
+      "supply":null,
       "time":null,
       "typeOfMedication":null,
       "vehicle":null
