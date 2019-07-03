@@ -75,7 +75,7 @@ describe "Substance", ->
 
     it "should return a relevantPeriod interval", ->
       substanceAdministered = new CQL_QDM.SubstanceAdministered(substanceAdministeredEntry)
-      expect(substanceAdministered.relevantPeriod()).toEqual new cql.Interval(new cql.DateTime(2012,5,18,8,0,0,0,0), new cql.DateTime(9999,12,31,23,59,59,999,0))
+      expect(substanceAdministered.relevantPeriod()).toEqual new cql.Interval(new cql.DateTime(2012,5,18,8,0,0,0,0), null)
 
     it "should return null if no relevantPeriod is specified", ->
       substanceAdministered = new CQL_QDM.SubstanceAdministered({})

@@ -22,8 +22,8 @@ class CQL_QDM.AllergyIntolerance extends CQL_QDM.QDMDatatype
     if entry.end_time
       @_prevalencePeriodHigh = CQL_QDM.Helpers.convertDateTime(entry.end_time)
     else
-      # No end time; high is set to infinity
-      @_prevalencePeriodHigh = CQL_QDM.Helpers.infinityDateTime()
+      # No end time; high is set to null
+      @_prevalencePeriodHigh = null
     @_severity = entry.severity
     @_type = entry.type
 
