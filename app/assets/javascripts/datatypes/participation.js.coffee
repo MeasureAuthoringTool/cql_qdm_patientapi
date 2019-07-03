@@ -21,8 +21,8 @@ class CQL_QDM.Participation extends CQL_QDM.QDMDatatype
     if entry.end_time
       @_participationPeriodHigh = CQL_QDM.Helpers.convertDateTime(entry.end_time)
     else
-      # No end time; high is set to infinity
-      @_participationPeriodHigh = CQL_QDM.Helpers.infinityDateTime()
+      # No end time; high is set to null
+      @_participationPeriodHigh = null
 
   ###
   @returns {Interval<Date>}

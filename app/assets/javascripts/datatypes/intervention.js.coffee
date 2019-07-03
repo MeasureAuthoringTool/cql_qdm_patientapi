@@ -64,8 +64,8 @@ class CQL_QDM.InterventionPerformed extends CQL_QDM.QDMDatatype
     if entry.end_time
       @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(entry.end_time)
     else
-      # No end time; high is set to infinity
-      @_relevantPeriodHigh = CQL_QDM.Helpers.infinityDateTime()
+      # No end time; high is set to null
+      @_relevantPeriodHigh = null
     if entry.values? && entry.values.length > 0
       @_result = entry.values?[0]
     @_status = entry.qdm_status

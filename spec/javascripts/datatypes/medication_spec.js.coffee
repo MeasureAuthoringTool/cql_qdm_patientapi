@@ -54,13 +54,13 @@ describe "Medication", ->
       medicationDispensed = new CQL_QDM.MedicationDispensed(medicationDispensedEntry)
       expect(medicationDispensed.dispenserId()).toEqual new CQL_QDM.Id("Dr. Alice", "testSystem")
   
-    it "has infinite DateTime when no end_time specified", ->
+    it "has null DateTime when no end_time specified", ->
       previous_end_time = medicationDispensedEntry['end_time']
       # Set end_time to null so that end_time is not specified in this test
       medicationDispensedEntry['end_time'] = null
       medicationDispensed = new CQL_QDM.MedicationDispensed(medicationDispensedEntry)
       expect(medicationDispensed.relevantPeriod().low).toEqual new cql.DateTime(2012, 5, 22, 8, 0, 0, 0, 0)
-      expect(medicationDispensed.relevantPeriod().high).toEqual CQL_QDM.Helpers.infinityDateTime()
+      expect(medicationDispensed.relevantPeriod().high).toBeNull()
       # Reset end_time in fixture so that other tests arent effected
       medicationDispensedEntry['end_time'] = previous_end_time
 
@@ -190,13 +190,13 @@ describe "Medication", ->
       expect(medicationOrdered.relevantPeriod().low).toEqual new cql.DateTime(2012, 5, 24, 8, 0, 0, 0, 0)
       expect(medicationOrdered.relevantPeriod().high).toEqual new cql.DateTime(2012, 5, 24, 8, 0, 0, 0, 0)
 
-    it "has infinite DateTime when no end_time specified", ->
+    it "has null DateTime when no end_time specified", ->
       previous_end_time = medicationOrderEntry['end_time']
       # Set end_time to null so that end_time is not specified in this test
       medicationOrderEntry['end_time'] = null
       medicationOrdered = new CQL_QDM.MedicationOrder(medicationOrderEntry)
       expect(medicationOrdered.relevantPeriod().low).toEqual new cql.DateTime(2012, 5, 24, 8, 0, 0, 0, 0)
-      expect(medicationOrdered.relevantPeriod().high).toEqual CQL_QDM.Helpers.infinityDateTime()
+      expect(medicationOrdered.relevantPeriod().high).toBeNull()
       # Reset end_time in fixture so that other tests arent effected
       medicationOrderEntry['end_time'] = previous_end_time
 

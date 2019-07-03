@@ -76,8 +76,8 @@ class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
     if entry.end_time
       @_relevantPeriodHigh = CQL_QDM.Helpers.convertDateTime(entry.end_time)
     else
-      # No end time; high is set to infinity
-      @_relevantPeriodHigh = CQL_QDM.Helpers.infinityDateTime()
+      # No end time; high is set to null
+      @_relevantPeriodHigh = null
     @_principalDiagnosis = entry.principalDiagnosis
 
   ###
