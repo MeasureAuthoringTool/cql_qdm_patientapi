@@ -129,7 +129,7 @@ class CQL_QDM.EncounterPerformed extends CQL_QDM.QDMDatatype
   lengthOfStay: ->
     low = @_relevantPeriodLow
     high = @_relevantPeriodHigh
-    if low?
+    if low? && high?
       new cql.Quantity({unit: 'days', value: low.differenceBetween(high, 'day')?.high})
     else
       null
